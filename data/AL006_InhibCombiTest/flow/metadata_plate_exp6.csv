@@ -1,0 +1,30 @@
+rowID,colID,wellID,staining,stimulus,iBTK_conc,iSYK_conc,concentration,iNFkB_conc,protein_BV421,protein_PE,protein_AF647,protein_AF488,inhibitor
+A,8,A08,no ,PBS,10,10,10 + 10,10,no stain,no stain,no stain,no stain,iSYK + iNFkB + iBTK
+A,9,A08,no ,PBS,0,0,0 + 0,0,no stain,no stain,no stain,no stain,DMSO
+B,1,B01,yes,aIg + H2O2,10,10,10 + 10 + 10,10,PARP,,pBTK,p38,iSYK + iNFkB + iBTK
+B,2,B02,yes,aIg + H2O2,2.5,2.5,2.5 + 2.5 + 2.5,2.5,PARP,,pBTK,p38,iSYK + iNFkB + iBTK
+B,3,B03,yes,aIg + H2O2,1,1,1 + 1 + 1,1,PARP,,pBTK,p38,iSYK + iNFkB + iBTK
+B,4,B04,yes,aIg + H2O2,0,0,0 + 0 + 0 ,0,PARP,,pBTK,p38,DMSO
+B,5,B05,yes,aIg + H2O2,1,5,1 + 5 + 1,1,PARP,,pBTK,p38,iSYK + iNFkB + iBTK
+B,6,B06,yes,aIg + H2O2,5,1,5 + 1 + 1,1,PARP,,pBTK,p38,iSYK + iNFkB + iBTK
+B,7,B07,yes,aIg + H2O2,1,1,1 + 1 + 5,1,PARP,,pBTK,p38,iSYK + iNFkB + iBTK
+B,8,B08,yes,PBS,10,10,10 + 10,10,PARP,,pBTK,p38,iSYK + iNFkB + iBTK
+B,9,B09,yes,PBS,0,0,0 + 0 + 0,0,PARP,,pBTK,p38,DMSO
+C,1,C01,yes,aIg + H2O2,10,10,10 + 10 + 10,10,Caspase 3,pSYK,pPLCy2,,iSYK + iNFkB + iBTK
+C,2,C02,yes,aIg + H2O2,2.5,2.5,2.5 + 2.5 + 2.5 ,2.5,Caspase 3,pSYK,pPLCy2,,iSYK + iNFkB + iBTK
+C,3,C03,yes,aIg + H2O2,1,1,1 + 1 + 1,1,Caspase 3,pSYK,pPLCy2,,iSYK + iNFkB + iBTK
+C,4,C04,yes,aIg + H2O2,0,0,0 + 0 + 0,0,Caspase 3,pSYK,pPLCy2,,DMSO
+C,5,C05,yes,aIg + H2O2,1,5,1 + 5 + 1,1,Caspase 3,pSYK,pPLCy2,,iSYK + iNFkB + iBTK
+C,6,C06,yes,aIg + H2O2,5,1,5 + 1 + 1,1,Caspase 3,pSYK,pPLCy2,,iSYK + iNFkB + iBTK
+C,7,C07,yes,aIg + H2O2,1,1,1 + 1 + 5,5,Caspase 3,pSYK,pPLCy2,,iSYK + iNFkB + iBTK
+C,8,C08,yes,PBS,10,10,10 + 10 + 10,10,Caspase 3,pSYK,pPLCy2,,iSYK + iNFkB + iBTK
+C,9,C09,yes,PBS,0,0,0 + 0 + 0,0,Caspase 3,pSYK,pPLCy2,,DMSO
+D,1,D01,yes,aIg + H2O2,10,10,10 + 10 + 10,10,,Rabbit IgG Isotype,pSTAT6,pS6,iSYK + iNFkB + iBTK
+D,2,D02,yes,aIg + H2O2,2.5,2.5,2.5 + 2.5 + 2.5,2.5,,Rabbit IgG Isotype,pSTAT6,pS6,iSYK + iNFkB + iBTK
+D,3,D03,yes,aIg + H2O2,1,1,1 + 1 + 1,1,,Rabbit IgG Isotype,pSTAT6,pS6,iSYK + iNFkB + iBTK
+D,4,D04,yes,aIg + H2O2,0,0,0 + 0 + 0,0,,Rabbit IgG Isotype,pSTAT6,pS6,DMSO
+D,5,D05,yes,aIg + H2O2,1,5,1 + 5 + 1,1,,Rabbit IgG Isotype,pSTAT6,pS6,iSYK + iNFkB + iBTK
+D,6,D06,yes,aIg + H2O2,5,1,5 + 1 + 1,1,,Rabbit IgG Isotype,pSTAT6,pS6,iSYK + iNFkB + iBTK
+D,7,D07,yes,aIg + H2O2,1,1,1 + 1 + 5,5,,Rabbit IgG Isotype,pSTAT6,pS6,iSYK + iNFkB + iBTK
+D,8,D08,yes,PBS,10,10,10 + 10 + 10 ,10,,Rabbit IgG Isotype,pSTAT6,pS6,iSYK + iNFkB + iBTK
+D,9,D09,yes,PBS,0,0,0 + 0 + 0,0,,Rabbit IgG Isotype,pSTAT6,pS6,DMSO

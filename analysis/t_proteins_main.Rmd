@@ -1,0 +1,3349 @@
+---
+title: "DLBCL proteins chapter main figures"
+author: "mwitmond"
+date: "2024-10-22"
+output:
+  workflowr::wflow_html:
+    toc: TRUE
+    toc_float: 
+      collapsed: FALSE
+    toc_depth: 3
+    code_folding: hide
+editor_options:
+  chunk_output_type: console
+---
+
+## Set-up
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = F, warning = F, echo = T, eval = T
+)
+
+# Load required packages
+source("code/packages_seq.R", local = knitr::knit_global())
+```
+
+```{r fig_settings}
+row_order = c("A", "B", "C", "D", "E", "F", "G", "H")
+col_order = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+panel_labels <- c("a", "b", "c","d", "e", "f", "g", "h", "i", "j", "k", "l", "m")
+PANEL_labels <- c("A", "B", "C","D", "E", "F", "G", "H", "I", "J", "K", "L", "M")
+
+textsize <- theme(axis.text.x = element_text(colour = "grey", size = 11), #, face = "bold"
+                  axis.text.y = element_text(colour = "grey", size = 11),
+                  axis.title = element_text(colour = "black", size = 12), 
+                  legend.title = element_text(colour = "black", size = 12),
+                  # legend.title = element_blank(), 
+                  legend.text = element_text(colour = "grey", size = 11), 
+                  strip.text.x = element_text(colour = "black", size = 12)
+)
+
+textsize_small <- theme(text = element_text(size = 9, family = "sans", colour = "black"),
+                        plot.title = element_text(size = 10)
+)
+```
+
+```{r fig_colors}
+colors_nord <- c("#2e3440", "#3b4252", "#434c5e", "#4c566a", 
+                 "#d8dee9", "#e5e9f0", "#eceff4", 
+                 "#8fbcbb", "#88c0d0", "#81a1c1", "#5e81ac", 
+                 "#bf616a", "#d08770", "#ebcb8b", "#a3be8c", "#b48ead")
+
+colors_toll_bright <- c("#4477AA", "#66CCEE", "#228833", "#CCBB44", "#EE6677", "#AA3377", "#BBBBBB")
+colors_toll_mute <- c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#DDCC77", "#CC6677", "#882255", "#AA4499", "#DDDDDD")
+colors_toll_br <- c("#364B9A", "#4A7BB7", "#6EA6CD", "#98CAE1", "#C2E4EF", "#EAECCC", "#FEDA8B", "#FDB366", "#F67A4B", "#DD3D2D", "#A50026")
+
+colors_blue9 <- c("#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b")
+colors_green9 <- c("#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b")
+colors_purple9 <- c("#fcfbfd", "#efedf5", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba", "#6a51a3", "#54278f", "#3f007d")
+colors_red9 <- c("#fff5f0", "#fee0d2", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#a50f15", "#67000d")
+colors_orange9 <- c("#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603", "#7f2704")
+colors_grey9 <- c("#ffffff", "#f0f0f0", "#d9d9d9", "#bdbdbd", "#969696", "#737373", "#525252", "#252525", "#000000")
+colors_yb9 <- c("#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58")
+colors_pr9 <- c("#f7f4f9", "#e7e1ef", "#d4b9da", "#c994c7", "#df65b0", "#e7298a", "#ce1256", "#980043", "#67001f")
+
+# Variable-specific colors
+colors_cell <- c("HBL1" = "#AA4499", "OCI-Ly8" = "#332288", 
+                 "ABC subtype" = "#AA4499", "GCB subtype" = "#332288")
+colors_stim <- c("PBS" = "#737373", "aIg+H2O2" = "#FDB366", 
+                 "Basal" = "#737373", "Activated" = "#FDB366")
+colors_cell_stim <- c("HBL1 - PBS" = "#c994c7", "HBL1 - aIg+H2O2" = "#AA4499", "OCI-Ly8 - PBS" = "#88CCEE", "OCI-Ly8 - aIg+H2O2" = "#332288")
+# colors_inhib <- c("iSYK" = "#228833", "iBTK" = "#4477AA", "iNFkB" = "#AA3377")
+colors_inhib <- c("iSYK" = "#9dce5c", "iBTK" = "#5c9dce", "iNFkB" = "#ce5c9d")
+colors_conc <- c("#737373", "#dadaeb", "#9e9ac8", "#6a51a3", "#3f007d")
+colors_iSYK <- colors_green9[c(3, 5, 6, 8, 9)]
+colors_iBTK <- colors_blue9[c(3, 5, 6, 8, 9)]
+colors_iNFkB <- colors_pr9[c(3, 5, 6, 8, 9)]
+colors_conc_stim <- colors_orange9[c(2, 3, 5, 6, 8, 9)]
+colors_conc_PBS <- colors_grey9[c(2, 3, 5, 6, 8, 9)]
+```
+
+
+
+## Figure 1
+
+*Sequencing-based characterisation of BCR signaling in two DLBCL subtype cell lines.*
+
+Input:
+
+-   BioRender schematic figures
+
+
+### Panels {.tabset}
+
+#### Panel A
+```{r fig1_panelA, fig.retina=1}
+# # Placeholder
+# fig1_panelA <- ggplot() +
+#   geom_blank() +
+#   scale_x_continuous(limits = c(0, 10)) +
+#   scale_y_continuous(limits = c(0, 10)) +
+#   # labs(title = "BCR signaling network") +
+#   theme_bw() +
+#   theme(axis.text.x = element_blank(),
+#         axis.text.y = element_blank(),
+#         axis.ticks = element_blank(),
+#         panel.grid = element_blank()) +
+#   textsize_small
+# # fig1_panelA
+
+# PNG
+fig1_panelA <- magick::image_read("output/figures/non_R_figs/ch4_BCR_network_simple_inhib_DLBCL.png") %>%
+  # magick::image_border(color = "black", geometry = "1x1") %>%
+  magick::image_ggplot(interpolate = TRUE)
+fig1_panelA
+```
+
+#### Panel B
+```{r fig1_panelB, fig.retina=1}
+# # Placeholder
+# fig1_panelB <- ggplot() +
+#   geom_blank() +
+#   scale_x_continuous(limits = c(0, 10)) +
+#   scale_y_continuous(limits = c(0, 10)) +
+#   # labs(title = "BCR signaling network") +
+#   theme_bw() +
+#   theme(axis.text.x = element_blank(),
+#         axis.text.y = element_blank(),
+#         axis.ticks = element_blank(),
+#         panel.grid = element_blank()) +
+#   textsize_small
+# # fig1_panelB
+
+# PNG
+fig1_panelB <- magick::image_read("output/figures/non_R_figs/ch4_DLBCL_inhibition_workflow.png") %>%
+  magick::image_ggplot(interpolate = TRUE)
+fig1_panelB
+```
+
+
+### Combined fig
+
+```{r fig1_combi, fig.width=6, fig.height=2.4, fig.retina=1}
+# Combine all panels of the figure
+fig1 <- plot_grid(fig1_panelA, fig1_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 2.1), label_size = 10)
+fig1
+
+# Save figure as pdf, jpg
+ggsave(
+  fig1,
+  filename = "output/figures/DLBCL_proteins/main_fig1.pdf",
+  width = 6,
+  height = 2.4,
+  units = "in",
+  dpi = 300
+  )
+ggsave(
+  fig1,
+  filename = "output/figures/DLBCL_proteins/main_fig1.jpg",
+  width = 6,
+  height = 2.4,
+  units = "in",
+  dpi = 300
+  )
+```
+*Sequencing-based characterisation of BCR signaling in two DLBCL subtype cell lines.*
+
+```{r fig1_clean}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "fig1"))
+rm(list = ls(pattern = "png"))
+rm(list = ls(pattern = "results_"))
+rm(list = ls(pattern = "volc_"))
+rm(list = ls(pattern = "list_"))
+rm(list = ls(pattern = "names_"))
+rm(list = ls(pattern = "titles_"))
+rm(list = ls(pattern = "data_"))
+rm(list = ls(pattern = "heat_"))
+rm(list = ls(pattern = "rld"))
+rm(list = ls(pattern = "pca"))
+gc()
+```
+
+
+
+## Figure 2
+
+*ID-seq confirms basal and activated BCR signaling in ABC- and GCB-type DLBCL.*
+
+Input:
+
+-   DS108 ID-seq data
+
+    -   DESeq2 analysis
+    
+    -   Count data
+
+
+### Data
+
+```{r fig2_data}
+# ID-seq data DS108 (counts per well/sample and mean per condition)
+fig2_data_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) %>%
+  subset(inhib_new == "PBS ctrl")
+fig2_mean_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_condition.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) %>%
+  subset(inhib_new == "PBS ctrl")
+```
+
+```{r fig2_labels}
+fig2_cells <- c("HBL1", "OCI-Ly8")
+fig2_cells_clean <- c("ABC subtype", "GCB subtype")
+fig2_cells_short <- c("ABC", "GCB")
+fig2_stim <- c("PBS", "aIg+H2O2")
+fig2_stim_clean <- c("Basal", "Activated")
+
+fig2_meta_cols <- c("plate_well", "plate", "well", "experiment", "cell_line", "cell_clean", "stimulus", "stim_clean", "cell_stim", "inhibitor", "inhib_conc_uM", "inhib_conc", "inhib_conc_text", "inhib_text_new", "stim_inhib", "replicate", "description", "descript_rep")
+```
+
+
+### Panels {.tabset}
+
+#### Panel A
+
+Differential expression analysis comparing basal signaling in HBL1 and OCI-Ly8 cells
+
+DESeq2 analysis parameters:
+
+-   2 cell lines, PBS stimulation only
+
+-   Compensated counts (>= 1)
+
+-   Model design: cell_clean
+
+```{r fig2_panelA_DESeq}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- fig2_data_id  %>%
+  dplyr::filter(stim_clean == "Basal" & counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig2_data_id, all_of(fig2_meta_cols)))) %>%
+  distinct()
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign <- ~ cell_clean
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$cell_clean <- relevel(dds$cell_clean, ref = "ABC subtype")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_cell <- results(dds, name = "cell_clean_GCB.subtype_vs_ABC.subtype", alpha = 0.05)
+
+list_results <- list(results_cell)
+
+# Data transformation
+# Regularized log transform
+rld <- rlog(dds, blind = FALSE)
+
+# Data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(as.data.frame(dataset))
+}
+
+# Apply function to each dataset
+# padj < 0.05
+# log2FC > log2(1.05)
+names_results_volc <- c("volc_cell")
+for(dataset in c(1:length(list_results))){
+  assign(names_results_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.05)))
+}
+```
+
+```{r fig2_panelA, fig.width=6, fig.height=3, fig.retina=1}
+# Select data
+fig2A_dataset <- volc_cell
+fig2A_dataset$wrapper = "Basal signaling: ABC vs GCB subtype"
+
+# Figure
+fig2_panelA <- ggplot(data = fig2A_dataset,
+                      aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
+  geom_point(size = 0.5) +
+  geom_text_repel(size = 1.85,
+                  segment.size = 0.2,
+                  hjust = 0,
+                  direction = "y",
+                  nudge_y = -log10(0.005),
+                  nudge_x = ifelse(fig2A_dataset$log2FoldChange < 0, -0.5 - fig2A_dataset$log2FoldChange, 0.5 - fig2A_dataset$log2FoldChange), 
+                  max.overlaps = 9
+  ) +
+  # facet_wrap(~wrapper, nrow = 1) +
+  scale_color_manual(values = c(UP = "#332288", NO = "black", DOWN = "#AA4499"),
+                     breaks = c("UP", "NO", "DOWN"),
+                     labels = c("GCB subtype", "No difference", "ABC subtype"),
+                     name = "Differentially\nexpressed\nproteins") + 
+  geom_vline(xintercept = c(-log2(1.05), log2(1.05)), color = "#CC6677") +
+  geom_hline(yintercept = -log10(0.05), color = "#CC6677") +
+  labs(x = "log2(fold change)", y = "-log10(adjusted p-value)", title = "Basal signaling: ABC vs GCB subtype") +
+  theme_bw() +
+  theme(panel.grid = element_blank(), legend.key.size = unit(0.2, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "right", legend.justification = "left") + #legend.position = "none"
+  textsize_small
+fig2_panelA
+```
+
+#### Panel B
+```{r fig2_panelB, fig.width=6, fig.height=3, fig.retina=1}
+# Select data
+fig2B_proteins <- c("CREB_S133", "GSK3b_S9")#"IgM", "CD43", 
+fig2B_proteins_name <- c("CREB (S133)", "GSK3b (S9)") #"IgM", "CD43", 
+
+fig2B_data <- fig2_data_id %>%
+  subset(target_nospace %in% fig2B_proteins & stim_clean == "Basal") %>%
+  mutate(target_nospace = factor(target_nospace, levels = fig2B_proteins))
+fig2B_mean <- fig2_mean_id %>%
+  subset(target_nospace %in% fig2B_proteins & stim_clean == "Basal") %>%
+  group_by(target_nospace, cell_clean) %>%
+  mutate(counts_norm_avg = mean(counts_norm), 
+         target_nospace = factor(target_nospace, levels = fig2B_proteins))
+
+# Statistics
+# Kruskal-Wallis test
+fig2B_kruskal <- fig2B_data %>%
+  group_by(target_nospace) %>%
+  kruskal_test(counts_norm ~ cell_clean)
+fig2B_kruskal
+
+# Post-hoc Dunn's test (without correction)
+fig2B_dunn <- fig2B_data %>%
+  group_by(target_nospace) %>%
+  dunn_test(counts_norm ~ cell_clean, p.adjust.method = "BH") #%>%
+  # dplyr::filter(
+  #   (group1 == "Activated\nDMSO ctrl" & group2 == "Basal\nDMSO ctrl") |
+  #     (group1 == "Activated\n100 uM iBTK" & group2 == "Basal\n100 uM iBTK") |
+  #     (group1 == "Basal\n100 uM iBTK" & group2 == "Basal\nDMSO ctrl") |
+  #     (group1 == "Activated\n100 uM iBTK" & group2 == "Activated\nDMSO ctrl")
+  #     ) %>%
+  # mutate(group1 = case_when(group1 == "Basal\n100 uM iBTK" ~ "Basal\n100 uM\niBTK", 
+  #                           group1 == "Activated\n100 uM iBTK" ~ "Activated\n100 uM\niBTK", 
+  #                           .default = group1), 
+  #        group2 = case_when(group2 == "Basal\n100 uM iBTK" ~ "Basal\n100 uM\niBTK", 
+  #                           group2 == "Activated\n100 uM iBTK" ~ "Activated\n100 uM\niBTK", 
+  #                           .default = group2))
+# group_by(target_nospace) %>%
+# adjust_pvalue(method = "BH")
+fig2B_dunn
+
+# Manual stat table (from DEA; Fig. 1)
+fig2B_manual_stat <- tibble(target_nospace = fig2B_dunn$target_nospace,
+                            .y. = "counts_norm",
+                            group1 = fig2B_dunn$group1,
+                            group2 = fig2B_dunn$group2,
+                            p.adj.signif = fig2B_dunn$p.adj.signif,
+                            y.position = c(2125, 1050)) #5100, 6100, 
+fig2B_manual_stat
+
+# Figure
+fig2_panelB <- ggplot() +
+  geom_jitter(data = fig2B_data,
+              aes(factor(cell_clean, levels = fig2_cells_clean), counts_norm, color = factor(cell_clean, levels = fig2_cells_clean)), 
+              alpha = 1, size = 1, width = 0.1) +
+  geom_errorbar(data = fig2B_mean,
+                aes(factor(cell_clean, levels = fig2_cells_clean),
+                    ymin = counts_norm_avg, ymax = counts_norm_avg,
+                    group = factor(cell_clean, levels = fig2_cells_clean),
+                    color = factor(cell_clean, levels = fig2_cells_clean)),
+                width = 0.75, size = 1) +
+  facet_wrap(vars(factor(target_nospace, levels = fig2B_proteins, labels = fig2B_proteins_name)), ncol = 1, scales = "free_y") +
+  scale_color_manual(values = colors_cell, breaks = fig2_cells_clean, labels = fig2_cells_short, name = "DLBCL subtype") +
+  labs(x = element_blank(), y = "Normalised counts") +
+  # coord_cartesian(ylim = c(1500, 10200)) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), legend.key.size = unit(0.5, "cm"), legend.spacing.y = unit(0.2, "cm"), legend.box.spacing = unit(0.1, "cm")) +
+  stat_pvalue_manual(fig2B_manual_stat, label = "p.adj.signif", tip.length = 0.05,
+                     step.increase = 0.22, group = "target_nospace", step.group.by = "target_nospace", size = 3, vjust = 1.5) + 
+  scale_x_discrete(labels = fig2_cells_short)
+fig2_panelB
+```
+
+#### Panel C
+
+Differential expression analysis of activated vs basal signaling
+
+DESeq2 analysis parameters:
+
+-   2 cell lines, 2 stimuli
+
+-   Compensated counts (>= 1)
+
+-   Model design: cell_stim
+
+```{r fig2_panelC_DESeq}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- fig2_data_id  %>%
+  dplyr::filter(counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig2_data_id, all_of(fig2_meta_cols)))) %>%
+  distinct()
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign <- ~ cell_stim
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$cell_stim <- relevel(dds$cell_stim, ref = "Basal\nABC subtype")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_HBL1_stim <- results(dds, name = "cell_stim_Activated.ABC.subtype_vs_Basal.ABC.subtype", alpha = 0.05)
+results_OCI_stim <- results(dds, contrast = c("cell_stim", "Activated\nGCB subtype", "Basal\nGCB subtype"), alpha = 0.05)
+
+list_results <- list(results_HBL1_stim, results_OCI_stim)
+
+# Data transformation
+# Regularized log transform
+rld_stim <- rlog(dds, blind = FALSE)
+
+# Data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(dataset)
+}
+
+# Apply function to each dataset
+# Applied thresholds:
+# padj < 0.05
+# log2FC > log2(1.05)
+names_volc <- c("volc_HBL1_stim", "volc_OCI_stim")
+for(dataset in c(1:length(list_results))){
+  assign(names_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.1)))
+}
+
+# Function to filter the data
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+filter_heatmap <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5), select_top = TRUE, select_n = 10) {
+  data <- as.data.frame(dataset) %>%
+    dplyr::filter(padj <= padj_filter & abs(log2FoldChange) >= foldchange_filter) %>%
+    arrange(-log2FoldChange) 
+  rownames(data) <- data$target_nospace
+  
+  # Select top 10 proteins with most increased and decreased expression
+  if (select_top == TRUE) {
+    data_top <- data %>%
+      slice_max(order_by = abs(log2FoldChange), n = select_n)
+    return(data_top)
+  } else {
+    return(data)
+  }
+}
+
+# Apply function to each dataset
+list_results_volc <- list(volc_HBL1_stim, volc_OCI_stim)
+names_heat <- c("heat_HBL1_stim", "heat_OCI_stim")
+for(dataset in c(1:length(list_results_volc))){
+  assign(names_heat[[dataset]], filter_heatmap(dataset = list_results_volc[[dataset]], select_top = FALSE, foldchange_filter = log2(1.1)))
+  dataset
+}
+```
+
+```{r fig2_panelC, fig.width=6, fig.height=3, fig.retina=1}
+# Select data
+# Combine heatmap datasets (without DESeq2 analysis values)
+heat_inhib <- list(heat_HBL1_stim, heat_OCI_stim) %>%
+  purrr::reduce(full_join) %>%
+  dplyr::select(-c(baseMean, log2FoldChange, lfcSE, stat, pvalue, padj, diff_express)) %>%
+  left_join(fig2_data_id[, 14:21]) %>%
+  # dplyr::filter(modification == "phospho") %>%
+  distinct()
+
+fig2C_prot_HBL1 <- sort(unique(c(heat_HBL1_stim$target_nospace)))
+fig2C_prot_OCI <- sort(unique(c(heat_OCI_stim$target_nospace)))
+
+# Subset the full dataframe to get metadata for heatmap plotting
+fig2C_info <- fig2_data_id %>%
+  dplyr::select(plate_well, stim_clean, cell_clean) %>%
+  distinct() %>%
+  # dplyr::filter(cell_line == "HBL1" &inhibitor == "iBTK" & inhib_conc %in% fig3_conc_all & !(stim_clean == "Basal" & inhib_conc %in% fig3_conc_all[2:5])) %>%
+  # mutate(inhibitor = factor(inhibitor, levels = fig3_inhib)) %>%
+  as.data.frame()
+rownames(fig2C_info) <- fig2C_info$plate_well
+fig2C_info <- dplyr::select(fig2C_info, -c(plate_well))
+
+# Get the rld transformed data for the heatmap and scale per row
+fig2C_data_heat <- t(scale(t(assay(rld_stim)[c(heat_inhib$target_nospace), rownames(fig2C_info)])))
+# sort_hclust <- function(...) as.hclust(dendsort(as.dendrogram(...)))
+# data_cluster_rows <- sort_hclust(hclust(dist(data_cell)))
+# plot(data_cluster_rows, main = "Unsorted Dendrogram", xlab = "", sub = "")
+
+# Figure
+fig2C_ann_colors <- list("Stimulation" = colors_stim, 
+                         "DLBCL subtype" = colors_cell)
+fig2C_heat_legend <- list(title = "Scaled\nexpression", title_gp = gpar(fontsize = 7), labels_gp = gpar(fontsize = 6), 
+                          grid_width = unit(2, "mm"), grid_height = unit(20, "mm"))
+
+fig2C_col_ann <- HeatmapAnnotation("DLBCL subtype" = fig2C_info$cell_clean, 
+                                   "Stimulation" = fig2C_info$stim_clean, 
+                                   simple_anno_size = unit(2.5, "mm"), 
+                                   annotation_name_gp = gpar(fontsize = 7),
+                                   col = fig2C_ann_colors, 
+                                   annotation_legend_param = list("DLBCL subtype" = list(title = "DLBCL subtype", 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 6), 
+                                                                                   grid_width = unit(2, "mm"), 
+                                                                                   grid_height = unit(1, "mm")), 
+                                                                  "Stimulation" = list(title = "Stimulation", 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 6), 
+                                                                                   grid_width = unit(2, "mm"), 
+                                                                                   grid_height = unit(1, "mm"))), 
+                                   show_legend = c(TRUE, TRUE))
+
+fig2_panelC <- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
+  fig2C_data_heat,
+  scale = "none",
+  cluster_rows = TRUE,
+  # treeheight_row = 20,
+  show_rownames = TRUE,
+  show_colnames = FALSE,
+  cluster_cols = FALSE,
+  top_annotation = fig2C_col_ann,
+  colorRampPalette(c("navy", "white", "firebrick3"))(50),
+  column_split = fig2C_info$cell_clean,
+  row_split = subset(heat_inhib)$modification,
+  row_gap = unit(1, "mm"), 
+  # cellwidth = 10,
+  # cellheight = 10,
+  fontsize = 5.5,
+  row_title_gp = gpar(fontsize = 7),
+  column_title_gp = gpar(fontsize = 7), 
+  annotation_names_col = gpar(fontsize = 6),
+  border_color = NA,
+  heatmap_legend_param = fig2C_heat_legend, 
+  # annotation_legend = FALSE,
+)) +
+  ggtitle("          Activated vs basal signaling") +
+  textsize_small
+fig2_panelC
+```
+
+#### Panel D
+```{r fig2_panelD, fig.width=6, fig.height=3, fig.retina=1}
+# Select data
+fig2D_proteins <- c("BTK", "BTK_Y223", "BTK_Y551") #, "SHP2_Y580", "ATF2_T71"
+# fig2D_proteins_name <- fig2D_proteins
+fig2D_proteins_name <- c("BTK", "BTK (Y223)", "BTK (Y551)")
+fig2D_cell_stim <- c("Basal\nABC subtype", "Activated\nABC subtype", "Basal\nGCB subtype", "Activated\nGCB subtype")
+fig2D_cell_stim_label <- c("Basal\n             ABC subtype", "Active", "Basal\n             GCB subtype", "Active")
+
+fig2D_data <- fig2_data_id %>%
+  subset(target_nospace %in% fig2D_proteins) %>%
+  mutate(target_nospace = factor(target_nospace, levels = fig2D_proteins), 
+         cell_stim = factor(cell_stim, levels = fig2D_cell_stim))
+fig2D_mean <- fig2_mean_id %>%
+  subset(target_nospace %in% fig2D_proteins) %>%
+  group_by(target_nospace, cell_stim) %>%
+  mutate(counts_norm_avg = mean(counts_norm),
+         target_nospace = factor(target_nospace, levels = fig2D_proteins), 
+         cell_stim = factor(cell_stim, levels = fig2D_cell_stim))
+
+# Statistics
+# Kruskal-Wallis test
+fig2D_kruskal <- fig2D_data %>%
+  group_by(target_nospace) %>%
+  kruskal_test(counts_norm ~ cell_stim)
+fig2D_kruskal
+
+# Post-hoc Dunn's test (without correction)
+fig2D_dunn <- fig2D_data %>%
+  group_by(target_nospace) %>%
+  dunn_test(counts_norm ~ cell_stim, p.adjust.method = "none") %>%
+  slice(-c(3, 4, 9, 10, 15, 16)) %>% #, 21, 22, 27, 28
+  # mutate(group1 = case_when(group1 == "Basal\n100 uM iBTK" ~ "Basal\n100 uM\niBTK", 
+  #                           group1 == "Activated\n100 uM iBTK" ~ "Activated\n100 uM\niBTK", 
+  #                           .default = group1), 
+  #        group2 = case_when(group2 == "Basal\n100 uM iBTK" ~ "Basal\n100 uM\niBTK", 
+  #                           group2 == "Activated\n100 uM iBTK" ~ "Activated\n100 uM\niBTK", 
+  #                           .default = group2))
+  group_by(target_nospace) %>%
+  adjust_pvalue(method = "BH") %>%
+  mutate(y.position = rep(c(1900, 2250, 3100), each = 4))
+fig2D_dunn
+
+# Figure
+fig2_panelD <- ggplot() +
+  geom_jitter(data = fig2D_data,
+              aes(factor(cell_stim, fig2D_cell_stim), counts_norm, color = factor(stim_clean, levels = fig2_stim_clean)), 
+              alpha = 1, size = 1, width = 0.1) +
+  geom_errorbar(data = fig2D_mean,
+                aes(factor(cell_stim, levels = fig2D_cell_stim),
+                    ymin = counts_norm_avg, ymax = counts_norm_avg,
+                    group = factor(cell_clean, levels = fig2_cells_clean),
+                    color = factor(stim_clean, levels = fig2_stim_clean)),
+                width = 0.75, size = 1) +
+  stat_pvalue_manual(fig2D_dunn, label = "p.adj.signif", tip.length = 0.05,
+                     step.increase = 0.22, group = "target_nospace", step.group.by = "target_nospace", size = 3, vjust = 1.2) + 
+  facet_wrap(vars(factor(target_nospace, levels = fig2D_proteins, labels = fig2D_proteins_name)), nrow = 1, scales = "free_y") +
+  scale_color_manual(values = colors_stim, breaks = fig2_stim_clean, name = "Stimulation") +
+  scale_x_discrete(breaks = fig2D_cell_stim, labels = fig2D_cell_stim_label) + 
+  labs(x = element_blank(), y = "Normalised counts") +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), 
+        legend.position = "bottom", legend.justification = "right", legend.key.size = unit(0.5, "cm"), legend.spacing.y = unit(0.2, "cm"), legend.box.spacing = unit(0.01, "cm"), legend.margin = margin(c(0, 0, 0, 0)))
+fig2_panelD
+```
+
+
+### Combined fig
+
+```{r fig2_combi, fig.width=6, fig.height=6.5, fig.retina=1}
+# Combine all panels of the figure
+fig2_AB <- plot_grid(fig2_panelA, fig2_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1.25, 1), label_size = 10)
+fig2_CD <- plot_grid(fig2_panelC, fig2_panelD, labels = PANEL_labels[c(3, 4)], ncol = 1, rel_heights = c(1.4, 1), label_size = 10)
+fig2 <- plot_grid(fig2_AB, fig2_CD, ncol = 1, rel_heights = c(1, 2), label_size = 10)
+fig2
+
+# Save figure as pdf, jpg
+ggsave(
+  fig2,
+  filename = "output/figures/DLBCL_proteins/main_fig2.pdf",
+  width = 6,
+  height = 6.5,
+  units = "in",
+  dpi = 300
+  )
+ggsave(
+  fig2,
+  filename = "output/figures/DLBCL_proteins/main_fig2.jpg",
+  width = 6,
+  height = 6.5,
+  units = "in",
+  dpi = 300
+  )
+```
+*ID-seq confirms basal and activated BCR signaling in ABC- and GCB-DLBCL.*
+
+```{r fig2_clean}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "fig2"))
+rm(list = ls(pattern = "png"))
+rm(list = ls(pattern = "results_"))
+rm(list = ls(pattern = "volc_"))
+rm(list = ls(pattern = "list_"))
+rm(list = ls(pattern = "names_"))
+rm(list = ls(pattern = "titles_"))
+rm(list = ls(pattern = "data_"))
+rm(list = ls(pattern = "heat_"))
+rm(list = ls(pattern = "rld"))
+rm(list = ls(pattern = "pca"))
+gc()
+```
+
+
+
+## Figure 3
+
+*High doses of inhibitors drastically decrease many phospho-protein levels.*
+
+Input:
+
+-   DS108 ID-seq data
+
+    -   Count data
+    
+    -   DESeq2 analysis
+    
+
+### Data
+
+```{r fig3_data}
+# ID-seq data DS108 (counts per well/sample and mean per condition)
+fig3_data_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) #%>%
+  # subset(inhib_new == "PBS ctrl")
+fig3_mean_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_condition.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) #%>%
+  # subset(inhib_new == "PBS ctrl")
+```
+
+```{r fig3_labels}
+fig3_cells <- c("HBL1", "OCI-Ly8")
+fig3_cells_clean <- c("ABC subtype", "GCB subtype")
+fig3_cells_short <- c("ABC", "GCB")
+fig3_stim <- c("PBS", "aIg+H2O2")
+fig3_stim_clean <- c("Basal", "Activated")
+
+fig3_inhib <- c("iBTK", "iSYK", "iNFkB")
+fig3_conc <- c("0 uM (DMSO)", "100 uM")
+fig3_conc_label <- c("DMSO ctrl", "100 uM")
+fig3_conc_all <- c("0 uM (DMSO)", "0.1 uM", "1 uM", "10 uM", "100 uM")
+# label_conc <- c("0 uM", "0.1 uM", "1 uM", "10 uM", "100 uM")
+
+fig3_meta_cols <- c("plate_well", "plate", "well", "experiment", "cell_line", "cell_clean", "stimulus", "stim_clean", "cell_stim", "inhibitor", "inhib_conc_uM", "inhib_conc", "inhib_conc_text", "inhib_text_new", "stim_inhib", "replicate", "description", "descript_rep")
+```
+
+
+### Panels {.tabset}
+
+#### Panel A
+```{r fig3_panelA, fig.width=6, fig.height=3, fig.retina=1}
+# Select data
+fig3A_protein <- c("BTK_Y551") # "PYK2_Y402" "ATF2_T71"
+fig3A_protein_name <- c("BTK (Y551)")
+fig3A_cell_stim <- c("Basal\nABC subtype", "Activated\nABC subtype", "Basal\nGCB subtype", "Activated\nGCB subtype")
+# fig3A_cell_stim_label <- c("Basal\n             ABC subtype", "Active", "Basal\n             GCB subtype", "Active")
+fig3A_cell_stim_conc <- c("0 uM\nBasal\nABC subtype", "0 uM\nActivated\nABC subtype", 
+                          "100 uM\nBasal\nABC subtype", "100 uM\nActivated\nABC subtype", 
+                          "0 uM\nBasal\nGCB subtype", "0 uM\nActivated\nGCB subtype", 
+                          "100 uM\nBasal\nGCB subtype", "100 uM\nActivated\nGCB subtype")
+fig3A_cell_stim_conc_label <- c("Bas.\n      0 uM", "Act.", 
+                                "Bas.\n     100 uM", "Act.", 
+                                "Bas.\n      0 uM", "Act.", 
+                                "Bas.\n     100 uM", "Act.")
+fig3A_colors_stim <- c("0 uM\nBasal\nABC subtype" = "#737373", "0 uM\nActivated\nABC subtype" = "#FDB366", 
+                          "100 uM\nBasal\nABC subtype" = "#bdbdbd", "100 uM\nActivated\nABC subtype" = "#FEDA8B", 
+                          "0 uM\nBasal\nGCB subtype" = "#737373", "0 uM\nActivated\nGCB subtype" = "#FDB366", 
+                          "100 uM\nBasal\nGCB subtype" = "#bdbdbd", "100 uM\nActivated\nGCB subtype" = "#FEDA8B")
+
+fig3A_data <- fig3_data_id %>%
+  subset(target_nospace %in% fig3A_protein & inhib_conc %in% fig3_conc) %>%
+  mutate(target_nospace = factor(target_nospace, levels = fig3A_protein), 
+         cell_stim = factor(cell_stim, levels = fig3A_cell_stim), 
+         cell_stim_conc = paste0(inhib_conc_uM, " uM\n", cell_stim),
+         inhibitor = factor(inhibitor, levels = fig3_inhib))
+fig3A_mean <- fig3_mean_id %>%
+  subset(target_nospace %in% fig3A_protein & inhib_conc %in% fig3_conc) %>%
+  # group_by(target_nospace, cell_stim) %>%
+  mutate(#counts_norm_avg = mean(counts_norm),
+         target_nospace = factor(target_nospace, levels = fig3A_protein), 
+         cell_stim = factor(cell_stim, levels = fig3A_cell_stim), 
+         cell_stim_conc = paste0(inhib_conc_uM, " uM\n", cell_stim),
+         inhibitor = factor(inhibitor, levels = fig3_inhib))
+
+# Statistics
+# Kruskal-Wallis test
+fig3A_kruskal <- fig3A_data %>%
+  group_by(target_nospace) %>%
+  kruskal_test(counts_norm ~ cell_stim_conc)
+fig3A_kruskal
+
+# Post-hoc Dunn's test (without correction)
+fig3A_dunn <- fig3A_data %>%
+  group_by(inhibitor, cell_clean) %>%
+  dunn_test(counts_norm ~ cell_stim_conc, p.adjust.method = "none") %>%
+  slice(-c(3, 4, 9, 10, 16, 17, 21, 22, 27, 28, 33, 34)) %>%
+  group_by(inhibitor, cell_clean) %>%
+  adjust_pvalue(method = "BH") %>%
+  mutate(y.position = 3000, 
+         inhib_cell = paste(inhibitor, cell_clean))
+fig3A_dunn
+
+# Figure
+fig3_panelA <- ggplot() +
+  geom_jitter(data = fig3A_data,
+              aes(factor(cell_stim_conc, levels = fig3A_cell_stim_conc), counts_norm, color = factor(cell_stim_conc, levels = fig3A_cell_stim_conc)), 
+              alpha = 1, size = 1, width = 0.15) +
+  geom_errorbar(data = fig3A_mean,
+                aes(factor(cell_stim_conc, levels = fig3A_cell_stim_conc),
+                    ymin = counts_norm, ymax = counts_norm,
+                    group = factor(cell_stim_conc, levels = fig3A_cell_stim_conc),
+                    color = factor(cell_stim_conc, levels = fig3A_cell_stim_conc)),
+                width = 0.95, size = 1) +
+  # stat_pvalue_manual(fig3A_dunn, label = "p.adj.signif", tip.length = 0.05,
+  #                    step.increase = 0.22, group = "inhib_cell", step.group.by = "inhib_cell", size = 3, vjust = 1.2) +
+  # facet_wrap(vars(factor(inhibitor, levels = fig3_inhib)), nrow = 1) +
+  # facet_nested(~ inhibitor + cell_clean, scales = "free_x") +
+  facet_nested(, vars(factor(inhibitor), factor(cell_clean, labels = fig3_cells_short)), scales = "free_x") +
+  # facet_grid(target_nospace~inhibitor, scales = "free_y") +
+  # scale_color_manual(values = colors_stim, breaks = fig3_stim_clean, name = "Stimulus") +
+  scale_color_manual(values = fig3A_colors_stim) +
+  scale_x_discrete(breaks = fig3A_cell_stim_conc, labels = fig3A_cell_stim_conc_label) +
+  labs(x = element_blank(), y = "Normalised counts", title = fig3A_protein_name) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), 
+        legend.position = "none", legend.justification = "right", legend.key.size = unit(0.5, "cm"), legend.spacing.y = unit(0.2, "cm"), legend.box.spacing = unit(0.01, "cm"), legend.margin = margin(c(0, 0, 0, 0)), 
+        axis.text.x = element_text(size = 6), plot.title = element_text(size = 8.5), plot.title.position = "panel")
+fig3_panelA
+```
+
+#### Panel B
+```{r fig3_panelB, fig.width=6, fig.height=3, fig.retina=1}
+# Select data
+fig3B_protein <- c("PYK2_Y402") # "PYK2_Y402" "ATF2_T71"
+fig3B_protein_name <- c("PYK2 (Y402)")
+fig3B_cell_stim <- c("Basal\nABC subtype", "Activated\nABC subtype", "Basal\nGCB subtype", "Activated\nGCB subtype")
+# fig3B_cell_stim_label <- c("Basal\n             ABC subtype", "Active", "Basal\n             GCB subtype", "Active")
+fig3B_cell_stim_conc <- c("0 uM\nBasal\nABC subtype", "0 uM\nActivated\nABC subtype", 
+                          "100 uM\nBasal\nABC subtype", "100 uM\nActivated\nABC subtype", 
+                          "0 uM\nBasal\nGCB subtype", "0 uM\nActivated\nGCB subtype", 
+                          "100 uM\nBasal\nGCB subtype", "100 uM\nActivated\nGCB subtype")
+fig3B_cell_stim_conc_label <- c("Bas.\n      0 uM", "Act.", 
+                                "Bas.\n     100 uM", "Act.", 
+                                "Bas.\n      0 uM", "Act.", 
+                                "Bas.\n     100 uM", "Act.")
+
+fig3B_data <- fig3_data_id %>%
+  subset(target_nospace %in% fig3B_protein & inhib_conc %in% fig3_conc) %>%
+  mutate(target_nospace = factor(target_nospace, levels = fig3B_protein), 
+         cell_stim = factor(cell_stim, levels = fig3B_cell_stim), 
+         cell_stim_conc = paste0(inhib_conc_uM, " uM\n", cell_stim),
+         inhibitor = factor(inhibitor, levels = fig3_inhib))
+fig3B_mean <- fig3_mean_id %>%
+  subset(target_nospace %in% fig3B_protein & inhib_conc %in% fig3_conc) %>%
+  # group_by(target_nospace, cell_stim) %>%
+  mutate(#counts_norm_avg = mean(counts_norm),
+         target_nospace = factor(target_nospace, levels = fig3B_protein), 
+         cell_stim = factor(cell_stim, levels = fig3B_cell_stim), 
+         cell_stim_conc = paste0(inhib_conc_uM, " uM\n", cell_stim),
+         inhibitor = factor(inhibitor, levels = fig3_inhib))
+
+# Statistics
+# Kruskal-Wallis test
+fig3B_kruskal <- fig3B_data %>%
+  group_by(target_nospace) %>%
+  kruskal_test(counts_norm ~ cell_stim_conc)
+fig3B_kruskal
+
+# Post-hoc Dunn's test (without correction)
+fig3B_dunn <- fig3B_data %>%
+  group_by(inhibitor, cell_clean) %>%
+  dunn_test(counts_norm ~ cell_stim_conc, p.adjust.method = "none") %>%
+  slice(-c(3, 4, 9, 10, 16, 17, 21, 22, 27, 28, 33, 34)) %>%
+  group_by(inhibitor, cell_clean) %>%
+  adjust_pvalue(method = "BH") %>%
+  mutate(y.position = 3000, 
+         inhib_cell = paste(inhibitor, cell_clean))
+fig3B_dunn
+
+# Figure
+fig3_panelB <- ggplot() +
+  geom_jitter(data = fig3B_data,
+              aes(factor(cell_stim_conc, levels = fig3B_cell_stim_conc), counts_norm, color = factor(cell_stim_conc, levels = fig3A_cell_stim_conc)), 
+              alpha = 1, size = 1, width = 0.15) +
+  geom_errorbar(data = fig3B_mean,
+                aes(factor(cell_stim_conc, levels = fig3B_cell_stim_conc),
+                    ymin = counts_norm, ymax = counts_norm,
+                    group = factor(cell_stim_conc, levels = fig3B_cell_stim_conc),
+                    color = factor(cell_stim_conc, levels = fig3A_cell_stim_conc)),
+                width = 0.95, size = 1) +
+  # stat_pvalue_manual(fig3B_dunn, label = "p.adj.signif", tip.length = 0.05,
+  #                    step.increase = 0.22, group = "inhib_cell", step.group.by = "inhib_cell", size = 3, vjust = 1.2) +
+  facet_nested(, vars(factor(inhibitor), factor(cell_clean, labels = fig3_cells_short)), scales = "free_x") +
+  scale_color_manual(values = fig3A_colors_stim) +
+  scale_x_discrete(breaks = fig3B_cell_stim_conc, labels = fig3B_cell_stim_conc_label) +
+  labs(x = element_blank(), y = "Normalised counts", title = fig3B_protein_name) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), 
+        legend.position = "none", legend.justification = "right", legend.key.size = unit(0.5, "cm"), legend.spacing.y = unit(0.2, "cm"), legend.box.spacing = unit(0.01, "cm"), legend.margin = margin(c(0, 0, 0, 0)), 
+        axis.text.x = element_text(size = 6), plot.title = element_text(size = 8.5), plot.title.position = "panel")
+fig3_panelB
+```
+
+#### Panel C
+```{r fig3_panelC, fig.width=6, fig.height=3, fig.retina=1}
+# Select data
+fig3C_protein <- c("ATF2_T71") # "PYK2_Y402" "ATF2_T71"
+fig3C_protein_name <- c("ATF2 (T71)")
+fig3C_cell_stim <- c("Basal\nABC subtype", "Activated\nABC subtype", "Basal\nGCB subtype", "Activated\nGCB subtype")
+# fig3C_cell_stim_label <- c("Basal\n             ABC subtype", "Active", "Basal\n             GCB subtype", "Active")
+fig3C_cell_stim_conc <- c("0 uM\nBasal\nABC subtype", "0 uM\nActivated\nABC subtype", 
+                          "100 uM\nBasal\nABC subtype", "100 uM\nActivated\nABC subtype", 
+                          "0 uM\nBasal\nGCB subtype", "0 uM\nActivated\nGCB subtype", 
+                          "100 uM\nBasal\nGCB subtype", "100 uM\nActivated\nGCB subtype")
+fig3C_cell_stim_conc_label <- c("Bas.\n      0 uM", "Act.",
+                                "Bas.\n     100 uM", "Act.",
+                                "Bas.\n      0 uM", "Act.",
+                                "Bas.\n     100 uM", "Act.")
+
+fig3C_data <- fig3_data_id %>%
+  subset(target_nospace %in% fig3C_protein & inhib_conc %in% fig3_conc) %>%
+  mutate(target_nospace = factor(target_nospace, levels = fig3C_protein), 
+         cell_stim = factor(cell_stim, levels = fig3C_cell_stim), 
+         cell_stim_conc = paste0(inhib_conc_uM, " uM\n", cell_stim),
+         inhibitor = factor(inhibitor, levels = fig3_inhib))
+fig3C_mean <- fig3_mean_id %>%
+  subset(target_nospace %in% fig3C_protein & inhib_conc %in% fig3_conc) %>%
+  # group_by(target_nospace, cell_stim) %>%
+  mutate(#counts_norm_avg = mean(counts_norm),
+         target_nospace = factor(target_nospace, levels = fig3C_protein), 
+         cell_stim = factor(cell_stim, levels = fig3C_cell_stim), 
+         cell_stim_conc = paste0(inhib_conc_uM, " uM\n", cell_stim),
+         inhibitor = factor(inhibitor, levels = fig3_inhib))
+
+# Statistics
+# Kruskal-Wallis test
+fig3C_kruskal <- fig3C_data %>%
+  group_by(target_nospace) %>%
+  kruskal_test(counts_norm ~ cell_stim_conc)
+fig3C_kruskal
+
+# Post-hoc Dunn's test (without correction)
+fig3C_dunn <- fig3C_data %>%
+  group_by(inhibitor, cell_clean) %>%
+  dunn_test(counts_norm ~ cell_stim_conc, p.adjust.method = "none") %>%
+  slice(-c(3, 4, 9, 10, 16, 17, 21, 22, 27, 28, 33, 34)) %>%
+  group_by(inhibitor, cell_clean) %>%
+  adjust_pvalue(method = "BH") %>%
+  mutate(y.position = 3000, 
+         inhib_cell = paste(inhibitor, cell_clean))
+fig3C_dunn
+
+# Figure
+fig3_panelC <- ggplot() +
+  geom_jitter(data = fig3C_data,
+              aes(factor(cell_stim_conc, levels = fig3C_cell_stim_conc), counts_norm, color = factor(cell_stim_conc, levels = fig3A_cell_stim_conc)), 
+              alpha = 1, size = 1, width = 0.15) +
+  geom_errorbar(data = fig3C_mean,
+                aes(factor(cell_stim_conc, levels = fig3C_cell_stim_conc),
+                    ymin = counts_norm, ymax = counts_norm,
+                    group = factor(cell_stim_conc, levels = fig3C_cell_stim_conc),
+                    color = factor(cell_stim_conc, levels = fig3A_cell_stim_conc)),
+                width = 0.95, size = 1) +
+  # stat_pvalue_manual(fig3C_dunn, label = "p.adj.signif", tip.length = 0.05,
+  #                    step.increase = 0.22, group = "inhib_cell", step.group.by = "inhib_cell", size = 3, vjust = 1.2) +
+  facet_nested(, vars(factor(inhibitor), factor(cell_clean, labels = fig3_cells_short)), scales = "free_x") +
+  scale_color_manual(values = fig3A_colors_stim, breaks = c("0 uM\nBasal\nABC subtype", "0 uM\nActivated\nABC subtype"), labels = c("Basal", "Activated"), name = "Stimulation") +
+  # scale_color_manual(values = colors_stim, breaks = fig3_stim_clean, name = "Stimulus") +
+  scale_x_discrete(breaks = fig3C_cell_stim_conc, labels = fig3C_cell_stim_conc_label) +
+  labs(x = element_blank(), y = "Normalised counts", title = fig3C_protein_name) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), 
+        legend.position = "bottom", legend.justification = "right", legend.key.size = unit(0.5, "cm"), legend.spacing.y = unit(0.2, "cm"), legend.box.spacing = unit(0.01, "cm"), legend.margin = margin(c(0, 0, 0, 0)), 
+        axis.text.x = element_text(size = 6), plot.title = element_text(size = 8.5), plot.title.position = "panel")
+fig3_panelC
+```
+
+#### Panel D
+```{r fig3_panelD, fig.width=6, fig.height=3, fig.retina=1}
+# Select data
+# Protein lists
+# HBL1
+fig3D_HBL1_iBTK <- read_lines("output/DS108_StimInhibIDseq/IDseq_sign_threshold/active_inhibitor/HBL1_iBTK_stim_sign_proteins.txt")
+fig3D_HBL1_iSYK <- read_lines("output/DS108_StimInhibIDseq/IDseq_sign_threshold/active_inhibitor/HBL1_iSYK_stim_sign_proteins.txt")
+fig3D_HBL1_iNFkB <- read_lines("output/DS108_StimInhibIDseq/IDseq_sign_threshold/active_inhibitor/HBL1_iNFkB_stim_sign_proteins.txt")
+# any dose inhib effect on act vs basal: HBL1_iBTK_stim_sign_proteins.txt
+
+# OCI-Ly8
+fig3D_OCI_iBTK <- read_lines("output/DS108_StimInhibIDseq/IDseq_sign_threshold/active_inhibitor/Ly8_iBTK_stim_sign_proteins.txt")
+fig3D_OCI_iSYK <- read_lines("output/DS108_StimInhibIDseq/IDseq_sign_threshold/active_inhibitor/Ly8_iSYK_stim_sign_proteins.txt")
+fig3D_OCI_iNFkB <- read_lines("output/DS108_StimInhibIDseq/IDseq_sign_threshold/active_inhibitor/Ly8_iNFkB_stim_sign_proteins.txt")
+# any dose inhib effect on act vs basal: Ly8_iBTK_stim_sign_proteins.txt
+
+# Figure
+# HBL1
+fig3D_HBL1_data <- list(fig3D_HBL1_iBTK, fig3D_HBL1_iSYK, fig3D_HBL1_iNFkB)
+fig3D_HBL1_names <- c(paste0("iBTK (", length(fig3D_HBL1_iBTK), " prot.)"), 
+                     paste0("iSYK (", length(fig3D_HBL1_iSYK), " prot.)"), 
+                     paste0("iNFkB (", length(fig3D_HBL1_iNFkB), " prot.)"))
+names(fig3D_HBL1_data) <- fig3D_HBL1_names
+fig3_panelD_HBL1 <- ggvenn(data = fig3D_HBL1_data, 
+               fill_color = c("#5c9dce", "#9dce5c", "#ce5c9d"),
+               # auto_scale = TRUE,
+               show_percentage = FALSE,
+               # show_elements = FALSE,
+               stroke_size = 0.35, 
+               text_size = 2.5, 
+               set_name_size = 2.5) + 
+  ggtitle("   Effect of inhibitors on\n   activated vs basal signaling\n\n   ABC subtype") +
+  textsize_small + 
+  theme(plot.title = element_text(size = 8.5))
+fig3_panelD_HBL1
+
+# OCI-Ly8
+fig3D_OCI_data <- list(fig3D_OCI_iBTK, fig3D_OCI_iSYK, fig3D_OCI_iNFkB)
+fig3D_OCI_names <- c(paste0("iBTK (", length(fig3D_OCI_iBTK), " prot.)"), 
+                     paste0("iSYK (", length(fig3D_OCI_iSYK), " prot.)"), 
+                     paste0("iNFkB (", length(fig3D_OCI_iNFkB), " prot.)"))
+names(fig3D_OCI_data) <- fig3D_OCI_names
+fig3_panelD_OCI <- ggvenn(data = fig3D_OCI_data, 
+               fill_color = c("#5c9dce", "#9dce5c", "#ce5c9d"),
+               # auto_scale = TRUE,
+               show_percentage = FALSE,
+               # show_elements = TRUE,
+               stroke_size = 0.5, 
+               text_size = 2.5, 
+               set_name_size = 2.5) + 
+  ggtitle("\n   GCB subtype") +
+  textsize_small + 
+  theme(plot.title = element_text(size = 8.5))
+fig3_panelD_OCI
+
+fig3_panelD <- plot_grid(fig3_panelD_HBL1, fig3_panelD_OCI, ncol = 1, rel_heights = c(1, 1))
+fig3_panelD
+
+fig3_panelD_alt <- plot_grid(fig3_panelD_HBL1, fig3_panelD_OCI, nrow = 1, rel_widths = c(1, 1))
+# fig3_panelD_alt
+```
+
+
+### Combined fig
+
+```{r fig3_combi, fig.width=6, fig.height=5.5, fig.retina=1}
+# Combine all panels of the figure
+# fig3 <- plot_grid(fig3_panelA, fig3_panelB, fig3_panelC, fig3_panelD_alt, labels = PANEL_labels[c(1:4)], ncol = 1, rel_heights = c(1, 1, 1.1, 1.2), label_size = 10)
+fig3_ABC <- plot_grid(fig3_panelA, fig3_panelB, fig3_panelC, labels = PANEL_labels[c(1:3)], ncol = 1, rel_heights = c(1, 1, 1.1), label_size = 10)
+fig3 <- plot_grid(fig3_ABC, fig3_panelD, labels = c(NA, PANEL_labels[c(4)]), nrow = 1, rel_widths = c(2.9, 1), label_size = 10)
+fig3
+
+# Save figure as pdf, jpg
+ggsave(
+  fig3,
+  filename = "output/figures/DLBCL_proteins/main_fig3.pdf",
+  width = 6,
+  height = 5.5,
+  units = "in",
+  dpi = 300
+  )
+ggsave(
+  fig3,
+  filename = "output/figures/DLBCL_proteins/main_fig3.jpg",
+  width = 6,
+  height = 5.5,
+  units = "in",
+  dpi = 300
+  )
+```
+*High doses of inhibitors drastically decrease many phospho-protein levels.*
+
+```{r fig3_clean}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "fig3"))
+rm(list = ls(pattern = "png"))
+rm(list = ls(pattern = "results_"))
+rm(list = ls(pattern = "volc_"))
+rm(list = ls(pattern = "list_"))
+rm(list = ls(pattern = "names_"))
+rm(list = ls(pattern = "titles_"))
+rm(list = ls(pattern = "data_"))
+rm(list = ls(pattern = "heat_"))
+rm(list = ls(pattern = "rld"))
+rm(list = ls(pattern = "pca"))
+gc()
+```
+
+
+
+## Figure 4
+
+*High doses of inhibitors cause network-wide disruption in the activated signaling response.*
+
+Input:
+
+-   DS108 ID-seq data
+
+    -   Network projection
+
+
+### Data
+
+```{r fig4_data}
+# ID-seq data DS108 (counts per well/sample and mean per condition)
+fig4_data_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) #%>%
+  # subset(inhib_new == "PBS ctrl")
+fig4_mean_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_condition.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) #%>%
+  # subset(inhib_new == "PBS ctrl")
+
+fig4_node_info <- read_excel("output/network_visual_DLBCL/node_info2.xlsx")
+```
+
+```{r fig4_labels}
+fig4_cells <- c("HBL1", "OCI-Ly8")
+fig4_cells_clean <- c("ABC subtype", "GCB subtype")
+fig4_stim <- c("PBS", "aIg+H2O2")
+fig4_stim_clean <- c("Basal", "Activated")
+
+fig4_inhib <- c("iBTK", "iSYK", "iNFkB")
+fig4_conc <- c("0 uM (DMSO)", "100 uM")
+fig4_conc_label <- c("DMSO ctrl", "100 uM")
+fig4_conc_all <- c("0 uM (DMSO)", "0.1 uM", "1 uM", "10 uM", "100 uM")
+# label_conc <- c("0 uM", "0.1 uM", "1 uM", "10 uM", "100 uM")
+
+fig4_meta_cols <- c("plate_well", "plate", "well", "experiment", "cell_line", "cell_clean", "stimulus", "stim_clean", "cell_stim", "inhibitor", "inhib_conc_uM", "inhib_conc", "inhib_conc_text", "inhib_text_new", "stim_inhib", "replicate", "description", "descript_rep")
+```
+
+
+### Diff express analysis {.tabset}
+
+#### Activated vs basal (PBS ctrl)
+
+Differential expression analysis of activated vs basal signaling
+
+DESeq2 analysis parameters:
+
+-   2 cell lines, 2 stimuli
+
+-   Compensated counts (>= 1)
+
+-   Model design: cell_stim
+
+```{r fig4_DESeq_act}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- fig4_data_id  %>%
+  dplyr::filter(inhib_new == "PBS ctrl" & counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig4_data_id, all_of(fig4_meta_cols)))) %>%
+  distinct()
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign <- ~ cell_stim
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$cell_stim <- relevel(dds$cell_stim, ref = "Basal\nABC subtype")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_HBL1_stim <- results(dds, name = "cell_stim_Activated.ABC.subtype_vs_Basal.ABC.subtype", alpha = 0.05)
+results_OCI_stim <- results(dds, contrast = c("cell_stim", "Activated\nGCB subtype", "Basal\nGCB subtype"), alpha = 0.05)
+
+list_results <- list(results_HBL1_stim, results_OCI_stim)
+
+# Data transformation
+# Regularized log transform
+rld_stim <- rlog(dds, blind = FALSE)
+
+# Data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(as.data.frame(dataset))
+}
+
+# Apply function to each dataset
+# Applied thresholds:
+# padj < 0.05
+volc_HBL1_stim <- prep_forvulcano(dataset = results_HBL1_stim, foldchange_filter = 0, padj_filter = 0.05) %>%
+  subset(diff_express == "UP" | diff_express == "DOWN") %>%
+  mutate(log10padj = -log10(padj)) %>%
+  dplyr::select(c(target_nospace, log2FoldChange, padj, log10padj, diff_express)) %>%
+  full_join(fig4_node_info) %>%
+  mutate(log2FoldChange = case_when(in_panel == "yes" & is.na(log2FoldChange) ~ 0, 
+                                    .default = log2FoldChange), 
+         padj = case_when(in_panel == "yes" & is.na(padj) ~ 0.051, 
+                          .default = padj)) %>%
+  subset(in_network == "yes" & in_panel == "yes") %>%
+  dplyr::rename(prot_HBL1_StimvsPBS_log2FC = log2FoldChange, 
+                prot_HBL1_StimvsPBS_padj = padj,
+                prot_HBL1_StimvsPBS_log10padj = log10padj, 
+                prot_HBL1_StimvsPBS_DE = diff_express)
+
+volc_OCI_stim <- prep_forvulcano(dataset = results_OCI_stim, foldchange_filter = 0, padj_filter = 0.05) %>%
+  subset(diff_express == "UP" | diff_express == "DOWN") %>%
+  mutate(log10padj = -log10(padj)) %>%
+  dplyr::select(c(target_nospace, log2FoldChange, padj, log10padj, diff_express)) %>%
+  full_join(fig4_node_info) %>%
+  mutate(log2FoldChange = case_when(in_panel == "yes" & is.na(log2FoldChange) ~ 0, 
+                                    .default = log2FoldChange), 
+         padj = case_when(in_panel == "yes" & is.na(padj) ~ 0.051, 
+                          .default = padj)) %>%
+  subset(in_network == "yes" & in_panel == "yes") %>%
+  dplyr::rename(prot_OCI_StimvsPBS_log2FC = log2FoldChange, 
+                prot_OCI_StimvsPBS_padj = padj,
+                prot_OCI_StimvsPBS_log10padj = log10padj, 
+                prot_OCI_StimvsPBS_DE = diff_express)
+```
+
+#### HBL1: 100 uM inhib vs DMSO ctrl (activated)
+
+Differential expression analysis of stimulation in HBL1
+
+DESeq2 analysis parameters:
+
+-   3 inhibitors, 0 uM (DMSO) + 100 uM inhib, aIg+H2O2, HBL1
+
+-   Compensated counts (>= 1)
+
+-   Model design: inhib_text_new (ref: DMSO ctrl)
+
+```{r fig4_DESeq_inhib_HBL1}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- fig4_data_id  %>%
+  dplyr::filter(cell_line == "HBL1" & stimulus == "aIg+H2O2" & inhib_conc %in% c("0 uM (DMSO)", "100 uM") & counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig4_data_id, all_of(fig4_meta_cols)))) %>%
+  distinct()
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign <- ~ inhib_text_new
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$inhib_text_new <- relevel(dds$inhib_text_new, ref = "DMSO ctrl")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_HBL1_iSYK100 <- results(dds, name = "inhib_text_new_100.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+results_HBL1_iBTK100 <- results(dds, name = "inhib_text_new_100.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+results_HBL1_iNFkB100 <- results(dds, name = "inhib_text_new_100.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+# list_results <- list(results_iSYK100_stim, results_iBTK100_stim, results_iNFkB100_stim)
+# summary(results_HBL1, padj = 0.05)
+
+# Data transformation
+# Regularized log transform
+rld <- rlog(dds, blind = FALSE)
+
+# Volcano preparation/data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(as.data.frame(dataset))
+}
+
+# Apply function to each dataset
+# Applied thresholds:
+# padj < 0.05
+volc_HBL1_iSYK100 <- prep_forvulcano(dataset = results_HBL1_iSYK100, foldchange_filter = 0, padj_filter = 0.05) %>%
+  subset(diff_express == "UP" | diff_express == "DOWN") %>%
+  mutate(log10padj = -log10(padj)) %>%
+  dplyr::select(c(target_nospace, log2FoldChange, padj, log10padj, diff_express)) %>%
+  full_join(fig4_node_info) %>%
+  mutate(log2FoldChange = case_when(in_panel == "yes" & is.na(log2FoldChange) ~ 0, 
+                               .default = log2FoldChange), 
+         padj = case_when(in_panel == "yes" & is.na(padj) ~ 0.051, 
+                               .default = padj)) %>%
+  subset(in_network == "yes" & in_panel == "yes") %>%
+  dplyr::rename(prot_HBL1_iSYK100vsDMSO_act_log2FC = log2FoldChange, 
+                prot_HBL1_iSYK100vsDMSO_act_padj = padj,
+                prot_HBL1_iSYK100vsDMSO_act_log10padj = log10padj, 
+                prot_HBL1_iSYK100vsDMSO_act_DE = diff_express)
+# write.csv(volc_HBL1_iSYK100, file = "output/network_visual_paper/node_info_HBL1_iSYK100uMvsDMSOctrl_StimOnly.csv", row.names = F, na = "")
+
+volc_HBL1_iBTK100 <- prep_forvulcano(dataset = results_HBL1_iBTK100, foldchange_filter = 0, padj_filter = 0.05) %>%
+  subset(diff_express == "UP" | diff_express == "DOWN") %>%
+  mutate(log10padj = -log10(padj)) %>%
+  dplyr::select(c(target_nospace, log2FoldChange, padj, log10padj, diff_express)) %>%
+  full_join(fig4_node_info) %>%
+  mutate(log2FoldChange = case_when(in_panel == "yes" & is.na(log2FoldChange) ~ 0, 
+                               .default = log2FoldChange), 
+         padj = case_when(in_panel == "yes" & is.na(padj) ~ 0.051, 
+                               .default = padj)) %>%
+  subset(in_network == "yes" & in_panel == "yes") %>%
+  dplyr::rename(prot_HBL1_iBTK100vsDMSO_act_log2FC = log2FoldChange, 
+                prot_HBL1_iBTK100vsDMSO_act_padj = padj,
+                prot_HBL1_iBTK100vsDMSO_act_log10padj = log10padj, 
+                prot_HBL1_iBTK100vsDMSO_act_DE = diff_express)
+# write.csv(volc_HBL1_iBTK100, file = "output/network_visual_paper/node_info_HBL1_iBTK100uMvsDMSOctrl_StimOnly.csv", row.names = F, na = "")
+
+volc_HBL1_iNFkB100 <- prep_forvulcano(dataset = results_HBL1_iNFkB100, foldchange_filter = 0, padj_filter = 0.05) %>%
+  subset(diff_express == "UP" | diff_express == "DOWN") %>%
+  mutate(log10padj = -log10(padj)) %>%
+  dplyr::select(c(target_nospace, log2FoldChange, padj, log10padj, diff_express)) %>%
+  full_join(fig4_node_info) %>%
+  mutate(log2FoldChange = case_when(in_panel == "yes" & is.na(log2FoldChange) ~ 0, 
+                               .default = log2FoldChange), 
+         padj = case_when(in_panel == "yes" & is.na(padj) ~ 0.051, 
+                               .default = padj)) %>%
+  subset(in_network == "yes" & in_panel == "yes") %>%
+  dplyr::rename(prot_HBL1_iNFkB100vsDMSO_act_log2FC = log2FoldChange, 
+                prot_HBL1_iNFkB100vsDMSO_act_padj = padj,
+                prot_HBL1_iNFkB100vsDMSO_act_log10padj = log10padj, 
+                prot_HBL1_iNFkB100vsDMSO_act_DE = diff_express)
+# write.csv(volc_HBL1_iNFkB100, file = "output/network_visual_paper/node_info_HBL1_iNFkB100uMvsDMSOctrl_StimOnly.csv", row.names = F, na = "")
+```
+
+#### OCI: 100 uM inhib vs DMSO ctrl (activated)
+
+Differential expression analysis of stimulation in OCI
+
+DESeq2 analysis parameters:
+
+-   3 inhibitors, 0 uM (DMSO) + 100 uM inhib, aIg+H2O2, OCI
+
+-   Compensated counts (>= 1)
+
+-   Model design: inhib_text_new (ref: DMSO ctrl)
+
+```{r fig4_DESeq_inhib_OCI}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- fig4_data_id  %>%
+  dplyr::filter(cell_line == "OCI-Ly8" & stimulus == "aIg+H2O2" & inhib_conc %in% c("0 uM (DMSO)", "100 uM") & counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig4_data_id, all_of(fig4_meta_cols)))) %>%
+  distinct()
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign <- ~ inhib_text_new
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$inhib_text_new <- relevel(dds$inhib_text_new, ref = "DMSO ctrl")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_OCI_iSYK100 <- results(dds, name = "inhib_text_new_100.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+results_OCI_iBTK100 <- results(dds, name = "inhib_text_new_100.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+results_OCI_iNFkB100 <- results(dds, name = "inhib_text_new_100.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+# list_results <- list(results_iSYK100_stim, results_iBTK100_stim, results_iNFkB100_stim)
+# summary(results_OCI, padj = 0.05)
+
+# Data transformation
+# Regularized log transform
+rld <- rlog(dds, blind = FALSE)
+
+# Volcano preparation/data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(as.data.frame(dataset))
+}
+
+# Apply function to each dataset
+# Applied thresholds:
+# padj < 0.05
+volc_OCI_iSYK100 <- prep_forvulcano(dataset = results_OCI_iSYK100, foldchange_filter = 0, padj_filter = 0.05) %>%
+  subset(diff_express == "UP" | diff_express == "DOWN") %>%
+  mutate(log10padj = -log10(padj)) %>%
+  dplyr::select(c(target_nospace, log2FoldChange, padj, log10padj, diff_express)) %>%
+  full_join(fig4_node_info) %>%
+  mutate(log2FoldChange = case_when(in_panel == "yes" & is.na(log2FoldChange) ~ 0, 
+                               .default = log2FoldChange), 
+         padj = case_when(in_panel == "yes" & is.na(padj) ~ 0.051, 
+                               .default = padj)) %>%
+  subset(in_network == "yes" & in_panel == "yes") %>%
+  dplyr::rename(prot_OCI_iSYK100vsDMSO_act_log2FC = log2FoldChange, 
+                prot_OCI_iSYK100vsDMSO_act_padj = padj,
+                prot_OCI_iSYK100vsDMSO_act_log10padj = log10padj, 
+                prot_OCI_iSYK100vsDMSO_act_DE = diff_express)
+# write.csv(volc_OCI_iSYK100, file = "output/network_visual_paper/node_info_OCI_iSYK100uMvsDMSOctrl_StimOnly.csv", row.names = F, na = "")
+
+volc_OCI_iBTK100 <- prep_forvulcano(dataset = results_OCI_iBTK100, foldchange_filter = 0, padj_filter = 0.05) %>%
+  subset(diff_express == "UP" | diff_express == "DOWN") %>%
+  mutate(log10padj = -log10(padj)) %>%
+  dplyr::select(c(target_nospace, log2FoldChange, padj, log10padj, diff_express)) %>%
+  full_join(fig4_node_info) %>%
+  mutate(log2FoldChange = case_when(in_panel == "yes" & is.na(log2FoldChange) ~ 0, 
+                               .default = log2FoldChange), 
+         padj = case_when(in_panel == "yes" & is.na(padj) ~ 0.051, 
+                               .default = padj)) %>%
+  subset(in_network == "yes" & in_panel == "yes") %>%
+  dplyr::rename(prot_OCI_iBTK100vsDMSO_act_log2FC = log2FoldChange, 
+                prot_OCI_iBTK100vsDMSO_act_padj = padj,
+                prot_OCI_iBTK100vsDMSO_act_log10padj = log10padj, 
+                prot_OCI_iBTK100vsDMSO_act_DE = diff_express)
+# write.csv(volc_OCI_iBTK100, file = "output/network_visual_paper/node_info_OCI_iBTK100uMvsDMSOctrl_StimOnly.csv", row.names = F, na = "")
+
+volc_OCI_iNFkB100 <- prep_forvulcano(dataset = results_OCI_iNFkB100, foldchange_filter = 0, padj_filter = 0.05) %>%
+  subset(diff_express == "UP" | diff_express == "DOWN") %>%
+  mutate(log10padj = -log10(padj)) %>%
+  dplyr::select(c(target_nospace, log2FoldChange, padj, log10padj, diff_express)) %>%
+  full_join(fig4_node_info) %>%
+  mutate(log2FoldChange = case_when(in_panel == "yes" & is.na(log2FoldChange) ~ 0, 
+                               .default = log2FoldChange), 
+         padj = case_when(in_panel == "yes" & is.na(padj) ~ 0.051, 
+                               .default = padj)) %>%
+  subset(in_network == "yes" & in_panel == "yes") %>%
+  dplyr::rename(prot_OCI_iNFkB100vsDMSO_act_log2FC = log2FoldChange, 
+                prot_OCI_iNFkB100vsDMSO_act_padj = padj,
+                prot_OCI_iNFkB100vsDMSO_act_log10padj = log10padj, 
+                prot_OCI_iNFkB100vsDMSO_act_DE = diff_express)
+# write.csv(volc_OCI_iNFkB100, file = "output/network_visual_paper/node_info_OCI_iNFkB100uMvsDMSOctrl_StimOnly.csv", row.names = F, na = "")
+```
+
+#### Combined dataset
+```{r fig4_DESeq_join}
+fig4_DESeq2_node_info <- list(volc_HBL1_stim, volc_HBL1_iBTK100, volc_HBL1_iSYK100, volc_HBL1_iNFkB100, 
+                              volc_OCI_stim, volc_OCI_iBTK100, volc_OCI_iSYK100, volc_OCI_iNFkB100) %>%
+  purrr::reduce(full_join)
+write.csv(fig4_DESeq2_node_info, file = "output/network_visual_DLBCL/data_node_info_proteins_all.csv", row.names = F, na = "")
+```
+
+
+### Panels {.tabset}
+
+#### Panel A
+```{r fig4_panelA, fig.retina=1}
+# Placeholder
+fig4_panelA <- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = "BCR signaling network") + 
+  theme_bw() +
+  theme(axis.text = element_text(color = "white"), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# fig4_panelA
+
+# HBL1: Active
+fig4_panelA <- magick::image_read("output/figures/non_R_figs/Cytoscape_prot_HBL1_ActvsBas.png") %>%
+  magick::image_border(color = "black", geometry = "1x1") %>%
+  magick::image_ggplot(interpolate = TRUE) +
+  ggtitle("    ABC subtype: Activated vs basal") +
+  # theme(axis.title = element_text(colour = "white"), axis.text = element_blank()) +
+  textsize_small
+fig4_panelA
+
+# legend
+fig4_network_legend <- magick::image_read("output/figures/non_R_figs/legend_network_projections.png") %>%
+# fig4_network_legend <- magick::image_read("output/figures/non_R_figs/legend_network_projections_vert.png") %>%
+  # magick::image_border(color = "black", geometry = "1x1") %>%
+  magick::image_ggplot(interpolate = TRUE) +
+  # ggtitle("\n") +
+  textsize_small
+# fig4_network_legend
+```
+
+#### Panel B
+```{r fig4_panelB, fig.width=6, fig.height=3, fig.retina=1}
+# Placeholder
+fig4_panelB <- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = "BCR signaling network") + 
+  theme_bw() +
+  theme(axis.text = element_text(color = "white"), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# fig4_panelB
+
+# HBL1: 100 uM iBTK
+fig4_panelB <- magick::image_read("output/figures/non_R_figs/Cytoscape_prot_HBL1_iBTK100uMvsDMSO.png") %>%
+  magick::image_border(color = "black", geometry = "1x1") %>%
+  magick::image_ggplot(interpolate = TRUE) +
+  ggtitle("    ABC subtype: 100 uM iBTK in activated cells") +
+  # theme(axis.title = element_text(colour = "white"), axis.text = element_blank()) +
+  textsize_small
+fig4_panelB
+```
+
+#### Panel C
+```{r fig4_panelC, fig.retina=1}
+# Placeholder
+fig4_panelC <- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = "BCR signaling network") + 
+  theme_bw() +
+  theme(axis.text = element_text(color = "white"), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# fig4_panelC
+
+# OCI: Active
+fig4_panelC <- magick::image_read("output/figures/non_R_figs/Cytoscape_prot_OCI_ActvsBas.png") %>%
+  magick::image_border(color = "black", geometry = "1x1") %>%
+  magick::image_ggplot(interpolate = TRUE) +
+  ggtitle("    GCB subtype: Activated vs basal") +
+  # theme(axis.title = element_text(colour = "white"), axis.text = element_blank()) +
+  textsize_small
+fig4_panelC
+```
+
+#### Panel D
+```{r fig4_panelD, fig.width=6, fig.height=3, fig.retina=1}
+# Placeholder
+fig4_panelD <- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = "BCR signaling network") + 
+  theme_bw() +
+  theme(axis.text = element_text(color = "white"), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# fig4_panelD
+
+# OCI: 100 uM iBTK
+fig4_panelD <- magick::image_read("output/figures/non_R_figs/Cytoscape_prot_OCI_iBTK100uMvsDMSO.png") %>%
+  magick::image_border(color = "black", geometry = "1x1") %>%
+  magick::image_ggplot(interpolate = TRUE) +
+  ggtitle("    GCB subtype: 100 uM iBTK in activated cells") +
+  # theme(axis.title = element_text(colour = "white"), axis.text = element_blank()) +
+  textsize_small
+fig4_panelD
+```
+
+
+### Combined fig
+
+```{r fig4_combi, fig.width=6, fig.height=8, fig.retina=1}
+# Combine all panels of the figure
+fig4_networks <- plot_grid(fig4_panelA, fig4_panelB, fig4_panelC, fig4_panelD, labels = PANEL_labels[c(1:4)], ncol = 2, rel_widths = c(1, 1), rel_heights = c(1, 1), label_size = 10)
+fig4 <- plot_grid(fig4_networks, fig4_network_legend, ncol = 1, rel_heights = c(10, 1))
+fig4
+
+# Save figure as pdf, jpg
+ggsave(
+  fig4,
+  filename = "output/figures/DLBCL_proteins/main_fig4.pdf",
+  width = 6,
+  height = 6.5,
+  units = "in",
+  dpi = 300
+  )
+ggsave(
+  fig4,
+  filename = "output/figures/DLBCL_proteins/main_fig4.jpg",
+  width = 6,
+  height = 6.5,
+  units = "in",
+  dpi = 300
+  )
+```
+*High doses of inhibitors cause network-wide disruption in the activated signaling response.*
+
+```{r fig4_clean}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "fig4"))
+rm(list = ls(pattern = "png"))
+rm(list = ls(pattern = "results_"))
+rm(list = ls(pattern = "volc_"))
+rm(list = ls(pattern = "list_"))
+rm(list = ls(pattern = "names_"))
+rm(list = ls(pattern = "titles_"))
+rm(list = ls(pattern = "data_"))
+rm(list = ls(pattern = "heat_"))
+rm(list = ls(pattern = "rld"))
+rm(list = ls(pattern = "pca"))
+gc()
+```
+
+
+
+## Figure 5
+
+*Inhibition of core BCR signaling and MAPK signaling in ABC-DLBCL subtype model.*
+
+Input:
+
+-   DS108 ID-seq data
+
+    -   Count data
+    
+    -   DESeq2 analysis
+
+
+### Data
+
+```{r fig5_data}
+# ID-seq data DS108 (counts per well/sample and mean per condition)
+fig5_data_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139" & cell_line == "HBL1") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) #%>%
+  # subset(inhib_new == "PBS ctrl")
+fig5_mean_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_condition.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139" & cell_line == "HBL1") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) #%>%
+  # subset(inhib_new == "PBS ctrl")
+```
+
+```{r fig5_labels}
+fig5_cells <- c("HBL1", "OCI-Ly8")
+fig5_cells_clean <- c("ABC subtype", "GCB subtype")
+fig5_stim <- c("PBS", "aIg+H2O2")
+fig5_stim_clean <- c("Basal", "Activated")
+
+fig5_inhib <- c("iBTK", "iSYK", "iNFkB")
+# fig5_conc <- c("0 uM (DMSO)", "100 uM")
+# fig5_conc_label <- c("DMSO ctrl", "100 uM")
+fig5_conc_all <- c("0 uM (DMSO)", "0.1 uM", "1 uM", "10 uM", "100 uM")
+fig5_conc_all_label <- c("0 uM", "0.1 uM", "1 uM", "10 uM", "100 uM")
+fig5_conc_all_label_alt <- c("0", "0.1", "1", "10", "100")
+
+fig5_meta_cols <- c("plate_well", "plate", "well", "experiment", "cell_line", "cell_clean", "stimulus", "stim_clean", "cell_stim", "inhibitor", "inhib_conc_uM", "inhib_conc", "inhib_conc_text", "inhib_text_new", "inhib_new", "stim_inhib", "replicate", "description", "descript_rep")
+```
+
+
+### Panels {.tabset}
+
+#### Panel A
+
+Differential expression analysis of the effect of inhibitor concentration on the stimulation in HBL1
+
+DESeq2 analysis parameters:
+
+-   HBL1: 3 inhibitors, 5 conc, 2 stimuli
+
+-   Compensated counts (>= 1)
+
+-   Model design: inhib_text_new (ref: DMSO ctrl) + stimulus (ref: PBS) + inhib_text_new:stimulus
+
+```{r fig5A_DESeq_HBL1}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- fig5_data_id  %>%
+  dplyr::filter(cell_line == "HBL1" & inhib_conc %in% fig5_conc_all & counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig5_data_id, all_of(fig5_meta_cols)))) %>%
+  distinct()
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign <- ~ inhib_text_new + stim_clean + inhib_text_new:stim_clean
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$inhib_text_new <- relevel(dds$inhib_text_new, ref = "DMSO ctrl")
+dds$stim_clean <- relevel(dds$stim_clean, ref = "Basal")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_HBL1_stim <- results(dds, name = "stim_clean_Activated_vs_Basal", alpha = 0.05)
+results_HBL1_iBTK100 <- results(dds, name = "inhib_text_new100.uM.iBTK.stim_cleanActivated", alpha = 0.05)
+results_HBL1_iSYK100 <- results(dds, name = "inhib_text_new100.uM.iSYK.stim_cleanActivated", alpha = 0.05)
+results_HBL1_iNFkB100 <- results(dds, name = "inhib_text_new100.uM.iNFkB.stim_cleanActivated", alpha = 0.05)
+
+list_results <- list(results_HBL1_stim, results_HBL1_iBTK100, results_HBL1_iSYK100, results_HBL1_iNFkB100)
+
+# Data transformation
+# Regularized log transform
+rld_HBL1 <- rlog(dds, blind = FALSE)
+
+# Data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(dataset)
+}
+
+# Apply function to each dataset
+# Applied thresholds:
+# padj < 0.05
+# log2FC > log2(1.05)
+names_volc <- c("volc_HBL1_stim", "volc_HBL1_iBTK100", "volc_HBL1_iSYK100", "volc_HBL1_iNFkB100")
+for(dataset in c(1:length(list_results))){
+  assign(names_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.1)))
+}
+
+# Function to filter the data
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+filter_heatmap <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5), select_top = TRUE, select_n = 10) {
+  data <- as.data.frame(dataset) %>%
+    dplyr::filter(padj <= padj_filter & abs(log2FoldChange) >= foldchange_filter) %>%
+    arrange(-log2FoldChange) 
+  rownames(data) <- data$target_nospace
+  
+  # Select top 10 proteins with most increased and decreased expression
+  if (select_top == TRUE) {
+    data_top <- data %>%
+      slice_max(order_by = abs(log2FoldChange), n = select_n)
+    return(data_top)
+  } else {
+    return(data)
+  }
+}
+
+# Apply function to each dataset
+list_results_volc <- list(volc_HBL1_stim, volc_HBL1_iBTK100, volc_HBL1_iSYK100, volc_HBL1_iNFkB100)
+names_heat <- c("heat_HBL1_stim", "heat_HBL1_iBTK100", "heat_HBL1_iSYK100", "heat_HBL1_iNFkB100")
+for(dataset in c(1:length(list_results_volc))){
+  assign(names_heat[[dataset]], filter_heatmap(dataset = list_results_volc[[dataset]], select_top = FALSE, foldchange_filter = log2(1.1)))
+  dataset
+}
+```
+
+```{r fig5_panelA, fig.width=6, fig.height=3, fig.retina=1}
+# Data
+# Combine heatmap datasets (without DESeq2 analysis values)
+heat_inhib_HBL1 <- list(heat_HBL1_stim, heat_HBL1_iBTK100, heat_HBL1_iSYK100, heat_HBL1_iNFkB100) %>%
+  purrr::reduce(full_join) %>%
+  dplyr::select(-c(baseMean, log2FoldChange, lfcSE, stat, pvalue, padj, diff_express)) %>%
+  left_join(fig5_data_id[, 14:21]) %>%
+  dplyr::filter(modification == "phospho") %>%
+  distinct()
+
+# Subset the full dataframe to get metadata for heatmap plotting
+fig5A_info_HBL1 <- fig5_data_id %>%
+  dplyr::select(plate_well, stim_clean, inhib_conc, inhibitor, cell_line) %>%
+  distinct() %>%
+  dplyr::filter(cell_line == "HBL1" & inhib_conc %in% fig5_conc_all & !(stim_clean == "Basal" & inhib_conc %in% fig5_conc_all[2:5])) %>%
+  mutate(inhibitor = factor(inhibitor, levels = fig5_inhib)) %>%
+  as.data.frame()
+rownames(fig5A_info_HBL1) <- fig5A_info_HBL1$plate_well
+fig5A_info_HBL1 <- dplyr::select(fig5A_info_HBL1, -c(plate_well, cell_line))
+
+# Get the rld transformed data for the heatmap and scale per row
+fig5A_data_heat_HBL1 <- t(scale(t(assay(rld_HBL1)[c(heat_inhib_HBL1$target_nospace), rownames(fig5A_info_HBL1)])))
+# sort_hclust <- function(...) as.hclust(dendsort(as.dendrogram(...)))
+# data_cluster_rows <- sort_hclust(hclust(dist(data_cell)))
+# plot(data_cluster_rows, main = "Unsorted Dendrogram", xlab = "", sub = "")
+
+# Figure
+fig5A_ann_colors <- list(Stimulation = colors_stim, 
+                         Inhibitor = colors_inhib,
+                         # inhib_new = c("DMSO ctrl" = "grey", colors_inhib), 
+                         "Inhibitor conc" = setNames(colors_conc, unique(fig5A_info_HBL1$inhib_conc)))
+fig5A_heat_legend <- list(title = "Scaled\nexpression", title_gp = gpar(fontsize = 7), labels_gp = gpar(fontsize = 7), 
+                          grid_width = unit(2, "mm"), grid_height = unit(20, "mm"))
+
+fig5A_col_ann <- HeatmapAnnotation(Inhibitor = fig5A_info_HBL1$inhibitor, 
+                                   "Inhibitor conc" = fig5A_info_HBL1$inhib_conc, 
+                                   Stimulation = fig5A_info_HBL1$stim_clean, 
+                                   simple_anno_size = unit(2.5, "mm"), 
+                                   annotation_name_gp = gpar(fontsize = 7),
+                                   col = fig5A_ann_colors, 
+                                   annotation_legend_param = list(Inhibitor = list(title = "Inhibitor", 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, "mm"), 
+                                                                                   grid_height = unit(1, "mm")), 
+                                                                  "Inhibitor conc" = list(title = "Inhibitor\nconcentration", 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, "mm"), 
+                                                                                   grid_height = unit(1, "mm")), 
+                                                                  Stimulation = list(title = "Stimulation", 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, "mm"), 
+                                                                                   grid_height = unit(1, "mm"))), 
+                                   show_legend = c(FALSE, TRUE, TRUE))
+
+fig5_panelA <- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
+  fig5A_data_heat_HBL1,
+  scale = "none",
+  cluster_rows = TRUE,
+  # treeheight_row = 20,
+  show_rownames = TRUE,
+  show_colnames = FALSE,
+  cluster_cols = FALSE,
+  # annotation_col = fig5A_info_Ly8,
+  top_annotation = fig5A_col_ann,
+  # annotation_colors = fig5A_ann_colors,
+  colorRampPalette(c("navy", "white", "firebrick3"))(50),
+  column_split = fig5A_info_HBL1$inhibitor,
+  row_split = subset(heat_inhib_HBL1)$modification,
+  row_gap = unit(1, "mm"), 
+  # cellwidth = 10,
+  # cellheight = 10,
+  fontsize = 5.75,
+  row_title_gp = gpar(fontsize = 7),
+  column_title_gp = gpar(fontsize = 7), 
+  annotation_names_col = gpar(fontsize = 7),
+  border_color = NA,
+  heatmap_legend_param = fig5A_heat_legend, 
+  # annotation_legend = FALSE,
+)) +
+  ggtitle("          ABC subtype: Effect of inhibitor treatment on activated vs basal signaling") +
+  textsize_small + 
+  theme(plot.title = element_text(size = 8.5))
+fig5_panelA
+```
+
+
+#### Panel B
+
+Differential expression analysis of the effect of inhibitor concentration on activated signaling
+
+DESeq2 analysis parameters:
+
+-   HBL1 samples: 3 inhibitors, 5 conc, 1 stimulus
+
+-   Compensated counts (>= 1)
+
+-   Model design: inhib_text_new (ref: DMSO ctrl)
+
+```{r fig5B_DESeq_act_HBL1}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+
+fig5B_inhib_new <- c("DMSO ctrl", "iBTK", "iSYK", "iNFkB")
+
+cts <- fig5_data_id  %>%
+  dplyr::filter(cell_line == "HBL1" & stimulus == "aIg+H2O2" & inhib_conc != "0 uM (PBS)" & counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig5_data_id, all_of(fig5_meta_cols)))) %>%
+  distinct() %>%
+  mutate(inhib_new = factor(inhib_new, levels = fig5B_inhib_new), 
+         inhib_conc = factor(inhib_conc, levels = fig5_conc_all), 
+         inhib_conc_uM = as.character(inhib_conc_uM), 
+         stimulus = factor(stimulus, levels = fig5_stim)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+# modeldesign <- ~ inhibitor + inhib_conc + inhib_conc:inhibitor # works
+modeldesign <- ~ inhib_text_new
+# modeldesign <- ~ inhib_text_new + stimulus + inhib_text_new:stimulus
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+# dds$stimulus <- relevel(dds$stimulus, ref = "PBS")
+dds$inhib_text_new <- relevel(dds$inhib_text_new, ref = "DMSO ctrl")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+# dds <- estimateSizeFactors(dds, controlGenes = ctrl_genes) # OPTIONAL: normalise data with specified control genes
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_iSYK0.1_Hcs <- results(dds, name = "inhib_text_new_0.1.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+results_iSYK1_Hcs <- results(dds, name = "inhib_text_new_1.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+results_iSYK10_Hcs <- results(dds, name = "inhib_text_new_10.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+results_iSYK100_Hcs <- results(dds, name = "inhib_text_new_100.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+
+results_iBTK0.1_Hcs <- results(dds, name = "inhib_text_new_0.1.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+results_iBTK1_Hcs <- results(dds, name = "inhib_text_new_1.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+results_iBTK10_Hcs <- results(dds, name = "inhib_text_new_10.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+results_iBTK100_Hcs <- results(dds, name = "inhib_text_new_100.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+
+results_iNFkB0.1_Hcs <- results(dds, name = "inhib_text_new_0.1.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+results_iNFkB1_Hcs <- results(dds, name = "inhib_text_new_1.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+results_iNFkB10_Hcs <- results(dds, name = "inhib_text_new_10.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+results_iNFkB100_Hcs <- results(dds, name = "inhib_text_new_100.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+
+# list_results <- list(results_iBTK0.1_Hsc, results_iBTK1_Hsc, results_iBTK10_Hsc, results_iBTK100_Hsc)
+list_results <- list(results_iSYK0.1_Hcs, results_iSYK1_Hcs, results_iSYK10_Hcs, results_iSYK100_Hcs,
+                     results_iBTK0.1_Hcs, results_iBTK1_Hcs, results_iBTK10_Hcs, results_iBTK100_Hcs,
+                     results_iNFkB0.1_Hcs, results_iNFkB1_Hcs, results_iNFkB10_Hcs, results_iNFkB100_Hcs)
+
+# summary(results_iSYK100_Hcs, padj = 0.05)
+
+# Data transformation
+# Regularized log transform
+rld_HBL1 <- rlog(dds, blind = FALSE)
+```
+
+```{r fig5_panelB, fig.width=10, fig.height=4, fig.retina=1}
+# Data
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(as.data.frame(dataset))
+}
+
+# Apply function to each dataset
+# padj < 0.05
+# log2FC > log2(1.05)
+# names_results_volc <- c("volc_iBTK0.1_Hcs", "volc_iBTK1_Hcs", "volc_iBTK10_Hcs", "volc_iBTK100_Hcs")
+names_results_volc <- c("volc_iSYK0.1_Hcs", "volc_iSYK1_Hcs", "volc_iSYK10_Hcs", "volc_iSYK100_Hcs",
+                        "volc_iBTK0.1_Hcs", "volc_iBTK1_Hcs", "volc_iBTK10_Hcs", "volc_iBTK100_Hcs",
+                        "volc_iNFkB0.1_Hcs", "volc_iNFkB1_Hcs", "volc_iNFkB10_Hcs", "volc_iNFkB100_Hcs")
+for(dataset in c(1:length(list_results))){
+  assign(names_results_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.1)))
+}
+
+# Add column with comparison for faceting
+fig5B_comp <- c("0.1 uM iSYK", "1 uM iSYK", "10 uM iSYK", "100 uM iSYK",
+                "0.1 uM iBTK", "1 uM iBTK", "10 uM iBTK", "100 uM iBTK", 
+                "0.1 uM iNFkB", "1 uM iNFkB", "10 uM iNFkB", "100 uM iNFkB")
+
+volc_iSYK0.1_Hcs$comparison <- fig5B_comp[1]
+volc_iSYK1_Hcs$comparison <- fig5B_comp[2]
+volc_iSYK10_Hcs$comparison <- fig5B_comp[3]
+volc_iSYK100_Hcs$comparison <- fig5B_comp[4]
+volc_iBTK0.1_Hcs$comparison <- fig5B_comp[5]
+volc_iBTK1_Hcs$comparison <- fig5B_comp[6]
+volc_iBTK10_Hcs$comparison <- fig5B_comp[7]
+volc_iBTK100_Hcs$comparison <- fig5B_comp[8]
+volc_iNFkB0.1_Hcs$comparison <- fig5B_comp[9]
+volc_iNFkB1_Hcs$comparison <- fig5B_comp[10]
+volc_iNFkB10_Hcs$comparison <- fig5B_comp[11]
+volc_iNFkB100_Hcs$comparison <- fig5B_comp[12]
+fig5B_dataset <- list(volc_iSYK0.1_Hcs, volc_iSYK1_Hcs, volc_iSYK10_Hcs, volc_iSYK100_Hcs,
+                      volc_iBTK0.1_Hcs, volc_iBTK1_Hcs, volc_iBTK10_Hcs, volc_iBTK100_Hcs,
+                      volc_iNFkB0.1_Hcs, volc_iNFkB1_Hcs, volc_iNFkB10_Hcs, volc_iNFkB100_Hcs) %>%
+  purrr::reduce(full_join) %>%
+  mutate(comparison = factor(comparison, levels = fig5B_comp)) %>%
+  arrange(comparison) 
+
+fig5B_dataset_subset <- fig5B_dataset %>%
+  subset(comparison %in% c("0.1 uM iNFkB", "1 uM iNFkB", "10 uM iNFkB")) #, "100 uM iNFkB"
+
+fig5A_prot_iNFkB100 <- sort(unique(c(subset(as.data.frame(volc_HBL1_iNFkB100), diff_express != "NO")$target_nospace))) 
+fig5B_prot_all <- sort(unique(c(subset(fig5B_dataset, comparison %in% c("0.1 uM iNFkB", "1 uM iNFkB", "10 uM iNFkB", "100 uM iNFkB") & diff_express != "NO")$target_nospace)))
+fig5B_prot_new <- setdiff(fig5B_prot_all, fig5A_prot_iNFkB100)
+
+fig5B_new <- tibble(target_nospace = fig5B_prot_new, fig5B_new = fig5B_prot_new, font_face = "bold.italic")
+fig5B_dataset_subset <- left_join(fig5B_dataset_subset, fig5B_new) %>%
+  mutate(font_face = replace_na(font_face, "plain"))
+fig5_dataset_label <- subset(fig5B_dataset_subset, font_face == "bold.italic")
+
+# Figure
+fig5_panelB <- ggplot(data = fig5B_dataset_subset,
+                      aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
+  geom_point(size = 0.25) +
+  geom_vline(xintercept = c(-log2(1.1), log2(1.1)), color = "#CC6677") +
+  geom_hline(yintercept = -log10(0.05), color = "#CC6677") +
+  geom_text_repel(data = fig5_dataset_label, aes(fontface = font_face), 
+                  size = 1.75,
+                  segment.size = 0.2,
+                  hjust = 1,
+                  direction = "y",
+                  max.overlaps = 15,
+                  nudge_y = 20,
+                  nudge_x = ifelse(fig5_dataset_label$log2FoldChange < 0, -0.4 - fig5_dataset_label$log2FoldChange, 0.5 - fig5_dataset_label$log2FoldChange)
+  ) +
+  facet_wrap(~comparison, ncol = 4) +
+  scale_color_manual(values = c(UP = "#A50026", NO = "black", DOWN = "#364B9A"),
+                     breaks = c("UP", "NO", "DOWN"),
+                     labels = c("Increased", "No difference", "Decreased"),
+                     name = "Differentially\nexpressed\nproteins") + 
+  labs(x = "log2(fold change)", y = "-log10(adjusted p-value)", title = "iNFkB versus DMSO control in activated cells") +
+  # coord_cartesian(xlim = c(-0.8, 0.3), ylim = c(0, 50)) + 
+  theme_bw() +
+  textsize_small +
+  theme(legend.key.size = unit(0.2, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "right", legend.justification = "left", plot.title = element_text(size = 8.5)) + #legend.position = "none"
+  guides(shape = guide_legend(nrow = 3, bycol = TRUE), color = guide_legend(nrow = 3, bycol = TRUE))
+fig5_panelB
+```
+
+```{r fig5_panelB_test, fig.width=10, fig.height=10, fig.retina=1}
+# Figure
+fig5_panelB_test <- ggplot(data = fig5B_dataset,
+                      aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
+  geom_point(size = 0.25) +
+  geom_vline(xintercept = c(-log2(1.1), log2(1.1)), color = "#CC6677") +
+  geom_hline(yintercept = -log10(0.05), color = "#CC6677") +
+  geom_text_repel(#aes(fontface = font_face), 
+                  size = 1.5,
+                  segment.size = 0.2,
+                  hjust = 1,
+                  direction = "y",
+                  max.overlaps = 8,
+                  nudge_y = -log10(0.005),
+                  nudge_x = ifelse(fig5B_dataset$log2FoldChange < 0, -0.5 - fig5B_dataset$log2FoldChange, 0.35 - fig5B_dataset$log2FoldChange)
+  ) +
+  facet_wrap(~comparison, ncol = 4) +
+  scale_color_manual(values = c(UP = "#A50026", NO = "black", DOWN = "#364B9A"),
+                     breaks = c("UP", "NO", "DOWN"),
+                     labels = c("Increased", "No difference", "Decreased"),
+                     name = "Differentially\nexpressed\nproteins") + 
+  labs(x = "log2(fold change)", y = "-log10(adjusted p-value)", title = "iNFkB versus DMSO ctrl in activated cells") +
+  # coord_cartesian(xlim = c(-0.8, 0.3), ylim = c(0, 50)) + 
+  theme_bw() +
+  textsize_small +
+  theme(legend.key.size = unit(0.2, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "right", legend.justification = "left", plot.title = element_text(size = 8.5)) + #legend.position = "none"
+  guides(shape = guide_legend(nrow = 3, bycol = TRUE), color = guide_legend(nrow = 3, bycol = TRUE))
+fig5_panelB_test
+```
+
+#### Panel C
+```{r fig5_panelC, fig.width=4, fig.height=6, fig.retina=1}
+# Data
+fig5C_prot <- c(
+  "BTK_Y551"
+  # "ERK1_2_T202_Y204", 
+  # "MAPK_p38_T180_Y182"
+) 
+fig5C_prot_label <- c("BTK (Y551)")
+fig5C_data <- fig5_data_id %>%
+  subset(target_nospace %in% fig5C_prot & inhib_conc %in% fig5_conc_all & cell_line == "HBL1")
+fig5C_mean <- fig5_mean_id %>%
+  subset(target_nospace %in% fig5C_prot & inhib_conc %in% fig5_conc_all & cell_line == "HBL1") 
+
+# Figure
+fig5_panelC <- ggplot() +
+  geom_point(data = subset(fig5C_data, target_nospace == fig5C_prot), 
+             aes(factor(inhib_conc, levels = fig5_conc_all, labels = fig5_conc_all_label_alt), 
+                 counts_norm, 
+                 color = stimulus, 
+                 shape = stimulus
+             ), 
+             alpha = 1, size = 1) +
+  geom_line(data = subset(fig5C_mean, target_nospace == fig5C_prot), 
+            aes(factor(inhib_conc, levels = fig5_conc_all, labels = fig5_conc_all_label_alt), 
+                counts_norm,
+                group = paste(inhibitor, stimulus),
+                color = stimulus
+            ),
+            size = 0.5) +
+  facet_wrap(vars(factor(inhibitor, levels = fig5_inhib)), ncol = 1) +
+  scale_shape_manual(values = c(17, 16), breaks = fig5_stim, labels = fig5_stim_clean, name = "Stimulation") +
+  scale_color_manual(values = colors_stim, breaks = fig5_stim, labels = fig5_stim_clean, name = "Stimulation") +
+  scale_y_continuous(breaks = c(1000, 2000, 3000)) +
+  labs(x = "Inhibitor conc. (uM)", y = "Normalised counts", title = fig5C_prot_label) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), legend.key.size = unit(0.3, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "bottom", strip.text.x = element_text(margin = margin(0.05, 0, 0.05, 0, "cm")), plot.title = element_text(size = 8), axis.text.x = element_text(size = 7)) +
+  guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
+fig5_panelC
+```
+
+#### Panel D
+```{r fig5_panelD, fig.width=4, fig.height=6, fig.retina=1}
+# Data
+fig5D_prot <- c(
+  # "BTK_Y551"
+  "ERK1_2_T202_Y204"
+  # "MAPK_p38_T180_Y182"
+) 
+fig5D_prot_label <- c("ERK1/2 (T202/Y204)")
+fig5D_data <- fig5_data_id %>%
+  subset(target_nospace %in% fig5D_prot & inhib_conc %in% fig5_conc_all & cell_line == "HBL1")
+fig5D_mean <- fig5_mean_id %>%
+  subset(target_nospace %in% fig5D_prot & inhib_conc %in% fig5_conc_all & cell_line == "HBL1") 
+
+# Figure
+fig5_panelD <- ggplot() +
+  geom_point(data = subset(fig5D_data, target_nospace == fig5D_prot), 
+             aes(factor(inhib_conc, levels = fig5_conc_all, labels = fig5_conc_all_label_alt), 
+                 counts_norm, 
+                 color = stimulus, 
+                 shape = stimulus
+             ), 
+             alpha = 1, size = 1) +
+  geom_line(data = subset(fig5D_mean, target_nospace == fig5D_prot), 
+            aes(factor(inhib_conc, levels = fig5_conc_all, labels = fig5_conc_all_label_alt), 
+                counts_norm,
+                group = paste(inhibitor, stimulus),
+                color = stimulus
+            ),
+            size = 0.5) +
+  facet_wrap(vars(factor(inhibitor, levels = fig5_inhib)), ncol = 1) +
+  scale_shape_manual(values = c(17, 16), breaks = fig5_stim, labels = fig5_stim_clean, name = "Stimulation") +
+  scale_color_manual(values = colors_stim, breaks = fig5_stim, labels = fig5_stim_clean, name = "Stimulation") +
+  scale_y_continuous(breaks = c(1700, 1900, 2100)) +
+  labs(x = "Inhibitor conc. (uM)", y = "Normalised counts", title = fig5D_prot_label) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), legend.key.size = unit(0.3, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "none", strip.text.x = element_text(margin = margin(0.05, 0, 0.05, 0, "cm")), plot.title = element_text(size = 8), axis.text.x = element_text(size = 7)) +
+  guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
+fig5_panelD
+```
+
+#### Panel E
+```{r fig5_panelE, fig.width=4, fig.height=6, fig.retina=1}
+# Data
+fig5E_prot <- c(
+  # "BTK_Y551"
+  # "ERK1_2_T202_Y204", 
+  "MAPK_p38_T180_Y182"
+) 
+fig5E_prot_label <- c("MAPK p38 (T180/Y182)")
+fig5E_data <- fig5_data_id %>%
+  subset(target_nospace %in% fig5E_prot & inhib_conc %in% fig5_conc_all & cell_line == "HBL1")
+fig5E_mean <- fig5_mean_id %>%
+  subset(target_nospace %in% fig5E_prot & inhib_conc %in% fig5_conc_all & cell_line == "HBL1") 
+
+# Figure
+fig5_panelE <- ggplot() +
+  geom_point(data = subset(fig5E_data, target_nospace == fig5E_prot), 
+             aes(factor(inhib_conc, levels = fig5_conc_all, labels = fig5_conc_all_label_alt), 
+                 counts_norm, 
+                 color = stimulus, 
+                 shape = stimulus
+             ), 
+             alpha = 1, size = 1) +
+  geom_line(data = subset(fig5E_mean, target_nospace == fig5E_prot), 
+            aes(factor(inhib_conc, levels = fig5_conc_all, labels = fig5_conc_all_label_alt), 
+                counts_norm,
+                group = paste(inhibitor, stimulus),
+                color = stimulus
+            ),
+            size = 0.5) +
+  facet_wrap(vars(factor(inhibitor, levels = fig5_inhib)), ncol = 1) +
+  scale_shape_manual(values = c(17, 16), breaks = fig5_stim, labels = fig5_stim_clean, name = "Stimulation") +
+  scale_color_manual(values = colors_stim, breaks = fig5_stim, labels = fig5_stim_clean, name = "Stimulation") +
+  scale_y_continuous(breaks = c(1300, 1500, 1700)) +
+  labs(x = "Inhibitor conc. (uM)", y = "Normalised counts", title = fig5E_prot_label) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), legend.key.size = unit(0.3, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "none", strip.text.x = element_text(margin = margin(0.05, 0, 0.05, 0, "cm")), plot.title = element_text(size = 8), axis.text.x = element_text(size = 7)) +
+  guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
+fig5_panelE
+```
+
+
+### Combined fig
+
+```{r fig5_combi, fig.width=6, fig.height=7.5, fig.retina=1}
+# Combine all panels of the figure
+fig5_AB <- plot_grid(fig5_panelA, fig5_panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1.2, 1), label_size = 10)
+fig5_CDE <- plot_grid(fig5_panelC, fig5_panelD, fig5_panelE, labels = PANEL_labels[c(3, 4, 5)], nrow = 1, rel_widths = c(1, 1, 1), label_size = 10, align = "h")
+fig5 <- plot_grid(fig5_AB, fig5_CDE, ncol = 1, rel_heights = c(1.65, 1), label_size = 10)
+fig5
+
+# Save figure as pdf, jpg
+ggsave(
+  fig5,
+  filename = "output/figures/DLBCL_proteins/main_fig5.pdf",
+  width = 6,
+  height = 7.5,
+  units = "in",
+  dpi = 300
+  )
+ggsave(
+  fig5,
+  filename = "output/figures/DLBCL_proteins/main_fig5.jpg",
+  width = 6,
+  height = 7.5,
+  units = "in",
+  dpi = 300
+  )
+```
+*Inhibition of core BCR signaling and MAPK signaling in ABC-DLBCL subtype model.*
+
+```{r fig5_clean}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "fig5"))
+rm(list = ls(pattern = "png"))
+rm(list = ls(pattern = "results_"))
+rm(list = ls(pattern = "volc_"))
+rm(list = ls(pattern = "list_"))
+rm(list = ls(pattern = "names_"))
+rm(list = ls(pattern = "titles_"))
+rm(list = ls(pattern = "data_"))
+rm(list = ls(pattern = "heat_"))
+rm(list = ls(pattern = "rld"))
+rm(list = ls(pattern = "pca"))
+gc()
+```
+
+
+
+## Figure 6
+
+*Inhibition of PI3K-AKT signaling and transcription factors in GCB-DLBCL subtype model.*
+
+Input:
+
+-   DS108 ID-seq data
+
+    -   Count data
+    
+    -   DESeq2 analysis
+
+
+### Data
+
+```{r fig6_data}
+# ID-seq data DS108 (counts per well/sample and mean per condition)
+fig6_data_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139" & cell_line == "OCI-Ly8") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) #%>%
+  # subset(inhib_new == "PBS ctrl")
+fig6_mean_id <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_condition.csv") %>%
+  subset(inhibitor != "iPI3Kd" & target_nospace != "BIM" & target_nospace != "Histone_H2AX_S139" & cell_line == "OCI-Ly8") %>%
+  mutate(stim_clean = case_when(stimulus == "PBS" ~ "Basal", 
+                                stimulus == "aIg+H2O2" ~ "Activated"),
+         inhib_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, "\n", inhib_text_new), 
+         cell_clean = case_when(cell_line == "HBL1" ~ "ABC subtype", 
+                                cell_line == "OCI-Ly8" ~ "GCB subtype"), 
+         cell_stim = paste0(stim_clean, "\n", cell_clean)) #%>%
+  # subset(inhib_new == "PBS ctrl")
+```
+
+```{r fig6_labels}
+fig6_cells <- c("HBL1", "OCI-Ly8")
+fig6_cells_clean <- c("ABC subtype", "GCB subtype")
+fig6_stim <- c("PBS", "aIg+H2O2")
+fig6_stim_clean <- c("Basal", "Activated")
+
+fig6_inhib <- c("iBTK", "iSYK", "iNFkB")
+# fig6_conc <- c("0 uM (DMSO)", "100 uM")
+# fig6_conc_label <- c("DMSO ctrl", "100 uM")
+fig6_conc_all <- c("0 uM (DMSO)", "0.1 uM", "1 uM", "10 uM", "100 uM")
+fig6_conc_all_label <- c("0 uM", "0.1 uM", "1 uM", "10 uM", "100 uM")
+fig6_conc_all_label_alt <- c("0", "0.1", "1", "10", "100")
+
+fig6_meta_cols <- c("plate_well", "plate", "well", "experiment", "cell_line", "cell_clean", "stimulus", "stim_clean", "cell_stim", "inhibitor", "inhib_conc_uM", "inhib_conc", "inhib_conc_text", "inhib_text_new", "inhib_new", "stim_inhib", "replicate", "description", "descript_rep")
+```
+
+
+### Panels {.tabset}
+
+#### Panel A
+
+Differential expression analysis of the effect of inhibitor concentration on the stimulation in OCI
+
+DESeq2 analysis parameters:
+
+-   OCI: 3 inhibitors, 5 conc, 2 stimuli
+
+-   Compensated counts (>= 1)
+
+-   Model design: inhib_text_new (ref: DMSO ctrl) + stimulus (ref: PBS) + inhib_text_new:stimulus
+
+```{r fig6A_DESeq_OCI}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- fig6_data_id  %>%
+  dplyr::filter(cell_line == "OCI-Ly8" & inhib_conc %in% fig6_conc_all & counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig6_data_id, all_of(fig6_meta_cols)))) %>%
+  distinct()
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign <- ~ inhib_text_new + stim_clean + inhib_text_new:stim_clean
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$inhib_text_new <- relevel(dds$inhib_text_new, ref = "DMSO ctrl")
+dds$stim_clean <- relevel(dds$stim_clean, ref = "Basal")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_OCI_stim <- results(dds, name = "stim_clean_Activated_vs_Basal", alpha = 0.05)
+results_OCI_iBTK100 <- results(dds, name = "inhib_text_new100.uM.iBTK.stim_cleanActivated", alpha = 0.05)
+results_OCI_iSYK100 <- results(dds, name = "inhib_text_new100.uM.iSYK.stim_cleanActivated", alpha = 0.05)
+results_OCI_iNFkB100 <- results(dds, name = "inhib_text_new100.uM.iNFkB.stim_cleanActivated", alpha = 0.05)
+
+list_results <- list(results_OCI_stim, results_OCI_iBTK100, results_OCI_iSYK100, results_OCI_iNFkB100)
+
+# Data transformation
+# Regularized log transform
+rld_OCI <- rlog(dds, blind = FALSE)
+
+# Data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(dataset)
+}
+
+# Apply function to each dataset
+# Applied thresholds:
+# padj < 0.05
+# log2FC > log2(1.05)
+names_volc <- c("volc_OCI_stim", "volc_OCI_iBTK100", "volc_OCI_iSYK100", "volc_OCI_iNFkB100")
+for(dataset in c(1:length(list_results))){
+  assign(names_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.1)))
+}
+
+# Function to filter the data
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+filter_heatmap <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5), select_top = TRUE, select_n = 10) {
+  data <- as.data.frame(dataset) %>%
+    dplyr::filter(padj <= padj_filter & abs(log2FoldChange) >= foldchange_filter) %>%
+    arrange(-log2FoldChange) 
+  rownames(data) <- data$target_nospace
+  
+  # Select top 10 proteins with most increased and decreased expression
+  if (select_top == TRUE) {
+    data_top <- data %>%
+      slice_max(order_by = abs(log2FoldChange), n = select_n)
+    return(data_top)
+  } else {
+    return(data)
+  }
+}
+
+# Apply function to each dataset
+list_results_volc <- list(volc_OCI_stim, volc_OCI_iBTK100, volc_OCI_iSYK100, volc_OCI_iNFkB100)
+names_heat <- c("heat_OCI_stim", "heat_OCI_iBTK100", "heat_OCI_iSYK100", "heat_OCI_iNFkB100")
+for(dataset in c(1:length(list_results_volc))){
+  assign(names_heat[[dataset]], filter_heatmap(dataset = list_results_volc[[dataset]], select_top = FALSE, foldchange_filter = log2(1.1)))
+  dataset
+}
+```
+
+```{r fig6_panelA, fig.width=6, fig.height=3, fig.retina=1}
+# Data
+# Combine heatmap datasets (without DESeq2 analysis values)
+heat_inhib_OCI <- list(heat_OCI_stim, heat_OCI_iBTK100, heat_OCI_iSYK100, heat_OCI_iNFkB100) %>%
+  purrr::reduce(full_join) %>%
+  dplyr::select(-c(baseMean, log2FoldChange, lfcSE, stat, pvalue, padj, diff_express)) %>%
+  left_join(fig6_data_id[, 14:21]) %>%
+  dplyr::filter(modification == "phospho") %>%
+  distinct()
+
+# Subset the full dataframe to get metadata for heatmap plotting
+fig6A_info_OCI <- fig6_data_id %>%
+  dplyr::select(plate_well, stim_clean, inhib_conc, inhibitor, cell_line) %>%
+  distinct() %>%
+  dplyr::filter(cell_line == "OCI-Ly8" & inhib_conc %in% fig6_conc_all & !(stim_clean == "Basal" & inhib_conc %in% fig6_conc_all[2:5])) %>%
+  mutate(inhibitor = factor(inhibitor, levels = fig6_inhib)) %>%
+  as.data.frame()
+rownames(fig6A_info_OCI) <- fig6A_info_OCI$plate_well
+fig6A_info_OCI <- dplyr::select(fig6A_info_OCI, -c(plate_well, cell_line))
+
+# Get the rld transformed data for the heatmap and scale per row
+fig6A_data_heat_OCI <- t(scale(t(assay(rld_OCI)[c(heat_inhib_OCI$target_nospace), rownames(fig6A_info_OCI)])))
+# sort_hclust <- function(...) as.hclust(dendsort(as.dendrogram(...)))
+# data_cluster_rows <- sort_hclust(hclust(dist(data_cell)))
+# plot(data_cluster_rows, main = "Unsorted Dendrogram", xlab = "", sub = "")
+
+# Figure
+fig6A_ann_colors <- list(Stimulation = colors_stim, 
+                         Inhibitor = colors_inhib,
+                         # inhib_new = c("DMSO ctrl" = "grey", colors_inhib), 
+                         "Inhibitor conc" = setNames(colors_conc, unique(fig6A_info_OCI$inhib_conc)))
+fig6A_heat_legend <- list(title = "Scaled\nexpression", title_gp = gpar(fontsize = 7), labels_gp = gpar(fontsize = 7), 
+                          grid_width = unit(2, "mm"), grid_height = unit(20, "mm"))
+
+fig6A_col_ann <- HeatmapAnnotation(Inhibitor = fig6A_info_OCI$inhibitor, 
+                                   "Inhibitor conc" = fig6A_info_OCI$inhib_conc, 
+                                   Stimulation = fig6A_info_OCI$stim_clean, 
+                                   simple_anno_size = unit(2.5, "mm"), 
+                                   annotation_name_gp = gpar(fontsize = 7),
+                                   col = fig6A_ann_colors, 
+                                   annotation_legend_param = list(Inhibitor = list(title = "Inhibitor", 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, "mm"), 
+                                                                                   grid_height = unit(1, "mm")), 
+                                                                  "Inhibitor conc" = list(title = "Inhibitor\nconcentration", 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, "mm"), 
+                                                                                   grid_height = unit(1, "mm")), 
+                                                                  Stimulation = list(title = "Stimulation", 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, "mm"), 
+                                                                                   grid_height = unit(1, "mm"))), 
+                                   show_legend = c(FALSE, TRUE, TRUE))
+
+fig6_panelA <- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
+  fig6A_data_heat_OCI,
+  scale = "none",
+  cluster_rows = TRUE,
+  # treeheight_row = 20,
+  show_rownames = TRUE,
+  show_colnames = FALSE,
+  cluster_cols = FALSE,
+  # annotation_col = fig6A_info_Ly8,
+  top_annotation = fig6A_col_ann,
+  # annotation_colors = fig6A_ann_colors,
+  colorRampPalette(c("navy", "white", "firebrick3"))(50),
+  column_split = fig6A_info_OCI$inhibitor,
+  row_split = subset(heat_inhib_OCI)$modification,
+  row_gap = unit(1, "mm"), 
+  # cellwidth = 10,
+  # cellheight = 10,
+  fontsize = 5.75,
+  row_title_gp = gpar(fontsize = 7),
+  column_title_gp = gpar(fontsize = 7), 
+  annotation_names_col = gpar(fontsize = 7),
+  border_color = NA,
+  heatmap_legend_param = fig6A_heat_legend, 
+  # annotation_legend = FALSE,
+)) +
+  ggtitle("          GCB subtype: Effect of inhibitor treatment on activated vs basal signaling") +
+  textsize_small + 
+  theme(plot.title = element_text(size = 8.5))
+fig6_panelA
+```
+
+
+#### Panel B
+
+Differential expression analysis of the effect of inhibitor concentration on activated signaling
+
+DESeq2 analysis parameters:
+
+-   OCI samples: 3 inhibitors, 5 conc, 1 stimulus
+
+-   Compensated counts (>= 1)
+
+-   Model design: inhib_text_new (ref: DMSO ctrl)
+
+```{r fig6B_DESeq_act_OCI}
+# Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+
+fig6B_inhib_new <- c("DMSO ctrl", "iBTK", "iSYK", "iNFkB")
+
+cts <- fig6_data_id  %>%
+  dplyr::filter(cell_line == "OCI-Ly8" & stimulus == "aIg+H2O2" & inhib_conc != "0 uM (PBS)" & counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  dplyr::filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0) %>%
+  column_to_rownames("target_nospace")
+
+cts <- as.matrix(as.data.frame(cts))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(fig6_data_id, all_of(fig6_meta_cols)))) %>%
+  distinct() %>%
+  mutate(inhib_new = factor(inhib_new, levels = fig6B_inhib_new), 
+         inhib_conc = factor(inhib_conc, levels = fig6_conc_all), 
+         inhib_conc_uM = as.character(inhib_conc_uM), 
+         stimulus = factor(stimulus, levels = fig6_stim)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+# modeldesign <- ~ inhibitor + inhib_conc + inhib_conc:inhibitor # works
+modeldesign <- ~ inhib_text_new
+# modeldesign <- ~ inhib_text_new + stimulus + inhib_text_new:stimulus
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+# dds$stimulus <- relevel(dds$stimulus, ref = "PBS")
+dds$inhib_text_new <- relevel(dds$inhib_text_new, ref = "DMSO ctrl")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+# dds <- estimateSizeFactors(dds, controlGenes = ctrl_genes) # OPTIONAL: normalise data with specified control genes
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_iSYK0.1_Hcs <- results(dds, name = "inhib_text_new_0.1.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+results_iSYK1_Hcs <- results(dds, name = "inhib_text_new_1.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+results_iSYK10_Hcs <- results(dds, name = "inhib_text_new_10.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+results_iSYK100_Hcs <- results(dds, name = "inhib_text_new_100.uM.iSYK_vs_DMSO.ctrl", alpha = 0.05)
+
+results_iBTK0.1_Hcs <- results(dds, name = "inhib_text_new_0.1.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+results_iBTK1_Hcs <- results(dds, name = "inhib_text_new_1.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+results_iBTK10_Hcs <- results(dds, name = "inhib_text_new_10.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+results_iBTK100_Hcs <- results(dds, name = "inhib_text_new_100.uM.iBTK_vs_DMSO.ctrl", alpha = 0.05)
+
+results_iNFkB0.1_Hcs <- results(dds, name = "inhib_text_new_0.1.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+results_iNFkB1_Hcs <- results(dds, name = "inhib_text_new_1.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+results_iNFkB10_Hcs <- results(dds, name = "inhib_text_new_10.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+results_iNFkB100_Hcs <- results(dds, name = "inhib_text_new_100.uM.iNFkB_vs_DMSO.ctrl", alpha = 0.05)
+
+# list_results <- list(results_iBTK0.1_Hsc, results_iBTK1_Hsc, results_iBTK10_Hsc, results_iBTK100_Hsc)
+list_results <- list(results_iSYK0.1_Hcs, results_iSYK1_Hcs, results_iSYK10_Hcs, results_iSYK100_Hcs,
+                     results_iBTK0.1_Hcs, results_iBTK1_Hcs, results_iBTK10_Hcs, results_iBTK100_Hcs,
+                     results_iNFkB0.1_Hcs, results_iNFkB1_Hcs, results_iNFkB10_Hcs, results_iNFkB100_Hcs)
+
+# summary(results_iSYK100_Hcs, padj = 0.05)
+
+# Data transformation
+# Regularized log transform
+rld_OCI <- rlog(dds, blind = FALSE)
+```
+
+```{r fig6_panelB, fig.width=10, fig.height=4, fig.retina=1}
+# Data
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano <- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins <- rownames(dataset)
+  dataset$target_nospace <- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express <- "NO"
+  dataset$diff_express[dataset$log2FoldChange > foldchange_filter & dataset$padj < padj_filter] <- "UP"
+  dataset$diff_express[dataset$log2FoldChange < -foldchange_filter & dataset$padj < padj_filter] <- "DOWN"
+  
+  # Add a column for labeling
+  dataset$delabel <- NA
+  dataset$delabel[dataset$diff_express != "NO"] <- dataset$proteins[dataset$diff_express != "NO"]
+  
+  # Add Ab metadata
+  # dataset <- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(as.data.frame(dataset))
+}
+
+# Apply function to each dataset
+# padj < 0.05
+# log2FC > log2(1.05)
+# names_results_volc <- c("volc_iBTK0.1_Hcs", "volc_iBTK1_Hcs", "volc_iBTK10_Hcs", "volc_iBTK100_Hcs")
+names_results_volc <- c("volc_iSYK0.1_Hcs", "volc_iSYK1_Hcs", "volc_iSYK10_Hcs", "volc_iSYK100_Hcs",
+                        "volc_iBTK0.1_Hcs", "volc_iBTK1_Hcs", "volc_iBTK10_Hcs", "volc_iBTK100_Hcs",
+                        "volc_iNFkB0.1_Hcs", "volc_iNFkB1_Hcs", "volc_iNFkB10_Hcs", "volc_iNFkB100_Hcs")
+for(dataset in c(1:length(list_results))){
+  assign(names_results_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.1)))
+}
+
+# Add column with comparison for faceting
+fig6B_comp <- c("0.1 uM iSYK", "1 uM iSYK", "10 uM iSYK", "100 uM iSYK",
+                "0.1 uM iBTK", "1 uM iBTK", "10 uM iBTK", "100 uM iBTK", 
+                "0.1 uM iNFkB", "1 uM iNFkB", "10 uM iNFkB", "100 uM iNFkB")
+
+volc_iSYK0.1_Hcs$comparison <- fig6B_comp[1]
+volc_iSYK1_Hcs$comparison <- fig6B_comp[2]
+volc_iSYK10_Hcs$comparison <- fig6B_comp[3]
+volc_iSYK100_Hcs$comparison <- fig6B_comp[4]
+volc_iBTK0.1_Hcs$comparison <- fig6B_comp[5]
+volc_iBTK1_Hcs$comparison <- fig6B_comp[6]
+volc_iBTK10_Hcs$comparison <- fig6B_comp[7]
+volc_iBTK100_Hcs$comparison <- fig6B_comp[8]
+volc_iNFkB0.1_Hcs$comparison <- fig6B_comp[9]
+volc_iNFkB1_Hcs$comparison <- fig6B_comp[10]
+volc_iNFkB10_Hcs$comparison <- fig6B_comp[11]
+volc_iNFkB100_Hcs$comparison <- fig6B_comp[12]
+fig6B_dataset <- list(volc_iSYK0.1_Hcs, volc_iSYK1_Hcs, volc_iSYK10_Hcs, volc_iSYK100_Hcs,
+                      volc_iBTK0.1_Hcs, volc_iBTK1_Hcs, volc_iBTK10_Hcs, volc_iBTK100_Hcs,
+                      volc_iNFkB0.1_Hcs, volc_iNFkB1_Hcs, volc_iNFkB10_Hcs, volc_iNFkB100_Hcs) %>%
+  purrr::reduce(full_join) %>%
+  mutate(comparison = factor(comparison, levels = fig6B_comp)) %>%
+  arrange(comparison)
+
+fig6B_dataset_subset <- fig6B_dataset %>%
+  subset(comparison %in% c("0.1 uM iSYK", "1 uM iSYK", "10 uM iSYK")) #, "100 uM iSYK"
+
+fig6A_prot_iSYK100 <- sort(unique(c(subset(as.data.frame(volc_OCI_iSYK100), diff_express != "NO")$target_nospace))) 
+fig6B_prot_all <- sort(unique(c(subset(fig6B_dataset, comparison %in% c("0.1 uM iSYK", "1 uM iSYK", "10 uM iSYK", "100 uM iSYK") & diff_express != "NO")$target_nospace)))
+fig6B_prot_new <- setdiff(fig6B_prot_all, fig6A_prot_iSYK100)
+
+fig6B_new <- tibble(target_nospace = fig6B_prot_new, fig6B_new = fig6B_prot_new, font_face = "bold.italic")
+fig6B_dataset_subset <- left_join(fig6B_dataset_subset, fig6B_new) %>%
+  mutate(font_face = replace_na(font_face, "plain"))
+fig6B_dataset_label <- subset(fig6B_dataset_subset, font_face == "bold.italic")
+
+# Figure
+fig6_panelB <- ggplot(data = fig6B_dataset_subset,
+                      aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
+  geom_point(size = 0.25) +
+  geom_vline(xintercept = c(-log2(1.1), log2(1.1)), color = "#CC6677") +
+  geom_hline(yintercept = -log10(0.05), color = "#CC6677") +
+  geom_text_repel(data = fig6B_dataset_label, aes(fontface = font_face), 
+                  size = 1.75,
+                  segment.size = 0.2,
+                  hjust = 1,
+                  direction = "y",
+                  max.overlaps = 15,
+                  nudge_y = 20,
+                  nudge_x = ifelse(fig6B_dataset_label$log2FoldChange < 0, -0.4 - fig6B_dataset_label$log2FoldChange, 0.25 - fig6B_dataset_label$log2FoldChange)
+  ) +
+  facet_wrap(~comparison, ncol = 4) +
+  scale_color_manual(values = c(UP = "#A50026", NO = "black", DOWN = "#364B9A"),
+                     breaks = c("UP", "NO", "DOWN"),
+                     labels = c("Increased", "No difference", "Decreased"),
+                     name = "Differentially\nexpressed\nproteins") + 
+  labs(x = "log2(fold change)", y = "-log10(adjusted p-value)", title = "iSYK versus DMSO control in activated cells") +
+  # coord_cartesian(xlim = c(-0.8, 0.3), ylim = c(0, 50)) + 
+  theme_bw() +
+  textsize_small +
+  theme(legend.key.size = unit(0.2, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "right", legend.justification = "left", plot.title = element_text(size = 8.5)) + #legend.position = "none"
+  guides(shape = guide_legend(nrow = 3, bycol = TRUE), color = guide_legend(nrow = 3, bycol = TRUE))
+fig6_panelB
+```
+
+```{r fig6_panelB_test, fig.width=10, fig.height=10, fig.retina=1}
+# Figure
+fig6_panelB_test <- ggplot(data = fig6B_dataset,
+                      aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
+  geom_point(size = 0.25) +
+  geom_vline(xintercept = c(-log2(1.1), log2(1.1)), color = "#CC6677") +
+  geom_hline(yintercept = -log10(0.05), color = "#CC6677") +
+  geom_text_repel(#aes(fontface = font_face), 
+                  size = 1.5,
+                  segment.size = 0.2,
+                  hjust = 1,
+                  direction = "y",
+                  max.overlaps = 8,
+                  nudge_y = -log10(0.005),
+                  nudge_x = ifelse(fig6B_dataset$log2FoldChange < 0, -0.5 - fig6B_dataset$log2FoldChange, 0.35 - fig6B_dataset$log2FoldChange)
+  ) +
+  facet_wrap(~comparison, ncol = 4) +
+  scale_color_manual(values = c(UP = "#A50026", NO = "black", DOWN = "#364B9A"),
+                     breaks = c("UP", "NO", "DOWN"),
+                     labels = c("Increased", "No difference", "Decreased"),
+                     name = "Differentially\nexpressed\nproteins") + 
+  labs(x = "log2(fold change)", y = "-log10(adjusted p-value)", title = "iSYK versus DMSO ctrl in activated cells") +
+  # coord_cartesian(xlim = c(-0.8, 0.3), ylim = c(0, 50)) + 
+  theme_bw() +
+  textsize_small +
+  theme(legend.key.size = unit(0.2, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "right", legend.justification = "left", plot.title = element_text(size = 8.5)) + #legend.position = "none"
+  guides(shape = guide_legend(nrow = 3, bycol = TRUE), color = guide_legend(nrow = 3, bycol = TRUE))
+fig6_panelB_test
+```
+
+#### Panel C
+```{r fig6_panelC, fig.width=4, fig.height=6, fig.retina=1}
+# Data
+fig6C_prot <- c(
+  "S6_S240_S244"
+  # ""CREB_S133"
+  # "VAV1_Y174"
+) 
+fig6C_prot_label <- c("S6 (S240/S244)")
+fig6C_data <- fig6_data_id %>%
+  subset(target_nospace %in% fig6C_prot & inhib_conc %in% fig6_conc_all & cell_line == "OCI-Ly8")
+fig6C_mean <- fig6_mean_id %>%
+  subset(target_nospace %in% fig6C_prot & inhib_conc %in% fig6_conc_all & cell_line == "OCI-Ly8") 
+
+# Figure
+fig6_panelC <- ggplot() +
+  geom_point(data = subset(fig6C_data, target_nospace == fig6C_prot), 
+             aes(factor(inhib_conc, levels = fig6_conc_all, labels = fig6_conc_all_label_alt), 
+                 counts_norm, 
+                 color = stimulus, 
+                 shape = stimulus
+             ), 
+             alpha = 1, size = 0.75) +
+  geom_line(data = subset(fig6C_mean, target_nospace == fig6C_prot), 
+            aes(factor(inhib_conc, levels = fig6_conc_all, labels = fig6_conc_all_label_alt), 
+                counts_norm,
+                group = paste(inhibitor, stimulus),
+                color = stimulus
+            ),
+            size = 0.5) +
+  facet_wrap(vars(factor(inhibitor, levels = fig6_inhib)), ncol = 1) +
+  scale_shape_manual(values = c(17, 16), breaks = fig6_stim, labels = fig6_stim_clean, name = "Stimulation") +
+  scale_color_manual(values = colors_stim, breaks = fig6_stim, labels = fig6_stim_clean, name = "Stimulation") +
+  scale_y_continuous(breaks = c(1000, 1300, 1600)) +
+  labs(x = "Inhibitor conc. (uM)", y = "Normalised counts", title = fig6C_prot_label) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), legend.key.size = unit(0.3, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "bottom", strip.text.x = element_text(margin = margin(0.05, 0, 0.05, 0, "cm")), plot.title = element_text(size = 8), axis.text.x = element_text(size = 7)) +
+  guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
+fig6_panelC
+```
+
+#### Panel D
+```{r fig6_panelD, fig.width=4, fig.height=6, fig.retina=1}
+# Data
+fig6D_prot <- c(
+  # "S6_S240_S244"
+  "CREB_S133"
+  # "VAV1_Y174"
+) 
+fig6D_prot_label <- c("CREB (S133)")
+fig6D_data <- fig6_data_id %>%
+  subset(target_nospace %in% fig6D_prot & inhib_conc %in% fig6_conc_all & cell_line == "OCI-Ly8")
+fig6D_mean <- fig6_mean_id %>%
+  subset(target_nospace %in% fig6D_prot & inhib_conc %in% fig6_conc_all & cell_line == "OCI-Ly8") 
+
+# Figure
+fig6_panelD <- ggplot() +
+  geom_point(data = subset(fig6D_data, target_nospace == fig6D_prot), 
+             aes(factor(inhib_conc, levels = fig6_conc_all, labels = fig6_conc_all_label_alt), 
+                 counts_norm, 
+                 color = stimulus, 
+                 shape = stimulus
+             ), 
+             alpha = 1, size = 0.75) +
+  geom_line(data = subset(fig6D_mean, target_nospace == fig6D_prot), 
+            aes(factor(inhib_conc, levels = fig6_conc_all, labels = fig6_conc_all_label_alt), 
+                counts_norm,
+                group = paste(inhibitor, stimulus),
+                color = stimulus
+            ),
+            size = 0.5) +
+  facet_wrap(vars(factor(inhibitor, levels = fig6_inhib)), ncol = 1) +
+  scale_shape_manual(values = c(17, 16), breaks = fig6_stim, labels = fig6_stim_clean, name = "Stimulus") +
+  scale_color_manual(values = colors_stim, breaks = fig6_stim, labels = fig6_stim_clean, name = "Stimulus") +
+  scale_y_continuous(breaks = c(1800, 2100, 2400)) +
+  labs(x = "Inhibitor conc. (uM)", y = "Normalised counts", title = fig6D_prot_label) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), legend.key.size = unit(0.3, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "none", strip.text.x = element_text(margin = margin(0.05, 0, 0.05, 0, "cm")), plot.title = element_text(size = 8), axis.text.x = element_text(size = 7)) #+
+  # guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
+fig6_panelD
+```
+
+#### Panel E
+```{r fig6_panelE, fig.width=4, fig.height=6, fig.retina=1}
+# Data
+fig6E_prot <- c(
+  # "S6_S240_S244"
+  # ""CREB_S133"
+  "VAV1_Y174"
+) 
+fig6E_prot_label <- c("VAV1 (Y174)")
+fig6E_data <- fig6_data_id %>%
+  subset(target_nospace %in% fig6E_prot & inhib_conc %in% fig6_conc_all & cell_line == "OCI-Ly8")
+fig6E_mean <- fig6_mean_id %>%
+  subset(target_nospace %in% fig6E_prot & inhib_conc %in% fig6_conc_all & cell_line == "OCI-Ly8") 
+
+# Figure
+fig6_panelE <- ggplot() +
+  geom_point(data = subset(fig6E_data, target_nospace == fig6E_prot), 
+             aes(factor(inhib_conc, levels = fig6_conc_all, labels = fig6_conc_all_label_alt), 
+                 counts_norm, 
+                 color = stimulus, 
+                 shape = stimulus
+             ), 
+             alpha = 1, size = 0.75) +
+  geom_line(data = subset(fig6E_mean, target_nospace == fig6E_prot), 
+            aes(factor(inhib_conc, levels = fig6_conc_all, labels = fig6_conc_all_label_alt), 
+                counts_norm,
+                group = paste(inhibitor, stimulus),
+                color = stimulus
+            ),
+            size = 0.5) +
+  facet_wrap(vars(factor(inhibitor, levels = fig6_inhib)), ncol = 1) +
+  scale_shape_manual(values = c(17, 16), breaks = fig6_stim, labels = fig6_stim_clean, name = "Stimulus") +
+  scale_color_manual(values = colors_stim, breaks = fig6_stim, labels = fig6_stim_clean, name = "Stimulus") +
+  scale_y_continuous(breaks = c(1500, 2000, 2500)) +
+  labs(x = "Inhibitor conc. (uM)", y = "Normalised counts", title = fig6E_prot_label) +
+  theme_bw() +
+  textsize_small +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), legend.key.size = unit(0.3, "cm"), legend.spacing.y = unit(0.1, "cm"), legend.box.spacing = unit(0.1, "cm"), legend.position = "none", strip.text.x = element_text(margin = margin(0.05, 0, 0.05, 0, "cm")), plot.title = element_text(size = 8), axis.text.x = element_text(size = 7)) #+
+  # guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
+fig6_panelE
+```
+
+
+### Combined fig
+
+```{r fig6_combi, fig.width=6, fig.height=7.5, fig.retina=1}
+# Combine all panels of the figure
+fig6_AB <- plot_grid(fig6_panelA, fig6_panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1.2, 1), label_size = 10)
+fig6_CDE <- plot_grid(fig6_panelC, fig6_panelD, fig6_panelE, labels = PANEL_labels[c(3, 4, 5)], nrow = 1, rel_widths = c(1, 1, 1), label_size = 10, align = "h")
+fig6 <- plot_grid(fig6_AB, fig6_CDE, ncol = 1, rel_heights = c(1.65, 1), label_size = 10)
+fig6
+
+# Save figure as pdf, jpg
+ggsave(
+  fig6,
+  filename = "output/figures/DLBCL_proteins/main_fig6.pdf",
+  width = 6,
+  height = 7.5,
+  units = "in",
+  dpi = 300
+  )
+ggsave(
+  fig6,
+  filename = "output/figures/DLBCL_proteins/main_fig6.jpg",
+  width = 6,
+  height = 7.5,
+  units = "in",
+  dpi = 300
+  )
+```
+*Inhibition of PI3K-AKT signaling and transcription factors in GCB-DLBCL subtype model.*
+
+```{r fig6_clean}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "fig6"))
+rm(list = ls(pattern = "png"))
+rm(list = ls(pattern = "results_"))
+rm(list = ls(pattern = "volc_"))
+rm(list = ls(pattern = "list_"))
+rm(list = ls(pattern = "names_"))
+rm(list = ls(pattern = "titles_"))
+rm(list = ls(pattern = "data_"))
+rm(list = ls(pattern = "heat_"))
+rm(list = ls(pattern = "rld"))
+rm(list = ls(pattern = "pca"))
+gc()
+```
+
+
+
+## Figure 7
+
+*DLBCL subtype-dependent small molecule inhibitor effects.*
+
+Input:
+
+-   BioRender schematic figure
+
+
+### Panels {.tabset}
+
+#### Panel A
+```{r fig7_panelA, fig.retina=1}
+# Placeholder
+fig7_panelA_place <- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = "BCR signaling network") + 
+  theme_bw() +
+  theme(axis.text = element_text(color = "white"), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# fig7_panelA_place
+
+# PNG
+fig7_panelA <- magick::image_read("output/figures/non_R_figs/ch4_DLBCL_inhibition_summary.png") %>%
+  magick::image_ggplot(interpolate = TRUE)
+fig7_panelA
+```
+
+
+### Combined fig
+
+```{r fig7_combi, fig.width=6, fig.height=3, fig.retina=1}
+# Combine all panels of the figure
+fig7_panelA
+
+# Save figure as pdf, jpg
+ggsave(
+  fig7_panelA_place,
+  filename = "output/figures/DLBCL_proteins/main_fig7_place.pdf",
+  width = 6,
+  height = 3,
+  units = "in",
+  dpi = 300
+  )
+ggsave(
+  fig7_panelA_place,
+  filename = "output/figures/DLBCL_proteins/main_fig7_place.jpg",
+  width = 6,
+  height = 3,
+  units = "in",
+  dpi = 300
+  )
+```
+*DLBCL subtype-dependent small molecule inhibitor effects.*
+
+```{r fig7_clean}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "fig7"))
+rm(list = ls(pattern = "png"))
+rm(list = ls(pattern = "results_"))
+rm(list = ls(pattern = "volc_"))
+rm(list = ls(pattern = "list_"))
+rm(list = ls(pattern = "names_"))
+rm(list = ls(pattern = "titles_"))
+rm(list = ls(pattern = "data_"))
+rm(list = ls(pattern = "heat_"))
+rm(list = ls(pattern = "rld"))
+rm(list = ls(pattern = "pca"))
+gc()
+```
+
+
+
+
+
+
+
+
+
+## Figure 0
+
+*Figure title.*
+
+Input:
+-   BioRender schematic figures
+
+-   ... phosphoflow data
+
+-   ... ID-seq data
+
+
+### Data
+
+```{r fig0_data, eval=F}
+
+```
+
+```{r fig0_labels, eval=F}
+
+```
+
+
+### Panels {.tabset}
+
+#### Panel A
+```{r fig0_panelA, fig.retina=1, eval=F}
+# Placeholder
+fig0_panelA <- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = "BCR signaling network") + 
+  theme_bw() +
+  theme(axis.text = element_text(color = "white"), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# fig0_panelA
+
+# PNG
+png_fig0 <- image_read("output/figures/non_R_figs/xxx.png") %>%
+  image_ggplot()
+# png_fig0
+```
+
+#### Panel B
+```{r fig0_panelB, fig.width=6, fig.height=3, fig.retina=1, eval=F}
+# Select data
+
+# Figure
+
+```
+
+#### Panel C
+```{r fig0_panelC, fig.width=6, fig.height=3, fig.retina=1, eval=F}
+# Select data
+
+# Figure
+
+```
+
+
+### Combined fig
+
+```{r fig0_combi, fig.width=6, fig.height=3, fig.retina=1, eval=F}
+# Combine all panels of the figure
+fig0 <- plot_grid(panelA, panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10)
+fig0
+
+# Save figure as pdf, jpg
+# ggsave(
+#   fig0,
+#   filename = "output/figures/DLBCL_proteins/main_fig0.pdf",
+#   width = 6,
+#   height = 3,
+#   units = "in",
+#   dpi = 300
+#   )
+ggsave(
+  fig0,
+  filename = "output/figures/DLBCL_proteins/main_fig0.jpg",
+  width = 6,
+  height = 3,
+  units = "in",
+  dpi = 300
+  )
+```
+*Figure title.*
+
+```{r fig0_clean, eval=F}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "fig0"))
+rm(list = ls(pattern = "png"))
+rm(list = ls(pattern = "results_"))
+rm(list = ls(pattern = "volc_"))
+rm(list = ls(pattern = "list_"))
+rm(list = ls(pattern = "names_"))
+rm(list = ls(pattern = "titles_"))
+rm(list = ls(pattern = "data_"))
+rm(list = ls(pattern = "heat_"))
+rm(list = ls(pattern = "rld"))
+rm(list = ls(pattern = "pca"))
+gc()
+```

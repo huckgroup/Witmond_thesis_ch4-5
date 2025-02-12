@@ -1,0 +1,51 @@
+name: "manuscript_IDseq_DLBCL"
+output_dir: ../docs
+navbar:
+  title: "Chapters on DLBCL"
+  left:
+  - text: Home
+    href: index.html
+  - text: Paper
+    menu:
+    - text: Main
+      href: y_paper_main.html
+    - text: Supplementary
+      href: z_paper_suppl.html
+  - text: Proteins ch
+    menu:
+    - text: Main
+      href: t_proteins_main.html.html
+    - text: Supplementary
+      href: u_proteins_suppl.html.html
+  - text: States ch
+    menu:
+    - text: Main
+      href: v_states_main.html.html
+    - text: Supplementary
+      href: w_states_suppl.html.html
+  - text: Flow
+    menu:
+    - text: Gating
+      href: a_flow_gating.html
+    - text: Annotation
+      href: b_flow_ann.html
+    - text: Visualisation
+      href: c_flow_vis.html
+  - text: IDseq
+    menu:
+    - text: Count tables
+      href: d_IDseq_count.html
+    - text: DS108 clean
+      href: DS108_p_seq_comparisons.html
+    - text: DS108 thresholds
+      href: DS108_q_seq_thresholds.html
+    - text: DS108 PCA
+      href: DS108_r_seq_pca.html
+  - text: License
+    href: license.html
+output:
+  workflowr::wflow_html:
+    toc: yes
+    toc_float: yes
+    theme: readable
+    highlight: textmate

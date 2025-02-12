@@ -1,0 +1,86 @@
+---
+title: "Small molecule inhibitor combination treatment effectively represses global B-cell signaling in diffuse large B-cell lymphoma"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+
+## Description
+
+This is the data analysis folder for the thesis chapter originating from the following manuscript:
+
+*Small molecule inhibitor combination treatment effectively represses global B-cell signaling in diffuse large B-cell lymphoma*
+
+By Melde Witmond, Babet Bollen, Pam Heijmans, Annemiek B. van Spriel, Jessie A.L.G. van Buggenum, Wilhelm T.S. Huck
+
+
+
+## Abstract
+
+Cells sense their environment via signaling networks and malignant cells often hijack signaling pathways for their growth, which complicates defining the effects of drugs. Here, we map the state of the signaling network of B-cell lymphoma cells via simultaneous quantification of 111 (phospho-)proteins. We demonstrate that the B-cell signaling network can be disrupted with specific clinical small molecule inhibitors (iBTK, iSYK, iNFκB), thereby inducing a repressed state of the network. Principal component analysis identifies how the three inhibitors work along subtly different repression axes through the signaling state landscape. Finally, we observe that 1 µM combination treatment with all three inhibitors is more effective in inducing the repressed state than 10 µM of the single inhibitors. These results emphasize that cellular signaling occurs in complex networks, and underscore how quantification of the signaling state landscape provides insights into how combination drug treatments can bring cells in a desired network state.
+
+
+
+## In this repository
+
+DLBCL proteins chapter: 
+
+-   [Proteins main](t_proteins_main.html): Main figures for the paper
+
+-   [Proteins suppl](u_proteins_suppl.html): Supplementary figures for the paper
+
+
+DLBCL states chapter: 
+
+-   [States main](v_states_main.html): Main figures for the paper
+
+-   [States suppl](w_states_suppl.html): Supplementary figures for the paper
+
+
+Submitted paper:
+
+-   [Paper main](y_paper_main.html): Main figures for the paper
+
+-   [Paper suppl](z_paper_suppl.html): Supplementary figures for the paper
+
+
+Conference: 
+
+-   [Poster](x_poster_FASEB.html): Figures for the poster for the FASEB conference
+
+
+Flow cytometry data:
+
+-   [Flow gating](a_flow_gating.html): Gating strategy
+
+-   [Flow annotation](b_flow_ann.html): Annotation with metadata
+
+-   [Flow visual](c_flow_vis.html): Visualisation
+
+
+ID-seq data: 
+
+-   [IDseq count](d_IDseq_count.html): FASTQ to count tables
+
+-   [IDseq DS108 clean](DS108_p_seq_comparisons.html): Analysis of experiment DS108
+
+-   [IDseq DS108 thresholds](DS108_q_seq_thresholds.html): Analysis of experiment DS108 with fold change thresholds
+
+-   [IDseq DS108 PCA](DS108_r_seq_pca.html): PCA exploration analysis of experiment DS108
+
+
+## Experiments
+
+DS102: StimTest
+
+DS103: ViabilityTest
+
+DS104:StimInhibTest
+
+DS108: StimInhibIDseq
+
+DS113: InhibCombiIDseq

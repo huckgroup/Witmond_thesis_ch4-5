@@ -1,0 +1,1025 @@
+---
+title: "(Phospho-)flow cytometry visualisation"
+author: "mwitmond"
+date: "2024-03-11"
+output:
+  workflowr::wflow_html:
+    toc: TRUE
+    toc_float: 
+      collapsed: FALSE
+    toc_depth: 2
+    code_folding: hide
+editor_options:
+  chunk_output_type: console
+---
+
+
+## Set-up
+
+```{r setup, message=F, warning=F}
+knitr::opts_chunk$set(
+  message = F, warning = F, echo = T, eval = T
+)
+
+# Load required packages
+source("code/packages_FACS.R", local = knitr::knit_global())
+```
+
+```{r fig_settings}
+row_order = c("A", "B", "C", "D", "E", "F", "G", "H")
+col_order = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+panel_labels <- c("a", "b", "c","d", "e", "f", "g", "h", "i", "j", "k", "l", "m")
+
+textsize <- theme(axis.text.x = element_text(colour = "grey", size = 11), #, face = "bold"
+                  axis.text.y = element_text(colour = "grey", size = 11),
+                  axis.title = element_text(colour = "black", size = 12), 
+                  legend.title = element_text(colour = "black", size = 12),
+                  # legend.title = element_blank(), 
+                  legend.text = element_text(colour = "grey", size = 11), 
+                  strip.text.x = element_text(colour = "black", size = 12)
+)
+
+# textsize_small <- theme(text = element_text(size = 7, family = "sans", colour = "black"),
+#                         plot.title = element_text(size = 8)
+# )
+
+textsize_small <- theme(axis.text.x = element_text(colour = "black", size = 9),
+                        axis.text.y = element_text(colour = "black", size = 9),
+                        axis.title = element_text(colour = "black", size = 10),
+                        legend.text = element_text(colour = "black", size = 9),
+                        title = element_text(color = "black", size = 10),
+                        strip.text.x = element_text(colour = "black", size = 10, face = "bold"),
+                        strip.text.y = element_text(colour = "black", size = 10, face = "bold")
+)
+
+colors_dark9 <- c("#4daf4a", "#984ea3", "#377eb8", "#ff7f00", "#f781bf", "#ffff33", "#e41a1c", "#a65628", "#999999")
+colors_light12 <- c("#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f")
+colors_paired10 <- c("#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#fb9a99", "#e31a1c")
+
+colors_blue9 <- c("#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b")
+colors_green9 <- c("#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b")
+colors_purple9 <- c("#fcfbfd", "#efedf5", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba", "#6a51a3", "#54278f", "#3f007d")
+colors_red9 <- c("#fff5f0", "#fee0d2", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#a50f15", "#67000d")
+colors_orange9 <- c("#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603", "#7f2704")
+colors_grey9 <- c("#ffffff", "#f0f0f0", "#d9d9d9", "#bdbdbd", "#969696", "#737373", "#525252", "#252525", "#000000")
+
+colors_yb9 <- c("#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58")
+colors_pr9 <- c("#f7f4f9", "#e7e1ef", "#d4b9da", "#c994c7", "#df65b0", "#e7298a", "#ce1256", "#980043", "#67001f")
+
+colors_proteins <- c("pCD79a (Y182)" = "#892BE1", "pSYK (Y525/Y526)" = "#1E8FFF", "pPLCy2 (Y759)" = "#20B1A9")
+colors_inhib <- c("iSYK" = "#41ab5d", "iBTK" = "#4292c6", "iPI3Kd" = "#807dba", "iNFkB" = "#f16913")
+colors_stim <- c("PBS" = "#525252", "aIg+H2O2" = "#fdae6b")
+colors_cell <- c("HBL1" = "#df65b0", "OCI-Ly8" = "#41b6c4")
+```
+
+
+
+## DS102: StimTest
+
+### Load data
+
+```{r fig_data_DS102}
+data_DS102 <- read_csv("output/DS102_StimTest/flow_ann/flow_data_DS102.csv")
+medians_DS102 <- read_csv("output/DS102_StimTest/flow_ann/flow_medians_DS102.csv")
+```
+
+```{r fig_labels_DS102}
+proteins_DS102 <- c("pCD79a (Y182)", "pSYK (Y525/Y526)", "pPLCy2 (Y759)", "cCaspase 3 + cPARP", "No stain")
+cells_DS102 <- c("HBL1", "OCI-Ly8")
+stim_DS102 <- c("aIg", "H2O2", "H2O2 + aIg")
+conc_DS102 <- c("PBS", 
+                "5 ug/mL aIg", "10 ug/mL aIg", "20 ug/mL aIg",
+                "3.3 mM H2O2", "10 mM H2O2", "20 mM H2O2",
+                "3.3 H2O2 + 10 aIg", "10 H2O2 + 10 aIg", "10 H2O2 + 20 aIg", "15 H2O2 + 15 aIg")
+conc_labels <- c("PBS", 
+                 "5 ug/mL\naIg", "10 ug/mL\naIg", "20 ug/mL\naIg",
+                 "3.3 mM\nH2O2", "10 mM\nH2O2", "20 mM\nH2O2",
+                 "3.3 H2O2 +\n10 aIg", "10 H2O2 +\n10 aIg", "10 H2O2 +\n20 aIg", "15 H2O2 +\n15 aIg")
+```
+
+
+### Ridge plots 
+
+```{r fig_ridge_cell_DS102, fig.width=8, fig.height=4}
+# this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS102) {
+  plot <- ggplot(subset(data_DS102, protein == this_protein), aes(x = fluorescence)) +
+    geom_density_ridges(
+      aes(y = factor(conc_text, levels = rev(conc_DS102)), fill = factor(conc_text, levels = conc_DS102)),
+      scale = 2, 
+      # fill = "#006699", 
+      alpha = 0.6
+    ) +
+    geom_vline(aes(xintercept = zero_quant97.5), linewidth = 0.5) +
+    facet_wrap(vars(factor(cell_line, levels = cells_DS102))) +
+    scale_x_logicle() + # logicle scale instead of log10 scale
+    scale_fill_manual(values = c("grey", colors_green9[c(4, 6, 8)], colors_purple9[c(4, 6, 8)], colors_dark9[c(3, 7, 4, 8)])) +
+    labs(x = paste("Fluorescent intensity", this_protein), y = "") +
+    theme_bw() +
+    theme(legend.position = "none", panel.grid.minor = element_blank()) +
+    textsize
+  
+  print(plot)
+}
+```
+
+```{r fig_ridge_conc_DS102, fig.width=7, fig.height=5, eval=F}
+# this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS102) {
+  plot <- ggplot(subset(data_DS102, protein == this_protein), aes(x = fluorescence)) +
+    geom_density_ridges(
+      aes(y = factor(cell_line, levels = rev(cells_DS102))),
+      scale = 2, 
+      fill = "#006699", 
+      alpha = 0.5
+    ) +
+    # geom_vline(aes(xintercept = zero_quant97.5), linewidth = 0.75) +
+    facet_wrap(vars(factor(conc_text, levels = conc_DS102)), ncol = 4) +
+    scale_x_logicle() + # logicle scale instead of log10 scale
+    labs(x = paste("Fluorescent intensity", this_protein), y = "") +
+    theme_bw() +
+    theme(legend.position = "none", panel.grid.minor = element_blank()) +
+    textsize_small
+  
+  print(plot)
+}
+```
+
+```{r fig_ridge_all_DS102, fig.width=10, fig.height=6}
+# this_protein <- "pPLCy2 (Y759)"
+plot <- ggplot(subset(data_DS102, protein != "No stain"), aes(x = fluorescence)) +
+  geom_density_ridges(
+    aes(y = factor(conc_text, levels = rev(conc_DS102)), fill = cell_line),
+    scale = 2, 
+    alpha = 0.5
+  ) +
+  facet_wrap(vars(factor(protein, levels = proteins_DS102)), ncol = 4) +
+  scale_x_logicle() + # logicle scale instead of log10 scale
+  scale_fill_manual(values = colors_dark9, name = "") +
+  labs(x = paste("Fluorescent intensity"), y = "") +
+  theme_bw() +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank()) +
+  textsize
+
+print(plot)
+```
+
+
+### Bar plots
+
+```{r fig_bar_fluor_prot_DS102, fig.width=6, fig.height=4}
+# this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS102) {
+  plot_fluor <- ggplot(subset(medians_DS102, protein == this_protein)) +
+    geom_col(aes(
+    x = factor(cell_line, levels = cells_DS102),
+    y = fluorescence_median, 
+    group = factor(conc_text, levels = conc_DS102),
+    fill = factor(conc_text, levels = conc_DS102)),
+    position = "dodge2") + 
+  facet_wrap(vars(factor(protein, levels = proteins_DS102))) +
+  scale_fill_manual(values = c("grey", colors_green9[c(4, 6, 8)], colors_purple9[c(4, 6, 8)], colors_dark9[c(3, 6, 4, 8)]), breaks = conc_DS102, labels = conc_labels, name = "") + 
+    labs(x = "", y = "Fluorescence") +
+    theme_bw() +
+    textsize +
+    theme(legend.position = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1)) #+
+  # guides(fill = guide_legend(ncol = 4, byrow = TRUE))
+  
+  print(plot_fluor)
+}
+```
+
+```{r fig_bar_fluor_DS102, fig.width=10, fig.height=5}
+# # Grouped per stimulus condition on the x-axis
+# plot_fluor <- ggplot(subset(medians_DS102, protein != "No stain" & protein != "cCaspase 3 + cPARP")) +
+#   geom_col(aes(
+#     x = factor(conc_text, levels = conc_DS102),
+#     y = fluorescence_median, 
+#     group = factor(cell_line, levels = cells_DS102),
+#     fill = factor(cell_line, levels = cells_DS102)),
+#     position = "dodge2") + 
+#   facet_wrap(vars(factor(protein, levels = proteins_DS102)), ncol = 4) +
+#   scale_fill_manual(values = colors_dark9, name = "") + 
+#   labs(x = "", y = "Fluorescence") +
+#   theme_bw() +
+#   textsize +
+#   theme(legend.position = "top", legend.justification = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1))
+# 
+# print(plot_fluor)
+
+# Grouped per cell line on the x-axis
+plot_fluor <- ggplot(subset(medians_DS102, protein != "No stain" & protein != "cCaspase 3 + cPARP")) +
+  geom_col(aes(
+    x = factor(cell_line, levels = cells_DS102),
+    y = fluorescence_median, 
+    group = factor(conc_text, levels = conc_DS102),
+    fill = factor(conc_text, levels = conc_DS102)),
+    position = "dodge2") + 
+  facet_wrap(vars(factor(protein, levels = proteins_DS102)), ncol = 4, scales = "free_y") +
+  scale_fill_manual(values = c("grey", colors_green9[c(4, 6, 8)], colors_purple9[c(4, 6, 8)], colors_dark9[c(3, 6, 4, 8)]), breaks = conc_DS102, labels = conc_labels, name = "") + 
+  labs(x = "", y = "Fluorescence") +
+  theme_bw() +
+  textsize +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = guide_legend(ncol = 4, byrow = TRUE))
+
+print(plot_fluor)
+```
+
+```{r fig_bar_on_DS102, fig.width=10, fig.height=5}
+# Grouped per cell line on the x-axis
+plot_fluor <- ggplot(subset(medians_DS102, protein != "No stain" & protein != "cCaspase 3 + cPARP")) +
+  geom_col(aes(
+    x = factor(cell_line, levels = cells_DS102),
+    y = percent_on, 
+    group = factor(conc_text, levels = conc_DS102),
+    fill = factor(conc_text, levels = conc_DS102)),
+    position = "dodge2") + 
+  facet_wrap(vars(factor(protein, levels = proteins_DS102)), ncol = 4) +
+  scale_fill_manual(values = c("grey", colors_green9[c(4, 6, 8)], colors_purple9[c(4, 6, 8)], colors_dark9[c(3, 6, 4, 8)]), breaks = conc_DS102, labels = conc_labels, name = "") + 
+  labs(x = "", y = "% cells ON") +
+  theme_bw() +
+  textsize +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = guide_legend(ncol = 4, byrow = TRUE))
+
+print(plot_fluor)
+```
+
+```{r fig_bar_FC_prot_DS102, fig.width=6, fig.height=4}
+# this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS102) {
+  plot_fluor <- ggplot(subset(medians_DS102, protein == this_protein)) +
+    geom_col(aes(
+    x = factor(cell_line, levels = cells_DS102),
+    y = FC, 
+    group = factor(conc_text, levels = conc_DS102),
+    fill = factor(conc_text, levels = conc_DS102)),
+    position = "dodge2") + 
+  facet_wrap(vars(factor(protein, levels = proteins_DS102))) +
+  scale_fill_manual(values = c("grey", colors_green9[c(4, 6, 8)], colors_purple9[c(4, 6, 8)], colors_dark9[c(3, 6, 4, 8)]), breaks = conc_DS102, labels = conc_labels, name = "") + 
+    labs(x = "", y = "Fold change in fluorescence") +
+    theme_bw() +
+    textsize +
+    theme(legend.position = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1)) #+
+  # guides(fill = guide_legend(ncol = 4, byrow = TRUE))
+  
+  print(plot_fluor)
+}
+```
+
+```{r fig_bar_FC_DS102, fig.width=10, fig.height=5}
+# Grouped per cell line on the x-axis
+plot_fluor <- ggplot(subset(medians_DS102, protein != "No stain" & protein != "cCaspase 3 + cPARP")) +
+  geom_col(aes(
+    x = factor(cell_line, levels = cells_DS102),
+    y = FC, 
+    group = factor(conc_text, levels = conc_DS102),
+    fill = factor(conc_text, levels = conc_DS102)),
+    position = "dodge2") + 
+  # coord_cartesian(ylim = c(0, 20)) +
+  facet_wrap(vars(factor(protein, levels = proteins_DS102)), ncol = 4) +
+  scale_fill_manual(values = c("grey", colors_green9[c(4, 6, 8)], colors_purple9[c(4, 6, 8)], colors_dark9[c(3, 6, 4, 8)]), breaks = conc_DS102, labels = conc_labels, name = "") +  
+  labs(x = "", y = "Fold change in fluorescence") +
+  theme_bw() +
+  textsize +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = guide_legend(ncol = 4, byrow = TRUE))
+
+print(plot_fluor)
+
+# Grouped per cell line on the x-axis
+plot_fluor <- ggplot(subset(medians_DS102, protein != "No stain" & protein != "cCaspase 3 + cPARP")) +
+  geom_col(aes(
+    x = factor(cell_line, levels = cells_DS102),
+    y = FC, 
+    group = factor(conc_text, levels = conc_DS102),
+    fill = factor(conc_text, levels = conc_DS102)),
+    position = "dodge2") + 
+  coord_cartesian(ylim = c(0, 20)) +
+  facet_wrap(vars(factor(protein, levels = proteins_DS102)), ncol = 4) +
+  scale_fill_manual(values = c("grey", colors_green9[c(4, 6, 8)], colors_purple9[c(4, 6, 8)], colors_dark9[c(3, 6, 4, 8)]), breaks = conc_DS102, labels = conc_labels, name = "") + 
+  labs(x = "", y = "Fold change in fluorescence (max 20)") +
+  theme_bw() +
+  textsize +
+  theme(legend.position = "bottom", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = guide_legend(ncol = 4, byrow = TRUE))
+
+print(plot_fluor)
+```
+
+```{r fig_bar_extra_DS102, fig.width=9, fig.height=3}
+# Fluorescence
+plot_fluor <- ggplot(subset(medians_DS102, 
+                            protein != "No stain" & 
+                              protein != "cCaspase 3 + cPARP" & 
+                              conc_text %in% c("PBS", "10 ug/mL aIg", "10 mM H2O2", "15 H2O2 + 15 aIg"))) +
+  geom_col(aes(
+    x = factor(cell_line, levels = cells_DS102),
+    y = fluorescence_median, 
+    group = factor(conc_text, levels = conc_DS102),
+    fill = factor(conc_text, levels = conc_DS102)),
+    position = "dodge2") + 
+  # coord_cartesian(ylim = c(0, 20)) +
+  facet_wrap(vars(factor(protein, levels = proteins_DS102)), ncol = 4, scales = "free_y") +
+  scale_fill_manual(values = c("grey", colors_blue9[5], colors_purple9[7], colors_dark9[7]), name = "") + 
+  labs(x = "", y = "Fluorescence") +
+  theme_bw() +
+  textsize +
+  theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+
+print(plot_fluor)
+
+# FC
+plot_fluor <- ggplot(subset(medians_DS102, 
+                            protein != "No stain" & 
+                              protein != "cCaspase 3 + cPARP" & 
+                              conc_text %in% c("PBS", "10 ug/mL aIg", "10 mM H2O2", "15 H2O2 + 15 aIg"))) +
+  geom_col(aes(
+    x = factor(cell_line, levels = cells_DS102),
+    y = FC, 
+    group = factor(conc_text, levels = conc_DS102),
+    fill = factor(conc_text, levels = conc_DS102)),
+    position = "dodge2") + 
+  # coord_cartesian(ylim = c(0, 20)) +
+  facet_wrap(vars(factor(protein, levels = proteins_DS102)), ncol = 4, scales = "free_y") +
+  scale_fill_manual(values = c("grey", colors_blue9[5], colors_purple9[7], colors_dark9[7]), name = "") + 
+  labs(x = "", y = "Fold change in fluorescence") +
+  theme_bw() +
+  textsize +
+  theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+
+print(plot_fluor)
+```
+
+```{r clear_DS102}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "_DS102"))
+rm(list = ls(pattern = "plot"))
+gc()
+```
+
+
+
+## DS103: ViabilityTest
+
+#### Viability
+
+```{r data_DS103_live}
+# Data for ridge plots of proliferation
+# HBL1 data
+gs_HBL1 <- load_gs(paste0("output/DS103_ViabilityTest/", "flow_gated_HBL1"))
+gated_pops_HBL1 <- gs_get_pop_paths(gs_HBL1, path = "auto")
+cs_HBL1_live <- gs_pop_get_data(gs_HBL1, tail(gated_pops_HBL1, 3)[1])
+df_HBL1_live <- fortify(cs_HBL1_live)
+df_HBL1_live[df_HBL1_live <= 0] <- NA # Remove all zero values from df in order to perform log transformations
+
+# OCI-Ly8 data
+gs_Ly8 <- load_gs(paste0("output/DS103_ViabilityTest/", "flow_gated_Ly8"))
+gated_pops_Ly8 <- gs_get_pop_paths(gs_Ly8, path = "auto")
+cs_Ly8_live <- gs_pop_get_data(gs_Ly8, tail(gated_pops_Ly8, 3)[1])
+df_Ly8_live <- fortify(cs_Ly8_live)
+df_Ly8_live[df_Ly8_live <= 0] <- NA # Remove all zero values from df in order to perform log transformations
+
+# Combine all cell line datasets
+df_DS103_live <- list(df_HBL1_live, df_Ly8_live) %>% reduce(full_join)
+df_DS103_live <- df_DS103_live[ , c("name", "expID", "plateID", "wellID", "BV421.A", "Alexa.488.A")]
+
+# Add metadata per well from custom .csv file
+metadata_DS103 <- read_csv("data/DS103_ViabilityTest/flow/metadata_plate_DS103.csv")
+metadata_DS103$colID <- as.character(metadata_DS103$colID)
+df_DS103_live <- left_join(df_DS103_live, metadata_DS103)
+counts_DS103_live <- df_DS103_live %>% count(plateID, wellID, name = "sample_cell_count")
+df_DS103_live <- left_join(df_DS103_live, counts_DS103_live)
+# df_DS103 <- df_DS103[df_DS103$sample_cell_count > 5000, ]
+
+gc()
+```
+
+```{r cell_counts_DS103}
+# Get cell counts
+counts_HBL1 <- gs_pop_get_count_fast(gs_HBL1)
+counts_Ly8 <- gs_pop_get_count_fast(gs_Ly8)
+counts_DS103 <- list(counts_HBL1, counts_Ly8) %>% reduce(full_join)
+counts_DS103$PercentParent <- (counts_DS103$Count / counts_DS103$ParentCount) * 100
+
+# Add metadata
+counts_DS103$wellID <- gsub("(.*)_.*_.*_.*.fcs", "\\1", counts_DS103$name)
+counts_DS103 <- left_join(counts_DS103, metadata_DS103)
+
+# Calculate percentage from root
+counts_root_DS103 <- counts_DS103 %>% filter(Parent == "root") %>% select(name, RootCount = ParentCount)
+counts_DS103 <- left_join(counts_DS103, counts_root_DS103)
+counts_DS103$PercentRoot <- (counts_DS103$Count / counts_DS103$RootCount) * 100
+```
+
+```{r fig_live_cells_DS103, fig.width=6, fig.height=4}
+# Live cells
+counts_final_A_DS103 <- subset(counts_DS103, Population == "/Debris/Singlets/Live")
+raw_map(data = counts_final_A_DS103$Count, well = counts_final_A_DS103$wellID, plate = 96, size = 10) +
+  scale_fill_viridis() +
+  labs(title = "Live single cell counts") +
+  theme_bw() +
+  textsize
+```
+***Figure:** Number of live single cells after gating (counts per sample/well).* 
+
+```{r live_cells_DS103}
+percent_live_DS103 <- subset(counts_DS103, Population == "/Debris/Singlets/Live")[, c("name", "wellID", "PercentRoot", "PercentParent")]
+
+# Add metadata per well from custom .csv file
+metadata_DS103 <- read_csv("data/DS103_ViabilityTest/flow//metadata_plate_DS103.csv")
+percent_live_DS103 <- left_join(percent_live_DS103, metadata_DS103)
+```
+
+```{r fig_live_percent_DS103, fig.width=8, fig.height=3.5}
+conc_DS103 <- c("0 uM PBS", "0 uM DMSO", "0.1 uM", "1 uM", "10 uM")
+
+ggplot(subset(percent_live_DS103, staining == "yes"), aes(x = factor(concentration_text, levels = conc_DS103), y = PercentRoot)) +
+  geom_point(aes(color = inhibitor), size = 2) +
+  geom_line(aes(color = inhibitor, group = inhibitor), linewidth = 1) +
+  facet_wrap(~cell_line, ncol = 3) + #, scales = "free_y"
+  ylim(0, 100) +
+  labs(y = "Percentage live cells \nfrom root (%)", x = "") +
+  theme_bw() +
+  theme(legend.position = "right", legend.justification = "right", axis.text.x = element_text(angle = 45, hjust = 1)) +
+  textsize
+
+ggplot(subset(percent_live_DS103, staining == "yes"), aes(x = factor(concentration_text, levels = conc_DS103), y = PercentParent)) +
+  geom_point(aes(color = inhibitor), size = 2) +
+  geom_line(aes(color = inhibitor, group = inhibitor), linewidth = 1) +
+  facet_wrap(~cell_line, ncol = 3) + #, scales = "free_y"
+  ylim(0, 100) +
+  labs(y = "Percentage live cells \nfrom singlets (%)", x = "") +
+  theme_bw() +
+  theme(legend.position = "right", legend.justification = "right", axis.text.x = element_text(angle = 45, hjust = 1)) +
+  textsize
+```
+***Figure:** Percentage of live single cells.*
+
+```{r fig_live_ridge_DS103, fig.width=7, fig.height=6}
+plot <- ggplot(df_DS103_live, aes(x = BV421.A)) +
+  geom_density_ridges(
+    aes(y = factor(concentration_text, levels = rev(conc_DS103)), fill = factor(concentration_uM)),
+    scale = 2, 
+    # fill = "#006699", 
+    alpha = 0.75
+  ) +
+  facet_grid(
+    vars(factor(inhibitor, levels = c("iSYK", "iBTK", "iPI3Kd", "iNFkB"))), 
+    vars(factor(cell_line, levels = c("HBL1", "OCI-Ly8")))
+  ) +
+  scale_fill_manual(values = colors_blue9[c(3, 5, 7, 9)]) +
+  scale_x_logicle() + # logicle scale instead of log10 scale
+  labs(x = "Fluorescent intensity cCaspase 3 + cPARP", y = "") +
+  theme_bw() +
+  theme(legend.position = "none", panel.grid.minor = element_blank()) +
+  textsize
+
+print(plot)
+```
+***Figure:** Distribution of apoptosis markers cCaspase 3 + cPARP.*
+
+
+#### Proliferation
+
+```{r data_DS103_pro}
+# Data for ridge plots of proliferation
+# HBL1 data
+# gs_HBL1 <- load_gs(paste0("output/", "gated_data_HBL1"))
+# gated_pops_HBL1 <- gs_get_pop_paths(gs_HBL1, path = "auto")
+cs_HBL1_pro <- gs_pop_get_data(gs_HBL1, tail(gated_pops_HBL1, 2)[1])
+df_HBL1_pro <- fortify(cs_HBL1_pro)
+df_HBL1_pro[df_HBL1_pro <= 0] <- NA # Remove all zero values from df in order to perform log transformations
+
+# OCI-Ly8 data
+# gs_Ly8 <- load_gs(paste0("output/", "gated_data_Ly8"))
+# gated_pops_Ly8 <- gs_get_pop_paths(gs_Ly8, path = "auto")
+cs_Ly8_pro <- gs_pop_get_data(gs_Ly8, tail(gated_pops_Ly8, 2)[1])
+df_Ly8_pro <- fortify(cs_Ly8_pro)
+df_Ly8_pro[df_Ly8_pro <= 0] <- NA # Remove all zero values from df in order to perform log transformations
+
+# Combine all cell line datasets
+df_DS103_pro <- list(df_HBL1_pro, df_Ly8_pro) %>% reduce(full_join)
+df_DS103_pro <- df_DS103_pro[ , c("name", "expID", "plateID", "wellID", "BV421.A", "Alexa.488.A")]
+
+# Add metadata per well from custom .csv file
+# metadata_DS103 <- read_csv("data/DS103/metadata_plate_DS103.csv")
+metadata_DS103$colID <- as.character(metadata_DS103$colID)
+df_DS103_pro <- left_join(df_DS103_pro, metadata_DS103)
+counts_DS103_pro <- df_DS103_pro %>% count(plateID, wellID, name = "sample_cell_count")
+df_DS103_pro <- left_join(df_DS103_pro, counts_DS103_pro)
+# df_DS103 <- df_DS103[df_DS103$sample_cell_count > 5000, ]
+
+gc()
+```
+
+```{r fig_pro_cells_DS103, fig.width=6, fig.height=4}
+# Proliferating cells
+counts_final_B_DS103 <- subset(counts_DS103, Population == "/Debris/Singlets/Live/Ki-67")
+raw_map(data = counts_final_B_DS103$Count, well = counts_final_B_DS103$wellID, plate = 96, size = 10) +
+  scale_fill_viridis() +
+  labs(title = "Proliferating cell counts") +
+  theme_bw() +
+  textsize
+```
+***Figure:** Number of live single cells after gating (counts per sample/well).* 
+
+```{r pro_cells_DS103}
+percent_pro_DS103 <- subset(counts_DS103, Population == "/Debris/Singlets/Live/Ki-67")[, c("name", "wellID", "PercentRoot", "PercentParent")]
+
+# Add metadata per well from custom .csv file
+# metadata_DS103 <- read_csv("data/DS103/metadata_plate_DS103.csv")
+percent_pro_DS103 <- left_join(percent_pro_DS103, metadata_DS103)
+```
+
+```{r fig_pro_percent_DS103, fig.width=8, fig.height=3.5}
+ggplot(subset(percent_pro_DS103, staining == "yes"), aes(x = factor(concentration_text, levels = conc_DS103), y = PercentRoot)) +
+  geom_point(aes(color = inhibitor), size = 2) +
+  geom_line(aes(color = inhibitor, group = inhibitor), linewidth = 1) +
+  facet_wrap(~cell_line, ncol = 3) + #, scales = "free_y"
+  ylim(0, 100) +
+  labs(y = "Percentage proliferating cells \nfrom root (%)", x = "") +
+  theme_bw() +
+  theme(legend.position = "right", legend.justification = "right", axis.text.x = element_text(angle = 45, hjust = 1)) +
+  textsize
+
+ggplot(subset(percent_pro_DS103, staining == "yes"), aes(x = factor(concentration_text, levels = conc_DS103), y = PercentParent)) +
+  geom_point(aes(color = inhibitor), size = 2) +
+  geom_line(aes(color = inhibitor, group = inhibitor), linewidth = 1) +
+  facet_wrap(~cell_line, ncol = 3) + #, scales = "free_y"
+  ylim(0, 100) +
+  labs(y = "Percentage proliferating cells \nfrom live cells (%)", x = "") +
+  theme_bw() +
+  theme(legend.position = "right", legend.justification = "right", axis.text.x = element_text(angle = 45, hjust = 1)) +
+  textsize
+```
+***Figure:** Percentage of proliferating cells.*
+
+```{r fig_pro_ridge_DS103, fig.width=7, fig.height=6}
+plot <- ggplot(df_DS103_pro, aes(x = Alexa.488.A)) +
+  geom_density_ridges(
+    aes(y = factor(concentration_text, levels = rev(conc_DS103)), fill = factor(concentration_uM)),
+    scale = 2, 
+    # fill = "#006699", 
+    alpha = 0.75
+  ) +
+  facet_grid(
+    vars(factor(inhibitor, levels = c("iSYK", "iBTK", "iPI3Kd", "iNFkB"))), 
+    vars(factor(cell_line, levels = c("HBL1", "OCI-Ly8")))
+  ) +
+  scale_fill_manual(values = colors_blue9[c(3, 5, 7, 9)]) +
+  scale_x_logicle() + # logicle scale instead of log10 scale
+  labs(x = "Fluorescent intensity Ki-67", y = "") +
+  theme_bw() +
+  theme(legend.position = "none", panel.grid.minor = element_blank()) +
+  textsize
+
+print(plot)
+```
+***Figure:** Distribution of proliferation marker Ki-67.*
+
+```{r clear_DS103}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "_DS103"))
+rm(list = ls(pattern = "_HBL1"))
+rm(list = ls(pattern = "_Ly8"))
+rm(list = ls(pattern = "plot"))
+gc()
+```
+
+
+
+## DS104: StimInhibTest
+
+### Load data
+
+```{r DS104_data}
+data_DS104 <- read_csv("output/DS104_StimInhibTest/flow_ann/flow_data_DS104.csv")
+medians_DS104 <- read_csv("output/DS104_StimInhibTest/flow_ann/flow_medians_DS104.csv")
+```
+
+```{r DS104_labels}
+proteins_DS104 <- c("pCD79a (Y182)", "pSYK (Y525/Y526)", "pPLCy2 (Y759)", "cCaspase 3 + cPARP")
+proteins_labels <- c("pCD79a\n(Y182)", "pSYK\n(Y525/Y526)", "pPLCy2\n(Y759)", "cCaspase 3\ncPARP")
+cells_DS104 <- c("HBL1", "OCI-Ly8")
+stim_DS104 <- c("PBS", "aIg/H2O2")
+inhib_DS104 <- c("DMSO", "iSYK", "iBTK", "iPI3Kd", "iNFkB")
+treat_DS104 <- c("DMSO PBS", "iSYK PBS", "iBTK PBS", "iPI3Kd PBS", "iNFkB PBS", 
+                 "DMSO aIg/H2O2", "iSYK aIg/H2O2", "iBTK aIg/H2O2", "iPI3Kd aIg/H2O2", "iNFkB aIg/H2O2")
+treat_no_DS104 <- c("DMSO PBS nostain", "DMSO PBS", "iSYK PBS", "iBTK PBS", "iPI3Kd PBS", "iNFkB PBS", 
+                    "DMSO aIg/H2O2", "iSYK aIg/H2O2", "iBTK aIg/H2O2", "iPI3Kd aIg/H2O2", "iNFkB aIg/H2O2")
+treat_pair_DS104 <- c("DMSO PBS", "DMSO aIg/H2O2", 
+                      "iSYK PBS", "iSYK aIg/H2O2", 
+                      "iBTK PBS", "iBTK aIg/H2O2", 
+                      "iPI3Kd PBS", "iPI3Kd aIg/H2O2", 
+                      "iNFkB PBS", "iNFkB aIg/H2O2")
+treat_labels <- c("DMSO\nPBS", "iSYK\nPBS", "iBTK\nPBS", "iPI3Kd\nPBS", "iNFkB\nPBS", 
+                  "DMSO\naIg/H2O2", "iSYK\naIg/H2O2", "iBTK\naIg/H2O2", "iPI3Kd\naIg/H2O2", "iNFkB\naIg/H2O2")
+```
+
+
+### Ridge plots 
+
+```{r fig_ridge_DS104, fig.width=8, fig.height=5}
+plot <- ggplot(subset(data_DS104, staining == "yes"), aes(x = fluorescence)) +
+  geom_density_ridges(
+    aes(y = factor(inhibitor, levels = rev(inhib_DS104)), fill = factor(stimulus, levels = stim_DS104)),
+    scale = 1, 
+    # fill = "#006699", 
+    alpha = 0.5
+  ) +
+  geom_vline(aes(xintercept = zero_quant97.5), linewidth = 0.5) +
+  facet_grid(vars(factor(cell_line, levels = cells_DS104)), vars(factor(protein, levels = proteins_DS104))) +
+  scale_x_logicle() + # logicle scale instead of log10 scale
+  scale_fill_manual(values = c("black", "orange")) +
+  labs(x = "Fluorescent intensity", y = "") +
+  theme_bw() +
+  theme(legend.position = "none", panel.grid.minor = element_blank()) +
+  textsize_small
+
+print(plot)
+```
+
+```{r fig_ridge_prot_DS104, fig.width=5, fig.height=3.5}
+this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS104) {
+  plot <- ggplot(subset(data_DS104, protein == this_protein & staining == "yes"), aes(x = fluorescence)) +
+    geom_density_ridges(
+      aes(y = factor(inhibitor, levels = rev(inhib_DS104)), fill = factor(stimulus, levels = stim_DS104)),
+      scale = 1, 
+      # fill = "#006699", 
+      alpha = 0.5
+    ) +
+    geom_vline(aes(xintercept = zero_quant97.5), linewidth = 0.5) +
+    facet_wrap(vars(factor(cell_line, levels = cells_DS104))) +
+    scale_x_logicle() + # logicle scale instead of log10 scale
+    scale_fill_manual(values = c("black", "orange")) +
+    labs(x = paste("Fluorescent intensity", this_protein), y = "") +
+    theme_bw() +
+    theme(legend.position = "none", panel.grid.minor = element_blank()) +
+    textsize_small
+  
+  print(plot)
+}
+```
+
+```{r fig_ridge_cell_DS104, fig.width=7, fig.height=3}
+this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS104) {
+  plot <- ggplot(subset(data_DS104, protein == this_protein & staining == "yes"), aes(x = fluorescence)) +
+    geom_density_ridges(
+      aes(y = factor(stimulus, levels = rev(stim_DS104)), fill = factor(cell_line, levels = cells_DS104)),
+      scale = 1, 
+      # fill = "#006699", 
+      alpha = 0.5
+    ) +
+    # geom_vline(aes(xintercept = zero_quant97.5), linewidth = 0.5) +
+    facet_wrap(vars(factor(inhibitor, levels = inhib_DS104)), ncol = 5) +
+    scale_x_logicle() + # logicle scale instead of log10 scale
+    scale_fill_manual(values = c("#4292c6", "#984ea3"), name = "") + #4daf4a
+    labs(x = paste("Fluorescent intensity", this_protein), y = "") +
+    theme_bw() +
+    theme(legend.position = "top", legend.justification = "right", panel.grid.minor = element_blank()) +
+    textsize_small
+  
+  print(plot)
+}
+```
+
+
+### Bar plots
+
+```{r bar_fluor_DS104, fig.width=8, fig.height=7}
+plot_fluor <- ggplot(subset(medians_DS104, staining == "yes")) +
+  geom_col(aes(
+    x = factor(inhibitor, levels = inhib_DS104),
+    y = fluorescence_median, 
+    group = factor(stimulus, levels = stim_DS104),
+    fill = factor(stimulus, levels = stim_DS104)),
+    position = "dodge2") + 
+  # facet_grid(vars(factor(cell_line, levels = cells_DS104)), vars(factor(protein, proteins_DS104)), scales = "free_y") +
+  facet_grid(vars(factor(protein, proteins_DS104)), vars(factor(cell_line, levels = cells_DS104)), scales = "free_y") +
+  scale_fill_manual(values = c("black", "orange"), name = "") +
+  labs(x = "", y = "Fluorescence (median)") +
+  theme_bw() +
+  textsize_small +
+  theme(legend.position = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+
+print(plot_fluor)
+```
+
+```{r bar_fluor_prot_DS104, fig.width=6, fig.height=3}
+this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS104) {
+  plot_fluor <- ggplot(subset(medians_DS104, protein == this_protein & staining == "yes")) +
+    geom_col(aes(
+    x = factor(inhibitor, levels = inhib_DS104),
+    y = fluorescence_median, 
+    group = factor(stimulus, levels = stim_DS104),
+    fill = factor(stimulus, levels = stim_DS104)),
+    position = "dodge2") + 
+    facet_wrap(vars(factor(cell_line, levels = cells_DS104)), scales = "free_y") +
+    scale_fill_manual(values = c("black", "orange"), name = "") +
+    labs(x = "", y = "Fluorescence (median)", title = this_protein) +
+    theme_bw() +
+    textsize_small +
+    theme(legend.position = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+  
+  print(plot_fluor)
+}
+```
+
+```{r bar_fluor_inhib_DS104, fig.width=8, fig.height=7, eval=F}
+plot_fluor <- ggplot(subset(medians_DS104, staining == "yes" & protein != "cCaspase 3 + cPARP")) +
+  geom_col(aes(
+    x = factor(protein, levels = proteins_DS104),
+    y = fluorescence_median, 
+    group = factor(stimulus, levels = stim_DS104),
+    fill = factor(stimulus, levels = stim_DS104)),
+    position = "dodge2") + 
+  # facet_grid(vars(factor(cell_line, levels = cells_DS104)), vars(factor(protein, proteins_DS104)), scales = "free_y") +
+  facet_grid(vars(factor(inhibitor, inhib_DS104)), vars(factor(cell_line, levels = cells_DS104))) +
+  scale_fill_manual(values = c("black", "orange"), name = "") +
+  scale_x_discrete(breaks = proteins_DS104, labels = proteins_labels) +
+  labs(x = "", y = "Fluorescence (medium)") +
+  theme_bw() +
+  textsize_small +
+  theme(legend.position = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+
+print(plot_fluor)
+```
+
+```{r bar_on_DS104, fig.width=8, fig.height=7}
+plot_fluor <- ggplot(subset(medians_DS104, staining == "yes" & protein != "cCaspase 3 + cPARP")) +
+  geom_col(aes(
+    x = factor(inhibitor, levels = inhib_DS104),
+    y = percent_on, 
+    group = factor(stimulus, levels = stim_DS104),
+    fill = factor(stimulus, levels = stim_DS104)),
+    position = "dodge2") + 
+  # facet_grid(vars(factor(cell_line, levels = cells_DS104)), vars(factor(protein, proteins_DS104)), scales = "free_y") +
+  facet_grid(vars(factor(protein, proteins_DS104)), vars(factor(cell_line, levels = cells_DS104)), scales = "free_y") +
+  scale_fill_manual(values = c("black", "orange"), name = "") +
+  labs(x = "", y = "% cells ON") +
+  theme_bw() +
+  textsize_small +
+  theme(legend.position = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+
+print(plot_fluor)
+```
+
+```{r bar_FC_DS104, fig.width=8, fig.height=7}
+plot_fluor <- ggplot(subset(medians_DS104, staining == "yes")) +
+  geom_col(aes(
+    x = factor(inhibitor, levels = inhib_DS104),
+    y = FC_median, 
+    group = factor(stimulus, levels = stim_DS104),
+    fill = factor(stimulus, levels = stim_DS104)),
+    position = "dodge2") + 
+  # facet_grid(vars(factor(cell_line, levels = cells_DS104)), vars(factor(protein, proteins_DS104)), scales = "free_y") +
+  facet_grid(vars(factor(protein, proteins_DS104)), vars(factor(cell_line, levels = cells_DS104)), scales = "free_y") +
+  scale_fill_manual(values = c("black", "orange"), name = "") +
+  labs(x = "", y = "Fluorescence (fold change of medium)") +
+  theme_bw() +
+  textsize_small +
+  theme(legend.position = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+
+print(plot_fluor)
+```
+
+```{r bar_FC_prot_DS104, fig.width=6, fig.height=3}
+this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS104) {
+  plot_fluor <- ggplot(subset(medians_DS104, protein == this_protein & staining == "yes")) +
+    geom_col(aes(
+    x = factor(inhibitor, levels = inhib_DS104),
+    y = FC_median, 
+    group = factor(stimulus, levels = stim_DS104),
+    fill = factor(stimulus, levels = stim_DS104)),
+    position = "dodge2") + 
+    facet_wrap(vars(factor(cell_line, levels = cells_DS104))) +
+    scale_fill_manual(values = c("black", "orange"), name = "") +
+    labs(x = "", y = "Fluorescence (fold change of medium)", title = this_protein) +
+    theme_bw() +
+    textsize_small +
+    theme(legend.position = "right", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+  
+  print(plot_fluor)
+}
+```
+
+```{r clear_DS104}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "_DS104"))
+rm(list = ls(pattern = "plot"))
+gc()
+```
+
+
+
+## DS108: StimInhibIDseq
+
+### Load data
+
+```{r DS108_data}
+data_DS108 <- read_csv("output/DS108_StimInhibIDseq/flow_ann/flow_data_DS108.csv")
+medians_DS108 <- read_csv("output/DS108_StimInhibIDseq/flow_ann/flow_medians_DS108.csv")
+```
+
+```{r DS108_labels}
+proteins_DS108 <- c("pCD79a (Y182)", "pSYK (Y525/Y526)", "pPLCy2 (Y759)", "cCaspase 3 + cPARP")
+proteins_labels <- c("pCD79a\n(Y182)", "pSYK\n(Y525/Y526)", "pPLCy2\n(Y759)", "cCaspase 3\ncPARP")
+cells_DS108 <- c("HBL1", "OCI-Ly8")
+stim_DS108 <- c("PBS", "aIg+H2O2")
+inhib_DS108 <- c("iSYK", "iBTK", "iPI3Kd", "iNFkB")
+inhib_conc_DS108 <- c("0 uM", "100 uM")
+inhib_full_DS108 <- c("0 uM iSYK", "100 uM iSYK", 
+                      "0 uM iBTK", "100 uM iBTK", 
+                      "0 uM iPI3Kd", "100 uM iPI3Kd", 
+                      "0 uM iNFkB", "100 uM iNFkB")
+inhib_stim_DS108 <- c("0 uM iSYK PBS", "0 uM iSYK aIg+H2O2", "100 uM iSYK PBS", "100 uM iSYK aIg+H2O2", 
+                      "0 uM iBTK PBS", "0 uM iBTK aIg+H2O2", "100 uM iBTK PBS", "100 uM iBTK aIg+H2O2", 
+                      "0 uM iPI3Kd PBS", "0 uM iPI3Kd aIg+H2O2", "100 uM iPI3Kd PBS", "100 uM iPI3Kd aIg+H2O2", 
+                      "0 uM iNFkB PBS", "0 uM iNFkB aIg+H2O2", "100 uM iNFkB PBS", "100 uM iNFkB aIg+H2O2")
+conc_stim_DS108 <- c("0 uM PBS", "0 uM aIg+H2O2", "100 uM PBS", "100 uM aIg+H2O2")
+conc_stim_labels <- c("0 uM inhib.\nPBS", "0 uM inhib.\naIg+H2O2", "100 uM inhib.\nPBS", "100 uM inhib.\naIg+H2O2")
+```
+
+
+### Ridge plots 
+
+```{r fig_ridge_DS108, fig.width=8, fig.height=6.5}
+plot <- ggplot(data_DS108, aes(x = fluorescence)) +
+  geom_density_ridges(
+    aes(y = factor(inhib_conc_text, levels = rev(inhib_full_DS108)), fill = factor(stimulus, levels = stim_DS108)),
+    scale = 1, 
+    # fill = "#006699", 
+    alpha = 0.5
+  ) +
+  # geom_vline(aes(xintercept = zero_quant97.5), linewidth = 0.5) +
+  facet_grid(vars(factor(cell_line, levels = cells_DS108)), vars(factor(protein, levels = proteins_DS108))) +
+  scale_x_logicle() + # logicle scale instead of log10 scale
+  scale_fill_manual(values = c("black", "orange")) +
+  labs(x = "Fluorescent intensity", y = "") +
+  theme_bw() +
+  theme(legend.position = "none", panel.grid.minor = element_blank()) +
+  textsize_small
+
+print(plot)
+```
+
+```{r fig_ridge_prot_DS108, fig.width=4, fig.height=5}
+for (this_protein in proteins_DS108) {
+  plot <- ggplot(subset(data_DS108, protein == this_protein), aes(x = fluorescence)) +
+    geom_density_ridges(
+      aes(y = factor(inhib_conc, levels = rev(inhib_conc_DS108)), fill = factor(stimulus, levels = stim_DS108)),
+      scale = 1, 
+      alpha = 0.5
+    ) +
+    facet_grid(vars(factor(inhibitor, levels = inhib_DS108)), vars(factor(cell_line, levels = cells_DS108))) +
+    scale_x_logicle() + # logicle scale instead of log10 scale
+    scale_fill_manual(values = c("black", "orange")) +
+    labs(x = "Fluorescent intensity", y = "", title = this_protein) +
+    theme_bw() +
+    theme(legend.position = "none", panel.grid.minor = element_blank()) +
+    textsize_small
+  
+  print(plot)
+}
+```
+
+
+### Bar plots
+
+```{r bar_fluor_cell_DS108, fig.width=8, fig.height=5}
+for (this_cell in cells_DS108) {
+  plot <- ggplot(subset(medians_DS108, cell_line == this_cell & protein != "cCaspase 3 + cPARP")) +
+    geom_col(aes(
+      x = factor(inhib_conc_text, levels = inhib_full_DS108),
+      y = fluorescence_median, 
+      group = factor(stimulus, levels = stim_DS108),
+      fill = factor(paste(inhib_conc_text, stimulus), levels = inhib_stim_DS108)),
+      position = "dodge2") + 
+    # facet_grid(vars(factor(protein, proteins_DS108)), vars(factor(cell_line, levels = cells_DS108)), scales = "free_y") +
+    facet_grid(vars(factor(protein, proteins_DS108)), vars(factor(inhibitor, levels = inhib_DS108)), scales = "free") +
+    scale_fill_manual(values = c("#bdbdbd", "#a6cee3", "#252525", "#1f78b4", 
+                                 "#bdbdbd", "#b2df8a", "#252525", "#33a02c", 
+                                 "#bdbdbd", "#fdbf6f", "#252525", "#ff7f00", 
+                                 "#bdbdbd", "#cab2d6", "#252525", "#6a3d9a"), 
+                      name = "") +
+    labs(x = "", y = "Fluorescence (median)", title = this_cell) +
+    theme_bw() +
+    textsize_small +
+    theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
+  
+  print(plot)
+}
+```
+
+```{r bar_fluor_prot_DS108, fig.width=9.5, fig.height=6}
+# this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS108) {
+  plot <- ggplot(subset(medians_DS108, protein == this_protein)) +
+    geom_col(aes(
+      x = factor(paste(inhib_conc, stimulus), levels = conc_stim_DS108, labels = conc_stim_labels),
+      y = fluorescence_median, 
+      group = factor(stimulus, levels = stim_DS108),
+      fill = factor(paste(inhib_conc_text, stimulus), levels = inhib_stim_DS108)),
+      position = "dodge2") + 
+    facet_grid(vars(factor(cell_line, levels = cells_DS108)), vars(factor(inhibitor, inhib_DS108)), scales = "free_y") +
+    scale_fill_manual(values = c("#bdbdbd", "#a6cee3", "#252525", "#1f78b4", 
+                                 "#bdbdbd", "#b2df8a", "#252525", "#33a02c", 
+                                 "#bdbdbd", "#fdbf6f", "#252525", "#ff7f00", 
+                                 "#bdbdbd", "#cab2d6", "#252525", "#6a3d9a"), 
+                      name = "") +
+    labs(x = "", y = "Fluorescence (median)", title = this_protein) +
+    theme_bw() +
+    textsize_small +
+    theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  print(plot)
+}
+```
+
+```{r bar_on_DS108, fig.width=9.5, fig.height=6}
+# this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS108[1:3]) {
+  plot <- ggplot(subset(medians_DS108, protein == this_protein)) +
+    geom_col(aes(
+      x = factor(paste(inhib_conc, stimulus), levels = conc_stim_DS108, labels = conc_stim_labels),
+      y = percent_on, 
+      group = factor(stimulus, levels = stim_DS108),
+      fill = factor(paste(inhib_conc_text, stimulus), levels = inhib_stim_DS108)),
+      position = "dodge2") + 
+    facet_grid(vars(factor(cell_line, levels = cells_DS108)), vars(factor(inhibitor, inhib_DS108))) +
+    scale_fill_manual(values = c("#bdbdbd", "#a6cee3", "#252525", "#1f78b4", 
+                                 "#bdbdbd", "#b2df8a", "#252525", "#33a02c", 
+                                 "#bdbdbd", "#fdbf6f", "#252525", "#ff7f00", 
+                                 "#bdbdbd", "#cab2d6", "#252525", "#6a3d9a"), 
+                      name = "") +
+    coord_cartesian(ylim = c(0, 100)) +
+    labs(x = "", y = "% cells ON", title = this_protein) +
+    theme_bw() +
+    textsize_small +
+    theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  print(plot)
+}
+```
+
+```{r bar_FC_DS108, fig.width=9.5, fig.height=6}
+# Fold change
+# this_protein <- "pPLCy2 (Y759)"
+for (this_protein in proteins_DS108[1:3]) {
+  plot <- ggplot(subset(medians_DS108, protein == this_protein)) +
+    geom_col(aes(
+      x = factor(paste(inhib_conc, stimulus), levels = conc_stim_DS108, labels = conc_stim_labels),
+      y = FC_median, 
+      group = factor(stimulus, levels = stim_DS108),
+      fill = factor(paste(inhib_conc_text, stimulus), levels = inhib_stim_DS108)),
+      position = "dodge2") + 
+    facet_grid(vars(factor(cell_line, levels = cells_DS108)), vars(factor(inhibitor, inhib_DS108)), scales = "free_y") +
+    scale_fill_manual(values = c("#bdbdbd", "#a6cee3", "#252525", "#1f78b4", 
+                                 "#bdbdbd", "#b2df8a", "#252525", "#33a02c", 
+                                 "#bdbdbd", "#fdbf6f", "#252525", "#ff7f00", 
+                                 "#bdbdbd", "#cab2d6", "#252525", "#6a3d9a"), 
+                      name = "") +
+    labs(x = "", y = "Fluorescence (fold change of medium)", title = this_protein) +
+    theme_bw() +
+    textsize_small +
+    theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  print(plot)
+}
+
+# log2 fold change
+for (this_protein in proteins_DS108[1:3]) {
+  plot <- ggplot(subset(medians_DS108, protein == this_protein)) +
+    geom_col(aes(
+      x = factor(paste(inhib_conc, stimulus), levels = conc_stim_DS108, labels = conc_stim_labels),
+      y = log2FC_median, 
+      group = factor(stimulus, levels = stim_DS108),
+      fill = factor(paste(inhib_conc_text, stimulus), levels = inhib_stim_DS108)),
+      position = "dodge2") + 
+    facet_grid(vars(factor(cell_line, levels = cells_DS108)), vars(factor(inhibitor, inhib_DS108)), scales = "free_y") +
+    scale_fill_manual(values = c("#bdbdbd", "#a6cee3", "#252525", "#1f78b4", 
+                                 "#bdbdbd", "#b2df8a", "#252525", "#33a02c", 
+                                 "#bdbdbd", "#fdbf6f", "#252525", "#ff7f00", 
+                                 "#bdbdbd", "#cab2d6", "#252525", "#6a3d9a"), 
+                      name = "") +
+    labs(x = "", y = "Fluorescence (log2 fold change of medium)", title = this_protein) +
+    theme_bw() +
+    textsize_small +
+    theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  print(plot)
+}
+```
+
+```{r clear_DS108}
+# Remove unnecessary files to clear up memory
+rm(list = ls(pattern = "_DS108"))
+rm(list = ls(pattern = "plot"))
+gc()
+```

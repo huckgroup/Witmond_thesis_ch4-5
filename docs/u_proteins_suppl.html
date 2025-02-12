@@ -1,0 +1,2656 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="mwitmond" />
+
+<meta name="date" content="2024-10-22" />
+
+<title>DLBCL proteins chapter supplementary figures</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Chapters on DLBCL</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Paper
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="y_paper_main.html">Main</a>
+    </li>
+    <li>
+      <a href="z_paper_suppl.html">Supplementary</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Proteins ch
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="t_proteins_main.html.html">Main</a>
+    </li>
+    <li>
+      <a href="u_proteins_suppl.html.html">Supplementary</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    States ch
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="v_states_main.html.html">Main</a>
+    </li>
+    <li>
+      <a href="w_states_suppl.html.html">Supplementary</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Flow
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="a_flow_gating.html">Gating</a>
+    </li>
+    <li>
+      <a href="b_flow_ann.html">Annotation</a>
+    </li>
+    <li>
+      <a href="c_flow_vis.html">Visualisation</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    IDseq
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="d_IDseq_count.html">Count tables</a>
+    </li>
+    <li>
+      <a href="DS108_p_seq_comparisons.html">DS108 clean</a>
+    </li>
+    <li>
+      <a href="DS108_q_seq_thresholds.html">DS108 thresholds</a>
+    </li>
+    <li>
+      <a href="DS108_r_seq_pca.html">DS108 PCA</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">DLBCL proteins chapter supplementary
+figures</h1>
+<h4 class="author">mwitmond</h4>
+<h4 class="date">2024-10-22</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2025-02-12
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>chapters_DLBCL/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20241022code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20241022)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20241022code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20241022)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong1ffbd94">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong> 1ffbd94
+</a>
+</p>
+</div>
+<div id="strongRepositoryversionstrong1ffbd94"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version 1ffbd94.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
+
+Untracked files:
+    Untracked:  code/packages_FACS.R
+    Untracked:  code/packages_seq.R
+    Untracked:  data/AL006_InhibCombiTest/
+    Untracked:  data/DS102_StimTest/
+    Untracked:  data/DS103_ViabilityTest/
+    Untracked:  data/DS104_StimInhibTest/
+    Untracked:  data/DS108_StimInhibIDseq/
+    Untracked:  data/DS113_InhibCombiIDseq/
+    Untracked:  output/DS102_StimTest/
+    Untracked:  output/DS103_ViabilityTest/
+    Untracked:  output/DS104_StimInhibTest/
+    Untracked:  output/DS108_StimInhibIDseq/
+    Untracked:  output/DS113_InhibCombiIDseq/
+    Untracked:  output/figures/
+    Untracked:  output/network_visual_DLBCL/
+    Untracked:  output/network_visual_paper/
+
+Unstaged changes:
+    Deleted:    analysis/about.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/u_proteins_suppl.Rmd</code>) and
+HTML (<code>docs/u_proteins_suppl.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+1ffbd94
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+<td>
+Revised chapter figs
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+4492de7
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2024-10-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+6559698
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2024-10-22
+</td>
+<td>
+Paper figs + analysis files for ch figs
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="set-up" class="section level2">
+<h2>Set-up</h2>
+<pre class="r"><code>row_order = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;)
+col_order = c(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;)
+panel_labels &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;,&quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;, &quot;k&quot;, &quot;l&quot;, &quot;m&quot;)
+PANEL_labels &lt;- c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;,&quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;, &quot;L&quot;, &quot;M&quot;)
+
+textsize &lt;- theme(axis.text.x = element_text(colour = &quot;grey&quot;, size = 11), #, face = &quot;bold&quot;
+                  axis.text.y = element_text(colour = &quot;grey&quot;, size = 11),
+                  axis.title = element_text(colour = &quot;black&quot;, size = 12), 
+                  legend.title = element_text(colour = &quot;black&quot;, size = 12),
+                  # legend.title = element_blank(), 
+                  legend.text = element_text(colour = &quot;grey&quot;, size = 11), 
+                  strip.text.x = element_text(colour = &quot;black&quot;, size = 12)
+)
+
+textsize_small &lt;- theme(text = element_text(size = 9, family = &quot;sans&quot;, colour = &quot;black&quot;),
+                        plot.title = element_text(size = 10)
+)</code></pre>
+<pre class="r"><code>colors_nord &lt;- c(&quot;#2e3440&quot;, &quot;#3b4252&quot;, &quot;#434c5e&quot;, &quot;#4c566a&quot;, 
+                 &quot;#d8dee9&quot;, &quot;#e5e9f0&quot;, &quot;#eceff4&quot;, 
+                 &quot;#8fbcbb&quot;, &quot;#88c0d0&quot;, &quot;#81a1c1&quot;, &quot;#5e81ac&quot;, 
+                 &quot;#bf616a&quot;, &quot;#d08770&quot;, &quot;#ebcb8b&quot;, &quot;#a3be8c&quot;, &quot;#b48ead&quot;)
+
+colors_toll_bright &lt;- c(&quot;#4477AA&quot;, &quot;#66CCEE&quot;, &quot;#228833&quot;, &quot;#CCBB44&quot;, &quot;#EE6677&quot;, &quot;#AA3377&quot;, &quot;#BBBBBB&quot;)
+colors_toll_mute &lt;- c(&quot;#332288&quot;, &quot;#88CCEE&quot;, &quot;#44AA99&quot;, &quot;#117733&quot;, &quot;#999933&quot;, &quot;#DDCC77&quot;, &quot;#CC6677&quot;, &quot;#882255&quot;, &quot;#AA4499&quot;, &quot;#DDDDDD&quot;)
+colors_toll_br &lt;- c(&quot;#364B9A&quot;, &quot;#4A7BB7&quot;, &quot;#6EA6CD&quot;, &quot;#98CAE1&quot;, &quot;#C2E4EF&quot;, &quot;#EAECCC&quot;, &quot;#FEDA8B&quot;, &quot;#FDB366&quot;, &quot;#F67A4B&quot;, &quot;#DD3D2D&quot;, &quot;#A50026&quot;)
+
+colors_blue9 &lt;- c(&quot;#f7fbff&quot;, &quot;#deebf7&quot;, &quot;#c6dbef&quot;, &quot;#9ecae1&quot;, &quot;#6baed6&quot;, &quot;#4292c6&quot;, &quot;#2171b5&quot;, &quot;#08519c&quot;, &quot;#08306b&quot;)
+colors_green9 &lt;- c(&quot;#f7fcf5&quot;, &quot;#e5f5e0&quot;, &quot;#c7e9c0&quot;, &quot;#a1d99b&quot;, &quot;#74c476&quot;, &quot;#41ab5d&quot;, &quot;#238b45&quot;, &quot;#006d2c&quot;, &quot;#00441b&quot;)
+colors_purple9 &lt;- c(&quot;#fcfbfd&quot;, &quot;#efedf5&quot;, &quot;#dadaeb&quot;, &quot;#bcbddc&quot;, &quot;#9e9ac8&quot;, &quot;#807dba&quot;, &quot;#6a51a3&quot;, &quot;#54278f&quot;, &quot;#3f007d&quot;)
+colors_red9 &lt;- c(&quot;#fff5f0&quot;, &quot;#fee0d2&quot;, &quot;#fcbba1&quot;, &quot;#fc9272&quot;, &quot;#fb6a4a&quot;, &quot;#ef3b2c&quot;, &quot;#cb181d&quot;, &quot;#a50f15&quot;, &quot;#67000d&quot;)
+colors_orange9 &lt;- c(&quot;#fff5eb&quot;, &quot;#fee6ce&quot;, &quot;#fdd0a2&quot;, &quot;#fdae6b&quot;, &quot;#fd8d3c&quot;, &quot;#f16913&quot;, &quot;#d94801&quot;, &quot;#a63603&quot;, &quot;#7f2704&quot;)
+colors_grey9 &lt;- c(&quot;#ffffff&quot;, &quot;#f0f0f0&quot;, &quot;#d9d9d9&quot;, &quot;#bdbdbd&quot;, &quot;#969696&quot;, &quot;#737373&quot;, &quot;#525252&quot;, &quot;#252525&quot;, &quot;#000000&quot;)
+colors_yb9 &lt;- c(&quot;#ffffd9&quot;, &quot;#edf8b1&quot;, &quot;#c7e9b4&quot;, &quot;#7fcdbb&quot;, &quot;#41b6c4&quot;, &quot;#1d91c0&quot;, &quot;#225ea8&quot;, &quot;#253494&quot;, &quot;#081d58&quot;)
+colors_pr9 &lt;- c(&quot;#f7f4f9&quot;, &quot;#e7e1ef&quot;, &quot;#d4b9da&quot;, &quot;#c994c7&quot;, &quot;#df65b0&quot;, &quot;#e7298a&quot;, &quot;#ce1256&quot;, &quot;#980043&quot;, &quot;#67001f&quot;)
+
+# Variable-specific colors
+colors_cell &lt;- c(&quot;HBL1&quot; = &quot;#AA4499&quot;, &quot;OCI-Ly8&quot; = &quot;#332288&quot;, 
+                 &quot;ABC subtype&quot; = &quot;#AA4499&quot;, &quot;GCB subtype&quot; = &quot;#332288&quot;)
+colors_stim &lt;- c(&quot;PBS&quot; = &quot;#737373&quot;, &quot;aIg+H2O2&quot; = &quot;#FDB366&quot;, 
+                 &quot;Basal&quot; = &quot;#737373&quot;, &quot;Activated&quot; = &quot;#FDB366&quot;)
+colors_cell_stim &lt;- c(&quot;HBL1 - PBS&quot; = &quot;#c994c7&quot;, &quot;HBL1 - aIg+H2O2&quot; = &quot;#AA4499&quot;, &quot;OCI-Ly8 - PBS&quot; = &quot;#88CCEE&quot;, &quot;OCI-Ly8 - aIg+H2O2&quot; = &quot;#332288&quot;)
+# colors_inhib &lt;- c(&quot;iSYK&quot; = &quot;#228833&quot;, &quot;iBTK&quot; = &quot;#4477AA&quot;, &quot;iNFkB&quot; = &quot;#AA3377&quot;)
+colors_inhib &lt;- c(&quot;iSYK&quot; = &quot;#9dce5c&quot;, &quot;iBTK&quot; = &quot;#5c9dce&quot;, &quot;iNFkB&quot; = &quot;#ce5c9d&quot;)
+colors_conc &lt;- c(&quot;#737373&quot;, &quot;#dadaeb&quot;, &quot;#9e9ac8&quot;, &quot;#6a51a3&quot;, &quot;#3f007d&quot;)
+colors_iSYK &lt;- colors_green9[c(3, 5, 6, 8, 9)]
+colors_iBTK &lt;- colors_blue9[c(3, 5, 6, 8, 9)]
+colors_iNFkB &lt;- colors_pr9[c(3, 5, 6, 8, 9)]
+colors_conc_stim &lt;- colors_orange9[c(2, 3, 5, 6, 8, 9)]
+colors_conc_PBS &lt;- colors_grey9[c(2, 3, 5, 6, 8, 9)]</code></pre>
+</div>
+<div id="suppl.-figure-s1" class="section level2">
+<h2>Suppl. Figure S1</h2>
+<p><em>Detailed schematic of the B-cell signaling network, with proteins
+measured in ID-seq panel indicated.</em></p>
+<p>Input:</p>
+<ul>
+<li>Cytoscape blank network</li>
+</ul>
+<div id="panels" class="section level3 tabset">
+<h3 class="tabset">Panels</h3>
+<div id="panel-a" class="section level4">
+<h4>Panel A</h4>
+<pre class="r"><code># Placeholder
+figS1_panelA &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS1_panelA
+
+# PNG
+figS1_panelA &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_BCR_network_organised.png&quot;) %&gt;%
+  magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
+  magick::image_ggplot(interpolate = TRUE)
+figS1_panelA</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS1_panelA-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Legend
+figS1_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/legend_network_projections_blank.png&quot;) %&gt;%
+  # magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
+  magick::image_ggplot(interpolate = TRUE)
+# figS1_legend</code></pre>
+</div>
+</div>
+<div id="combined-fig" class="section level3">
+<h3>Combined fig</h3>
+<pre class="r"><code># Combine all panels of the figure
+figS1 &lt;- plot_grid(figS1_panelA, figS1_legend, ncol = 1, rel_heights = c(8, 1), label_size = 10)
+figS1</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS1_combi-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Save figure as pdf, jpg
+ggsave(
+  figS1,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS1.pdf&quot;,
+  width = 6,
+  height = 6.5,
+  units = &quot;in&quot;,
+  dpi = 300
+  )
+ggsave(
+  figS1,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS1.jpg&quot;,
+  width = 6,
+  height = 6.5,
+  units = &quot;in&quot;,
+  dpi = 300
+  )</code></pre>
+<p><em>Detailed schematic of the B-cell signaling network, with proteins
+measured in ID-seq panel indicated.</em></p>
+<pre class="r"><code># Remove unnecessary files to clear up memory
+rm(list = ls(pattern = &quot;figS1&quot;))
+rm(list = ls(pattern = &quot;png&quot;))
+rm(list = ls(pattern = &quot;results_&quot;))
+rm(list = ls(pattern = &quot;volc_&quot;))
+rm(list = ls(pattern = &quot;list_&quot;))
+rm(list = ls(pattern = &quot;names_&quot;))
+rm(list = ls(pattern = &quot;titles_&quot;))
+rm(list = ls(pattern = &quot;data_&quot;))
+rm(list = ls(pattern = &quot;heat_&quot;))
+rm(list = ls(pattern = &quot;rld&quot;))
+rm(list = ls(pattern = &quot;pca&quot;))
+gc()</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells 10598733 566.1   17064672 911.4 12885455 688.2
+Vcells 19434496 148.3   33081922 252.4 27328500 208.5</code></pre>
+</div>
+</div>
+<div id="suppl.-figure-s2" class="section level2">
+<h2>Suppl. Figure S2</h2>
+<p><em>Increased activation upon treatment with both anti-Ig and H2O2
+combined compared to treatment with anti-Ig or H2O2 alone.</em></p>
+<p>Input:</p>
+<ul>
+<li>DS102 phosphoflow data</li>
+</ul>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<pre class="r"><code>figS2_data &lt;- read_csv(&quot;output/DS102_StimTest/flow_ann/flow_data_DS102.csv&quot;)
+figS2_medians &lt;- read_csv(&quot;output/DS102_StimTest/flow_ann/flow_medians_DS102.csv&quot;)</code></pre>
+<pre class="r"><code>figS2_proteins &lt;- c(&quot;pSYK (Y525/Y526)&quot;) # &quot;pPLCy2 (Y759)&quot;
+figS2_stim &lt;- c(&quot;aIg&quot;, &quot;H2O2&quot;, &quot;H2O2 + aIg&quot;)
+figS2_stim &lt;- c(&quot;Anti-Ig&quot;, &quot;H2O2&quot;, &quot;Combination\nAnti-Ig + H2O2&quot;)
+figS2_conc &lt;- c(&quot;PBS&quot;, 
+                &quot;10 ug/mL aIg&quot;, &quot;20 ug/mL aIg&quot;,
+                &quot;10 mM H2O2&quot;, &quot;20 mM H2O2&quot;, 
+                &quot;15 H2O2 + 15 aIg&quot;)
+figS2_conc_label &lt;- c(&quot;PBS&quot;, 
+                &quot;10 ug/mL\nanti-Ig&quot;, &quot;20 ug/mL\nanti-Ig&quot;,
+                &quot;10 mM\nH2O2&quot;, &quot;20 mM\nH2O2&quot;,
+                &quot;15 anti-Ig +\n15 H2O2&quot;)
+figS2_colors &lt;- c(&quot;PBS&quot; = &quot;#737373&quot;, 
+                  &quot;10 ug/mL aIg&quot; = &quot;#a1d99b&quot;, &quot;20 ug/mL aIg&quot; = &quot;#74c476&quot;,
+                  &quot;10 mM H2O2&quot; = &quot;#98CAE1&quot;, &quot;20 mM H2O2&quot; = &quot;#6EA6CD&quot;, 
+                  &quot;15 H2O2 + 15 aIg&quot; = &quot;#FDB366&quot;)</code></pre>
+</div>
+<div id="panels-1" class="section level3 tabset">
+<h3 class="tabset">Panels</h3>
+<div id="panel-a-1" class="section level4">
+<h4>Panel A</h4>
+<pre class="r"><code># Data
+figS2A_medians &lt;- figS2_medians %&gt;%
+  subset(cell_line == &quot;HBL1&quot; &amp; protein == figS2_proteins &amp; conc_text %in% figS2_conc)
+figS2A_data_stat &lt;- figS2_data %&gt;%
+  subset(cell_line == &quot;HBL1&quot; &amp; protein %in% figS2_proteins &amp; conc_text %in% figS2_conc)
+
+# Statistics
+# Kruskal-Wallis test
+figS2A_kruskal &lt;- figS2A_data_stat %&gt;%
+  # group_by(target_nospace) %&gt;%
+  kruskal_test(fluorescence ~ conc_text)
+figS2A_kruskal</code></pre>
+<pre><code># A tibble: 1 × 6
+  .y.               n statistic    df     p method        
+* &lt;chr&gt;         &lt;int&gt;     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         
+1 fluorescence 234536   155207.     5     0 Kruskal-Wallis</code></pre>
+<pre class="r"><code># Post-hoc Dunn&#39;s test (without correction)
+figS2A_dunn &lt;- figS2A_data_stat %&gt;%
+  # group_by(target_nospace) %&gt;%
+  dunn_test(fluorescence ~ conc_text, p.adjust.method = &quot;none&quot;) %&gt;%
+  dplyr::filter(
+    (group1 == &quot;15 H2O2 + 15 aIg&quot;) | (group2 == &quot;15 H2O2 + 15 aIg&quot;)
+      ) %&gt;%
+# group_by(target_nospace) %&gt;%
+  adjust_pvalue(method = &quot;BH&quot;) %&gt;%
+  # add_xy_position(x = &quot;conc_text&quot;, ref.group = &quot;15 H2O2 + 15 aIg&quot;)
+  mutate(xmin = c(4, 2, 6, 6, 6), 
+         xmax = c(6, 6, 5, 3, 1), 
+         plot_order = c(4, 2, 5, 3, 1)) %&gt;%
+  arrange(plot_order)
+figS2A_dunn</code></pre>
+<pre><code># A tibble: 5 × 12
+  .y.       group1 group2    n1    n2 statistic         p     p.adj p.adj.signif
+  &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       
+1 fluoresc… 15 H2… PBS    37262 40876    -328.  0         0         ****        
+2 fluoresc… 10 ug… 15 H2… 37243 37262     220.  0         0         ****        
+3 fluoresc… 15 H2… 20 ug… 37262 38679    -135.  0         0         ****        
+4 fluoresc… 10 mM… 15 H2… 40257 37262      89.1 0         0         ****        
+5 fluoresc… 15 H2… 20 mM… 37262 40219     -29.3 2.40e-189 2.40e-189 ****        
+# ℹ 3 more variables: xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, plot_order &lt;dbl&gt;</code></pre>
+<pre class="r"><code># Figure
+figS2_panelA &lt;- ggplot() +
+  geom_jitter(data = figS2A_data_stat,
+              aes(
+                x = factor(conc_text, levels = figS2_conc, labels = figS2_conc_label),
+                y = fluorescence,
+                group = factor(conc_text, levels = figS2_conc),
+                color = factor(conc_text, levels = figS2_conc)),
+              # position = &quot;dodge2&quot;,
+              width = 0.2, size = 0.2, alpha = 0.1
+              ) +
+  geom_errorbar(data = figS2A_medians,
+                aes(x = factor(conc_text, levels = figS2_conc, labels = figS2_conc_label),
+                    ymin = fluorescence_median, ymax = fluorescence_median,
+                    group = factor(conc_text, levels = figS2_conc)),
+                color = &quot;black&quot;, width = 0.5, size = 0.5) +
+  stat_pvalue_manual(figS2A_dunn, label = &quot;p.adj.signif&quot;, tip.length = 0.01,
+                     y.position = 2.75e5, step.increase = 0.05, size = 2.25) +
+  coord_cartesian(ylim = c(0, 3.35e5)) +
+  # facet_wrap(vars(factor(protein, levels = proteins_suppl_figS2)), scale = &quot;free_y&quot;) +
+  # scale_y_log10() +
+  scale_color_manual(values = figS2_colors, labels = figS2_conc_label, name = &quot;Stimulus&quot;) +
+  labs(x = &quot;&quot;, y = &quot;Fluorescent intensity (A.U.)&quot;, title = &quot;ABC subtype (HBL1)&quot;) +
+  theme_bw() +
+  textsize_small +
+  theme(legend.position = &quot;none&quot;, panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(size = 6))
+figS2_panelA</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS2_panelA-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-b" class="section level4">
+<h4>Panel B</h4>
+<pre class="r"><code># Data
+figS2B_medians &lt;- figS2_medians %&gt;%
+  subset(cell_line == &quot;OCI-Ly8&quot; &amp; protein == figS2_proteins &amp; conc_text %in% figS2_conc)
+figS2B_data_stat &lt;- figS2_data %&gt;%
+  subset(cell_line == &quot;OCI-Ly8&quot; &amp; protein %in% figS2_proteins &amp; conc_text %in% figS2_conc)
+
+# Statistics
+# Kruskal-Wallis test
+figS2B_kruskal &lt;- figS2B_data_stat %&gt;%
+  # group_by(target_nospace) %&gt;%
+  kruskal_test(fluorescence ~ conc_text)
+figS2B_kruskal</code></pre>
+<pre><code># A tibble: 1 × 6
+  .y.               n statistic    df     p method        
+* &lt;chr&gt;         &lt;int&gt;     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         
+1 fluorescence 136483    59839.     5     0 Kruskal-Wallis</code></pre>
+<pre class="r"><code># Post-hoc Dunn&#39;s test (without correction)
+figS2B_dunn &lt;- figS2B_data_stat %&gt;%
+  # group_by(target_nospace) %&gt;%
+  dunn_test(fluorescence ~ conc_text, p.adjust.method = &quot;none&quot;) %&gt;%
+  dplyr::filter(
+    (group1 == &quot;15 H2O2 + 15 aIg&quot;) | (group2 == &quot;15 H2O2 + 15 aIg&quot;)
+      ) %&gt;%
+# group_by(target_nospace) %&gt;%
+  adjust_pvalue(method = &quot;BH&quot;) %&gt;%
+  # add_xy_position(x = &quot;conc_text&quot;, ref.group = &quot;15 H2O2 + 15 aIg&quot;)
+  mutate(xmin = c(4, 2, 6, 6, 6), 
+         xmax = c(6, 6, 5, 3, 1), 
+         plot_order = c(4, 2, 5, 3, 1)) %&gt;%
+  arrange(plot_order)
+figS2B_dunn</code></pre>
+<pre><code># A tibble: 5 × 12
+  .y.       group1 group2    n1    n2 statistic         p     p.adj p.adj.signif
+  &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       
+1 fluoresc… 15 H2… PBS    21189 22075    -212.  0         0         ****        
+2 fluoresc… 10 ug… 15 H2… 23299 21189     136.  0         0         ****        
+3 fluoresc… 15 H2… 20 ug… 21189 22124    -121.  0         0         ****        
+4 fluoresc… 10 mM… 15 H2… 23629 21189     135.  0         0         ****        
+5 fluoresc… 15 H2… 20 mM… 21189 24167     -36.0 3.51e-284 3.51e-284 ****        
+# ℹ 3 more variables: xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, plot_order &lt;dbl&gt;</code></pre>
+<pre class="r"><code># Figure
+figS2_panelB &lt;- ggplot() +
+  geom_jitter(data = figS2B_data_stat,
+              aes(
+                x = factor(conc_text, levels = figS2_conc, labels = figS2_conc_label),
+                y = fluorescence,
+                group = factor(conc_text, levels = figS2_conc),
+                color = factor(conc_text, levels = figS2_conc)),
+              # position = &quot;dodge2&quot;,
+              width = 0.2, size = 0.2, alpha = 0.1
+              ) +
+  geom_errorbar(data = figS2B_medians,
+                aes(x = factor(conc_text, levels = figS2_conc, labels = figS2_conc_label),
+                    ymin = fluorescence_median, ymax = fluorescence_median,
+                    group = factor(conc_text, levels = figS2_conc)),
+                color = &quot;black&quot;, width = 0.5, size = 0.5) +
+  stat_pvalue_manual(figS2B_dunn, label = &quot;p.adj.signif&quot;, tip.length = 0.01,
+                     y.position = 1.5e5, step.increase = 0.05, size = 2.25) +
+  coord_cartesian(ylim = c(0, 2e5)) +
+  # facet_wrap(vars(factor(protein, levels = proteins_suppl_figS2)), scale = &quot;free_y&quot;) +
+  # scale_y_log10() +
+  scale_color_manual(values = figS2_colors, labels = figS2_conc_label, name = &quot;Stimulus&quot;) +
+  labs(x = &quot;&quot;, y = &quot;Fluorescent intensity (A.U.)&quot;, title = &quot;GCB subtype (OCI-Ly8)&quot;) +
+  theme_bw() +
+  textsize_small +
+  theme(legend.position = &quot;none&quot;, panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(size = 6))
+figS2_panelB</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS2_panelB-1.png" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combined-fig-1" class="section level3">
+<h3>Combined fig</h3>
+<pre class="r"><code># Combine all panels of the figure
+figS2 &lt;- plot_grid(figS2_panelA, figS2_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 1), label_size = 10)
+figS2</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS2_combi-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Save figure as pdf, jpg
+ggsave(
+  figS2,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS2.pdf&quot;,
+  width = 6,
+  height = 3,
+  units = &quot;in&quot;,
+  dpi = 300
+  )
+ggsave(
+  figS2,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS2.jpg&quot;,
+  width = 6,
+  height = 3,
+  units = &quot;in&quot;,
+  dpi = 300
+  )</code></pre>
+<p><em>Increased activation upon treatment with both anti-Ig and H2O2
+combined compared to treatment with anti-Ig or H2O2 alone.</em></p>
+<pre class="r"><code># Remove unnecessary files to clear up memory
+rm(list = ls(pattern = &quot;figS2&quot;))
+rm(list = ls(pattern = &quot;png&quot;))
+rm(list = ls(pattern = &quot;results_&quot;))
+rm(list = ls(pattern = &quot;volc_&quot;))
+rm(list = ls(pattern = &quot;list_&quot;))
+rm(list = ls(pattern = &quot;names_&quot;))
+rm(list = ls(pattern = &quot;titles_&quot;))
+rm(list = ls(pattern = &quot;data_&quot;))
+rm(list = ls(pattern = &quot;heat_&quot;))
+rm(list = ls(pattern = &quot;rld&quot;))
+rm(list = ls(pattern = &quot;pca&quot;))
+gc()</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb)  max used  (Mb)
+Ncells 10815163 577.6   17064672 911.4  13835158 738.9
+Vcells 28335631 216.2  103332381 788.4 129158973 985.5</code></pre>
+</div>
+</div>
+<div id="suppl.-figure-s3" class="section level2">
+<h2>Suppl. Figure S3</h2>
+<p><em>Phospho-specific flow cytometry measurements of CD79a (Y182)
+shows high concordance with ID-seq results.</em></p>
+<p>Input:</p>
+<ul>
+<li><p>DS108 phosphoflow data</p></li>
+<li><p>DS108 ID-seq data</p>
+<ul>
+<li>Count data</li>
+</ul></li>
+</ul>
+<div id="data-1" class="section level3">
+<h3>Data</h3>
+<pre class="r"><code># Phospshoflow data 
+figS3_data_flow &lt;- read_csv(&quot;output/DS108_StimInhibIDseq/flow_ann/flow_data_DS108.csv&quot;) %&gt;%
+  mutate(cell_clean = case_when(cell_line == &quot;HBL1&quot; ~ &quot;ABC subtype&quot;, 
+                                cell_line == &quot;OCI-Ly8&quot; ~ &quot;GCB subtype&quot;))
+
+# ID-seq data (counts per well/sample and mean per condition)
+figS3_data_id &lt;- read_csv(&quot;output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv&quot;) %&gt;%
+  subset(inhibitor != &quot;iPI3Kd&quot; &amp; target_nospace != &quot;BIM&quot; &amp; target_nospace != &quot;Histone_H2AX_S139&quot;) %&gt;%
+  mutate(stim_clean = case_when(stimulus == &quot;PBS&quot; ~ &quot;Basal&quot;, 
+                                stimulus == &quot;aIg+H2O2&quot; ~ &quot;Activated&quot;),
+         inhib_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                               inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                                    inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, &quot;\n&quot;, inhib_text_new), 
+         cell_clean = case_when(cell_line == &quot;HBL1&quot; ~ &quot;ABC subtype&quot;, 
+                                cell_line == &quot;OCI-Ly8&quot; ~ &quot;GCB subtype&quot;), 
+         cell_stim = paste0(stim_clean, &quot;\n&quot;, cell_clean))
+figS3_mean_id &lt;- read_csv(&quot;output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_condition.csv&quot;) %&gt;%
+  subset(inhibitor != &quot;iPI3Kd&quot; &amp; target_nospace != &quot;BIM&quot; &amp; target_nospace != &quot;Histone_H2AX_S139&quot;) %&gt;%
+  mutate(stim_clean = case_when(stimulus == &quot;PBS&quot; ~ &quot;Basal&quot;, 
+                                stimulus == &quot;aIg+H2O2&quot; ~ &quot;Activated&quot;),
+         inhib_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                               inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                                    inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, &quot;\n&quot;, inhib_text_new), 
+         cell_clean = case_when(cell_line == &quot;HBL1&quot; ~ &quot;ABC subtype&quot;, 
+                                cell_line == &quot;OCI-Ly8&quot; ~ &quot;GCB subtype&quot;), 
+         cell_stim = paste0(stim_clean, &quot;\n&quot;, cell_clean))</code></pre>
+<pre class="r"><code>figS3_stim &lt;- c(&quot;PBS&quot;, &quot;aIg+H2O2&quot;)
+figS3_stim_label &lt;- c(&quot;Basal&quot;, &quot;Activated&quot;)
+figS3_inhib &lt;- c(&quot;iBTK&quot;, &quot;iSYK&quot;, &quot;iNFkB&quot;)
+
+figS3_conc_flow &lt;- c(&quot;0 uM&quot;, &quot;100 uM&quot;)
+figS3_conc_id &lt;- c(&quot;0 uM (DMSO)&quot;, &quot;100 uM&quot;)
+figS3_conc_label &lt;- c(&quot;DMSO\nctrl&quot;, &quot;100 uM&quot;)
+
+figS3_protein_flow &lt;- &quot;pCD79a (Y182)&quot;
+figS3_protein_id &lt;- &quot;CD79a_Y182&quot;</code></pre>
+</div>
+<div id="panels-2" class="section level3 tabset">
+<h3 class="tabset">Panels</h3>
+<div id="panel-a-2" class="section level4">
+<h4>Panel A</h4>
+<pre class="r"><code># Select data
+figS3A_data_flow &lt;- figS3_data_flow %&gt;%
+  subset(protein == figS3_protein_flow &amp; inhib_conc %in% figS3_conc_flow &amp; inhibitor %in% figS3_inhib) %&gt;%
+  mutate(inhibitor = factor(inhibitor, levels = figS3_inhib))
+
+# Figure
+figS3_panelA &lt;- ggplot(figS3A_data_flow, aes(x = fluorescence)) +
+  geom_density_ridges(
+    aes(y = factor(inhib_conc, levels = rev(figS3_conc_flow), labels = rev(figS3_conc_label)), fill = factor(stimulus, levels = figS3_stim)),
+    scale = 1, 
+    alpha = 0.5
+  ) +
+  # facet_wrap(vars(factor(inhibitor, levels = figS3_inhib)), nrow = 1) +
+  facet_nested(~ inhibitor + cell_clean, scales = &quot;free_x&quot;) +
+  scale_x_logicle() + # logicle scale instead of log10 scale
+  scale_fill_manual(values = colors_stim, labels = figS3_stim_label, name = &quot;Stimulation&quot;) +
+  labs(x = &quot;Fluorescent intensity (A.U.)&quot;, y = &quot;&quot;) +
+  theme_bw() +
+  # theme(legend.position = &quot;right&quot;, panel.grid.minor = element_blank()) +
+  theme(panel.grid.minor = element_blank(), legend.key.size = unit(0.5, &quot;cm&quot;), legend.spacing.y = unit(0.2, &quot;cm&quot;), legend.box.spacing = unit(0.1, &quot;cm&quot;), legend.position = &quot;top&quot;, legend.justification = &quot;right&quot;) +
+  textsize_small
+figS3_panelA</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS3_panelA-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-b-1" class="section level4">
+<h4>Panel B</h4>
+<pre class="r"><code># Select data
+figS3B_data_id &lt;- figS3_data_id %&gt;%
+  subset(target_nospace == figS3_protein_id &amp; inhib_conc %in% figS3_conc_id) %&gt;%
+  mutate(inhibitor = factor(inhibitor, levels = figS3_inhib))
+figS3B_mean_id &lt;- figS3_mean_id %&gt;%
+  subset(target_nospace == figS3_protein_id &amp; inhib_conc %in% figS3_conc_id) %&gt;%
+  mutate(inhibitor = factor(inhibitor, levels = figS3_inhib))
+
+# Figure
+figS3_panelB &lt;- ggplot() +
+  geom_jitter(data = figS3B_data_id, 
+              aes(x = factor(inhib_conc, levels = figS3_conc_id, labels = figS3_conc_label), 
+                  y = counts_norm, 
+                  color = factor(stimulus, levels = figS3_stim)), 
+              alpha = 1, size = 1, width = 0.1) +
+  geom_errorbar(data = figS3B_mean_id,
+                aes(x = factor(inhib_conc, levels = figS3_conc_id, labels = figS3_conc_label), 
+                    ymin = counts_norm, ymax = counts_norm,
+                    group = factor(stimulus, levels = figS3_stim),
+                    color = factor(stimulus, levels = figS3_stim)),
+                width = 0.35, size = 0.75) +
+  # stat_pvalue_manual(figS4B_dunn, label = &quot;p.adj&quot;, tip.length = 0.01,
+  #                    y.position = 800, step.increase = 0, size = 2.25) +
+  # facet_wrap(vars(factor(inhibitor, levels = inhib_suppl_figS4)), nrow = 1) +
+  facet_nested(~ inhibitor + cell_clean, scales = &quot;free_x&quot;) +
+  scale_color_manual(values = colors_stim, labels = figS3_stim_label, name = &quot;Stimulation&quot;) +
+  labs(x = element_blank(), y = &quot;Normalised counts&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor.y = element_blank(), panel.grid.major.x = element_blank(), legend.key.size = unit(0.5, &quot;cm&quot;), legend.spacing.y = unit(0.2, &quot;cm&quot;), legend.box.spacing = unit(0.1, &quot;cm&quot;), legend.position = &quot;bottom&quot;, legend.justification = &quot;right&quot;, axis.text.x = element_text(size = 6.5)) +
+  textsize_small
+figS3_panelB</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS3_panelB-1.png" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combined-fig-2" class="section level3">
+<h3>Combined fig</h3>
+<pre class="r"><code># Combine all panels of the figure
+figS3 &lt;- plot_grid(figS3_panelA, figS3_panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10, align = &quot;v&quot;)
+figS3</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS3_combi-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Save figure as pdf, jpg
+ggsave(
+  figS3,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS3.pdf&quot;,
+  width = 6,
+  height = 4,
+  units = &quot;in&quot;,
+  dpi = 300
+  )
+ggsave(
+  figS3,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS3.jpg&quot;,
+  width = 6,
+  height = 4,
+  units = &quot;in&quot;,
+  dpi = 300
+  )</code></pre>
+<p><em>Phospho-specific flow cytometry measurements of CD79a (Y182)
+shows high concordance with ID-seq results.</em></p>
+<pre class="r"><code># Remove unnecessary files to clear up memory
+rm(list = ls(pattern = &quot;figS3&quot;))
+rm(list = ls(pattern = &quot;png&quot;))
+rm(list = ls(pattern = &quot;results_&quot;))
+rm(list = ls(pattern = &quot;volc_&quot;))
+rm(list = ls(pattern = &quot;list_&quot;))
+rm(list = ls(pattern = &quot;names_&quot;))
+rm(list = ls(pattern = &quot;titles_&quot;))
+rm(list = ls(pattern = &quot;data_&quot;))
+rm(list = ls(pattern = &quot;heat_&quot;))
+rm(list = ls(pattern = &quot;rld&quot;))
+rm(list = ls(pattern = &quot;pca&quot;))
+gc()</code></pre>
+<pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells 10908258 582.6   17064672  911.4  17064672  911.4
+Vcells 33943229 259.0  151582758 1156.5 189478447 1445.7</code></pre>
+</div>
+</div>
+<div id="suppl.-figure-s4" class="section level2">
+<h2>Suppl. Figure S4</h2>
+<p><em>DMSO has no effect on signaling activation.</em></p>
+<p>Input:</p>
+<ul>
+<li><p>DS108 ID-seq data</p>
+<ul>
+<li>DESeq2 analysis of PBS and DMSO controls</li>
+</ul></li>
+</ul>
+<div id="data-2" class="section level3">
+<h3>Data</h3>
+<pre class="r"><code># ID-seq data (counts per well/sample and mean per condition)
+figS4_data_id &lt;- read_csv(&quot;output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv&quot;) %&gt;%
+  subset(inhibitor != &quot;iPI3Kd&quot; &amp; target_nospace != &quot;BIM&quot; &amp; target_nospace != &quot;Histone_H2AX_S139&quot;) %&gt;%
+  mutate(stim_clean = case_when(stimulus == &quot;PBS&quot; ~ &quot;Basal&quot;, 
+                                stimulus == &quot;aIg+H2O2&quot; ~ &quot;Activated&quot;),
+         inhib_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                               inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                                    inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, &quot;\n&quot;, inhib_text_new), 
+         cell_clean = case_when(cell_line == &quot;HBL1&quot; ~ &quot;ABC subtype&quot;, 
+                                cell_line == &quot;OCI-Ly8&quot; ~ &quot;GCB subtype&quot;), 
+         cell_stim = paste0(stim_clean, &quot;\n&quot;, cell_clean))</code></pre>
+<pre class="r"><code>figS4_stim_ &lt;- c(&quot;PBS&quot;, &quot;aIg+H2O2&quot;)
+figS4_stim_label_ &lt;- c(&quot;Basal&quot;, &quot;Activated&quot;)
+# inhib_suppl_figS4 &lt;- c(&quot;iBTK&quot;, &quot;iSYK&quot;, &quot;iNFkB&quot;)
+figS4_conc &lt;- c(&quot;0 uM (PBS)&quot;, &quot;0 uM (DMSO)&quot;)
+figS4_conc_label &lt;- c(&quot;PBS ctrl&quot;, &quot;DMSO ctrl&quot;)
+
+figS4_meta_cols &lt;- c(&quot;plate_well&quot;, &quot;plate&quot;, &quot;well&quot;, &quot;experiment&quot;, &quot;cell_line&quot;, &quot;cell_clean&quot;, &quot;stimulus&quot;, &quot;stim_clean&quot;, &quot;cell_stim&quot;, &quot;inhibitor&quot;, &quot;inhib_conc_uM&quot;, &quot;inhib_conc&quot;, &quot;inhib_conc_text&quot;, &quot;inhib_text_new&quot;, &quot;inhib_new&quot;, &quot;stim_inhib&quot;, &quot;replicate&quot;, &quot;description&quot;, &quot;descript_rep&quot;)</code></pre>
+<p>Differential expression analysis of the effect of DMSO vs PBS on the
+stimulation in 2 cell lines together</p>
+<p>DESeq2 analysis parameters:</p>
+<ul>
+<li><p>2 cell lines, PBS + DMSO ctrls 2 stimuli</p></li>
+<li><p>Compensated counts (&gt;= 1)</p></li>
+<li><p>Model design: inhib_text_new (ref: PBS ctrl) + stimulus (ref:
+PBS) + inhib_text_new:stimulus</p></li>
+</ul>
+<pre class="r"><code># Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts &lt;- figS4_data_id  %&gt;%
+  dplyr::filter(inhib_conc %in% figS4_conc &amp; counts &gt;= 1) %&gt;% #cell_line == &quot;HBL1&quot; &amp; 
+  dplyr::select(target_nospace, plate_well, counts) %&gt;%
+  dplyr::filter(!is.na(counts)) %&gt;%
+  spread(plate_well, counts) %&gt;%
+  replace(is.na(.), 0) %&gt;%
+  column_to_rownames(&quot;target_nospace&quot;)
+
+cts &lt;- as.matrix(as.data.frame(cts))
+
+coldata &lt;- data.frame(plate_well = colnames(cts)) %&gt;%
+  left_join(distinct(dplyr::select(figS4_data_id, all_of(figS4_meta_cols)))) %&gt;%
+  distinct()
+
+rownames(coldata) &lt;- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign &lt;- ~ inhib_text_new + stim_clean + inhib_text_new:stim_clean
+
+# Then create the DESeq dataset
+dds &lt;- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$inhib_text_new &lt;- relevel(dds$inhib_text_new, ref = &quot;PBS ctrl&quot;)
+dds$stim_clean &lt;- relevel(dds$stim_clean, ref = &quot;Basal&quot;)
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds &lt;- DESeq(dds, test = &quot;Wald&quot;, fitType = &quot;local&quot;)
+DESeq_comparisons &lt;- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+results_stim &lt;- results(dds, name = &quot;stim_clean_Activated_vs_Basal&quot;, alpha = 0.05)
+results_DMSO &lt;- results(dds, name = &quot;inhib_text_new_DMSO.ctrl_vs_PBS.ctrl&quot;, alpha = 0.05)
+results_DMSO_stim &lt;- results(dds, name = &quot;inhib_text_newDMSO.ctrl.stim_cleanActivated&quot;, alpha = 0.05)
+
+list_results &lt;- list(results_stim, results_DMSO, results_DMSO_stim)
+
+# Data transformation
+# Regularized log transform
+rld &lt;- rlog(dds, blind = FALSE)
+
+# Data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano &lt;- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins &lt;- rownames(dataset)
+  dataset$target_nospace &lt;- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express &lt;- &quot;NO&quot;
+  dataset$diff_express[dataset$log2FoldChange &gt; foldchange_filter &amp; dataset$padj &lt; padj_filter] &lt;- &quot;UP&quot;
+  dataset$diff_express[dataset$log2FoldChange &lt; -foldchange_filter &amp; dataset$padj &lt; padj_filter] &lt;- &quot;DOWN&quot;
+  
+  # Add a column for labeling
+  dataset$delabel &lt;- NA
+  dataset$delabel[dataset$diff_express != &quot;NO&quot;] &lt;- dataset$proteins[dataset$diff_express != &quot;NO&quot;]
+  
+  # Add Ab metadata
+  # dataset &lt;- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(as.data.frame(dataset))
+}
+
+# Apply function to each dataset
+# padj &lt; 0.05
+# log2FC &gt; log2(1.05)
+names_results_volc &lt;- c(&quot;volc_stim&quot;, &quot;volc_DMSO&quot;, &quot;volc_DMSO_stim&quot;)
+for(dataset in c(1:length(list_results))){
+  assign(names_results_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.1)))
+}
+
+# Add column with comparison for faceting
+figS4_comp &lt;- c(&quot;Activated vs basal&quot;, &quot;DMSO vs PBS&quot;, &quot;Effect DMSO on activation&quot;)
+volc_stim$comparison &lt;- figS4_comp[1]
+volc_DMSO$comparison &lt;- figS4_comp[2]
+volc_DMSO_stim$comparison &lt;- figS4_comp[3]
+figS4_DESeq_dataset &lt;- list(volc_stim, volc_DMSO, volc_DMSO_stim) %&gt;%
+  purrr::reduce(full_join)</code></pre>
+</div>
+<div id="panels-3" class="section level3 tabset">
+<h3 class="tabset">Panels</h3>
+<div id="panel-a-3" class="section level4">
+<h4>Panel A</h4>
+<pre class="r"><code># Select data
+figS4A_data &lt;- figS4_DESeq_dataset %&gt;%
+  subset(comparison == &quot;Activated vs basal&quot;)
+
+# Figure
+figS4_panelA &lt;- ggplot(data = figS4A_data,
+                      aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
+  geom_point(size = 0.5) +
+  geom_text_repel(size = 1.75,
+                  segment.size = 0.2,
+                  hjust = 0,
+                  direction = &quot;y&quot;,
+                  max.overlaps = 8,
+                  nudge_y = -log10(0.005),
+                  nudge_x = ifelse(figS4A_data$log2FoldChange &lt; 0, -0.25 - figS4A_data$log2FoldChange, 0.5 - figS4A_data$log2FoldChange)
+  ) +
+  facet_wrap(~comparison, nrow = 1) +
+  scale_color_manual(values = c(UP = &quot;#A50026&quot;, NO = &quot;black&quot;, DOWN = &quot;#364B9A&quot;),
+                     breaks = c(&quot;UP&quot;, &quot;NO&quot;, &quot;DOWN&quot;),
+                     labels = c(&quot;Increased&quot;, &quot;No difference&quot;, &quot;Decreased&quot;),
+                     name = &quot;Differentially\nexpressed\nproteins&quot;) + 
+  geom_vline(xintercept = c(-log2(1.1), log2(1.1)), color = &quot;#CC6677&quot;) +
+  geom_hline(yintercept = -log10(0.05), color = &quot;#CC6677&quot;) +
+  labs(x = &quot;log2(fold change)&quot;, y = &quot;-log10(adjusted p-value)&quot;, title = element_blank()) +
+  coord_cartesian(xlim = c(-0.25, 1.25), ylim = c(0, 35)) +
+  theme_bw() +
+  theme(legend.key.size = unit(0.2, &quot;cm&quot;), legend.spacing.y = unit(0.1, &quot;cm&quot;), legend.box.spacing = unit(0.1, &quot;cm&quot;), legend.position = &quot;bottom&quot;, legend.justification = &quot;left&quot;, panel.grid = element_blank(), legend.title = element_text(size = 8)) + 
+  guides(color = guide_legend(ncol = 1, byrow = TRUE)) +
+  textsize_small
+figS4_panelA</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS4_panelA-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-b-2" class="section level4">
+<h4>Panel B</h4>
+<pre class="r"><code># Select data
+figS4B_data &lt;- figS4_DESeq_dataset %&gt;%
+  subset(comparison == &quot;DMSO vs PBS&quot;)
+
+# Figure
+figS4_panelB &lt;- ggplot(data = figS4B_data,
+                      aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
+  geom_point(size = 0.5) +
+  geom_text_repel(size = 2,
+                  segment.size = 0.2,
+                  hjust = 0,
+                  direction = &quot;y&quot;,
+                  nudge_y = -log10(0.005),
+                  nudge_x = ifelse(figS4B_data$log2FoldChange &lt; 0, -0.4 - figS4B_data$log2FoldChange, 0.4 - figS4B_data$log2FoldChange)
+  ) +
+  facet_wrap(~comparison, nrow = 1) +
+  scale_color_manual(values = c(UP = &quot;#A50026&quot;, NO = &quot;black&quot;, DOWN = &quot;#364B9A&quot;),
+                     breaks = c(&quot;UP&quot;, &quot;NO&quot;, &quot;DOWN&quot;),
+                     labels = c(&quot;Increased&quot;, &quot;No difference&quot;, &quot;Decreased&quot;),
+                     name = &quot;Differentially\nexpressed\nproteins&quot;) + 
+  geom_vline(xintercept = c(-log2(1.1), log2(1.1)), color = &quot;#CC6677&quot;) +
+  geom_hline(yintercept = -log10(0.05), color = &quot;#CC6677&quot;) +
+  labs(x = &quot;log2(fold change)&quot;, y = &quot;-log10(adjusted p-value)&quot;, title = element_blank()) +
+  coord_cartesian(xlim = c(-0.25, 1.25), ylim = c(0, 35)) +
+  theme_bw() +
+  theme(legend.key.size = unit(0.2, &quot;cm&quot;), legend.spacing.y = unit(0.1, &quot;cm&quot;), legend.box.spacing = unit(0.1, &quot;cm&quot;), legend.position = &quot;none&quot;, legend.justification = &quot;left&quot;, panel.grid = element_blank()) + 
+  # guides(color = guide_legend(nrow = 3, byrow = TRUE)) +
+  textsize_small
+figS4_panelB</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS4_panelB-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-c" class="section level4">
+<h4>Panel C</h4>
+<pre class="r"><code># Select data
+figS4C_data &lt;- figS4_DESeq_dataset %&gt;%
+  subset(comparison == &quot;Effect DMSO on activation&quot;)
+
+# Figure
+figS4_panelC &lt;- ggplot(data = figS4C_data,
+                      aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
+  geom_point(size = 0.5) +
+  geom_text_repel(size = 2,
+                  segment.size = 0.2,
+                  hjust = 0,
+                  direction = &quot;y&quot;,
+                  nudge_y = -log10(0.005),
+                  nudge_x = ifelse(figS4C_data$log2FoldChange &lt; 0, -0.4 - figS4C_data$log2FoldChange, 0.4 - figS4C_data$log2FoldChange)
+  ) +
+  facet_wrap(~comparison, nrow = 1) +
+  scale_color_manual(values = c(UP = &quot;#A50026&quot;, NO = &quot;black&quot;, DOWN = &quot;#364B9A&quot;),
+                     breaks = c(&quot;UP&quot;, &quot;NO&quot;, &quot;DOWN&quot;),
+                     labels = c(&quot;Increased&quot;, &quot;No difference&quot;, &quot;Decreased&quot;),
+                     name = &quot;Differentially\nexpressed\nproteins&quot;) + 
+  geom_vline(xintercept = c(-log2(1.1), log2(1.1)), color = &quot;#CC6677&quot;) +
+  geom_hline(yintercept = -log10(0.05), color = &quot;#CC6677&quot;) +
+  labs(x = &quot;log2(fold change)&quot;, y = &quot;-log10(adjusted p-value)&quot;, title = element_blank()) +
+  coord_cartesian(xlim = c(-0.25, 1.25), ylim = c(0, 35)) +
+  theme_bw() +
+  theme(legend.key.size = unit(0.2, &quot;cm&quot;), legend.spacing.y = unit(0.1, &quot;cm&quot;), legend.box.spacing = unit(0.1, &quot;cm&quot;), legend.position = &quot;none&quot;, legend.justification = &quot;left&quot;, panel.grid = element_blank()) +
+  # guides(color = guide_legend(nrow = 3, byrow = TRUE)) +
+  textsize_small
+figS4_panelC</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS4_panelC-1.png" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combined-fig-3" class="section level3">
+<h3>Combined fig</h3>
+<pre class="r"><code># Combine all panels of the figure
+figS4 &lt;- plot_grid(figS4_panelA, figS4_panelB, figS4_panelC, labels = PANEL_labels[c(1, 2, 3)], nrow = 1, rel_widths = c(1, 1, 1), label_size = 10, align = &quot;h&quot;)
+figS4</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS4_combi-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Save figure as pdf, jpg
+ggsave(
+  figS4,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS4.pdf&quot;,
+  width = 6,
+  height = 3,
+  units = &quot;in&quot;,
+  dpi = 300
+  )
+ggsave(
+  figS4,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS4.jpg&quot;,
+  width = 6,
+  height = 3,
+  units = &quot;in&quot;,
+  dpi = 300
+  )</code></pre>
+<p><em>DMSO has no effect on signaling activation.</em></p>
+<pre class="r"><code># Remove unnecessary files to clear up memory
+rm(list = ls(pattern = &quot;figS4&quot;))
+rm(list = ls(pattern = &quot;png&quot;))
+rm(list = ls(pattern = &quot;results_&quot;))
+rm(list = ls(pattern = &quot;volc_&quot;))
+rm(list = ls(pattern = &quot;list_&quot;))
+rm(list = ls(pattern = &quot;names_&quot;))
+rm(list = ls(pattern = &quot;titles_&quot;))
+rm(list = ls(pattern = &quot;data_&quot;))
+rm(list = ls(pattern = &quot;heat_&quot;))
+rm(list = ls(pattern = &quot;rld&quot;))
+rm(list = ls(pattern = &quot;pca&quot;))
+gc()</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb)  max used   (Mb)
+Ncells 11018098 588.5   17064672 911.4  17064672  911.4
+Vcells 19337359 147.6  121266207 925.2 189478447 1445.7</code></pre>
+</div>
+</div>
+<div id="suppl.-figure-s5" class="section level2">
+<h2>Suppl. Figure S5</h2>
+<p><em>Network-wide inhibition effect of 100 uM iSYK or 100 uM iNFkB
+versus DMSO control in activated cells.</em></p>
+<p>Input: - Cytoscape network figures</p>
+<div id="panels-4" class="section level3 tabset">
+<h3 class="tabset">Panels</h3>
+<div id="panel-a-4" class="section level4">
+<h4>Panel A</h4>
+<pre class="r"><code># Placeholder
+figS5_panelA &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS5_panelA
+
+# HBL1: Active
+figS5_panelA &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_prot_HBL1_iSYK100uMvsDMSO.png&quot;) %&gt;%
+  magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
+  magick::image_ggplot(interpolate = TRUE) +
+  ggtitle(&quot;    ABC subtype: 100 uM iSYK in activated cells&quot;) +
+  # theme(axis.title = element_text(colour = &quot;white&quot;), axis.text = element_blank()) +
+  textsize_small
+figS5_panelA</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS5_panelA-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># legend
+figS5_network_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/legend_network_projections.png&quot;) %&gt;%
+# figS5_network_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/legend_network_projections_vert.png&quot;) %&gt;%
+  # magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
+  magick::image_ggplot(interpolate = TRUE) +
+  # ggtitle(&quot;\n&quot;) +
+  textsize_small
+# figS5_network_legend</code></pre>
+</div>
+<div id="panel-b-3" class="section level4">
+<h4>Panel B</h4>
+<pre class="r"><code># Placeholder
+figS5_panelB &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS5_panelB
+
+# HBL1: 100 uM iBTK
+figS5_panelB &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_prot_HBL1_iNFkB100uMvsDMSO.png&quot;) %&gt;%
+  magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
+  magick::image_ggplot(interpolate = TRUE) +
+  ggtitle(&quot;    ABC subtype: 100 uM iNFkB in activated cells&quot;) +
+  # theme(axis.title = element_text(colour = &quot;white&quot;), axis.text = element_blank()) +
+  textsize_small
+figS5_panelB</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS5_panelB-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-c-1" class="section level4">
+<h4>Panel C</h4>
+<pre class="r"><code># Placeholder
+figS5_panelC &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS5_panelC
+
+# OCI: Active
+figS5_panelC &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_prot_OCI_iSYK100uMvsDMSO.png&quot;) %&gt;%
+  magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
+  magick::image_ggplot(interpolate = TRUE) +
+  ggtitle(&quot;    GCB subtype: 100 uM iSYK in activated cells&quot;) +
+  # theme(axis.title = element_text(colour = &quot;white&quot;), axis.text = element_blank()) +
+  textsize_small
+figS5_panelC</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS5_panelC-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-d" class="section level4">
+<h4>Panel D</h4>
+<pre class="r"><code># Placeholder
+figS5_panelD &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS5_panelD
+
+# OCI: 100 uM iBTK
+figS5_panelD &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_prot_OCI_iNFkB100uMvsDMSO.png&quot;) %&gt;%
+  magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
+  magick::image_ggplot(interpolate = TRUE) +
+  ggtitle(&quot;    GCB subtype: 100 uM iNFkB in activated cells&quot;) +
+  # theme(axis.title = element_text(colour = &quot;white&quot;), axis.text = element_blank()) +
+  textsize_small
+figS5_panelD</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS5_panelD-1.png" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combined-fig-4" class="section level3">
+<h3>Combined fig</h3>
+<pre class="r"><code># Combine all panels of the figure
+figS5_networks &lt;- plot_grid(figS5_panelA, figS5_panelB, figS5_panelC, figS5_panelD, labels = PANEL_labels[c(1:4)], ncol = 2, rel_widths = c(1, 1), rel_heights = c(1, 1), label_size = 10)
+figS5 &lt;- plot_grid(figS5_networks, figS5_network_legend, ncol = 1, rel_heights = c(10, 1))
+figS5</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS5_combi-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Save figure as pdf, jpg
+ggsave(
+  figS5,
+  filename = &quot;output/figures/DLBCL_proteins/main_figS5.pdf&quot;,
+  width = 6,
+  height = 6.5,
+  units = &quot;in&quot;,
+  dpi = 300
+  )
+ggsave(
+  figS5,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS5.jpg&quot;,
+  width = 6,
+  height = 6.5,
+  units = &quot;in&quot;,
+  dpi = 300
+  )</code></pre>
+<p><em>Network-wide inhibition effect of 100 uM iSYK or 100 uM iNFkB
+versus DMSO control in activated cells.</em></p>
+<pre class="r"><code># Remove unnecessary files to clear up memory
+rm(list = ls(pattern = &quot;figS5&quot;))
+rm(list = ls(pattern = &quot;png&quot;))
+rm(list = ls(pattern = &quot;results_&quot;))
+rm(list = ls(pattern = &quot;volc_&quot;))
+rm(list = ls(pattern = &quot;list_&quot;))
+rm(list = ls(pattern = &quot;names_&quot;))
+rm(list = ls(pattern = &quot;titles_&quot;))
+rm(list = ls(pattern = &quot;data_&quot;))
+rm(list = ls(pattern = &quot;heat_&quot;))
+rm(list = ls(pattern = &quot;rld&quot;))
+rm(list = ls(pattern = &quot;pca&quot;))
+gc()</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb)  max used   (Mb)
+Ncells 11030504 589.1   17064672 911.4  17064672  911.4
+Vcells 23247301 177.4   97012966 740.2 189478447 1445.7</code></pre>
+</div>
+</div>
+<div id="suppl.-figure-s6" class="section level2">
+<h2>Suppl. Figure S6</h2>
+<p><em>Effect of 100 uM inhibitor treatment on basal signaling
+levels.</em></p>
+<p>Input:</p>
+<ul>
+<li><p>DS108 ID-seq data</p>
+<ul>
+<li><p>Count data</p></li>
+<li><p>DESeq2 analysis</p></li>
+</ul></li>
+</ul>
+<div id="data-3" class="section level3">
+<h3>Data</h3>
+<pre class="r"><code># ID-seq data DS108 (counts per well/sample and mean per condition)
+figS6_data_id &lt;- read_csv(&quot;output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv&quot;) %&gt;%
+  subset(inhibitor != &quot;iPI3Kd&quot; &amp; target_nospace != &quot;BIM&quot; &amp; target_nospace != &quot;Histone_H2AX_S139&quot;) %&gt;%
+  mutate(stim_clean = case_when(stimulus == &quot;PBS&quot; ~ &quot;Basal&quot;, 
+                                stimulus == &quot;aIg+H2O2&quot; ~ &quot;Activated&quot;),
+         inhib_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                               inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                                    inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, &quot;\n&quot;, inhib_text_new), 
+         cell_clean = case_when(cell_line == &quot;HBL1&quot; ~ &quot;ABC subtype&quot;, 
+                                cell_line == &quot;OCI-Ly8&quot; ~ &quot;GCB subtype&quot;), 
+         cell_stim = paste0(stim_clean, &quot;\n&quot;, cell_clean)) #%&gt;%
+  # subset(inhib_new == &quot;PBS ctrl&quot;)
+figS6_mean_id &lt;- read_csv(&quot;output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_condition.csv&quot;) %&gt;%
+  subset(inhibitor != &quot;iPI3Kd&quot; &amp; target_nospace != &quot;BIM&quot; &amp; target_nospace != &quot;Histone_H2AX_S139&quot;) %&gt;%
+  mutate(stim_clean = case_when(stimulus == &quot;PBS&quot; ~ &quot;Basal&quot;, 
+                                stimulus == &quot;aIg+H2O2&quot; ~ &quot;Activated&quot;),
+         inhib_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                               inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == &quot;0 uM (DMSO)&quot; ~ &quot;DMSO ctrl&quot;, 
+                                    inhib_conc == &quot;0 uM (PBS)&quot; ~ &quot;PBS ctrl&quot;, 
+                                    .default = inhib_conc_text), 
+         stim_inhib = paste0(stim_clean, &quot;\n&quot;, inhib_text_new), 
+         cell_clean = case_when(cell_line == &quot;HBL1&quot; ~ &quot;ABC subtype&quot;, 
+                                cell_line == &quot;OCI-Ly8&quot; ~ &quot;GCB subtype&quot;), 
+         cell_stim = paste0(stim_clean, &quot;\n&quot;, cell_clean)) #%&gt;%
+  # subset(inhib_new == &quot;PBS ctrl&quot;)</code></pre>
+<pre class="r"><code>figS6_cells &lt;- c(&quot;HBL1&quot;, &quot;OCI-Ly8&quot;)
+figS6_cells_clean &lt;- c(&quot;ABC subtype&quot;, &quot;GCB subtype&quot;)
+figS6_stim &lt;- c(&quot;PBS&quot;, &quot;aIg+H2O2&quot;)
+figS6_stim_clean &lt;- c(&quot;Basal&quot;, &quot;Activated&quot;)
+
+figS6_inhib &lt;- c(&quot;iBTK&quot;, &quot;iSYK&quot;, &quot;iNFkB&quot;)
+# figS6_conc &lt;- c(&quot;0 uM (DMSO)&quot;, &quot;100 uM&quot;)
+# figS6_conc_label &lt;- c(&quot;DMSO ctrl&quot;, &quot;100 uM&quot;)
+figS6_conc_all &lt;- c(&quot;0 uM (DMSO)&quot;, &quot;0.1 uM&quot;, &quot;1 uM&quot;, &quot;10 uM&quot;, &quot;100 uM&quot;)
+figS6_conc_all_label &lt;- c(&quot;0 uM&quot;, &quot;0.1 uM&quot;, &quot;1 uM&quot;, &quot;10 uM&quot;, &quot;100 uM&quot;)
+figS6_conc_all_label_alt &lt;- c(&quot;0&quot;, &quot;0.1&quot;, &quot;1&quot;, &quot;10&quot;, &quot;100&quot;)
+
+figS6_meta_cols &lt;- c(&quot;plate_well&quot;, &quot;plate&quot;, &quot;well&quot;, &quot;experiment&quot;, &quot;cell_line&quot;, &quot;cell_clean&quot;, &quot;stimulus&quot;, &quot;stim_clean&quot;, &quot;cell_stim&quot;, &quot;inhibitor&quot;, &quot;inhib_conc_uM&quot;, &quot;inhib_conc&quot;, &quot;inhib_conc_text&quot;, &quot;inhib_text_new&quot;, &quot;inhib_new&quot;, &quot;stim_inhib&quot;, &quot;replicate&quot;, &quot;description&quot;, &quot;descript_rep&quot;)</code></pre>
+</div>
+<div id="panels-5" class="section level3 tabset">
+<h3 class="tabset">Panels</h3>
+<div id="panel-a-5" class="section level4">
+<h4>Panel A</h4>
+<p>Differential expression analysis of the effect of 100 uM inhibitor on
+basal signaling in HBL1 (inhib vs DMSO ctrl)</p>
+<p>DESeq2 analysis parameters:</p>
+<ul>
+<li><p>HBL1: 3 inhibitors, 5 conc, PBS stimulation</p></li>
+<li><p>Compensated counts (&gt;= 1)</p></li>
+<li><p>Model design: inhib_text_new (ref: DMSO ctrl)</p></li>
+</ul>
+<pre class="r"><code># Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts &lt;- figS6_data_id  %&gt;%
+  dplyr::filter(cell_line == &quot;HBL1&quot; &amp; stimulus == &quot;PBS&quot; &amp; inhib_conc %in% figS6_conc_all &amp; counts &gt;= 1) %&gt;%
+  dplyr::select(target_nospace, plate_well, counts) %&gt;%
+  dplyr::filter(!is.na(counts)) %&gt;%
+  spread(plate_well, counts) %&gt;%
+  replace(is.na(.), 0) %&gt;%
+  column_to_rownames(&quot;target_nospace&quot;)
+
+cts &lt;- as.matrix(as.data.frame(cts))
+
+coldata &lt;- data.frame(plate_well = colnames(cts)) %&gt;%
+  left_join(distinct(dplyr::select(figS6_data_id, all_of(figS6_meta_cols)))) %&gt;%
+  distinct()
+
+rownames(coldata) &lt;- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign &lt;- ~ inhib_text_new
+
+# Then create the DESeq dataset
+dds &lt;- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$inhib_text_new &lt;- relevel(dds$inhib_text_new, ref = &quot;DMSO ctrl&quot;)
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds &lt;- DESeq(dds, test = &quot;Wald&quot;, fitType = &quot;local&quot;)
+DESeq_comparisons &lt;- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+# results_HBL1_stim &lt;- results(dds, name = &quot;stim_clean_Activated_vs_Basal&quot;, alpha = 0.05)
+results_HBL1_iBTK100 &lt;- results(dds, name = &quot;inhib_text_new_100.uM.iBTK_vs_DMSO.ctrl&quot;, alpha = 0.05)
+results_HBL1_iSYK100 &lt;- results(dds, name = &quot;inhib_text_new_100.uM.iSYK_vs_DMSO.ctrl&quot;, alpha = 0.05)
+results_HBL1_iNFkB100 &lt;- results(dds, name = &quot;inhib_text_new_100.uM.iNFkB_vs_DMSO.ctrl&quot;, alpha = 0.05)
+
+list_results &lt;- list(results_HBL1_iBTK100, results_HBL1_iSYK100, results_HBL1_iNFkB100)
+
+# Data transformation
+# Regularized log transform
+rld_HBL1 &lt;- rlog(dds, blind = FALSE)
+
+# Data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano &lt;- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins &lt;- rownames(dataset)
+  dataset$target_nospace &lt;- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express &lt;- &quot;NO&quot;
+  dataset$diff_express[dataset$log2FoldChange &gt; foldchange_filter &amp; dataset$padj &lt; padj_filter] &lt;- &quot;UP&quot;
+  dataset$diff_express[dataset$log2FoldChange &lt; -foldchange_filter &amp; dataset$padj &lt; padj_filter] &lt;- &quot;DOWN&quot;
+  
+  # Add a column for labeling
+  dataset$delabel &lt;- NA
+  dataset$delabel[dataset$diff_express != &quot;NO&quot;] &lt;- dataset$proteins[dataset$diff_express != &quot;NO&quot;]
+  
+  # Add Ab metadata
+  # dataset &lt;- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(dataset)
+}
+
+# Apply function to each dataset
+# Applied thresholds:
+# padj &lt; 0.05
+# log2FC &gt; log2(1.05)
+names_volc &lt;- c(&quot;volc_HBL1_iBTK100&quot;, &quot;volc_HBL1_iSYK100&quot;, &quot;volc_HBL1_iNFkB100&quot;)
+for(dataset in c(1:length(list_results))){
+  assign(names_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.1)))
+}
+
+# Function to filter the data
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+filter_heatmap &lt;- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5), select_top = TRUE, select_n = 10) {
+  data &lt;- as.data.frame(dataset) %&gt;%
+    dplyr::filter(padj &lt;= padj_filter &amp; abs(log2FoldChange) &gt;= foldchange_filter) %&gt;%
+    arrange(-log2FoldChange) 
+  rownames(data) &lt;- data$target_nospace
+  
+  # Select top 10 proteins with most increased and decreased expression
+  if (select_top == TRUE) {
+    data_top &lt;- data %&gt;%
+      slice_max(order_by = abs(log2FoldChange), n = select_n)
+    return(data_top)
+  } else {
+    return(data)
+  }
+}
+
+# Apply function to each dataset
+list_results_volc &lt;- list(volc_HBL1_iBTK100, volc_HBL1_iSYK100, volc_HBL1_iNFkB100)
+names_heat &lt;- c(&quot;heat_HBL1_iBTK100&quot;, &quot;heat_HBL1_iSYK100&quot;, &quot;heat_HBL1_iNFkB100&quot;)
+for(dataset in c(1:length(list_results_volc))){
+  assign(names_heat[[dataset]], filter_heatmap(dataset = list_results_volc[[dataset]], select_top = FALSE, foldchange_filter = log2(1.1)))
+  dataset
+}</code></pre>
+<pre class="r"><code># Data
+# Combine heatmap datasets (without DESeq2 analysis values)
+heat_inhib_HBL1 &lt;- list(heat_HBL1_iBTK100, heat_HBL1_iSYK100, heat_HBL1_iNFkB100) %&gt;%
+  purrr::reduce(full_join) %&gt;%
+  dplyr::select(-c(baseMean, log2FoldChange, lfcSE, stat, pvalue, padj, diff_express)) %&gt;%
+  left_join(figS6_data_id[, 14:21]) %&gt;%
+  dplyr::filter(modification == &quot;phospho&quot;) %&gt;%
+  distinct()
+
+# Subset the full dataframe to get metadata for heatmap plotting
+figS6A_info_HBL1 &lt;- figS6_data_id %&gt;%
+  dplyr::select(plate_well, stim_clean, inhib_conc, inhibitor, cell_line) %&gt;%
+  distinct() %&gt;%
+  dplyr::filter(cell_line == &quot;HBL1&quot; &amp; inhib_conc %in% figS6_conc_all &amp; stim_clean == &quot;Basal&quot;) %&gt;%
+  mutate(inhibitor = factor(inhibitor, levels = figS6_inhib)) %&gt;%
+  as.data.frame()
+rownames(figS6A_info_HBL1) &lt;- figS6A_info_HBL1$plate_well
+figS6A_info_HBL1 &lt;- dplyr::select(figS6A_info_HBL1, -c(plate_well, cell_line, stim_clean))
+
+# Get the rld transformed data for the heatmap and scale per row
+figS6A_data_heat_HBL1 &lt;- t(scale(t(assay(rld_HBL1)[c(heat_inhib_HBL1$target_nospace), rownames(figS6A_info_HBL1)])))
+# sort_hclust &lt;- function(...) as.hclust(dendsort(as.dendrogram(...)))
+# data_cluster_rows &lt;- sort_hclust(hclust(dist(data_cell)))
+# plot(data_cluster_rows, main = &quot;Unsorted Dendrogram&quot;, xlab = &quot;&quot;, sub = &quot;&quot;)
+
+# Figure
+figS6A_ann_colors &lt;- list(Inhibitor = colors_inhib,
+                         &quot;Inhibitor conc&quot; = setNames(colors_conc, unique(figS6A_info_HBL1$inhib_conc)))
+figS6A_heat_legend &lt;- list(title = &quot;Scaled\nexpression&quot;, title_gp = gpar(fontsize = 7), labels_gp = gpar(fontsize = 7), 
+                          grid_width = unit(2, &quot;mm&quot;), grid_height = unit(20, &quot;mm&quot;))
+
+figS6A_col_ann &lt;- HeatmapAnnotation(Inhibitor = figS6A_info_HBL1$inhibitor, 
+                                   &quot;Inhibitor conc&quot; = figS6A_info_HBL1$inhib_conc, 
+                                   simple_anno_size = unit(2.5, &quot;mm&quot;), 
+                                   annotation_name_gp = gpar(fontsize = 7),
+                                   col = figS6A_ann_colors, 
+                                   annotation_legend_param = list(Inhibitor = list(title = &quot;Inhibitor&quot;, 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, &quot;mm&quot;), 
+                                                                                   grid_height = unit(1, &quot;mm&quot;)), 
+                                                                  &quot;Inhibitor conc&quot; = list(title = &quot;Inhibitor\nconcentration&quot;, 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, &quot;mm&quot;), 
+                                                                                   grid_height = unit(1, &quot;mm&quot;))), 
+                                   show_legend = c(TRUE, TRUE))
+
+figS6_panelA &lt;- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
+  figS6A_data_heat_HBL1,
+  scale = &quot;none&quot;,
+  cluster_rows = TRUE,
+  # treeheight_row = 20,
+  show_rownames = TRUE,
+  show_colnames = FALSE,
+  cluster_cols = FALSE,
+  # annotation_col = figS6A_info_Ly8,
+  top_annotation = figS6A_col_ann,
+  # annotation_colors = figS6A_ann_colors,
+  colorRampPalette(c(&quot;navy&quot;, &quot;white&quot;, &quot;firebrick3&quot;))(50),
+  column_split = figS6A_info_HBL1$inhibitor,
+  row_split = subset(heat_inhib_HBL1)$modification,
+  row_gap = unit(1, &quot;mm&quot;), 
+  # cellwidth = 10,
+  # cellheight = 10,
+  fontsize = 5.75,
+  row_title_gp = gpar(fontsize = 7),
+  column_title_gp = gpar(fontsize = 7), 
+  annotation_names_col = gpar(fontsize = 7),
+  border_color = NA,
+  heatmap_legend_param = figS6A_heat_legend, 
+  # annotation_legend = FALSE,
+)) +
+  ggtitle(&quot;          ABC subtype: Effect of inhibitor treatment on basal signaling&quot;) +
+  textsize_small + 
+  theme(plot.title = element_text(size = 8.5))
+figS6_panelA</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS6_panelA-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-b-4" class="section level4">
+<h4>Panel B</h4>
+<p>Differential expression analysis of the effect of 100 uM inhibitor on
+basal signaling in OCI-Ly8 (inhib vs DMSO ctrl)</p>
+<p>DESeq2 analysis parameters:</p>
+<ul>
+<li><p>OCI-Ly8: 3 inhibitors, 5 conc, PBS stimulation</p></li>
+<li><p>Compensated counts (&gt;= 1)</p></li>
+<li><p>Model design: inhib_text_new (ref: DMSO ctrl)</p></li>
+</ul>
+<pre class="r"><code># Differential expression analysis
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts &lt;- figS6_data_id  %&gt;%
+  dplyr::filter(cell_line == &quot;OCI-Ly8&quot; &amp; stimulus == &quot;PBS&quot; &amp; inhib_conc %in% figS6_conc_all &amp; counts &gt;= 1) %&gt;%
+  dplyr::select(target_nospace, plate_well, counts) %&gt;%
+  dplyr::filter(!is.na(counts)) %&gt;%
+  spread(plate_well, counts) %&gt;%
+  replace(is.na(.), 0) %&gt;%
+  column_to_rownames(&quot;target_nospace&quot;)
+
+cts &lt;- as.matrix(as.data.frame(cts))
+
+coldata &lt;- data.frame(plate_well = colnames(cts)) %&gt;%
+  left_join(distinct(dplyr::select(figS6_data_id, all_of(figS6_meta_cols)))) %&gt;%
+  distinct()
+
+rownames(coldata) &lt;- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+modeldesign &lt;- ~ inhib_text_new
+
+# Then create the DESeq dataset
+dds &lt;- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+dds$inhib_text_new &lt;- relevel(dds$inhib_text_new, ref = &quot;DMSO ctrl&quot;)
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+dds &lt;- DESeq(dds, test = &quot;Wald&quot;, fitType = &quot;local&quot;)
+DESeq_comparisons &lt;- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+
+# Results
+# results_OCI_stim &lt;- results(dds, name = &quot;stim_clean_Activated_vs_Basal&quot;, alpha = 0.05)
+results_OCI_iBTK100 &lt;- results(dds, name = &quot;inhib_text_new_100.uM.iBTK_vs_DMSO.ctrl&quot;, alpha = 0.05)
+results_OCI_iSYK100 &lt;- results(dds, name = &quot;inhib_text_new_100.uM.iSYK_vs_DMSO.ctrl&quot;, alpha = 0.05)
+results_OCI_iNFkB100 &lt;- results(dds, name = &quot;inhib_text_new_100.uM.iNFkB_vs_DMSO.ctrl&quot;, alpha = 0.05)
+
+list_results &lt;- list(results_OCI_iBTK100, results_OCI_iSYK100, results_OCI_iNFkB100)
+
+# Data transformation
+# Regularized log transform
+rld_OCI &lt;- rlog(dds, blind = FALSE)
+
+# Data wrangling
+# Function to prepare DESeq2 results for volcano plots
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+prep_forvulcano &lt;- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5)){ 
+  dataset$proteins &lt;- rownames(dataset)
+  dataset$target_nospace &lt;- rownames(dataset)
+  
+  # Add a column for differential expression
+  dataset$diff_express &lt;- &quot;NO&quot;
+  dataset$diff_express[dataset$log2FoldChange &gt; foldchange_filter &amp; dataset$padj &lt; padj_filter] &lt;- &quot;UP&quot;
+  dataset$diff_express[dataset$log2FoldChange &lt; -foldchange_filter &amp; dataset$padj &lt; padj_filter] &lt;- &quot;DOWN&quot;
+  
+  # Add a column for labeling
+  dataset$delabel &lt;- NA
+  dataset$delabel[dataset$diff_express != &quot;NO&quot;] &lt;- dataset$proteins[dataset$diff_express != &quot;NO&quot;]
+  
+  # Add Ab metadata
+  # dataset &lt;- left_join(as.data.frame(dataset), meta_Abs)
+  
+  return(dataset)
+}
+
+# Apply function to each dataset
+# Applied thresholds:
+# padj &lt; 0.05
+# log2FC &gt; log2(1.05)
+names_volc &lt;- c(&quot;volc_OCI_iBTK100&quot;, &quot;volc_OCI_iSYK100&quot;, &quot;volc_OCI_iNFkB100&quot;)
+for(dataset in c(1:length(list_results))){
+  assign(names_volc[dataset], prep_forvulcano(dataset = list_results[[dataset]], foldchange_filter = log2(1.1)))
+}
+
+# Function to filter the data
+# Standard log2FC filter = log2(1.5); standard padj filter = 0.05
+filter_heatmap &lt;- function(dataset = dataset, padj_filter = 0.05, foldchange_filter = log2(1.5), select_top = TRUE, select_n = 10) {
+  data &lt;- as.data.frame(dataset) %&gt;%
+    dplyr::filter(padj &lt;= padj_filter &amp; abs(log2FoldChange) &gt;= foldchange_filter) %&gt;%
+    arrange(-log2FoldChange) 
+  rownames(data) &lt;- data$target_nospace
+  
+  # Select top 10 proteins with most increased and decreased expression
+  if (select_top == TRUE) {
+    data_top &lt;- data %&gt;%
+      slice_max(order_by = abs(log2FoldChange), n = select_n)
+    return(data_top)
+  } else {
+    return(data)
+  }
+}
+
+# Apply function to each dataset
+list_results_volc &lt;- list(volc_OCI_iBTK100, volc_OCI_iSYK100, volc_OCI_iNFkB100)
+names_heat &lt;- c(&quot;heat_OCI_iBTK100&quot;, &quot;heat_OCI_iSYK100&quot;, &quot;heat_OCI_iNFkB100&quot;)
+for(dataset in c(1:length(list_results_volc))){
+  assign(names_heat[[dataset]], filter_heatmap(dataset = list_results_volc[[dataset]], select_top = FALSE, foldchange_filter = log2(1.1)))
+  dataset
+}</code></pre>
+<pre class="r"><code># Data
+# Combine heatmap datasets (without DESeq2 analysis values)
+heat_inhib_OCI &lt;- list(heat_OCI_iBTK100, heat_OCI_iSYK100, heat_OCI_iNFkB100) %&gt;%
+  purrr::reduce(full_join) %&gt;%
+  dplyr::select(-c(baseMean, log2FoldChange, lfcSE, stat, pvalue, padj, diff_express)) %&gt;%
+  left_join(figS6_data_id[, 14:21]) %&gt;%
+  dplyr::filter(modification == &quot;phospho&quot;) %&gt;%
+  distinct()
+
+# Subset the full dataframe to get metadata for heatmap plotting
+figS6B_info_OCI &lt;- figS6_data_id %&gt;%
+  dplyr::select(plate_well, stim_clean, inhib_conc, inhibitor, cell_line) %&gt;%
+  distinct() %&gt;%
+  dplyr::filter(cell_line == &quot;OCI-Ly8&quot; &amp; inhib_conc %in% figS6_conc_all &amp; stim_clean == &quot;Basal&quot;) %&gt;%
+  mutate(inhibitor = factor(inhibitor, levels = figS6_inhib)) %&gt;%
+  as.data.frame()
+rownames(figS6B_info_OCI) &lt;- figS6B_info_OCI$plate_well
+figS6B_info_OCI &lt;- dplyr::select(figS6B_info_OCI, -c(plate_well, cell_line, stim_clean))
+
+# Get the rld transformed data for the heatmap and scale per row
+figS6B_data_heat_OCI &lt;- t(scale(t(assay(rld_OCI)[c(heat_inhib_OCI$target_nospace), rownames(figS6B_info_OCI)])))
+# sort_hclust &lt;- function(...) as.hclust(dendsort(as.dendrogram(...)))
+# data_cluster_rows &lt;- sort_hclust(hclust(dist(data_cell)))
+# plot(data_cluster_rows, main = &quot;Unsorted Dendrogram&quot;, xlab = &quot;&quot;, sub = &quot;&quot;)
+
+# Figure
+figS6B_ann_colors &lt;- list(Inhibitor = colors_inhib,
+                         &quot;Inhibitor conc&quot; = setNames(colors_conc, unique(figS6B_info_OCI$inhib_conc)))
+figS6B_heat_legend &lt;- list(title = &quot;Scaled\nexpression&quot;, title_gp = gpar(fontsize = 7), labels_gp = gpar(fontsize = 7), 
+                          grid_width = unit(2, &quot;mm&quot;), grid_height = unit(20, &quot;mm&quot;))
+
+figS6B_col_ann &lt;- HeatmapAnnotation(Inhibitor = figS6B_info_OCI$inhibitor, 
+                                   &quot;Inhibitor conc&quot; = figS6B_info_OCI$inhib_conc, 
+                                   simple_anno_size = unit(2.5, &quot;mm&quot;), 
+                                   annotation_name_gp = gpar(fontsize = 7),
+                                   col = figS6B_ann_colors, 
+                                   annotation_legend_param = list(Inhibitor = list(title = &quot;Inhibitor&quot;, 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, &quot;mm&quot;), 
+                                                                                   grid_height = unit(1, &quot;mm&quot;)), 
+                                                                  &quot;Inhibitor conc&quot; = list(title = &quot;Inhibitor\nconcentration&quot;, 
+                                                                                   title_gp = gpar(fontsize = 7), 
+                                                                                   labels_gp = gpar(fontsize = 7), 
+                                                                                   grid_width = unit(2, &quot;mm&quot;), 
+                                                                                   grid_height = unit(1, &quot;mm&quot;))), 
+                                   show_legend = c(TRUE, TRUE))
+
+figS6_panelB &lt;- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
+  figS6B_data_heat_OCI,
+  scale = &quot;none&quot;,
+  cluster_rows = TRUE,
+  # treeheight_row = 20,
+  show_rownames = TRUE,
+  show_colnames = FALSE,
+  cluster_cols = FALSE,
+  # annotation_col = figS6B_info_Ly8,
+  top_annotation = figS6B_col_ann,
+  # annotation_colors = figS6B_ann_colors,
+  colorRampPalette(c(&quot;navy&quot;, &quot;white&quot;, &quot;firebrick3&quot;))(50),
+  column_split = figS6B_info_OCI$inhibitor,
+  row_split = subset(heat_inhib_OCI)$modification,
+  row_gap = unit(1, &quot;mm&quot;), 
+  # cellwidth = 10,
+  # cellheight = 10,
+  fontsize = 5.75,
+  row_title_gp = gpar(fontsize = 7),
+  column_title_gp = gpar(fontsize = 7), 
+  annotation_names_col = gpar(fontsize = 7),
+  border_color = NA,
+  heatmap_legend_param = figS6B_heat_legend, 
+  # annotation_legend = FALSE,
+)) +
+  ggtitle(&quot;          GCB subtype: Effect of inhibitor treatment on basal signaling&quot;) +
+  textsize_small + 
+  theme(plot.title = element_text(size = 8.5))
+figS6_panelB</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS6_panelB-1.png" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combined-fig-5" class="section level3">
+<h3>Combined fig</h3>
+<pre class="r"><code># Combine all panels of the figure
+figS6 &lt;- plot_grid(figS6_panelA, figS6_panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10)
+figS6</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS6_combi-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Save figure as pdf, jpg
+ggsave(
+  figS6,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS6.pdf&quot;,
+  width = 6,
+  height = 4.75,
+  units = &quot;in&quot;,
+  dpi = 300
+  )
+ggsave(
+  figS6,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS6.jpg&quot;,
+  width = 6,
+  height = 4.75,
+  units = &quot;in&quot;,
+  dpi = 300
+  )</code></pre>
+<p><em>Effect of 100 uM inhibitor treatment on basal signaling
+levels.</em></p>
+<pre class="r"><code># Remove unnecessary files to clear up memory
+rm(list = ls(pattern = &quot;figS6&quot;))
+rm(list = ls(pattern = &quot;png&quot;))
+rm(list = ls(pattern = &quot;results_&quot;))
+rm(list = ls(pattern = &quot;volc_&quot;))
+rm(list = ls(pattern = &quot;list_&quot;))
+rm(list = ls(pattern = &quot;names_&quot;))
+rm(list = ls(pattern = &quot;titles_&quot;))
+rm(list = ls(pattern = &quot;data_&quot;))
+rm(list = ls(pattern = &quot;heat_&quot;))
+rm(list = ls(pattern = &quot;rld&quot;))
+rm(list = ls(pattern = &quot;pca&quot;))
+gc()</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb)  max used   (Mb)
+Ncells 11231303 599.9   17064672 911.4  17064672  911.4
+Vcells 19794179 151.1   77610373 592.2 189478447 1445.7</code></pre>
+</div>
+</div>
+<div id="suppl.-figure-s7" class="section level2">
+<h2>Suppl. Figure S7</h2>
+<p><em>Flow cytometry gating strategy.</em></p>
+<p>Input: - DS108 phosphoflow data</p>
+<pre><code>-   Gating plots</code></pre>
+<div id="panels-6" class="section level3 tabset">
+<h3 class="tabset">Panels</h3>
+<div id="panel-a-6" class="section level4">
+<h4>Panel A</h4>
+<pre class="r"><code># Placeholder
+figS7_panelA &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS7_panelA
+
+# PNG
+figS7_panelA &lt;- magick::image_read(&quot;output/figures/gating_figs/fig_debris_DS108.png&quot;) %&gt;%
+  image_ggplot(interpolate = TRUE)
+figS7_panelA</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS7_panelA-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-b-5" class="section level4">
+<h4>Panel B</h4>
+<pre class="r"><code># Placeholder
+figS7_panelB &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS7_panelB
+
+# PNG
+figS7_panelB &lt;- magick::image_read(&quot;output/figures/gating_figs/fig_singlets_DS108.png&quot;) %&gt;%
+  image_ggplot(interpolate = TRUE)
+figS7_panelB</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS7_panelB-1.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="panel-c-2" class="section level4">
+<h4>Panel C</h4>
+<pre class="r"><code># Placeholder
+figS7_panelC &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS7_panelC
+
+# PNG
+figS7_panelC &lt;- magick::image_read(&quot;output/figures/gating_figs/fig_live_DS108.png&quot;) %&gt;%
+  image_ggplot(interpolate = TRUE)
+figS7_panelC</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS7_panelC-1.png" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="combined-fig-6" class="section level3">
+<h3>Combined fig</h3>
+<pre class="r"><code># Combine all panels of the figure
+figS7 &lt;- plot_grid(figS7_panelA, figS7_panelB, figS7_panelC, labels = PANEL_labels[c(1, 2, 3)], ncol = 3, rel_widths = c(1, 1, 1), label_size = 10)
+figS7</code></pre>
+<p><img src="figure/u_proteins_suppl.Rmd/figS7_combi-1.png" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Save figure as pdf, jpg
+ggsave(
+  figS7,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS7.pdf&quot;,
+  width = 6,
+  height = 2,
+  units = &quot;in&quot;,
+  dpi = 300
+  )
+ggsave(
+  figS7,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS7.jpg&quot;,
+  width = 6,
+  height = 2,
+  units = &quot;in&quot;,
+  dpi = 300
+  )</code></pre>
+<p><em>Flow cytometry gating strategy.</em></p>
+<pre class="r"><code># Remove unnecessary files to clear up memory
+rm(list = ls(pattern = &quot;figS7&quot;))
+rm(list = ls(pattern = &quot;png&quot;))
+rm(list = ls(pattern = &quot;results_&quot;))
+rm(list = ls(pattern = &quot;volc_&quot;))
+rm(list = ls(pattern = &quot;list_&quot;))
+rm(list = ls(pattern = &quot;names_&quot;))
+rm(list = ls(pattern = &quot;titles_&quot;))
+rm(list = ls(pattern = &quot;data_&quot;))
+rm(list = ls(pattern = &quot;heat_&quot;))
+rm(list = ls(pattern = &quot;rld&quot;))
+rm(list = ls(pattern = &quot;pca&quot;))
+gc()</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb)  max used   (Mb)
+Ncells 11247843 600.7   17064672 911.4  17064672  911.4
+Vcells 22243317 169.8   77610373 592.2 189478447 1445.7</code></pre>
+</div>
+</div>
+<div id="suppl.-figure-s0" class="section level2">
+<h2>Suppl. Figure S0</h2>
+<p><em>Figure title.</em></p>
+<p>Input: - BioRender schematic figures</p>
+<ul>
+<li><p>… phosphoflow data</p></li>
+<li><p>… ID-seq data</p></li>
+</ul>
+<div id="data-4" class="section level3">
+<h3>Data</h3>
+</div>
+<div id="panels-7" class="section level3 tabset">
+<h3 class="tabset">Panels</h3>
+<div id="panel-a-7" class="section level4">
+<h4>Panel A</h4>
+<pre class="r"><code># Placeholder
+figS0_panelA &lt;- ggplot() +
+  geom_blank() +
+  scale_x_continuous(limits = c(0, 10)) + 
+  scale_y_continuous(limits = c(0, 10)) + 
+  # labs(title = &quot;BCR signaling network&quot;) + 
+  theme_bw() +
+  theme(axis.text = element_text(color = &quot;white&quot;), 
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank()) +
+  textsize_small
+# figS0_panelA
+
+# PNG
+png_figS0 &lt;- image_read(&quot;output/figures/non_R_figs/xxx.png&quot;) %&gt;%
+  image_ggplot()
+# png_figS0</code></pre>
+</div>
+<div id="panel-b-6" class="section level4">
+<h4>Panel B</h4>
+<pre class="r"><code># Select data
+
+# Figure</code></pre>
+</div>
+<div id="panel-c-3" class="section level4">
+<h4>Panel C</h4>
+<pre class="r"><code># Select data
+
+# Figure</code></pre>
+</div>
+</div>
+<div id="combined-fig-7" class="section level3">
+<h3>Combined fig</h3>
+<pre class="r"><code># Combine all panels of the figure
+figS0 &lt;- plot_grid(panelA, panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10)
+figS0
+
+# Save figure as pdf, jpg
+# ggsave(
+#   figS0,
+#   filename = &quot;output/figures/DLBCL_proteins/suppl_figS0.pdf&quot;,
+#   width = 6,
+#   height = 3,
+#   units = &quot;in&quot;,
+#   dpi = 300
+#   )
+ggsave(
+  figS0,
+  filename = &quot;output/figures/DLBCL_proteins/suppl_figS0.jpg&quot;,
+  width = 6,
+  height = 3,
+  units = &quot;in&quot;,
+  dpi = 300
+  )</code></pre>
+<p><em>Figure title.</em></p>
+<pre class="r"><code># Remove unnecessary files to clear up memory
+rm(list = ls(pattern = &quot;figS0&quot;))
+rm(list = ls(pattern = &quot;png&quot;))
+rm(list = ls(pattern = &quot;results_&quot;))
+rm(list = ls(pattern = &quot;volc_&quot;))
+rm(list = ls(pattern = &quot;list_&quot;))
+rm(list = ls(pattern = &quot;names_&quot;))
+rm(list = ls(pattern = &quot;titles_&quot;))
+rm(list = ls(pattern = &quot;data_&quot;))
+rm(list = ls(pattern = &quot;heat_&quot;))
+rm(list = ls(pattern = &quot;rld&quot;))
+rm(list = ls(pattern = &quot;pca&quot;))
+gc()</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.4.1 (2024-06-14 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 10 x64 (build 19045)
+
+Matrix products: default
+
+
+locale:
+[1] LC_COLLATE=English_Netherlands.utf8  LC_CTYPE=English_Netherlands.utf8   
+[3] LC_MONETARY=English_Netherlands.utf8 LC_NUMERIC=C                        
+[5] LC_TIME=English_Netherlands.utf8    
+
+time zone: Europe/Amsterdam
+tzcode source: internal
+
+attached base packages:
+[1] grid      stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] png_0.1-8                   magick_2.8.3               
+ [3] ggridges_0.5.6              forecast_8.23.0            
+ [5] zoo_1.8-12                  ggcyto_1.32.0              
+ [7] flowWorkspace_4.16.0        ncdfFlow_2.50.0            
+ [9] BH_1.84.0-0                 flowCore_2.16.0            
+[11] ashr_2.2-63                 apeglm_1.26.1              
+[13] MASS_7.3-60.2               ggbreak_0.1.2              
+[15] geomtextpath_0.1.4          ggh4x_0.2.8                
+[17] cowplot_1.1.3               patchwork_1.2.0            
+[19] greekLetters_1.0.2          ggpubr_0.6.0               
+[21] ggrepel_0.9.5               scales_1.3.0               
+[23] ggthemes_5.1.0              RColorBrewer_1.1-3         
+[25] scico_1.5.0                 viridis_0.6.5              
+[27] viridisLite_0.4.2           gridExtra_2.3              
+[29] mmtable2_0.1.3              gt_0.10.1                  
+[31] ggvenn_0.1.10               rgl_1.3.1                  
+[33] plotly_4.10.4               ggcorrplot_0.1.4.1         
+[35] corrplot_0.92               umap_0.2.10.0              
+[37] ggplotify_0.1.2             dendsort_0.3.4             
+[39] vsn_3.72.0                  ComplexHeatmap_2.20.0      
+[41] platetools_0.1.7            kableExtra_1.4.0           
+[43] DESeq2_1.44.0               SummarizedExperiment_1.34.0
+[45] Biobase_2.64.0              MatrixGenerics_1.16.0      
+[47] matrixStats_1.3.0           GenomicRanges_1.56.1       
+[49] GenomeInfoDb_1.40.1         IRanges_2.38.0             
+[51] S4Vectors_0.42.0            BiocGenerics_0.50.0        
+[53] Seurat_5.1.0                SeuratObject_5.0.2         
+[55] sp_2.1-4                    rstatix_0.7.2              
+[57] factoextra_1.0.7            FactoMineR_2.11            
+[59] readxl_1.4.3                Matrix_1.7-0               
+[61] lubridate_1.9.3             forcats_1.0.0              
+[63] stringr_1.5.1               dplyr_1.1.4                
+[65] purrr_1.0.2                 readr_2.1.5                
+[67] tidyr_1.3.1                 tibble_3.2.1               
+[69] ggplot2_3.5.1               tidyverse_2.0.0            
+[71] workflowr_1.7.1            
+
+loaded via a namespace (and not attached):
+  [1] vroom_1.6.5             nnet_7.3-19             goftest_1.2-3          
+  [4] DT_0.33                 TH.data_1.1-2           vctrs_0.6.5            
+  [7] spatstat.random_3.2-3   digest_0.6.36           shape_1.4.6.1          
+ [10] git2r_0.33.0            mixsqp_0.3-54           deldir_2.0-4           
+ [13] parallelly_1.37.1       SQUAREM_2021.1          reshape2_1.4.4         
+ [16] httpuv_1.6.15           foreach_1.5.2           withr_3.0.0            
+ [19] xfun_0.45               ggfun_0.1.5             survival_3.6-4         
+ [22] memoise_2.0.1           hexbin_1.28.3           RProtoBufLib_2.16.0    
+ [25] emmeans_1.10.2          systemfonts_1.1.0       ragg_1.3.2             
+ [28] GlobalOptions_0.1.2     quantmod_0.4.26         pbapply_1.7-2          
+ [31] promises_1.3.0          scatterplot3d_0.3-44    httr_1.4.7             
+ [34] globals_0.16.3          fitdistrplus_1.1-11     ps_1.7.6               
+ [37] rstudioapi_0.16.0       UCSC.utils_1.0.0        miniUI_0.1.1.1         
+ [40] generics_0.1.3          base64enc_0.1-3         processx_3.8.4         
+ [43] curl_5.2.1              zlibbioc_1.50.0         polyclip_1.10-6        
+ [46] quadprog_1.5-8          GenomeInfoDbData_1.2.12 SparseArray_1.4.8      
+ [49] xtable_1.8-4            doParallel_1.0.17       evaluate_0.24.0        
+ [52] S4Arrays_1.4.1          preprocessCore_1.66.0   fracdiff_1.5-3         
+ [55] hms_1.1.3               irlba_2.3.5.1           colorspace_2.1-0       
+ [58] urca_1.3-4              ROCR_1.0-11             reticulate_1.38.0      
+ [61] spatstat.data_3.1-2     Rgraphviz_2.48.0        magrittr_2.0.3         
+ [64] lmtest_0.9-40           later_1.3.2             lattice_0.22-6         
+ [67] spatstat.geom_3.2-9     future.apply_1.11.2     getPass_0.2-4          
+ [70] XML_3.99-0.17           scattermore_1.2         xts_0.14.0             
+ [73] RcppAnnoy_0.0.22        pillar_1.9.0            nlme_3.1-164           
+ [76] iterators_1.0.14        compiler_4.4.1          RSpectra_0.16-1        
+ [79] stringi_1.8.4           tensor_1.5              plyr_1.8.9             
+ [82] crayon_1.5.3            abind_1.4-5             truncnorm_1.0-9        
+ [85] gridGraphics_0.5-1      emdbook_1.3.13          locfit_1.5-9.10        
+ [88] bit_4.0.5               sandwich_3.1-0          whisker_0.4.1          
+ [91] codetools_0.2-20        multcomp_1.4-25         textshaping_0.4.0      
+ [94] TTR_0.24.4              openssl_2.2.0           bslib_0.7.0            
+ [97] GetoptLong_1.0.5        mime_0.12               splines_4.4.1          
+[100] circlize_0.4.16         Rcpp_1.0.12             fastDummies_1.7.3      
+[103] tseries_0.10-56         cellranger_1.1.0        Rttf2pt1_1.3.12        
+[106] leaps_3.2               knitr_1.47              utf8_1.2.4             
+[109] clue_0.3-65             fs_1.6.4                listenv_0.9.1          
+[112] ggsignif_0.6.4          estimability_1.5.1      callr_3.7.6            
+[115] statmod_1.5.0           tzdb_0.4.0              svglite_2.1.3          
+[118] pkgconfig_2.0.3         tools_4.4.1             cachem_1.1.0           
+[121] numDeriv_2016.8-1.1     fastmap_1.2.0           rmarkdown_2.27         
+[124] ica_1.0-3               broom_1.0.6             sass_0.4.9             
+[127] coda_0.19-4.1           BiocManager_1.30.23     dotCall64_1.1-1        
+[130] graph_1.82.0            carData_3.0-5           RANN_2.6.1             
+[133] farver_2.1.2            yaml_2.3.8              cli_3.6.3              
+[136] leiden_0.4.3.1          lifecycle_1.0.4         askpass_1.2.0          
+[139] uwot_0.2.2              mvtnorm_1.2-5           backports_1.5.0        
+[142] cytolib_2.16.0          BiocParallel_1.38.0     timechange_0.3.0       
+[145] gtable_0.3.5            rjson_0.2.21            progressr_0.14.0       
+[148] parallel_4.4.1          limma_3.60.3            jsonlite_1.8.8         
+[151] RcppHNSW_0.6.0          bit64_4.0.5             multcompView_0.1-10    
+[154] assertthat_0.2.1        Rtsne_0.17              yulab.utils_0.1.4      
+[157] spatstat.utils_3.0-5    bdsmatrix_1.3-7         highr_0.11             
+[160] jquerylib_0.1.4         timeDate_4032.109       lazyeval_0.2.2         
+[163] shiny_1.8.1.1           htmltools_0.5.8.1       affy_1.82.0            
+[166] sctransform_0.4.1       glue_1.7.0              spam_2.10-0            
+[169] XVector_0.44.0          rprojroot_2.0.4         flashClust_1.01-2      
+[172] invgamma_1.1            igraph_2.0.3            extrafontdb_1.0        
+[175] R6_2.5.1                labeling_0.4.3          bbmle_1.0.25.1         
+[178] cluster_2.1.6           aplot_0.2.3             DelayedArray_0.30.1    
+[181] tidyselect_1.2.1        xml2_1.3.6              car_3.1-2              
+[184] future_1.33.2           munsell_0.5.1           KernSmooth_2.23-24     
+[187] affyio_1.74.0           data.table_1.15.4       htmlwidgets_1.6.4      
+[190] rlang_1.1.4             spatstat.sparse_3.1-0   extrafont_0.19         
+[193] spatstat.explore_3.2-7  fansi_1.0.6            </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

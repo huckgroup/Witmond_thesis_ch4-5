@@ -1,0 +1,2003 @@
+---
+title: "DS108 ID-seq analysis: PCA exploration"
+author: "mwitmond"
+date: "2024-03-12"
+output:
+  workflowr::wflow_html:
+    toc: TRUE
+    toc_float: 
+      collapsed: FALSE
+    toc_depth: 4
+    code_folding: hide
+editor_options:
+  chunk_output_type: console
+---
+
+## Set-up
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = F, warning = F, echo = T, eval = T
+)
+
+# Load required packages
+source("code/packages_seq.R", local = knitr::knit_global())
+```
+
+```{r fig_settings}
+row_order = c("A", "B", "C", "D", "E", "F", "G", "H")
+col_order = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+panel_labels <- c("a", "b", "c","d", "e", "f", "g", "h", "i", "j", "k", "l", "m")
+
+textsize <- theme(axis.text.x = element_text(colour = "grey", size = 11), #, face = "bold"
+                  axis.text.y = element_text(colour = "grey", size = 11),
+                  axis.title = element_text(colour = "black", size = 12), 
+                  legend.title = element_text(colour = "black", size = 12),
+                  # legend.title = element_blank(), 
+                  legend.text = element_text(colour = "grey", size = 11), 
+                  strip.text.x = element_text(colour = "black", size = 12)
+)
+
+# textsize_small <- theme(text = element_text(size = 7, family = "sans", colour = "black"),
+#                         plot.title = element_text(size = 8)
+# )
+textsize_small <- theme(axis.text.x = element_text(colour = "black", size = 9),
+                        axis.text.y = element_text(colour = "black", size = 9),
+                        axis.title = element_text(colour = "black", size = 10),
+                        legend.text = element_text(colour = "black", size = 9),
+                        title = element_text(color = "black", size = 10),
+                        strip.text.x = element_text(colour = "black", size = 10),
+                        strip.text.y = element_text(colour = "black", size = 10)
+)
+
+colors_dark9 <- c("#4daf4a", "#984ea3", "#377eb8", "#ff7f00", "#f781bf", "#ffff33", "#e41a1c", "#a65628", "#999999")
+colors_light12 <- c("#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f")
+colors_paired10 <- c("#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#fb9a99", "#e31a1c")
+
+colors_blue9 <- c("#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b")
+colors_green9 <- c("#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b")
+colors_purple9 <- c("#fcfbfd", "#efedf5", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba", "#6a51a3", "#54278f", "#3f007d")
+colors_red9 <- c("#fff5f0", "#fee0d2", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#a50f15", "#67000d")
+colors_orange9 <- c("#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603", "#7f2704")
+colors_grey9 <- c("#ffffff", "#f0f0f0", "#d9d9d9", "#bdbdbd", "#969696", "#737373", "#525252", "#252525", "#000000")
+
+colors_yb9 <- c("#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58")
+colors_pr9 <- c("#f7f4f9", "#e7e1ef", "#d4b9da", "#c994c7", "#df65b0", "#e7298a", "#ce1256", "#980043", "#67001f")
+
+colors_proteins <- c("pCD79a (Y182)" = "#892BE1", "pSYK (Y525/Y526)" = "#1E8FFF", "pPLCy2 (Y759)" = "#20B1A9")
+colors_inhib <- c("iSYK" = "#41ab5d", "iBTK" = "#807dba", "iPI3Kd" = "#4292c6", "iNFkB" = "#f16913")
+colors_stim <- c("PBS" = "#525252", "aIg+H2O2" = "#fdae6b")
+colors_cell <- c("HBL1" = "#df65b0", "OCI-Ly8" = "#41b6c4")
+colors_inhib_conc <- c(colors_green9[c(2, 3, 5, 7, 9)], colors_purple9[c(2, 3, 5, 7, 9)], colors_orange9[c(2, 3, 5, 7, 9)])
+names(colors_inhib_conc) <- c("0 uM iSYK (DMSO)", "0.1 uM iSYK", "1 uM iSYK", "10 uM iSYK", "100 uM iSYK", 
+                              "0 uM iBTK (DMSO)", "0.1 uM iBTK", "1 uM iBTK", "10 uM iBTK", "100 uM iBTK", 
+                              "0 uM iNFkB (DMSO)", "0.1 uM iNFkB", "1 uM iNFkB", "10 uM iNFkB", "100 uM iNFkB")
+
+```
+
+```{r fig_labels}
+plates_DS108 <- c("A", "B", "C", "D")
+cells_DS108 <- c("HBL1", "OCI-Ly8")
+stim_DS108 <- c("PBS", "aIg+H2O2")
+inhib_DS108 <- c("iSYK", "iBTK", "iPI3Kd", "iNFkB")
+inhib_conc_DS108 <- c("0 uM (nostain)", "0 uM (PBS)", "0 uM (DMSO)", "0.1 uM", "1 uM", "10 uM", "100 uM")
+inhib_conc_label <- c("0 uM\n(nostain)", "0 uM\n(PBS)", "0 uM\n(DMSO)", "0.1 uM", "1 uM", "10 uM", "100 uM")
+inhib_full_DS108 <- c("0 uM iSYK (nostain)", "0 uM iSYK (PBS)", "0 uM iSYK (DMSO)", "0.1 uM iSYK", "1 uM iSYK", "10 uM iSYK", "100 uM iSYK", 
+                      "0 uM iBTK (nostain)", "0 uM iBTK (PBS)", "0 uM iBTK (DMSO)", "0.1 uM iBTK", "1 uM iBTK", "10 uM iBTK", "100 uM iBTK", 
+                      "0 uM iPI3Kd (nostain)", "0 uM iPI3Kd (PBS)", "0 uM iPI3Kd (DMSO)", "0.1 uM iPI3Kd", "1 uM iPI3Kd", "10 uM iPI3Kd", "100 uM iPI3Kd",
+                      "0 uM iNFkB (nostain)", "0 uM iNFkB (PBS)", "0 uM iNFkB (DMSO)", "0.1 uM iNFkB", "1 uM iNFkB", "10 uM iNFkB", "100 uM iNFkB")
+```
+
+
+
+## Data
+```{r data}
+data_well_all <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_sample.csv")
+data_mean_all <- read_csv("output/DS108_StimInhibIDseq/IDseq_ann/IDseq_data_condition.csv")
+
+meta_cols <- c("plate_well", "plate", "well", "experiment", "cell_line", "stimulus", "inhibitor", "inhib_conc_uM", "inhib_conc", "inhib_conc_text", "inhib_text_new", "replicate", "description", "descript_rep")
+
+# Add a column with DMSO ctrl and PBS ctrl as inhibitors (instead of only under conc)
+data_well_all <- data_well_all %>%
+  mutate(inhib_new = case_when(inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    .default = inhib_conc_text))
+data_mean_all <- data_mean_all %>%
+  mutate(inhib_new = case_when(inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                               inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                               .default = inhibitor), 
+         inhib_text_new = case_when(inhib_conc == "0 uM (PBS)" ~ "PBS ctrl", 
+                                    inhib_conc == "0 uM (DMSO)" ~ "DMSO ctrl", 
+                                    .default = inhib_conc_text))
+
+inhib_new_DS108 <- c("DMSO ctrl", "PBS ctrl", "iSYK", "iBTK", "iPI3Kd", "iNFkB")
+
+# Remove iPI3Kd, 0 uM (PBS) and proteins BIM and Histone H2A.X S139 samples from the dataset
+data_well_all <- data_well_all %>%
+  filter(inhibitor != "iPI3Kd" & inhib_conc != "0 uM (PBS)" & target_nospace != "BIM"& target_nospace != "Histone_H2AX_S139") #
+data_mean_all <- data_mean_all %>%
+  filter(inhibitor != "iPI3Kd" & inhib_conc != "0 uM (PBS)" & target_nospace != "BIM"& target_nospace != "Histone_H2AX_S139") #
+```
+
+
+
+## PCA via DEseq2 analysis
+
+https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html
+
+### All samples
+
+DESeq2 analysis parameters:
+
+- all samples except nostain
+
+- Compensated counts (>= 1)
+
+- Model design: description
+
+```{r DESeq2_data}
+# Prepare data to load into DESeq dataset
+# cts: dataframe with proteins as row names, wells as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- data_well_all  %>%
+  filter(counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  filter(!is.na(counts)) %>%
+  spread(plate_well, counts) %>%
+  replace(is.na(.), 0)
+
+rownames(cts) <- cts$target_nospace
+cts <- as.matrix(as.data.frame(cts[2:ncol(cts)]))
+
+coldata <- data.frame(plate_well = colnames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+
+# Create DESeq object
+# First define how the model is designed. Place most important parameter last
+# modeldesign <- ~ cell_line + inhibitor + inhib_conc + stimulus
+modeldesign <- ~ description
+
+# Then create the DESeq dataset
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                              colData = coldata,
+                              design = modeldesign)
+# Define the reference samples for design parameter
+# dds$cell_line <- relevel(dds$cell_line, ref = "HBL1")
+# dds$inhibitor <- relevel(dds$inhibitor, ref = "iSYK")
+# dds$stimulus <- relevel(dds$stimulus, ref = "PBS")
+# dds$inhib_conc <- relevel(dds$inhib_conc, ref = "0 uM (DMSO)")
+
+# Run DESeq2: 
+  # This function performs a default analysis through the steps:
+  # Estimation of size factors: estimateSizeFactors
+  # Estimation of dispersion: estimateDispersions
+  # Negative Binomial GLM fitting and Wald statistics: nbinomWaldTest
+
+# dds <- estimateSizeFactors(dds, controlGenes = ctrl_genes) # OPTIONAL: normalise data with specified control genes
+dds <- DESeq(dds, test = "Wald", fitType = "local")
+DESeq_comparisons <- resultsNames(dds) # lists the coefficients
+# DESeq_comparisons
+```
+
+```{r DESeq2_transform}
+# Normtransform (log2(n+1))
+DESeq2_ntd <- normTransform(dds)
+
+# Variance stabilising transform
+DESeq2_vsd <- vst(dds, blind = FALSE, nsub = nrow(dds))
+
+# Regularized log transform
+DESeq2_rld <- rlog(dds, blind = FALSE)
+```
+
+```{r DESeq2_PCA_results}
+# Results
+DESeq2_pcaData <- plotPCA(unlist(DESeq2_rld), intgroup = c("stimulus", "cell_line", "inhibitor", "inhib_conc"), returnData = TRUE)
+percentVar <- round(100 * attr(DESeq2_pcaData, "percentVar"))
+
+# Test
+rv <- rowVars(assay(DESeq2_rld), useNames = TRUE) # calculate the variance for each gene
+select <- order(rv, decreasing=TRUE)[seq_len(min(106, length(rv)))] # select the ntop genes by variance
+test_pca <- prcomp(t(assay(DESeq2_rld)[select,])) # perform a PCA on the data in assay(x) for the selected genes
+
+test_percentVar <- test_pca$sdev^2 / sum(test_pca$sdev^2) # the contribution to the total variance for each component
+
+test_comp <- test_pca[["x"]]
+test_comp <- data.frame(test_comp)
+test_comp$PC2 <- test_comp$PC2
+test_comp$PC3 <- -test_comp$PC3
+test_data <- test_comp[, 1:3] %>%
+  rownames_to_column("plate_well") %>%
+  left_join(coldata)
+
+test_expl_var <- (summary(test_pca)[["importance"]]['Proportion of Variance',]) * 100
+test_expl_var3 <- sum(test_expl_var[1:3])
+
+# # Test 2
+# rv <- rowVars(assay(DESeq2_rld), useNames = FALSE) # calculate the variance for each gene
+# select <- order(rv, decreasing=TRUE)[seq_len(min(106, length(rv)))] # select the ntop genes by variance
+# test2_pca <- PCA(t(assay(DESeq2_rld)[unique(c(data_well_all$target_nospace)), rownames(coldata)]), scale.unit = FALSE, ncp = 5, graph = FALSE) # perform a PCA on the data in assay(x) for the selected genes
+# # Percentage variance explained by each PC
+# test2_expl_var <- as.data.frame(get_eigenvalue(test2_pca)) %>%
+#   rownames_to_column("PC") %>%
+#   pull(var = variance.percent, name = PC) %>%
+#   round(digits = 1)
+# 
+# # Results focused on variables (proteins)
+# test2_variab <- get_pca_var(test2_pca)
+# 
+# # Results focused on individuals (wells)
+# test2_indiv <- get_pca_ind(test2_pca)
+# test2_data <- as.data.frame(test2_indiv$coord[, 1:3]) %>%
+#   rownames_to_column("plate_well") %>%
+#   dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3) %>%
+#   left_join(coldata)
+```
+
+```{r DESeq2_PCA}
+plot <- ggplot(DESeq2_pcaData, aes(PC1, PC2, color = stimulus, fill = stimulus, shape = inhib_conc)) +
+  geom_point(size = 2) +
+  xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+  ylab(paste0("PC2: ", percentVar[2], "% variance")) + 
+  coord_fixed() +
+  facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c("PBS" = "black", "aIg+H2O2"= "orange"), name = "Stimulus") + 
+  scale_fill_manual(values = c("PBS" = "black", "aIg+H2O2"= "orange"), name = "Stimulus") + 
+  scale_shape_manual(values = c(16, 17, 10, 7, 3, 8), name = "Inhib conc") +
+  # ggtitle(titles_datatransform[data]) +
+  theme_bw() +
+  textsize_small
+
+print(plot)
+```
+
+```{r DESeq2_test}
+# fig <- plot_ly(test_data, x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc, colors = colors_blue9[3:7]) %>%
+#   add_markers(size = 12) %>%
+#   layout(title = paste("Variance explained:", sum(test_expl_var[1:3])))
+# fig
+
+plot <- ggplot(test_data, aes(PC1, PC2, color = paste(stimulus, "-", inhib_conc), shape = cell_line)) +
+  geom_point(size = 2) +
+  # xlab(paste0("PC1: ", test_expl_var[1], "% variance")) +
+  # ylab(paste0("PC3: ", test_expl_var[3], "% variance")) +
+  coord_fixed() +
+  # facet_grid(cell_line~inhibitor) +
+  # scale_color_manual(values = c("PBS" = "black", "aIg+H2O2"= "orange"), name = "Stimulus") + 
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  # scale_shape_manual(values = c(16, 17, 10, 7, 3, 8), name = "Inhib conc") +
+  # ggtitle(titles_datatransform[data]) +
+  theme_bw() +
+  textsize_small
+print(plot)
+```
+
+```{r DESeq2_test2, eval=F}
+fviz_eig(test2_pca, addlabels = TRUE)
+
+contrib_2.5p <- as.data.frame(test2_variab$contrib) %>%
+  # rownames_to_column("target_nospace") %>%
+  filter(Dim.1 >= 2.5 | Dim.2 >= 2.5 | Dim.3 >= 2.5) %>% # | Dim.4 >= 1 | Dim.5 >= 1
+  dplyr::rename(PC1 = Dim.1, PC2 =  Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC5 = Dim.5) %>%
+  dplyr::select(c(PC1, PC2, PC3)) %>%
+  as.matrix()
+  # filter_all(any_vars(.>1))
+corrplot(contrib_2.5p, is.corr = FALSE, method = "circle", outline = TRUE, 
+         tl.col = "black", cl.ratio = 0.75, cl.offset = 1, 
+         title = "Protein contributions to PC (>2.5% in any PC)")
+```
+
+
+
+## PCA via FactoMineR
+
+### All samples 
+
+PCA with all samples together, followed by subsetting for visualisation
+
+#### PCA
+```{r Facto_data_all}
+# Prepare data for FactoMineR package
+# cts: dataframe with wells as row names, proteins as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- data_well_all  %>%
+  filter(counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts_norm) %>%
+  filter(!is.na(counts_norm)) %>%
+  spread(target_nospace, counts_norm) %>%
+  replace(is.na(.), 0)
+
+cts <- column_to_rownames(cts, "plate_well")
+# cts2 <- as.matrix(as.data.frame(cts), row_names = TRUE)
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+```
+
+```{r Facto_results_all}
+# Results
+results_all <- PCA(cts, scale.unit = FALSE, ncp = 5, graph = FALSE)
+
+# Percentage variance explained by each PC
+expl_var_all <- as.data.frame(get_eigenvalue(results_all)) %>%
+  rownames_to_column("PC") %>%
+  pull(var = variance.percent, name = PC) %>%
+  round(digits = 1)
+
+# Results focused on variables (proteins)
+variab_all <- get_pca_var(results_all) 
+# head(variab$contrib)
+
+# Results focused on individuals (wells)
+indiv_all <- get_pca_ind(results_all) 
+# head(indiv$contrib)
+pca_data_all <- as.data.frame(indiv_all$coord[, 1:3]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3) %>% 
+  left_join(coldata)
+```
+
+```{r Facto_vis_all}
+# Variance explained by each PC (eigenvalues)
+fviz_eig(results_all, addlabels = TRUE)
+
+fviz_pca_var(results_all, col.var = "black")
+
+# Quality of representation for variables
+# corrplot(variab_all$cos2, is.corr = FALSE)
+# corrplot(variab_all$contrib, is.corr = FALSE)
+
+contrib_2.5p <- as.data.frame(variab_all$contrib) %>%
+  # rownames_to_column("target_nospace") %>%
+  filter(Dim.1 >= 2.5 | Dim.2 >= 2.5 | Dim.3 >= 2.5) %>% # | Dim.4 >= 1 | Dim.5 >= 1
+  dplyr::rename(PC1 = Dim.1, PC2 =  Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC5 = Dim.5) %>%
+  dplyr::select(c(PC1, PC2, PC3)) %>%
+  as.matrix()
+  # filter_all(any_vars(.>1))
+corrplot(contrib_2.5p, is.corr = FALSE, method = "circle", outline = TRUE, 
+         tl.col = "black", cl.ratio = 0.75, cl.offset = 1, 
+         title = "Protein contributions to PC (>2.5% in any PC)(all)")
+
+# Top10 contributing proteins to PC1-3
+fig_PC1 <- fviz_contrib(results_all, choice = "var", axes = 1, top = 10)
+fig_PC2 <- fviz_contrib(results_all, choice = "var", axes = 2, top = 10)
+fig_PC3 <- fviz_contrib(results_all, choice = "var", axes = 3, top = 10)
+plot_grid(fig_PC1, fig_PC2, fig_PC3, ncol = 3)
+
+fig_PC12 <- fviz_pca_ind(results_all,
+             axes = c(1, 2),
+             geom.ind = "point",
+             mean.point = FALSE,
+             col.ind = paste(coldata$cell_line, coldata$stimulus),
+             addEllipses = TRUE)
+fig_PC13 <- fviz_pca_ind(results_all,
+             axes = c(1, 3),
+             geom.ind = "point",
+             mean.point = FALSE,
+             col.ind = paste(coldata$cell_line, coldata$stimulus),
+             addEllipses = TRUE)
+fig_PC23 <- fviz_pca_ind(results_all,
+             axes = c(2, 3),
+             geom.ind = "point",
+             mean.point = FALSE,
+             col.ind = paste(coldata$cell_line, coldata$stimulus),
+             addEllipses = TRUE)
+plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3)
+```
+
+#### UMAP visualisation
+```{r Facto_UMAP_PCA}
+# Data
+pca_data_5PC <- as.data.frame(indiv_all$coord[, 1:5]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC53 = Dim.5) %>% 
+  left_join(coldata)
+
+# UMAP data reduction
+umap_pca <- umap::umap(as.data.frame(indiv_all$coord[, 1:5]))
+# umap.defaults
+# head(umap_pca$layout)
+umap_pca_ann <- as.data.frame(umap_pca$layout) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(UMAP1 = V1, UMAP2 = V2) %>% 
+  left_join(coldata)
+
+# Basic fig of everything
+fig <- ggplot(umap_pca_ann, aes(x = UMAP1, y = UMAP2)) + 
+  geom_point(aes(shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 2) + 
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  ggtitle("UMAP with PC1-5") +
+  theme_bw() +
+  textsize_small
+fig
+
+# Figure variations
+fig <- ggplot(umap_pca_ann, aes(x = UMAP1, y = UMAP2)) + 
+  geom_point(aes(color = inhibitor), size = 1.5) + 
+  # scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  facet_grid(cell_line~stimulus) +
+  ggtitle("UMAP with PC1-5") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+fig <- ggplot(umap_pca_ann, aes(x = UMAP1, y = UMAP2)) + 
+  geom_point(aes(color = inhib_conc), size = 1.5) + 
+  scale_color_manual(values = colors_purple9[c(3, 5, 6, 8, 9)]) +
+  facet_grid(cell_line~stimulus) +
+  ggtitle("UMAP with PC1-5") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+fig <- ggplot(umap_pca_ann, aes(x = UMAP1, y = UMAP2)) + 
+  geom_point(aes(color = paste(cell_line, "-", inhib_conc)), size = 1.5) + 
+  scale_color_manual(values = c(colors_yb9[3:7], colors_pr9[3:7]), name = "Cell line - Inhib conc") +
+  facet_grid(inhibitor~stimulus) +
+  ggtitle("UMAP with PC1-5") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+fig <- ggplot(umap_pca_ann, aes(x = UMAP1, y = UMAP2)) + 
+  geom_point(aes(color = paste(stimulus, "-", inhib_conc)), size = 1.5) + 
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  facet_grid(inhibitor~cell_line) +
+  ggtitle("UMAP with PC1-5") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+```
+
+```{r Facto_UMAP_raw}
+cts <- data_well_all  %>%
+  filter(counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  filter(!is.na(counts)) %>%
+  spread(target_nospace, counts) %>%
+  replace(is.na(.), 0)
+cts <- column_to_rownames(cts, "plate_well")
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+rownames(coldata) <- coldata$plate_well
+
+umap_raw <- umap::umap(cts)
+# head(umap_pca$layout)
+umap_raw_ann <- as.data.frame(umap_raw$layout) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(UMAP1 = V1, UMAP2 = V2) %>% 
+  left_join(coldata)
+
+fig <- ggplot(umap_raw_ann) + 
+  geom_point(aes(x = UMAP1, y = UMAP2, shape = cell_line, color = paste(stimulus, "-", inhib_conc))) + 
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  # facet_wrap(~inhibitor) +
+  ggtitle("UMAP with raw data (counts)") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+```
+
+#### Everything
+```{r Facto_2D_all, fig.height=8, fig.width=16}
+fig_PC12 <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC2, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC2: ", expl_var_all[2], "% variance")) + 
+  ggtitle("PC1 vs PC2") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC12
+fig_PC13 <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC1 vs PC3") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC13
+fig_PC23 <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC2, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC2: ", expl_var_all[2], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC2 vs PC3") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig_PC23
+
+fig <- plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3, align = "h", rel_widths = c(1, 1, 1.5))
+print(fig)
+```
+
+```{r Facto_2D_all_facet}
+# Faceted per inhib
+fig <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  facet_grid(~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+# Faceted per cell line
+fig <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC3, shape = stimulus, color = inhib_conc_text), size = 3) + 
+  facet_grid(~cell_line) +
+  scale_color_manual(values = colors_inhib_conc) +
+  # scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+# Faceted per inhib per cell line
+fig <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+# Faceted per stimulus
+fig <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(cell_line, "-", inhib_conc)), size = 3) + 
+  facet_grid(~stimulus) +
+  scale_color_manual(values = c(colors_yb9[3:7], colors_pr9[3:7]), name = "Cell_line - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+# Faceted per stimulus per cell line
+fig <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  facet_grid(cell_line~stimulus) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+# Faceted per inhib conc
+fig <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  facet_grid(~inhib_conc) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+
+# Faceted per inhib per inhib conc
+fig <- ggplot(pca_data_all) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  facet_grid(inhibitor~inhib_conc) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+fig
+```
+
+```{r Facto_3D_all}
+# 3D scatter plot of PC1-3
+# cell_line
+fig <- plot_ly(pca_data_all, x = ~PC1, y = ~PC2, z = ~PC3, color = ~cell_line, colors = colors_cell) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# stimulus
+fig <- plot_ly(pca_data_all, x = ~PC1, y = ~PC2, z = ~PC3, color = ~stimulus, colors = colors_stim) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# inhib_conc
+fig <- plot_ly(arrange(pca_data_all, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc, colors = colors_blue9[c(2, 3, 5, 7, 9)]) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# inhibitor
+fig <- plot_ly(pca_data_all, x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhibitor, colors = colors_inhib) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# inhib_conc_text
+fig <- plot_ly(arrange(pca_data_all, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc_text, colors = colors_inhib_conc) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_all[1:3])))
+fig
+```
+
+#### Inhib comp per cell line
+```{r Facto_2D_cell, fig.height=8, fig.width=16}
+# FIX: PC1 vs PC3 only, each inhib combi (iSYK + iBTK, iSYK + iNFkB, iBTK + iNFkB)
+
+# iSYK and iBTK
+fig1 <- ggplot(subset(pca_data_all, inhibitor %in% c("iSYK", "iBTK"))) + 
+  geom_point(aes(x = PC1, y = PC3, shape = stimulus, color = inhib_conc_text), size = 3) + 
+  facet_wrap(~cell_line, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = colors_inhib_conc) +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("iSYK and iBTK") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig1
+
+# iSYK and iNFkB
+fig2 <- ggplot(subset(pca_data_all, inhibitor %in% c("iSYK", "iNFkB"))) + 
+  geom_point(aes(x = PC1, y = PC3, shape = stimulus, color = inhib_conc_text), size = 3) + 
+  facet_wrap(~cell_line, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = colors_inhib_conc) +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("iSYK and iNFkB") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig2
+
+# iBTK and iNFkB
+fig3 <- ggplot(subset(pca_data_all, inhibitor %in% c("iNFkB", "iBTK"))) + 
+  geom_point(aes(x = PC1, y = PC3, shape = stimulus, color = inhib_conc_text), size = 3) + 
+  facet_wrap(~cell_line, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = colors_inhib_conc) +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("iBTK and iNFkB") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig3
+
+fig <- plot_grid(fig1, fig2, fig3, ncol = 3, align = "h")
+print(fig)
+```
+
+```{r Facto_3D_cell}
+# 3D scatter plot of PC1-3
+pca_data_all$combi <- paste(pca_data_all$stimulus, pca_data_all$inhib_conc_text, sep = " - ")
+colors_combi <- c(colors_grey9[c(2, 3, 5, 7, 9)], colors_green9[c(2, 3, 5, 7, 9)], colors_grey9[c(2, 3, 5, 7, 9)], colors_purple9[c(2, 3, 5, 7, 9)], colors_grey9[c(2, 3, 5, 7, 9)], colors_orange9[c(2, 3, 5, 7, 9)])
+names(colors_combi) <- unique(arrange(pca_data_all, inhibitor)$combi)
+
+cell <- "HBL1"
+# iSYK vs iBTK
+fig <- plot_ly(subset(arrange(pca_data_all, inhibitor), cell_line == cell & inhibitor %in% c("iSYK", "iBTK")), 
+               x = ~PC1, y = ~PC2, z = ~PC3, 
+               color = ~combi, colors = colors_combi) %>%
+  add_markers(size = 20) %>%
+  layout(title = paste(cell, "- iSYK vs iBTK", "- Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# iSYK vs iNFkB
+fig <- plot_ly(subset(arrange(pca_data_all, inhibitor), cell_line == cell & inhibitor %in% c("iSYK", "iNFkB")), 
+               x = ~PC1, y = ~PC2, z = ~PC3, 
+               color = ~combi, colors = colors_combi) %>%
+  add_markers(size = 20) %>%
+  layout(title = paste(cell, "- iSYK vs iNFkB", "- Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# iBTK vs iNFkB
+fig <- plot_ly(subset(arrange(pca_data_all, inhibitor), cell_line == cell & inhibitor %in% c("iBTK", "iNFkB")), 
+               x = ~PC1, y = ~PC2, z = ~PC3, 
+               color = ~combi, colors = colors_combi) %>%
+  add_markers(size = 20) %>%
+  layout(title = paste(cell, "- iBTK vs iNFkB", "- Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+cell <- "OCI-Ly8"
+# iSYK vs iBTK
+fig <- plot_ly(subset(arrange(pca_data_all, inhibitor), cell_line == cell & inhibitor %in% c("iSYK", "iBTK")), 
+               x = ~PC1, y = ~PC2, z = ~PC3, 
+               color = ~combi, colors = colors_combi) %>%
+  add_markers(size = 20) %>%
+  layout(title = paste(cell, "- iSYK vs iBTK", "- Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# iSYK vs iNFkB
+fig <- plot_ly(subset(arrange(pca_data_all, inhibitor), cell_line == cell & inhibitor %in% c("iSYK", "iNFkB")), 
+               x = ~PC1, y = ~PC2, z = ~PC3, 
+               color = ~combi, colors = colors_combi) %>%
+  add_markers(size = 20) %>%
+  layout(title = paste(cell, "- iSYK vs iNFkB", "- Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# iBTK vs iNFkB
+fig <- plot_ly(subset(arrange(pca_data_all, inhibitor), cell_line == cell & inhibitor %in% c("iBTK", "iNFkB")), 
+               x = ~PC1, y = ~PC2, z = ~PC3, 
+               color = ~combi, colors = colors_combi) %>%
+  add_markers(size = 20) %>%
+  layout(title = paste(cell, "- iBTK vs iNFkB", "- Variance explained:", sum(expl_var_all[1:3])))
+fig
+```
+
+#### Cell line comp per inhib
+```{r Facto_3D_inhib}
+# 3D scatter plot of PC1-3
+pca_data_all$combi <- paste(pca_data_all$cell_line, pca_data_all$stimulus, pca_data_all$inhib_conc, sep = " - ")
+colors_combi <- c(colors_grey9[c(2, 3, 5, 7, 9)], colors_pr9[c(2, 3, 5, 7, 9)], colors_grey9[c(2, 3, 5, 7, 9)], colors_yb9[c(2, 3, 5, 7, 9)])
+names(colors_combi) <- unique(pca_data_all$combi)
+
+# iSYK
+fig <- plot_ly(subset(pca_data_all, inhibitor == "iSYK"), x = ~PC1, y = ~PC2, z = ~PC3, color = ~combi, colors = colors_combi) %>%
+    add_markers(size = 20) %>%
+    layout(title = paste("iSYK - Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# iBTK
+fig <- plot_ly(subset(pca_data_all, inhibitor == "iBTK"), x = ~PC1, y = ~PC2, z = ~PC3, color = ~combi, colors = colors_combi) %>%
+    add_markers(size = 20) %>%
+    layout(title = paste("iBTK - Variance explained:", sum(expl_var_all[1:3])))
+fig
+
+# iNFkB
+fig <- plot_ly(subset(pca_data_all, inhibitor == "iNFkB"), x = ~PC1, y = ~PC2, z = ~PC3, color = ~combi, colors = colors_combi) %>%
+    add_markers(size = 20) %>%
+    layout(title = paste("iNFkB - Variance explained:", sum(expl_var_all[1:3])))
+fig
+```
+
+
+### HBL1 samples all
+
+PCA with only the HBL1 samples
+
+```{r Facto_data_HBL1}
+# Prepare data for FactoMineR package
+# cts: dataframe with wells as row names, proteins as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- data_well_all  %>%
+  filter(counts >= 1 & cell_line == "HBL1") %>%
+  dplyr::select(target_nospace, plate_well, counts_norm) %>%
+  filter(!is.na(counts_norm)) %>%
+  spread(target_nospace, counts_norm) %>%
+  replace(is.na(.), 0)
+
+cts <- column_to_rownames(cts, "plate_well")
+# cts2 <- as.matrix(as.data.frame(cts), row_names = TRUE)
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+```
+
+```{r Facto_results_HBL1}
+# Results
+results_HBL1 <- PCA(cts, scale.unit = FALSE, ncp = 5, graph = FALSE)
+
+# Percentage variance explained by each PC
+expl_var_HBL1 <- as.data.frame(get_eigenvalue(results_HBL1)) %>%
+  rownames_to_column("PC") %>%
+  pull(var = variance.percent, name = PC) %>%
+  round(digits = 1)
+
+# Results focused on variables (proteins)
+variab_HBL1 <- get_pca_var(results_HBL1) 
+# head(variab$contrib)
+
+# Results focused on individuals (wells)
+indiv_HBL1 <- get_pca_ind(results_HBL1) 
+# head(indiv$contrib)
+pca_data_HBL1 <- as.data.frame(indiv_HBL1$coord[, 1:3]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3) %>% 
+  left_join(coldata)
+```
+
+```{r Facto_vis_HBL1}
+# Variance explained by each PC (eigenvalues)
+fviz_eig(results_HBL1, addlabels = TRUE)
+
+# fviz_pca_var(results_HBL1, col.var = "black")
+
+# Quality of representation for variables
+# corrplot(variab_HBL1$cos2, is.corr = FALSE)
+# corrplot(variab_HBL1$contrib, is.corr = FALSE)
+
+contrib_2.5p <- as.data.frame(variab_HBL1$contrib) %>%
+  # rownames_to_column("target_nospace") %>%
+  filter(Dim.1 >= 2.5 | Dim.2 >= 2.5 | Dim.3 >= 2.5) %>% # | Dim.4 >= 1 | Dim.5 >= 1
+  dplyr::rename(PC1 = Dim.1, PC2 =  Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC5 = Dim.5) %>%
+  dplyr::select(c(PC1, PC2, PC3)) %>%
+  as.matrix()
+  # filter_all(any_vars(.>1))
+corrplot(contrib_2.5p, is.corr = FALSE, method = "circle", outline = TRUE, 
+         tl.col = "black", cl.ratio = 0.75, cl.offset = 1, 
+         title = "Protein contributions to PC (>2.5% in any PC)(HBL1 only)")
+
+# Top10 contributing proteins to PC1-3 
+fig_PC1 <- fviz_contrib(results_HBL1, choice = "var", axes = 1, top = 10)
+fig_PC2 <- fviz_contrib(results_HBL1, choice = "var", axes = 2, top = 10)
+fig_PC3 <- fviz_contrib(results_HBL1, choice = "var", axes = 3, top = 10)
+plot_grid(fig_PC1, fig_PC2, fig_PC3, ncol = 3)
+
+# fviz_pca_ind(results_HBL1,
+#              axes = c(1, 2),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$inhib_text_new),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_HBL1,
+#              axes = c(1, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$inhib_text_new),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_HBL1,
+#              axes = c(2, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              # col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              col.ind = paste(coldata$inhib_text_new),
+#              addEllipses = TRUE)
+```
+
+```{r Facto_2D_HBL1, fig.height=8, fig.width=16}
+# pca_data_HBL1
+fig_PC12 <- ggplot(pca_data_HBL1) + 
+  geom_point(aes(x = PC1, y = PC2, shape = stimulus, color = paste(stimulus, "-", inhib_conc)), size = 3) +
+  # geom_point(aes(x = PC1, y = PC2, shape = stimulus, color = inhib_text_new), size = 3, alpha = 0.8) + 
+  facet_wrap(~inhibitor, ncol = 1) +
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_HBL1[1], "% variance")) +
+  ylab(paste0("PC2: ", expl_var_HBL1[2], "% variance")) + 
+  ggtitle("Normalised counts\nPC1 vs PC2 (HBL1 only)") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC12
+fig_PC13 <- ggplot(pca_data_HBL1) + 
+  geom_point(aes(x = PC1, y = PC3, shape = stimulus, color = paste(stimulus, "-", inhib_conc)), size = 3) +
+  facet_wrap(~inhibitor, ncol = 1) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_HBL1[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_HBL1[3], "% variance")) + 
+  ggtitle("PC1 vs PC3") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC13
+fig_PC23 <- ggplot(pca_data_HBL1) + 
+  geom_point(aes(x = PC2, y = PC3, shape = stimulus, color = paste(stimulus, "-", inhib_conc)), size = 3) +
+  facet_wrap(~inhibitor, ncol = 1) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC2: ", expl_var_HBL1[2], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_HBL1[3], "% variance")) + 
+  ggtitle("PC2 vs PC3") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig_PC23
+
+fig <- plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3, align = "h", rel_widths = c(1, 1, 1.75))
+print(fig)
+
+# Selected samples only
+conditions <- c("0 uM (DMSO)", "100 uM")
+select_colors <- c("DMSO ctrl" = "grey", "100 uM iSYK" = "green", "100 uM iBTK" = "blue", "100 uM iNFkB" = "red")
+fig_PC12 <- ggplot(subset(pca_data_HBL1, inhib_conc %in% conditions)) + 
+  geom_point(aes(x = PC1, y = PC2, shape = stimulus, color = inhib_text_new), size = 3) +
+  # scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  scale_color_manual(values = select_colors) +
+  xlab(paste0("PC1: ", expl_var_HBL1[1], "% variance")) +
+  ylab(paste0("PC2: ", expl_var_HBL1[2], "% variance")) + 
+  ggtitle("Normalised counts\nPC1 vs PC2 (selected HBL1 only)") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC12
+fig_PC13 <- ggplot(subset(pca_data_HBL1, inhib_conc %in% conditions)) + 
+  geom_point(aes(x = PC1, y = PC3, shape = stimulus, color = inhib_text_new), size = 3) +
+  # scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  scale_color_manual(values = select_colors) +
+  xlab(paste0("PC1: ", expl_var_HBL1[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_HBL1[3], "% variance")) + 
+  ggtitle("Normalised counts\nPC1 vs PC3 (selected HBL1 only)") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC13
+fig_PC23 <- ggplot(subset(pca_data_HBL1, inhib_conc %in% conditions)) + 
+  geom_point(aes(x = PC2, y = PC3, shape = stimulus, color = inhib_text_new), size = 3) +
+  # scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  scale_color_manual(values = select_colors) +
+  xlab(paste0("PC2: ", expl_var_HBL1[2], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_HBL1[3], "% variance")) + 
+  ggtitle("Normalised counts\nPC2 vs PC3 (selected HBL1 only)") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig_PC23
+fig <- plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3, align = "h", rel_widths = c(1, 1, 1.5))
+print(fig)
+```
+
+```{r Facto_3D_HBL1}
+# 3D scatter plot of PC1-3
+# stimulus
+fig <- plot_ly(pca_data_HBL1, x = ~PC1, y = ~PC2, z = ~PC3, color = ~stimulus, colors = colors_stim) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_HBL1[1:3])))
+fig
+
+# inhibitor
+fig <- plot_ly(pca_data_HBL1, x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_text_new, colors = c("DMSO ctrl" = "grey", "100 uM iSYK" = "green", "100 uM iBTK" = "blue", "100 uM iNFkB" = "red")) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_HBL1[1:3])))
+fig
+
+# inhib_conc
+fig <- plot_ly(arrange(pca_data_HBL1, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc, colors = colors_blue9[c(2, 3, 5, 7, 9)]) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_HBL1[1:3])))
+fig
+
+# inhib_conc_text
+fig <- plot_ly(arrange(pca_data_HBL1, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc_text, colors = colors_inhib_conc) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_HBL1[1:3])))
+fig
+```
+
+#### UMAP visualisation
+```{r Facto_UMAP_PCA2}
+# Data
+pca_data_5PC <- as.data.frame(indiv_HBL1$coord[, 1:5]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC53 = Dim.5) %>% 
+  left_join(coldata)
+
+# UMAP data reduction
+umap_pca <- umap::umap(as.data.frame(indiv_HBL1$coord[, 1:5]))
+# umap.defaults
+# head(umap_pca$layout)
+umap_pca_ann <- as.data.frame(umap_pca$layout) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(UMAP1 = V1, UMAP2 = V2) %>% 
+  left_join(coldata)
+
+# Basic fig of everything
+fig <- ggplot(umap_pca_ann, aes(x = UMAP1, y = UMAP2)) + 
+  geom_point(aes(shape = stimulus, color = inhib_text_new), size = 2) + 
+  scale_color_manual(values = c("DMSO ctrl" = "grey", "100 uM iSYK" = "green", "100 uM iBTK" = "blue", "100 uM iNFkB" = "red")) +
+  ggtitle("UMAP with PC1-5") +
+  theme_bw() +
+  textsize_small
+fig
+```
+
+
+### HBL1 samples select
+
+PCA with only the HBL1 samples
+
+-   basal + basal-inhibited + activated + activated-inhibited
+
+```{r Facto_data_HBL1s}
+# Prepare data for FactoMineR package
+# cts: dataframe with wells as row names, proteins as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadatconditions <- c("0 uM (DMSO)", "100 uM")
+cts <- data_well_all  %>%
+  filter(counts >= 1 & cell_line == "HBL1" & inhib_conc %in% conditions) %>%
+  dplyr::select(target_nospace, plate_well, counts_norm) %>%
+  filter(!is.na(counts_norm)) %>%
+  spread(target_nospace, counts_norm) %>%
+  replace(is.na(.), 0)
+
+cts <- column_to_rownames(cts, "plate_well")
+# cts2 <- as.matrix(as.data.frame(cts), row_names = TRUE)
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+```
+
+```{r Facto_results_HBL1s}
+# Results
+results_HBL1 <- PCA(cts, scale.unit = FALSE, ncp = 5, graph = FALSE)
+
+# Percentage variance explained by each PC
+expl_var_HBL1 <- as.data.frame(get_eigenvalue(results_HBL1)) %>%
+  rownames_to_column("PC") %>%
+  pull(var = variance.percent, name = PC) %>%
+  round(digits = 1)
+
+# Results focused on variables (proteins)
+variab_HBL1 <- get_pca_var(results_HBL1) 
+# head(variab$contrib)
+
+# Results focused on individuals (wells)
+indiv_HBL1 <- get_pca_ind(results_HBL1) 
+# head(indiv$contrib)
+pca_data_HBL1 <- as.data.frame(indiv_HBL1$coord[, 1:3]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3) %>% 
+  left_join(coldata)
+```
+
+```{r Facto_vis_HBL1s}
+# Variance explained by each PC (eigenvalues)
+fviz_eig(results_HBL1, addlabels = TRUE)
+
+# fviz_pca_var(results_HBL1, col.var = "black")
+
+# Quality of representation for variables
+# corrplot(variab_HBL1$cos2, is.corr = FALSE)
+# corrplot(variab_HBL1$contrib, is.corr = FALSE)
+
+contrib_2.5p <- as.data.frame(variab_HBL1$contrib) %>%
+  # rownames_to_column("target_nospace") %>%
+  filter(Dim.1 >= 2.5 | Dim.2 >= 2.5 | Dim.3 >= 2.5) %>% # | Dim.4 >= 1 | Dim.5 >= 1
+  dplyr::rename(PC1 = Dim.1, PC2 =  Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC5 = Dim.5) %>%
+  dplyr::select(c(PC1, PC2, PC3)) %>%
+  as.matrix()
+  # filter_all(any_vars(.>1))
+corrplot(contrib_2.5p, is.corr = FALSE, method = "circle", outline = TRUE, 
+         tl.col = "black", cl.ratio = 0.75, cl.offset = 1, 
+         title = "Protein contributions to PC (>2.5% in any PC)(HBL1 only)")
+
+# Top10 contributing proteins to PC1-3 
+fig_PC1 <- fviz_contrib(results_HBL1, choice = "var", axes = 1, top = 10)
+fig_PC2 <- fviz_contrib(results_HBL1, choice = "var", axes = 2, top = 10)
+fig_PC3 <- fviz_contrib(results_HBL1, choice = "var", axes = 3, top = 10)
+plot_grid(fig_PC1, fig_PC2, fig_PC3, ncol = 3)
+
+# fviz_pca_ind(results_HBL1,
+#              axes = c(1, 2),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$inhib_text_new),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_HBL1,
+#              axes = c(1, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$inhib_text_new),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_HBL1,
+#              axes = c(2, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              # col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              col.ind = paste(coldata$inhib_text_new),
+#              addEllipses = TRUE)
+```
+
+```{r Facto_2D_HBL1s, fig.height=8, fig.width=16}
+# pca_data_HBL1
+fig_PC12 <- ggplot(pca_data_HBL1) + 
+  # geom_point(aes(x = PC1, y = PC2, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  geom_point(aes(x = PC1, y = PC2, shape = stimulus, color = inhib_text_new), size = 3, alpha = 0.8) + 
+  # facet_wrap(~stimulus, ncol = 1) +
+  # facet_grid(cell_line~inhibitor) +
+  # scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  scale_color_manual(values = c("DMSO ctrl" = "grey", "100 uM iSYK" = "green", "100 uM iBTK" = "blue", "100 uM iNFkB" = "red")) +
+  xlab(paste0("PC1: ", expl_var_HBL1[1], "% variance")) +
+  ylab(paste0("PC2: ", expl_var_HBL1[2], "% variance")) + 
+  ggtitle("Normalised counts\nPC1 vs PC2 (HBL1 only)") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC12
+fig_PC13 <- ggplot(pca_data_HBL1) + 
+  geom_point(aes(x = PC1, y = PC3, shape = stimulus, color = inhib_text_new), size = 3, alpha = 0.8) + 
+  # facet_grid(cell_line~inhibitor) +
+  # scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  scale_color_manual(values = c("DMSO ctrl" = "grey", "100 uM iSYK" = "green", "100 uM iBTK" = "blue", "100 uM iNFkB" = "red")) +
+  xlab(paste0("PC1: ", expl_var_HBL1[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_HBL1[3], "% variance")) + 
+  ggtitle("PC1 vs PC3") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC13
+fig_PC23 <- ggplot(pca_data_HBL1) + 
+  geom_point(aes(x = PC2, y = PC3, shape = stimulus, color = inhib_text_new), size = 3, alpha = 0.8) + 
+  # facet_grid(cell_line~inhibitor) +
+  # scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  scale_color_manual(values = c("DMSO ctrl" = "grey", "100 uM iSYK" = "green", "100 uM iBTK" = "blue", "100 uM iNFkB" = "red")) +
+  xlab(paste0("PC2: ", expl_var_HBL1[2], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_HBL1[3], "% variance")) + 
+  ggtitle("PC2 vs PC3") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig_PC23
+
+fig <- plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3, align = "h", rel_widths = c(1, 1, 1.5))
+print(fig)
+```
+
+```{r Facto_3D_HBL1s}
+# 3D scatter plot of PC1-3
+# stimulus
+fig <- plot_ly(pca_data_HBL1, x = ~PC1, y = ~PC2, z = ~PC3, color = ~stimulus, colors = colors_stim) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_HBL1[1:3])))
+fig
+
+# inhibitor
+fig <- plot_ly(pca_data_HBL1, x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_text_new, colors = c("DMSO ctrl" = "grey", "100 uM iSYK" = "green", "100 uM iBTK" = "blue", "100 uM iNFkB" = "red")) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_HBL1[1:3])))
+fig
+
+# inhib_conc
+fig <- plot_ly(arrange(pca_data_HBL1, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc, colors = colors_blue9[c(2, 3, 5, 7, 9)]) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_HBL1[1:3])))
+fig
+
+# inhib_conc_text
+fig <- plot_ly(arrange(pca_data_HBL1, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc_text, colors = colors_inhib_conc) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_HBL1[1:3])))
+fig
+```
+
+#### UMAP visualisation
+```{r Facto_UMAP_PCAs}
+# Data
+pca_data_5PC <- as.data.frame(indiv_HBL1$coord[, 1:5]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC53 = Dim.5) %>% 
+  left_join(coldata)
+
+# UMAP data reduction
+umap_pca <- umap::umap(as.data.frame(indiv_HBL1$coord[, 1:5]))
+# umap.defaults
+# head(umap_pca$layout)
+umap_pca_ann <- as.data.frame(umap_pca$layout) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(UMAP1 = V1, UMAP2 = V2) %>% 
+  left_join(coldata)
+
+# Basic fig of everything
+fig <- ggplot(umap_pca_ann, aes(x = UMAP1, y = UMAP2)) + 
+  geom_point(aes(shape = stimulus, color = inhib_text_new), size = 2) + 
+  scale_color_manual(values = c("DMSO ctrl" = "grey", "100 uM iSYK" = "green", "100 uM iBTK" = "blue", "100 uM iNFkB" = "red")) +
+  ggtitle("Normalised counts\nUMAP with PC1-5") +
+  theme_bw() +
+  textsize_small
+fig
+```
+
+### OCI-Ly8 samples
+
+PCA with only the OCI-Ly8 samples
+
+```{r Facto_data_Ly8}
+# Prepare data for FactoMineR package
+# cts: dataframe with wells as row names, proteins as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- data_well_all  %>%
+  filter(counts >= 1 & cell_line == "OCI-Ly8") %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  filter(!is.na(counts)) %>%
+  spread(target_nospace, counts) %>%
+  replace(is.na(.), 0)
+
+cts <- column_to_rownames(cts, "plate_well")
+# cts2 <- as.matrix(as.data.frame(cts), row_names = TRUE)
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+```
+
+```{r Facto_results_Ly8}
+# Results
+results_Ly8 <- PCA(cts, scale.unit = FALSE, ncp = 5, graph = FALSE)
+
+# Percentage variance explained by each PC
+expl_var_Ly8 <- as.data.frame(get_eigenvalue(results_Ly8)) %>%
+  rownames_to_column("PC") %>%
+  pull(var = variance.percent, name = PC) %>%
+  round(digits = 1)
+
+# Results focused on variables (proteins)
+variab_Ly8 <- get_pca_var(results_Ly8) 
+# head(variab$contrib)
+
+# Results focused on individuals (wells)
+indiv_Ly8 <- get_pca_ind(results_Ly8) 
+# head(indiv$contrib)
+pca_data_Ly8 <- as.data.frame(indiv_Ly8$coord[, 1:3]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3) %>% 
+  left_join(coldata)
+```
+
+```{r Facto_vis_Ly8}
+# Variance explained by each PC (eigenvalues)
+fviz_eig(results_Ly8, addlabels = TRUE)
+
+# fviz_pca_var(results_Ly8, col.var = "black")
+
+# Quality of representation for variables
+# corrplot(variab_Ly8$cos2, is.corr = FALSE)
+# corrplot(variab_Ly8$contrib, is.corr = FALSE)
+
+contrib_2.5p <- as.data.frame(variab_Ly8$contrib) %>%
+  # rownames_to_column("target_nospace") %>%
+  filter(Dim.1 >= 2.5 | Dim.2 >= 2.5 | Dim.3 >= 2.5) %>% # | Dim.4 >= 1 | Dim.5 >= 1
+  dplyr::rename(PC1 = Dim.1, PC2 =  Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC5 = Dim.5) %>%
+  dplyr::select(c(PC1, PC2, PC3)) %>%
+  as.matrix()
+  # filter_all(any_vars(.>1))
+corrplot(contrib_2.5p, is.corr = FALSE, method = "circle", outline = TRUE, 
+         tl.col = "black", cl.ratio = 0.75, cl.offset = 1, 
+         title = "Protein contributions to PC (>2.5% in any PC)(OCI-Ly8 only)")
+
+# Top10 contributing proteins to PC1-3 
+fig_PC1 <- fviz_contrib(results_Ly8, choice = "var", axes = 1, top = 10)
+fig_PC2 <- fviz_contrib(results_Ly8, choice = "var", axes = 2, top = 10)
+fig_PC3 <- fviz_contrib(results_Ly8, choice = "var", axes = 3, top = 10)
+plot_grid(fig_PC1, fig_PC2, fig_PC3, ncol = 3)
+
+# fviz_pca_ind(results_Ly8,
+#              axes = c(1, 2),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus), 
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_Ly8,
+#              axes = c(1, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus), 
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_Ly8,
+#              axes = c(2, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus), 
+#              addEllipses = TRUE)
+# plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3)
+```
+
+```{r Facto_2D_Ly8, fig.height=8, fig.width=16}
+# pca_data_Ly8
+fig_PC12 <- ggplot(pca_data_Ly8) + 
+  geom_point(aes(x = PC1, y = PC2, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC2: ", expl_var_all[2], "% variance")) + 
+  ggtitle("PC1 vs PC2 (OCI-Ly8 only)") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC12
+fig_PC13 <- ggplot(pca_data_Ly8) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC1 vs PC3") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC13
+fig_PC23 <- ggplot(pca_data_Ly8) + 
+  geom_point(aes(x = PC2, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC2: ", expl_var_all[2], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC2 vs PC3") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig_PC23
+
+fig <- plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3, align = "h", rel_widths = c(1, 1, 1.5))
+print(fig)
+```
+
+```{r Facto_3D_Ly8}
+# 3D scatter plot of PC1-3
+# stimulus
+fig <- plot_ly(pca_data_Ly8, x = ~PC1, y = ~PC2, z = ~PC3, color = ~stimulus, colors = colors_stim) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_Ly8[1:3])))
+fig
+
+# # inhibitor
+# fig <- plot_ly(pca_data_Ly8, x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhibitor, colors = colors_inhib) %>%
+#   add_markers(size = 12) %>%
+#   layout(title = paste("Variance explained:", sum(expl_var_Ly8[1:3])))
+# fig
+
+# inhib_conc
+fig <- plot_ly(arrange(pca_data_Ly8, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc, colors = colors_blue9[c(2, 3, 5, 7, 9)]) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_Ly8[1:3])))
+fig
+
+# inhib_conc_text
+fig <- plot_ly(arrange(pca_data_Ly8, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhib_conc_text, colors = colors_inhib_conc) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", sum(expl_var_Ly8[1:3])))
+fig
+```
+
+
+### iSYK samples
+
+PCA with only the iSYK samples
+
+```{r Facto_data_iSYK}
+# Prepare data for FactoMineR package
+# cts: dataframe with wells as row names, proteins as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- data_well_all  %>%
+  filter(counts >= 1 & inhibitor == "iSYK") %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  filter(!is.na(counts)) %>%
+  spread(target_nospace, counts) %>%
+  replace(is.na(.), 0)
+
+cts <- column_to_rownames(cts, "plate_well")
+# cts2 <- as.matrix(as.data.frame(cts), row_names = TRUE)
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+```
+
+```{r Facto_results_iSYK}
+# Results
+results_iSYK <- PCA(cts, scale.unit = FALSE, ncp = 5, graph = FALSE)
+
+# Percentage variance explained by each PC
+expl_var_iSYK <- as.data.frame(get_eigenvalue(results_iSYK)) %>%
+  rownames_to_column("PC") %>%
+  pull(var = variance.percent, name = PC) %>%
+  round(digits = 1)
+
+# Results focused on variables (proteins)
+variab_iSYK <- get_pca_var(results_iSYK) 
+# head(variab$contrib)
+
+# Results focused on individuals (wells)
+indiv_iSYK <- get_pca_ind(results_iSYK) 
+# head(indiv$contrib)
+pca_data_iSYK <- as.data.frame(indiv_iSYK$coord[, 1:3]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3) %>% 
+  left_join(coldata)
+```
+
+```{r Facto_vis_iSYK}
+# Variance explained by each PC (eigenvalues)
+fviz_eig(results_iSYK, addlabels = TRUE)
+
+# fviz_pca_var(results_iSYK, col.var = "black")
+
+# Quality of representation for variables
+# corrplot(variab_iSYK$cos2, is.corr = FALSE)
+# corrplot(variab_iSYK$contrib, is.corr = FALSE)
+
+contrib_2.5p <- as.data.frame(variab_iSYK$contrib) %>%
+  # rownames_to_column("target_nospace") %>%
+  filter(Dim.1 >= 2.5 | Dim.2 >= 2.5 | Dim.3 >= 2.5) %>% # | Dim.4 >= 1 | Dim.5 >= 1
+  dplyr::rename(PC1 = Dim.1, PC2 =  Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC5 = Dim.5) %>%
+  dplyr::select(c(PC1, PC2, PC3)) %>%
+  as.matrix()
+  # filter_all(any_vars(.>1))
+corrplot(contrib_2.5p, is.corr = FALSE, method = "circle", outline = TRUE, 
+         tl.col = "black", cl.ratio = 0.75, cl.offset = 1, 
+         title = "Protein contributions to PC (>2.5% in any PC)(iSYK only)")
+
+# Top10 contributing proteins to PC1-3 
+fig_PC1 <- fviz_contrib(results_iSYK, choice = "var", axes = 1, top = 10)
+fig_PC2 <- fviz_contrib(results_iSYK, choice = "var", axes = 2, top = 10)
+fig_PC3 <- fviz_contrib(results_iSYK, choice = "var", axes = 3, top = 10)
+plot_grid(fig_PC1, fig_PC2, fig_PC3, ncol = 3)
+
+# fviz_pca_ind(results_iSYK,
+#              axes = c(1, 2),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_iSYK,
+#              axes = c(1, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_iSYK,
+#              axes = c(2, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3)
+```
+
+```{r Facto_2D_iSYK, fig.height=8, fig.width=16}
+# pca_data_iSYK
+fig_PC12 <- ggplot(pca_data_iSYK) + 
+  geom_point(aes(x = PC1, y = PC2, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC2: ", expl_var_all[2], "% variance")) + 
+  ggtitle("PC1 vs PC2 (iSYK only)") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC12
+fig_PC13 <- ggplot(pca_data_iSYK) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC1 vs PC3") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC13
+fig_PC23 <- ggplot(pca_data_iSYK) + 
+  geom_point(aes(x = PC2, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC2: ", expl_var_all[2], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC2 vs PC3") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig_PC23
+
+fig <- plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3, align = "h", rel_widths = c(1, 1, 1.5))
+print(fig)
+```
+
+### iBTK samples
+
+PCA with only the iBTK samples
+
+```{r Facto_data_iBTK}
+# Prepare data for FactoMineR package
+# cts: dataframe with wells as row names, proteins as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- data_well_all  %>%
+  filter(counts >= 1 & inhibitor == "iBTK") %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  filter(!is.na(counts)) %>%
+  spread(target_nospace, counts) %>%
+  replace(is.na(.), 0)
+
+cts <- column_to_rownames(cts, "plate_well")
+# cts2 <- as.matrix(as.data.frame(cts), row_names = TRUE)
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+```
+
+```{r Facto_results_iBTK}
+# Results
+results_iBTK <- PCA(cts, scale.unit = FALSE, ncp = 5, graph = FALSE)
+
+# Percentage variance explained by each PC
+expl_var_iBTK <- as.data.frame(get_eigenvalue(results_iBTK)) %>%
+  rownames_to_column("PC") %>%
+  pull(var = variance.percent, name = PC) %>%
+  round(digits = 1)
+
+# Results focused on variables (proteins)
+variab_iBTK <- get_pca_var(results_iBTK) 
+# head(variab$contrib)
+
+# Results focused on individuals (wells)
+indiv_iBTK <- get_pca_ind(results_iBTK) 
+# head(indiv$contrib)
+pca_data_iBTK <- as.data.frame(indiv_iBTK$coord[, 1:3]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3) %>% 
+  left_join(coldata)
+```
+
+```{r Facto_vis_iBTK}
+# Variance explained by each PC (eigenvalues)
+fviz_eig(results_iBTK, addlabels = TRUE)
+
+# fviz_pca_var(results_iBTK, col.var = "black")
+
+# Quality of representation for variables
+# corrplot(variab_iBTK$cos2, is.corr = FALSE)
+# corrplot(variab_iBTK$contrib, is.corr = FALSE)
+
+contrib_2.5p <- as.data.frame(variab_iBTK$contrib) %>%
+  # rownames_to_column("target_nospace") %>%
+  filter(Dim.1 >= 2.5 | Dim.2 >= 2.5 | Dim.3 >= 2.5) %>% # | Dim.4 >= 1 | Dim.5 >= 1
+  dplyr::rename(PC1 = Dim.1, PC2 =  Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC5 = Dim.5) %>%
+  dplyr::select(c(PC1, PC2, PC3)) %>%
+  as.matrix()
+  # filter_all(any_vars(.>1))
+corrplot(contrib_2.5p, is.corr = FALSE, method = "circle", outline = TRUE, 
+         tl.col = "black", cl.ratio = 0.75, cl.offset = 1, 
+         title = "Protein contributions to PC (>2.5% in any PC)(iBTK only)")
+
+# Top10 contributing proteins to PC1-3 
+fig_PC1 <- fviz_contrib(results_iBTK, choice = "var", axes = 1, top = 10)
+fig_PC2 <- fviz_contrib(results_iBTK, choice = "var", axes = 2, top = 10)
+fig_PC3 <- fviz_contrib(results_iBTK, choice = "var", axes = 3, top = 10)
+plot_grid(fig_PC1, fig_PC2, fig_PC3, ncol = 3)
+
+# fviz_pca_ind(results_iBTK,
+#              axes = c(1, 2),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_iBTK,
+#              axes = c(1, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_iBTK,
+#              axes = c(2, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3)
+```
+
+```{r Facto_2D_iBTK, fig.height=8, fig.width=16}
+# pca_data_iBTK
+fig_PC12 <- ggplot(pca_data_iBTK) + 
+  geom_point(aes(x = PC1, y = PC2, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC2: ", expl_var_all[2], "% variance")) + 
+  ggtitle("PC1 vs PC2 (iBTK only)") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC12
+fig_PC13 <- ggplot(pca_data_iBTK) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC1 vs PC3") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC13
+fig_PC23 <- ggplot(pca_data_iBTK) + 
+  geom_point(aes(x = PC2, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC2: ", expl_var_all[2], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC2 vs PC3") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig_PC23
+
+fig <- plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3, align = "h", rel_widths = c(1, 1, 1.5))
+print(fig)
+```
+
+
+### iNFkB samples
+
+PCA with only the iNFkB samples
+
+```{r Facto_data_iNFkB}
+# Prepare data for FactoMineR package
+# cts: dataframe with wells as row names, proteins as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- data_well_all  %>%
+  filter(counts >= 1 & inhibitor == "iNFkB") %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  filter(!is.na(counts)) %>%
+  spread(target_nospace, counts) %>%
+  replace(is.na(.), 0)
+
+cts <- column_to_rownames(cts, "plate_well")
+# cts2 <- as.matrix(as.data.frame(cts), row_names = TRUE)
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+```
+
+```{r Facto_results_iNFkB}
+# Results
+results_iNFkB <- PCA(cts, scale.unit = FALSE, ncp = 5, graph = FALSE)
+
+# Percentage variance explained by each PC
+expl_var_iNFkB <- as.data.frame(get_eigenvalue(results_iNFkB)) %>%
+  rownames_to_column("PC") %>%
+  pull(var = variance.percent, name = PC) %>%
+  round(digits = 1)
+
+# Results focused on variables (proteins)
+variab_iNFkB <- get_pca_var(results_iNFkB) 
+# head(variab$contrib)
+
+# Results focused on individuals (wells)
+indiv_iNFkB <- get_pca_ind(results_iNFkB) 
+# head(indiv$contrib)
+pca_data_iNFkB <- as.data.frame(indiv_iNFkB$coord[, 1:3]) %>%
+  rownames_to_column("plate_well") %>%
+  dplyr::rename(PC1 = Dim.1, PC2 = Dim.2, PC3 = Dim.3) %>% 
+  left_join(coldata)
+```
+
+```{r Facto_vis_iNFkB}
+# Variance explained by each PC (eigenvalues)
+fviz_eig(results_iNFkB, addlabels = TRUE)
+
+# fviz_pca_var(results_iNFkB, col.var = "black")
+
+# Quality of representation for variables
+# corrplot(variab_iNFkB$cos2, is.corr = FALSE)
+# corrplot(variab_iNFkB$contrib, is.corr = FALSE)
+
+contrib_2.5p <- as.data.frame(variab_iNFkB$contrib) %>%
+  # rownames_to_column("target_nospace") %>%
+  filter(Dim.1 >= 2.5 | Dim.2 >= 2.5 | Dim.3 >= 2.5) %>% # | Dim.4 >= 1 | Dim.5 >= 1
+  dplyr::rename(PC1 = Dim.1, PC2 =  Dim.2, PC3 = Dim.3, PC4 = Dim.4, PC5 = Dim.5) %>%
+  dplyr::select(c(PC1, PC2, PC3)) %>%
+  as.matrix()
+  # filter_all(any_vars(.>1))
+corrplot(contrib_2.5p, is.corr = FALSE, method = "circle", outline = TRUE, 
+         tl.col = "black", cl.ratio = 0.75, cl.offset = 1, 
+         title = "Protein contributions to PC (>2.5% in any PC)(iNFkB only)")
+
+# Top10 contributing proteins to PC1-3 
+fig_PC1 <- fviz_contrib(results_iNFkB, choice = "var", axes = 1, top = 10)
+fig_PC2 <- fviz_contrib(results_iNFkB, choice = "var", axes = 2, top = 10)
+fig_PC3 <- fviz_contrib(results_iNFkB, choice = "var", axes = 3, top = 10)
+plot_grid(fig_PC1, fig_PC2, fig_PC3, ncol = 3)
+
+# fviz_pca_ind(results_iNFkB,
+#              axes = c(1, 2),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_iNFkB,
+#              axes = c(1, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# fviz_pca_ind(results_iNFkB,
+#              axes = c(2, 3),
+#              geom.ind = "point",
+#              mean.point = FALSE,
+#              col.ind = paste(coldata$cell_line, coldata$stimulus),
+#              addEllipses = TRUE)
+# plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3)
+```
+
+```{r Facto_2D_iNFkB, fig.height=8, fig.width=16}
+# pca_data_iNFkB
+fig_PC12 <- ggplot(pca_data_iNFkB) + 
+  geom_point(aes(x = PC1, y = PC2, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC2: ", expl_var_all[2], "% variance")) + 
+  ggtitle("PC1 vs PC2 (iNFkB only)") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC12
+fig_PC13 <- ggplot(pca_data_iNFkB) + 
+  geom_point(aes(x = PC1, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC1: ", expl_var_all[1], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC1 vs PC3") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+# fig_PC13
+fig_PC23 <- ggplot(pca_data_iNFkB) + 
+  geom_point(aes(x = PC2, y = PC3, shape = cell_line, color = paste(stimulus, "-", inhib_conc)), size = 3) + 
+  # facet_grid(cell_line~inhibitor) +
+  scale_color_manual(values = c(colors_orange9[3:7], colors_grey9[3:7]), name = "Stim - Inhib conc") +
+  xlab(paste0("PC2: ", expl_var_all[2], "% variance")) +
+  ylab(paste0("PC3: ", expl_var_all[3], "% variance")) + 
+  ggtitle("PC2 vs PC3") +
+  theme_bw() +
+  # theme(legend.position = "none") +
+  textsize_small
+# fig_PC23
+
+fig <- plot_grid(fig_PC12, fig_PC13, fig_PC23, ncol = 3, align = "h", rel_widths = c(1, 1, 1.5))
+print(fig)
+```
+
+
+
+## PCA via prcomp
+
+### All samples
+
+```{r prcomp_data}
+# Prepare data for prcomp package
+# cts: dataframe with wells as row names, proteins as column names, and count data as cell values
+# coldata: dataframe with wells as row names and all metadata as columns
+cts <- data_well_all  %>%
+  filter(counts >= 1) %>%
+  dplyr::select(target_nospace, plate_well, counts) %>%
+  filter(!is.na(counts)) %>%
+  spread(target_nospace, counts) %>%
+  replace(is.na(.), 0)
+
+cts <- column_to_rownames(cts, "plate_well")
+# cts2 <- as.matrix(as.data.frame(cts), row_names = TRUE)
+
+coldata <- data.frame(plate_well = rownames(cts)) %>%
+  left_join(distinct(dplyr::select(data_well_all, all_of(meta_cols)))) %>%
+  mutate(stimulus = factor(stimulus, levels = stim_DS108), 
+         cell_line = factor(cell_line, levels = cells_DS108), 
+         inhibitor = factor(inhibitor, levels = inhib_DS108), 
+         inhib_conc = factor(inhib_conc, levels = inhib_conc_DS108)) #If necessary, make factors of some metadata columns
+
+rownames(coldata) <- coldata$plate_well
+```
+
+```{r prcomp_results}
+# Results
+prcomp_results <- prcomp(cts)
+# summary(results_prcomp)
+components <- prcomp_results[["x"]]
+components <- data.frame(components)
+components$PC2 <- components$PC2
+components$PC3 <- -components$PC3
+prcomp_data <- components[, 1:3] %>%
+  rownames_to_column("plate_well") %>%
+  left_join(coldata)
+
+prcomp_expl_var <- (summary(prcomp_results)[["importance"]]['Proportion of Variance',]) * 100
+prcomp_expl_var3 <- sum(prcomp_expl_var[1:3])
+```
+
+```{r prcomp_plotly_2D, fig.height=10, fig.width=15}
+# 2D scatterplot of PC1-2
+# fig <- plot_ly(prcomp_data, x = ~PC1, y = ~PC2, color = ~stimulus, colors = colors_stim) %>%
+#   add_markers(size = 12)
+# fig
+
+fig12 <- ggplot(arrange(prcomp_data, inhibitor)) + 
+  geom_point(aes(x = PC1, y = PC2, color = inhib_conc_text, shape = stimulus), size = 2.5) + 
+  facet_wrap(~cell_line, ncol = 1) +
+  xlab(paste0("PC1: ", prcomp_expl_var[1], "% variance")) +
+  ylab(paste0("PC2: ", prcomp_expl_var[2], "% variance")) + 
+  scale_color_manual(values = colors_inhib_conc, breaks = inhib_full_DS108) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+fig13 <- ggplot(arrange(prcomp_data, inhibitor)) + 
+  geom_point(aes(x = PC1, y = PC3, color = inhib_conc_text, shape = stimulus), size = 2.5) + 
+  facet_wrap(~cell_line, ncol = 1) +
+  xlab(paste0("PC1: ", prcomp_expl_var[1], "% variance")) +
+  ylab(paste0("PC3: ", prcomp_expl_var[3], "% variance")) + 
+  scale_color_manual(values = colors_inhib_conc, breaks = inhib_full_DS108) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+fig23 <- ggplot(arrange(prcomp_data, inhibitor)) + 
+  geom_point(aes(x = PC2, y = PC3, color = inhib_conc_text, shape = stimulus), size = 2.5) + 
+  facet_wrap(~cell_line, ncol = 1) +
+  xlab(paste0("PC2: ", prcomp_expl_var[2], "% variance")) +
+  ylab(paste0("PC3: ", prcomp_expl_var[3], "% variance")) + 
+  scale_color_manual(values = colors_inhib_conc, breaks = inhib_full_DS108) +
+  theme_bw() +
+  textsize_small
+fig <- plot_grid(fig12, fig13, fig23, ncol = 3)
+print(fig)
+
+fig12 <- ggplot(arrange(prcomp_data, inhibitor)) + 
+  geom_point(aes(x = PC1, y = PC2, color = paste(cell_line, inhib_conc), shape = stimulus), size = 2.5) + 
+  facet_wrap(~inhibitor, ncol = 1) +
+  xlab(paste0("PC1: ", prcomp_expl_var[1], "% variance")) +
+  ylab(paste0("PC2: ", prcomp_expl_var[2], "% variance")) + 
+  scale_color_manual(values = c(colors_pr9[c(3:7)], colors_yb9[c(3:7)])) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+fig13 <- ggplot(arrange(prcomp_data, inhibitor)) + 
+  geom_point(aes(x = PC1, y = PC3, color = paste(cell_line, inhib_conc), shape = stimulus), size = 2.5) + 
+  facet_wrap(~inhibitor, ncol = 1) +
+  xlab(paste0("PC1: ", prcomp_expl_var[1], "% variance")) +
+  ylab(paste0("PC3: ", prcomp_expl_var[3], "% variance")) + 
+  scale_color_manual(values = c(colors_pr9[c(3:7)], colors_yb9[c(3:7)])) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  textsize_small
+fig23 <- ggplot(arrange(prcomp_data, inhibitor)) + 
+  geom_point(aes(x = PC2, y = PC3, color = paste(cell_line, inhib_conc), shape = stimulus), size = 2.5) + 
+  facet_wrap(~inhibitor, ncol = 1) +
+  xlab(paste0("PC2: ", prcomp_expl_var[2], "% variance")) +
+  ylab(paste0("PC3: ", prcomp_expl_var[3], "% variance")) + 
+  scale_color_manual(values = c(colors_pr9[c(3:7)], colors_yb9[c(3:7)])) +
+  theme_bw() +
+  textsize_small
+fig <- plot_grid(fig12, fig13, fig23, ncol = 3)
+print(fig)
+
+for (cells in cells_DS108) {
+  fig12 <- ggplot(arrange(subset(prcomp_data, cell_line == cells), inhibitor)) + 
+    geom_point(aes(x = PC1, y = PC2, color = inhib_conc_text, shape = stimulus), size = 2.5) + 
+    facet_wrap(~inhibitor, ncol = 1) +
+    xlab(paste0("PC1: ", prcomp_expl_var[1], "% variance")) +
+    ylab(paste0("PC2: ", prcomp_expl_var[2], "% variance")) + 
+    ggtitle(cells) +
+    scale_color_manual(values = colors_inhib_conc, breaks = inhib_full_DS108) +
+    theme_bw() +
+    theme(legend.position = "none") +
+    textsize_small
+  fig13 <- ggplot(arrange(subset(prcomp_data, cell_line == cells), inhibitor)) + 
+    geom_point(aes(x = PC1, y = PC3, color = inhib_conc_text, shape = stimulus), size = 2.5) + 
+    facet_wrap(~inhibitor, ncol = 1) +
+    xlab(paste0("PC1: ", prcomp_expl_var[1], "% variance")) +
+    ylab(paste0("PC3: ", prcomp_expl_var[3], "% variance")) + 
+    scale_color_manual(values = colors_inhib_conc, breaks = inhib_full_DS108) +
+    theme_bw() +
+    theme(legend.position = "none") +
+    textsize_small
+  fig23 <- ggplot(arrange(subset(prcomp_data, cell_line == cells), inhibitor)) + 
+    geom_point(aes(x = PC2, y = PC3, color = inhib_conc_text, shape = stimulus), size = 2.5) + 
+    facet_wrap(~inhibitor, ncol = 1) +
+    xlab(paste0("PC2: ", prcomp_expl_var[2], "% variance")) +
+    ylab(paste0("PC3: ", prcomp_expl_var[3], "% variance")) + 
+    scale_color_manual(values = colors_inhib_conc, breaks = inhib_full_DS108) +
+    theme_bw() +
+    textsize_small
+  fig <- plot_grid(fig12, fig13, fig23, ncol = 3, align = "h")
+  print(fig)
+}
+```
+
+```{r prcomp_plotly_3D, eval=F}
+# 3D scatter plot of PC1-3
+# inhibitor
+fig <- plot_ly(prcomp_data, x = ~PC1, y = ~PC2, z = ~PC3, color = ~inhibitor, colors = colors_inhib) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", prcomp_expl_var3))
+fig
+# inhib_conc
+fig <- plot_ly(arrange(prcomp_data, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, shape = ~stimulus, color = ~inhib_conc, colors = colors_blue9[c(2, 3, 5, 7, 9)]) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", prcomp_expl_var3))
+fig
+# inhib_conc_text
+fig <- plot_ly(arrange(prcomp_data, inhibitor), x = ~PC1, y = ~PC2, z = ~PC3, shape = ~stimulus, color = ~inhib_conc_text, colors = colors_inhib_conc) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", prcomp_expl_var3))
+fig
+# stimulus
+fig <- plot_ly(prcomp_data, x = ~PC1, y = ~PC2, z = ~PC3, color = ~stimulus, colors = colors_stim) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", prcomp_expl_var3))
+fig
+# cell_line
+fig <- plot_ly(prcomp_data, x = ~PC1, y = ~PC2, z = ~PC3, color = ~cell_line, colors = colors_cell) %>%
+  add_markers(size = 12) %>%
+  layout(title = paste("Variance explained:", prcomp_expl_var3))
+fig
+
+# # Faceted 3D scatter plot
+# prcomp_data %>%
+#   arrange(inhibitor) %>%
+#   group_by(cell_line) %>%
+#   do(p = plot_ly(., x = ~PC1, y = ~PC2, z = ~PC3, type = "scatter", color = ~inhib_conc_text, colors = colors_inhib_conc)) %>%
+#   # add_markers(size = 12) %>%
+#   subplot(nrows = 1) #%>%
+#   # layout(title = paste("Variance explained:", expl_var))
+```
+
+```{r prcomp_rgl}
+fig <- plot3d(prcomp_data[, 2:4], col = colors_stim)
+fig
+```
+
+

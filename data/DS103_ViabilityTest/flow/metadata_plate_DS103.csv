@@ -1,0 +1,61 @@
+rowID,colID,wellID,sample,cell_line,inhibitor,concentration_uM,concentration_text,description,staining,protein_AF488,protein_BV421
+B,1,B01,1,HBL1,iNFkB,0,0 uM PBS,HBL1 - 0 uM PBS iSYK,yes,Ki-67,cCaspase 3 + cPARP
+B,2,B02,2,HBL1,iPI3Kd,0,0 uM PBS,HBL1 - 0 uM PBS iBTK,yes,Ki-67,cCaspase 3 + cPARP
+B,3,B03,3,HBL1,iBTK,0,0 uM PBS,HBL1 - 0 uM PBS iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+B,4,B04,4,HBL1,iSYK,0,0 uM PBS,HBL1 - 0 uM PBS iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+B,5,B05,5,BJAB,iNFkB,0,0 uM PBS,BJAB - 0 uM PBS iSYK,yes,Ki-67,cCaspase 3 + cPARP
+B,6,B06,6,BJAB,iPI3Kd,0,0 uM PBS,BJAB - 0 uM PBS iBTK,yes,Ki-67,cCaspase 3 + cPARP
+B,7,B07,7,BJAB,iBTK,0,0 uM PBS,BJAB - 0 uM PBS iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+B,8,B08,8,BJAB,iSYK,0,0 uM PBS,BJAB - 0 uM PBS iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+B,9,B09,9,OCI-Ly8,iNFkB,0,0 uM PBS,OCI-Ly8 - 0 uM PBS iSYK,yes,Ki-67,cCaspase 3 + cPARP
+B,10,B10,10,OCI-Ly8,iPI3Kd,0,0 uM PBS,OCI-Ly8 - 0 uM PBS iBTK,yes,Ki-67,cCaspase 3 + cPARP
+B,11,B11,11,OCI-Ly8,iBTK,0,0 uM PBS,OCI-Ly8 - 0 uM PBS iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+B,12,B12,12,OCI-Ly8,iSYK,0,0 uM PBS,OCI-Ly8 - 0 uM PBS iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+C,1,C01,13,HBL1,iNFkB,0,0 uM DMSO,HBL1 - 0 uM DMSO iSYK,yes,Ki-67,cCaspase 3 + cPARP
+C,2,C02,14,HBL1,iPI3Kd,0,0 uM DMSO,HBL1 - 0 uM DMSO iBTK,yes,Ki-67,cCaspase 3 + cPARP
+C,3,C03,15,HBL1,iBTK,0,0 uM DMSO,HBL1 - 0 uM DMSO iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+C,4,C04,16,HBL1,iSYK,0,0 uM DMSO,HBL1 - 0 uM DMSO iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+C,5,C05,17,BJAB,iNFkB,0,0 uM DMSO,BJAB - 0 uM DMSO iSYK,yes,Ki-67,cCaspase 3 + cPARP
+C,6,C06,18,BJAB,iPI3Kd,0,0 uM DMSO,BJAB - 0 uM DMSO iBTK,yes,Ki-67,cCaspase 3 + cPARP
+C,7,C07,19,BJAB,iBTK,0,0 uM DMSO,BJAB - 0 uM DMSO iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+C,8,C08,20,BJAB,iSYK,0,0 uM DMSO,BJAB - 0 uM DMSO iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+C,9,C09,21,OCI-Ly8,iNFkB,0,0 uM DMSO,OCI-Ly8 - 0 uM DMSO iSYK,yes,Ki-67,cCaspase 3 + cPARP
+C,10,C10,22,OCI-Ly8,iPI3Kd,0,0 uM DMSO,OCI-Ly8 - 0 uM DMSO iBTK,yes,Ki-67,cCaspase 3 + cPARP
+C,11,C11,23,OCI-Ly8,iBTK,0,0 uM DMSO,OCI-Ly8 - 0 uM DMSO iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+C,12,C12,24,OCI-Ly8,iSYK,0,0 uM DMSO,OCI-Ly8 - 0 uM DMSO iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+D,1,D01,25,HBL1,iNFkB,0.1,0.1 uM,HBL1 - 0.1 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+D,2,D02,26,HBL1,iPI3Kd,0.1,0.1 uM,HBL1 - 0.1 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+D,3,D03,27,HBL1,iBTK,0.1,0.1 uM,HBL1 - 0.1 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+D,4,D04,28,HBL1,iSYK,0.1,0.1 uM,HBL1 - 0.1 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+D,5,D05,29,BJAB,iNFkB,0.1,0.1 uM,BJAB - 0.1 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+D,6,D06,30,BJAB,iPI3Kd,0.1,0.1 uM,BJAB - 0.1 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+D,7,D07,31,BJAB,iBTK,0.1,0.1 uM,BJAB - 0.1 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+D,8,D08,32,BJAB,iSYK,0.1,0.1 uM,BJAB - 0.1 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+D,9,D09,33,OCI-Ly8,iNFkB,0.1,0.1 uM,OCI-Ly8 - 0.1 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+D,10,D10,34,OCI-Ly8,iPI3Kd,0.1,0.1 uM,OCI-Ly8 - 0.1 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+D,11,D11,35,OCI-Ly8,iBTK,0.1,0.1 uM,OCI-Ly8 - 0.1 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+D,12,D12,36,OCI-Ly8,iSYK,0.1,0.1 uM,OCI-Ly8 - 0.1 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+E,1,E01,37,HBL1,iNFkB,1,1 uM,HBL1 - 1 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+E,2,E02,38,HBL1,iPI3Kd,1,1 uM,HBL1 - 1 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+E,3,E03,39,HBL1,iBTK,1,1 uM,HBL1 - 1 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+E,4,E04,40,HBL1,iSYK,1,1 uM,HBL1 - 1 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+E,5,E05,41,BJAB,iNFkB,1,1 uM,BJAB - 1 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+E,6,E06,42,BJAB,iPI3Kd,1,1 uM,BJAB - 1 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+E,7,E07,43,BJAB,iBTK,1,1 uM,BJAB - 1 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+E,8,E08,44,BJAB,iSYK,1,1 uM,BJAB - 1 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+E,9,E09,45,OCI-Ly8,iNFkB,1,1 uM,OCI-Ly8 - 1 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+E,10,E10,46,OCI-Ly8,iPI3Kd,1,1 uM,OCI-Ly8 - 1 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+E,11,E11,47,OCI-Ly8,iBTK,1,1 uM,OCI-Ly8 - 1 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+E,12,E12,48,OCI-Ly8,iSYK,1,1 uM,OCI-Ly8 - 1 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+F,1,F01,49,HBL1,iNFkB,10,10 uM,HBL1 - 10 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+F,2,F02,50,HBL1,iPI3Kd,10,10 uM,HBL1 - 10 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+F,3,F03,51,HBL1,iBTK,10,10 uM,HBL1 - 10 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+F,4,F04,52,HBL1,iSYK,10,10 uM,HBL1 - 10 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+F,5,F05,53,BJAB,iNFkB,10,10 uM,BJAB - 10 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+F,6,F06,54,BJAB,iPI3Kd,10,10 uM,BJAB - 10 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+F,7,F07,55,BJAB,iBTK,10,10 uM,BJAB - 10 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+F,8,F08,56,BJAB,iSYK,10,10 uM,BJAB - 10 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP
+F,9,F09,57,OCI-Ly8,iNFkB,10,10 uM,OCI-Ly8 - 10 uM iSYK,yes,Ki-67,cCaspase 3 + cPARP
+F,10,F10,58,OCI-Ly8,iPI3Kd,10,10 uM,OCI-Ly8 - 10 uM iBTK,yes,Ki-67,cCaspase 3 + cPARP
+F,11,F11,59,OCI-Ly8,iBTK,10,10 uM,OCI-Ly8 - 10 uM iPI3Kd,yes,Ki-67,cCaspase 3 + cPARP
+F,12,F12,60,OCI-Ly8,iSYK,10,10 uM,OCI-Ly8 - 10 uM iNFkB,yes,Ki-67,cCaspase 3 + cPARP

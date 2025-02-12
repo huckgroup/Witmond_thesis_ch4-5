@@ -1,0 +1,17 @@
+rowID,colID,wellID,sample,cell_line,stimulus,inhibitor,inhib_conc,iSYK_conc_uM,iBTK_conc_uM,iNFkB_conc_uM,description,staining,protein_PE,protein_AF647,protein_AF488,protein_BV421
+A,1,A01,1,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,0 + 0 + 0 uM,0,0,0,HBL1 0 + 0 + 0 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,1,B01,2,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,1 + 1 + 1 uM,1,1,1,HBL1 1 + 1 + 1 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,1,C01,3,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,2.5 + 2.5 + 2.5 uM,2.5,2.5,2.5,HBL1 2.5 + 2.5 + 2.5 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,1,D01,4,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,10 + 10 + 10 uM,10,10,10,HBL1 10 + 10 + 10 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+E,1,E01,5,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,10 + 0 + 0 uM,10,0,0,HBL1 10 + 0 + 0 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+F,1,F01,6,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,0 + 10 + 0 uM,0,10,0,HBL1 0 + 10 + 0 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+G,1,G01,7,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,0 + 0 + 10 uM,0,0,10,HBL1 0 + 0 + 10 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+H,1,H01,8,HBL1,PBS,iSYK+iBTK+iNFkB,0 + 0 + 0 uM,0,0,0,HBL1 0 + 0 + 0 uM iSYK+iBTK+iNFkB PBS,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+A,2,A02,9,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,2.5 + 2.5 + 0 uM,2.5,2.5,0,HBL1 2.5 + 2.5 + 0 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,2,B02,10,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,2.5 + 0 + 2.5 uM,2.5,0,2.5,HBL1 2.5 + 0 + 2.5 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,2,C02,11,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,0 + 2.5 + 2.5 uM,0,2.5,2.5,HBL1 0 + 2.5 + 2.5 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,2,D02,12,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,5 + 1 + 1 uM,5,1,1,HBL1 5 + 1 + 1 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+E,2,E02,13,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,1 + 5 + 1 uM,1,5,1,HBL1 1 + 5 + 1 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+F,2,F02,14,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,1 + 1 + 5 uM,1,1,5,HBL1 1 + 1 + 5 uM iSYK+iBTK+iNFkB aIg+H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+G,2,G02,15,HBL1,aIg+H2O2,iSYK+iBTK+iNFkB,10 + 10 + 10 uM,10,10,10,HBL1 10 + 10 + 10 uM iSYK+iBTK+iNFkB aIg+H2O2 (nostain),no,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+H,2,H02,16,HBL1,PBS,iSYK+iBTK+iNFkB,10 + 10 + 10 uM,10,10,10,HBL1 10 + 10 + 10 uM iSYK+iBTK+iNFkB PBS,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP

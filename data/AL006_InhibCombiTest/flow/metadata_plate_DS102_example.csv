@@ -1,0 +1,37 @@
+rowID,colID,wellID,sample,cell_line,stimulus,conc,conc_text,description,staining,protein_PE,protein_AF647,protein_AF488,protein_BV421
+B,3,B03,3,HBL1,aIg,5,5 ug/mL aIg,HBL1 - 5 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,3,C03,15,BJAB,aIg,5,5 ug/mL aIg,BJAB - 5 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,3,D03,27,OCI-Ly8,aIg,5,5 ug/mL aIg,OCI-Ly8 - 5 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,4,B04,4,HBL1,aIg,10,10 ug/mL aIg,HBL1 - 10 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,4,C04,16,BJAB,aIg,10,10 ug/mL aIg,BJAB - 10 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,4,D04,28,OCI-Ly8,aIg,10,10 ug/mL aIg,OCI-Ly8 - 10 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,5,B05,5,HBL1,aIg,20,20 ug/mL aIg,HBL1 - 20 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,5,C05,17,BJAB,aIg,20,20 ug/mL aIg,BJAB - 20 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,5,D05,29,OCI-Ly8,aIg,20,20 ug/mL aIg,OCI-Ly8 - 20 ug/mL aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,6,B06,6,HBL1,H2O2,3.3,3.3 mM H2O2,HBL1 - 3.3 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,6,C06,18,BJAB,H2O2,3.3,3.3 mM H2O2,BJAB - 3.3 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,6,D06,30,OCI-Ly8,H2O2,3.3,3.3 mM H2O2,OCI-Ly8 - 3.3 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,7,B07,7,HBL1,H2O2,10,10 mM H2O2,HBL1 - 10 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,7,C07,19,BJAB,H2O2,10,10 mM H2O2,BJAB - 10 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,7,D07,31,OCI-Ly8,H2O2,10,10 mM H2O2,OCI-Ly8 - 10 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,8,B08,8,HBL1,H2O2,20,20 mM H2O2,HBL1 - 20 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,8,C08,20,BJAB,H2O2,20,20 mM H2O2,BJAB - 20 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,8,D08,32,OCI-Ly8,H2O2,20,20 mM H2O2,OCI-Ly8 - 20 mM H2O2,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,9,B09,9,HBL1,H2O2 + aIg,3.3 + 10,3.3 H2O2 + 10 aIg,HBL1 - 3.3 H2O2 + 10 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,9,C09,21,BJAB,H2O2 + aIg,3.3 + 10,3.3 H2O2 + 10 aIg,BJAB - 3.3 H2O2 + 10 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,9,D09,33,OCI-Ly8,H2O2 + aIg,3.3 + 10,3.3 H2O2 + 10 aIg,OCI-Ly8 - 3.3 H2O2 + 10 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,10,B10,10,HBL1,H2O2 + aIg,10 + 10,10 H2O2 + 10 aIg,HBL1 - 10 H2O2 + 10 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,10,C10,22,BJAB,H2O2 + aIg,10 + 10,10 H2O2 + 10 aIg,BJAB - 10 H2O2 + 10 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,10,D10,34,OCI-Ly8,H2O2 + aIg,10 + 10,10 H2O2 + 10 aIg,OCI-Ly8 - 10 H2O2 + 10 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,11,B11,11,HBL1,H2O2 + aIg,10 + 20,10 H2O2 + 20 aIg,HBL1 - 10 H2O2 + 20 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,11,C11,23,BJAB,H2O2 + aIg,10 + 20,10 H2O2 + 20 aIg,BJAB - 10 H2O2 + 20 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,11,D11,35,OCI-Ly8,H2O2 + aIg,10 + 20,10 H2O2 + 20 aIg,OCI-Ly8 - 10 H2O2 + 20 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,12,B12,12,HBL1,H2O2 + aIg,15 + 15,15 H2O2 + 15 aIg,HBL1 - 15 H2O2 + 15 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,12,C12,24,BJAB,H2O2 + aIg,15 + 15,15 H2O2 + 15 aIg,BJAB - 15 H2O2 + 15 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,12,D12,36,OCI-Ly8,H2O2 + aIg,15 + 15,15 H2O2 + 15 aIg,OCI-Ly8 - 15 H2O2 + 15 aIg,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+B,1,B01,1,HBL1,PBS,0,PBS,HBL1 - PBS,no,No stain,No stain,No stain,No stain
+C,1,C01,13,BJAB,PBS,0,PBS,BJAB - PBS,no,No stain,No stain,No stain,No stain
+D,1,D01,25,OCI-Ly8,PBS,0,PBS,OCI-Ly8 - PBS,no,No stain,No stain,No stain,No stain
+B,2,B02,2,HBL1,PBS,0,PBS,HBL1 - PBS,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+C,2,C02,14,BJAB,PBS,0,PBS,BJAB - PBS,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
+D,2,D02,26,OCI-Ly8,PBS,0,PBS,OCI-Ly8 - PBS,yes,pSYK (Y525/Y526),pPLCy2 (Y759),pCD79a (Y182),cCaspase 3 + cPARP
