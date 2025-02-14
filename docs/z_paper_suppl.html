@@ -481,7 +481,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-12
+<strong>Last updated:</strong> 2025-02-14
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -612,13 +612,13 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong1ffbd94">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong94c226d">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 1ffbd94
+aria-hidden="true"></span> <strong>Repository version:</strong> 94c226d
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong1ffbd94"
+<div id="strongRepositoryversionstrong94c226d"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -627,7 +627,7 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 1ffbd94.
+The results in this page were generated with repository version 94c226d.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -711,6 +711,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+94c226d
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-14
+</td>
+<td>
+Updated fig S2
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -901,10 +935,7 @@ png_suppl_figS1_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/
   # magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
   magick::image_ggplot(interpolate = TRUE)
 # png_suppl_figS1_legend</code></pre>
-</div>
-</div>
-<div id="combined-fig" class="section level3">
-<h3>Combined fig</h3>
+<p>l### Combined fig</p>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS1 &lt;- plot_grid(png_suppl_figS1, png_suppl_figS1_legend, ncol = 1, rel_heights = c(8, 1), label_size = 10)
 suppl_figS1</code></pre>
@@ -971,14 +1002,16 @@ rm(list = ls(pattern = &quot;figS1&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb) max used  (Mb)
-Ncells 10602175 566.3   19604257 1047.0 12335743 658.8
-Vcells 19458613 148.5   31982714  244.1 26548076 202.6</code></pre>
+Ncells 10602252 566.3   19724988 1053.5 12756670 681.3
+Vcells 19459309 148.5   31335255  239.1 30036322 229.2</code></pre>
+</div>
 </div>
 </div>
 <div id="suppl.-figure-s2" class="section level2">
 <h2>Suppl. figure S2</h2>
 <p><em>Increased activation upon treatment with both anti-Ig and H2O2
-combined compared to treatment with anti-Ig or H2O2 alone.</em></p>
+combined compared to treatment with anti-Ig or H2O2 alone without loss
+of viability.</em></p>
 <p>Input:</p>
 <ul>
 <li>DS102 phosphoflow data</li>
@@ -986,7 +1019,8 @@ combined compared to treatment with anti-Ig or H2O2 alone.</em></p>
 <div id="data" class="section level3">
 <h3>Data</h3>
 <pre class="r"><code>data_suppl_figS2 &lt;- read_csv(&quot;output/DS102_StimTest/flow_ann/flow_data_DS102.csv&quot;)
-medians_suppl_figS2 &lt;- read_csv(&quot;output/DS102_StimTest/flow_ann/flow_medians_DS102.csv&quot;)</code></pre>
+medians_suppl_figS2 &lt;- read_csv(&quot;output/DS102_StimTest/flow_ann/flow_medians_DS102.csv&quot;)
+counts_suppl_figS2 &lt;- read_csv(&quot;output/DS102_StimTest/flow_ann/gated_counts_DS102.csv&quot;)</code></pre>
 <pre class="r"><code>proteins_suppl_figS2 &lt;- c(&quot;pCD79a (Y182)&quot;, &quot;pSYK (Y525/Y526)&quot;) # &quot;pPLCy2 (Y759)&quot;
 stim_suppl_figS2 &lt;- c(&quot;aIg&quot;, &quot;H2O2&quot;, &quot;H2O2 + aIg&quot;)
 stim_labels_suppl_figS2 &lt;- c(&quot;Anti-Ig&quot;, &quot;H2O2&quot;, &quot;Combination\nAnti-Ig + H2O2&quot;)
@@ -999,9 +1033,22 @@ conc_labels_suppl_figS2 &lt;- c(&quot;PBS&quot;,
                              &quot;10 mM\nH2O2&quot;, &quot;20 mM\nH2O2&quot;,
                              &quot;15 anti-Ig +\n15 H2O2&quot;)
 colors_conc_suppl_figS2 &lt;- c(&quot;PBS&quot; = &quot;#737373&quot;, 
-                             &quot;10 ug/mL aIg&quot; = &quot;#a1d99b&quot;, &quot;20 ug/mL aIg&quot; = &quot;#74c476&quot;,
-                             &quot;10 mM H2O2&quot; = &quot;#98CAE1&quot;, &quot;20 mM H2O2&quot; = &quot;#6EA6CD&quot;, 
-                             &quot;15 H2O2 + 15 aIg&quot; = &quot;#FDB366&quot;)</code></pre>
+                             &quot;10 ug/mL aIg&quot; = &quot;#74c476&quot;, &quot;20 ug/mL aIg&quot; = &quot;#41ab5d&quot;,
+                             &quot;10 mM H2O2&quot; = &quot;#6EA6CD&quot;, &quot;20 mM H2O2&quot; = &quot;#4A7BB7&quot;, 
+                             &quot;15 H2O2 + 15 aIg&quot; = &quot;#DD3D2D&quot;)
+
+conc_suppl_figS2C &lt;- c(&quot;PBS&quot;, 
+                       &quot;5 ug/mL aIg&quot;, &quot;10 ug/mL aIg&quot;, &quot;20 ug/mL aIg&quot;,
+                       &quot;3.3 mM H2O2&quot;, &quot;10 mM H2O2&quot;, &quot;20 mM H2O2&quot;,
+                       &quot;3.3 H2O2 + 10 aIg&quot;, &quot;10 H2O2 + 10 aIg&quot;, &quot;10 H2O2 + 20 aIg&quot;, &quot;15 H2O2 + 15 aIg&quot;)
+conc_labels_suppl_figS2C &lt;- c(&quot;PBS&quot;, 
+                              &quot;5 ug/mL\nanti-Ig&quot;, &quot;10 ug/mL\nanti-Ig&quot;, &quot;20 ug/mL\nanti-Ig&quot;,
+                              &quot;3.3 mM\nH2O2&quot;, &quot;10 mM\nH2O2&quot;, &quot;20 mM\nH2O2&quot;,
+                              &quot;3.3 H2O2 +\n10 anti-Ig&quot;, &quot;10 H2O2 +\n10 anti-Ig&quot;, &quot;10 H2O2 +\n20 anti-Ig&quot;, &quot;15 H2O2 +\n15 anti-Ig&quot;)
+colors_conc_suppl_figS2C &lt;- c(&quot;PBS&quot; = &quot;#737373&quot;, 
+                             &quot;5 ug/mL aIg&quot; = &quot;#a1d99b&quot;, &quot;10 ug/mL aIg&quot; = &quot;#74c476&quot;, &quot;20 ug/mL aIg&quot; = &quot;#41ab5d&quot;,
+                             &quot;3.3 mM H2O2&quot; = &quot;#98CAE1&quot;, &quot;10 mM H2O2&quot; = &quot;#6EA6CD&quot;, &quot;20 mM H2O2&quot; = &quot;#4A7BB7&quot;, 
+                             &quot;3.3 H2O2 + 10 aIg&quot; = &quot;#FEDA8B&quot;, &quot;10 H2O2 + 10 aIg&quot; = &quot;#FDB366&quot;, &quot;10 H2O2 + 20 aIg&quot; = &quot;#F67A4B&quot;, &quot;15 H2O2 + 15 aIg&quot; = &quot;#DD3D2D&quot;)</code></pre>
 </div>
 <div id="panels-1" class="section level3 tabset">
 <h3 class="tabset">Panels</h3>
@@ -1279,11 +1326,41 @@ mwitmond
 </div>
 </div>
 </div>
+<div id="panel-c" class="section level4">
+<h4>Panel C</h4>
+<pre class="r"><code># Data
+metadata_suppl_figS2 &lt;- medians_suppl_figS2 %&gt;%
+  dplyr::select(c(plateID, wellID, sample, cell_line, stimulus, conc, conc_text, description, staining)) %&gt;%
+  distinct()
+counts_suppl_figS2C &lt;- counts_suppl_figS2 %&gt;%
+  subset(Population == &quot;/Debris/Singlets/Live&quot;) %&gt;%
+  dplyr::select(c(plateID, wellID, PercentRoot, PercentParent)) %&gt;%
+  left_join(metadata_suppl_figS2) %&gt;%
+  subset(staining == &quot;yes&quot; &amp; cell_line == &quot;HBL1&quot;)
+
+# Figure
+suppl_figS2_panelC &lt;- ggplot(counts_suppl_figS2C, 
+                             aes(x = factor(conc_text, levels = conc_suppl_figS2C, labels = conc_labels_suppl_figS2C), 
+                                 y = PercentRoot)) +
+  geom_point(aes(group = factor(conc_text, levels = conc_suppl_figS2C),
+                color = factor(conc_text, levels = conc_suppl_figS2C)), 
+             size = 2) +
+  facet_wrap(vars(factor(cell_line, labels = &quot;Viability&quot;)), ncol = 1) +
+  ylim(0, 100) +
+  scale_color_manual(values = colors_conc_suppl_figS2C, labels = conc_labels_suppl_figS2C, name = &quot;Stimulus&quot;) +
+  labs(y = &quot;% live cells\nof total events&quot;, x = &quot;&quot;) +
+  theme_bw() +
+  textsize_small +
+  theme(legend.position = &quot;none&quot;, panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(size = 6))
+suppl_figS2_panelC</code></pre>
+<p><img src="figure/z_paper_suppl.Rmd/suppl_figS2_panelC-1.png" style="display: block; margin: auto;" /></p>
 </div>
-<div id="combined-fig-1" class="section level3">
+</div>
+<div id="combined-fig" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
-suppl_figS2 &lt;- plot_grid(suppl_figS2_panelA_alt, suppl_figS2_panelB_alt, labels = PANEL_labels[c(1, 2)], ncol = 2, rel_widths = c(1, 1), label_size = 10)
+suppl_figS2_AB &lt;- plot_grid(suppl_figS2_panelA_alt, suppl_figS2_panelB_alt, labels = PANEL_labels[c(1, 2)], ncol = 2, rel_widths = c(1, 1), label_size = 10)
+suppl_figS2 &lt;- plot_grid(suppl_figS2_AB, suppl_figS2_panelC, labels = c(&quot;&quot;, PANEL_labels[c(3)]), ncol = 1, rel_heights = c(1.5, 1), label_size = 10)
 suppl_figS2</code></pre>
 <p><img src="figure/z_paper_suppl.Rmd/suppl_figS2_combi-1.png" style="display: block; margin: auto;" /></p>
 <p>
@@ -1326,31 +1403,31 @@ mwitmond
 <pre class="r"><code># Save figure as pdf, jpg, and png
 ggsave(
   suppl_figS2,
-  filename = &quot;output/figures/paper/suppl_figS2.pdf&quot;,
+  filename = &quot;output/figures/paper/suppl_figS2_new.pdf&quot;,
   width = 6.125,
-  height = 3,
+  height = 4.5, #3
   units = &quot;in&quot;,
   dpi = 300
   )
 ggsave(
   suppl_figS2,
-  filename = &quot;output/figures/paper/suppl_figS2.jpg&quot;,
+  filename = &quot;output/figures/paper/suppl_figS2_new.jpg&quot;,
   width = 6.125,
-  height = 3,
+  height = 4.5,
   units = &quot;in&quot;,
   dpi = 300
   )</code></pre>
 <p><em>Figure S2: Increased activation upon treatment with both anti-Ig
-and H2O2 combined compared to treatment with anti-Ig or H2O2
-alone.</em></p>
+and H2O2 combined compared to treatment with anti-Ig or H2O2 alone
+without loss of viability.</em></p>
 <pre class="r"><code># Remove unnecessary files to clear up memory
 rm(list = ls(pattern = &quot;figS2&quot;))
 # rm(list = ls(pattern = &quot;_fig1&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
-<pre><code>           used  (Mb) gc trigger   (Mb)  max used  (Mb)
-Ncells 10840177 579.0   19604257 1047.0  13514554 721.8
-Vcells 30894088 235.8  123837680  944.9 128930891 983.7</code></pre>
+<pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells 10853374 579.7   19724988 1053.5  17742310  947.6
+Vcells 30922305 236.0  114108560  870.6 142635700 1088.3</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s3" class="section level2">
@@ -1422,7 +1499,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-2" class="section level3">
+<div id="combined-fig-1" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 png_suppl_figS3</code></pre>
@@ -1489,8 +1566,8 @@ rm(list = ls(pattern = &quot;figS3&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 10832165 578.6   19604257 1047.0  13514554  721.8
-Vcells 18916420 144.4  142801808 1089.5 139788691 1066.6</code></pre>
+Ncells 10839264 578.9   19724988 1053.5  17742310  947.6
+Vcells 18933179 144.5  131831265 1005.8 142635700 1088.3</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s4" class="section level2">
@@ -1716,7 +1793,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-3" class="section level3">
+<div id="combined-fig-2" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS4 &lt;- plot_grid(suppl_figS4_panelA, suppl_figS4_panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10, align = &quot;v&quot;)
@@ -1784,8 +1861,8 @@ rm(list = ls(pattern = &quot;figS4&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 10880663 581.1   19604257 1047.0  19604257 1047.0
-Vcells 27125058 207.0  140318495 1070.6 175260797 1337.2</code></pre>
+Ncells 10887708 581.5   19724988 1053.5  19724988 1053.5
+Vcells 27141734 207.1  129502385  988.1 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s5" class="section level2">
@@ -2062,7 +2139,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="panel-c" class="section level4">
+<div id="panel-c-1" class="section level4">
 <h4>Panel C</h4>
 <pre class="r"><code># Select data
 dataset_suppl_figS5C &lt;- dataset_suppl_figS5 %&gt;%
@@ -2133,7 +2210,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-4" class="section level3">
+<div id="combined-fig-3" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS5 &lt;- plot_grid(suppl_figS5_panelA, suppl_figS5_panelB, suppl_figS5_panelC, labels = PANEL_labels[c(1, 2, 3)], nrow = 1, rel_widths = c(1, 1, 1), label_size = 10, align = &quot;h&quot;)
@@ -2199,8 +2276,8 @@ rm(list = ls(pattern = &quot;figS5&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 10988352 586.9   19604257 1047.0  19604257 1047.0
-Vcells 19295994 147.3  112254796  856.5 175260797 1337.2</code></pre>
+Ncells 10988798 586.9   19724988 1053.5  19724988 1053.5
+Vcells 19297730 147.3  103601908  790.5 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s6" class="section level2">
@@ -2360,7 +2437,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-5" class="section level3">
+<div id="combined-fig-4" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS6_panelA</code></pre>
@@ -2427,8 +2504,8 @@ rm(list = ls(pattern = &quot;pca&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 10984433 586.7   19604257 1047.0  19604257 1047.0
-Vcells 19288800 147.2   89803837  685.2 175260797 1337.2</code></pre>
+Ncells 10984879 586.7   19724988 1053.5  19724988 1053.5
+Vcells 19290536 147.2   82881527  632.4 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s7" class="section level2">
@@ -2618,7 +2695,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-6" class="section level3">
+<div id="combined-fig-5" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS7 &lt;- plot_grid(suppl_figS7_panelA, suppl_figS7_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 1.55), label_size = 10)
@@ -2686,8 +2763,8 @@ rm(list = ls(pattern = &quot;figS7&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 10993401 587.2   19604257 1047.0  19604257 1047.0
-Vcells 19325477 147.5   71843070  548.2 175260797 1337.2</code></pre>
+Ncells 10993844 587.2   19724988 1053.5  19724988 1053.5
+Vcells 19327208 147.5   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s8" class="section level2">
@@ -2968,7 +3045,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="panel-c-1" class="section level4">
+<div id="panel-c-2" class="section level4">
 <h4>Panel C</h4>
 <pre class="r"><code># Select data
 dataset_suppl_figS8C &lt;- dataset_suppl_figS8 %&gt;%
@@ -3182,7 +3259,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-7" class="section level3">
+<div id="combined-fig-6" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS8_A &lt;- plot_grid(suppl_figS8_panelA, NULL, labels = PANEL_labels[c(1)], nrow = 1, rel_widths = c(1.75, 1), label_size = 10)
@@ -3259,8 +3336,8 @@ rm(list = ls(pattern = &quot;pca&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11012824 588.2   19604257 1047.0  19604257 1047.0
-Vcells 19404149 148.1   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11013174 588.2   19724988 1053.5  19724988 1053.5
+Vcells 19405328 148.1   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s9" class="section level2">
@@ -3404,7 +3481,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-8" class="section level3">
+<div id="combined-fig-7" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS9_AB &lt;- plot_grid(png_suppl_figS9_panelA, png_suppl_figS9_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 1), label_size = 10)
@@ -3473,8 +3550,8 @@ rm(list = ls(pattern = &quot;figS9&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11002062 587.6   19604257 1047.0  19604257 1047.0
-Vcells 21506527 164.1   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11002497 587.6   19724988 1053.5  19724988 1053.5
+Vcells 21507843 164.1   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s10" class="section level2">
@@ -3788,7 +3865,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-9" class="section level3">
+<div id="combined-fig-8" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS10_panelA</code></pre>
@@ -3862,8 +3939,8 @@ rm(list = ls(pattern = &quot;pca&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11194270 597.9   19604257 1047.0  19604257 1047.0
-Vcells 19815867 151.2   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11194634 597.9   19724988 1053.5  19724988 1053.5
+Vcells 19817065 151.2   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s11" class="section level2">
@@ -4078,7 +4155,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="panel-c-2" class="section level4">
+<div id="panel-c-3" class="section level4">
 <h4>Panel C</h4>
 <p>Example protein MAPK p38</p>
 <pre class="r"><code># Data
@@ -4159,7 +4236,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-10" class="section level3">
+<div id="combined-fig-9" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS11 &lt;- plot_grid(suppl_figS11_panelA, suppl_figS11_panelB, suppl_figS11_panelC, labels = PANEL_labels[c(1:3)], nrow = 1, rel_widths = c(1, 1, 1), label_size = 10, align = &quot;h&quot;)
@@ -4227,8 +4304,8 @@ rm(list = ls(pattern = &quot;pca&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11201188 598.3   19604257 1047.0  19604257 1047.0
-Vcells 19837941 151.4   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11201558 598.3   19724988 1053.5  19724988 1053.5
+Vcells 19839130 151.4   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s12" class="section level2">
@@ -4411,7 +4488,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-11" class="section level3">
+<div id="combined-fig-10" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS12_panelA</code></pre>
@@ -4478,8 +4555,8 @@ rm(list = ls(pattern = &quot;pca&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11187180 597.5   19604257 1047.0  19604257 1047.0
-Vcells 19800827 151.1   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11187550 597.5   19724988 1053.5  19724988 1053.5
+Vcells 19802016 151.1   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s13" class="section level2">
@@ -4650,7 +4727,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-12" class="section level3">
+<div id="combined-fig-11" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS13_panelA</code></pre>
@@ -4717,8 +4794,8 @@ rm(list = ls(pattern = &quot;figS13&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11198660 598.1   19604257 1047.0  19604257 1047.0
-Vcells 19833025 151.4   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11199024 598.1   19724988 1053.5  19724988 1053.5
+Vcells 19834210 151.4   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s14" class="section level2">
@@ -4967,7 +5044,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-13" class="section level3">
+<div id="combined-fig-12" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS14 &lt;- plot_grid(suppl_figS14_panelA, suppl_figS14_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 1.35), label_size = 10)
@@ -5036,8 +5113,8 @@ rm(list = ls(pattern = &quot;pca&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11206641 598.5   19604257 1047.0  19604257 1047.0
-Vcells 19839089 151.4   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11207005 598.6   19724988 1053.5  19724988 1053.5
+Vcells 19840274 151.4   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s15" class="section level2">
@@ -5181,7 +5258,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-14" class="section level3">
+<div id="combined-fig-13" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS15_AB &lt;- plot_grid(png_suppl_figS15_panelA, png_suppl_figS15_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 1), label_size = 10)
@@ -5251,8 +5328,8 @@ rm(list = ls(pattern = &quot;figS15&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11212543 598.9   19604257 1047.0  19604257 1047.0
-Vcells 21984363 167.8   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11212986 598.9   19724988 1053.5  19724988 1053.5
+Vcells 21985675 167.8   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s16" class="section level2">
@@ -5773,7 +5850,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="panel-c-3" class="section level4">
+<div id="panel-c-4" class="section level4">
 <h4>Panel C</h4>
 <pre class="r"><code>## Select data
 proteins_suppl_figS16 &lt;- c(&quot;S6_S240_S244&quot;)
@@ -6228,7 +6305,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-15" class="section level3">
+<div id="combined-fig-14" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS16 &lt;- plot_grid(suppl_figS16_panelA, suppl_figS16_panelB, suppl_figS16_panelC, suppl_figS16_panelD, labels = PANEL_labels[c(1:4)], ncol = 1, rel_heights = c(1, 1, 1, 1), label_size = 10)
@@ -6319,8 +6396,8 @@ rm(list = ls(pattern = &quot;figS16&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11231255 599.9   19604257 1047.0  19604257 1047.0
-Vcells 19898114 151.9   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11231619 599.9   19724988 1053.5  19724988 1053.5
+Vcells 19899299 151.9   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s17" class="section level2">
@@ -6446,7 +6523,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="panel-c-4" class="section level4">
+<div id="panel-c-5" class="section level4">
 <h4>Panel C</h4>
 <pre class="r"><code># Placeholder
 suppl_figS17_panelC &lt;- ggplot() +
@@ -6505,7 +6582,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-16" class="section level3">
+<div id="combined-fig-15" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS17 &lt;- plot_grid(png_suppl_figS17_panelA, png_suppl_figS17_panelB, png_suppl_figS17_panelC, labels = PANEL_labels[c(1, 2, 3)], ncol = 3, rel_widths = c(1, 1, 1), label_size = 10)
@@ -6572,8 +6649,8 @@ rm(list = ls(pattern = &quot;figS17&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11259674 601.4   19604257 1047.0  19604257 1047.0
-Vcells 22374275 170.8   57474456  438.5 175260797 1337.2</code></pre>
+Ncells 11260113 601.4   19724988 1053.5  19724988 1053.5
+Vcells 22375585 170.8   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s18" class="section level2">
@@ -6641,7 +6718,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-17" class="section level3">
+<div id="combined-fig-16" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 png_suppl_figS18</code></pre>
@@ -6708,8 +6785,8 @@ rm(list = ls(pattern = &quot;figS18&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11218316 599.2   19604257 1047.0  19604257 1047.0
-Vcells 19862545 151.6   69049347  526.9 175260797 1337.2</code></pre>
+Ncells 11218680 599.2   19724988 1053.5  19724988 1053.5
+Vcells 19863730 151.6   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s19" class="section level2">
@@ -6836,7 +6913,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="panel-c-5" class="section level4">
+<div id="panel-c-6" class="section level4">
 <h4>Panel C</h4>
 <pre class="r"><code># Placeholder
 suppl_figS19_panelC &lt;- ggplot() +
@@ -6895,7 +6972,7 @@ mwitmond
 </div>
 </div>
 </div>
-<div id="combined-fig-18" class="section level3">
+<div id="combined-fig-17" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS19 &lt;- plot_grid(png_suppl_figS19_panelA, png_suppl_figS19_panelB, png_suppl_figS19_panelC, labels = PANEL_labels[c(1, 2, 3)], nrow = 1, rel_widths =  c(1.4, 1.05, 1.01), label_size = 10, label_colour = &quot;white&quot;)
@@ -6964,8 +7041,8 @@ rm(list = ls(pattern = &quot;figS19&quot;))
 rm(list = ls(pattern = &quot;png_&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 11259766 601.4   19604257 1047.0  19604257 1047.0
-Vcells 25651480 195.8   69049347  526.9 175260797 1337.2</code></pre>
+Ncells 11260133 601.4   19724988 1053.5  19724988 1053.5
+Vcells 25652670 195.8   66305222  505.9 161658666 1233.4</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s0" class="section level2">
@@ -7007,11 +7084,11 @@ png_suppl_figS0 &lt;- image_read(&quot;output/figures/non_R_figs/xxx.png&quot;) 
 
 # Figure</code></pre>
 </div>
-<div id="panel-c-6" class="section level4">
+<div id="panel-c-7" class="section level4">
 <h4>Panel C</h4>
 </div>
 </div>
-<div id="combined-fig-19" class="section level3">
+<div id="combined-fig-18" class="section level3">
 <h3>Combined fig</h3>
 <pre class="r"><code># Combine all panels of the figure
 suppl_figS0 &lt;- plot_grid(panelA, panelB, labels = panel_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10)
@@ -7208,7 +7285,7 @@ fig3_panelB2 &lt;- ggplot() +
 fig3_panelB &lt;- plot_grid(fig3_panelB1, fig3_panelB2, ncol = 2, rel_widths = c(1, 1.5), align = &quot;h&quot;)
 fig3_panelB</code></pre>
 </div>
-<div id="panel-c-7" class="section level4">
+<div id="panel-c-8" class="section level4">
 <h4>Panel C</h4>
 <p>Effect of inhibitor concentration on phospho-protein levels:
 Activation and dose-response inhibition in one cell line</p>

@@ -482,7 +482,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-12
+<strong>Last updated:</strong> 2025-02-14
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -613,13 +613,13 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong1ffbd94">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong94c226d">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 1ffbd94
+aria-hidden="true"></span> <strong>Repository version:</strong> 94c226d
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong1ffbd94"
+<div id="strongRepositoryversionstrong94c226d"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -628,7 +628,7 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 1ffbd94.
+The results in this page were generated with repository version 94c226d.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -712,6 +712,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -852,6 +869,43 @@ figS1_panelA &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_
   magick::image_ggplot(interpolate = TRUE)
 figS1_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS1_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS1_panelA-1">
+Past versions of figS1_panelA-1.png
+</button>
+</p>
+<div id="fig-figS1_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Legend
 figS1_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/legend_network_projections_blank.png&quot;) %&gt;%
   # magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
@@ -865,6 +919,43 @@ figS1_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/legend_net
 figS1 &lt;- plot_grid(figS1_panelA, figS1_legend, ncol = 1, rel_heights = c(8, 1), label_size = 10)
 figS1</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS1_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS1_combi-1">
+Past versions of figS1_combi-1.png
+</button>
+</p>
+<div id="fig-figS1_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS1,
@@ -898,8 +989,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9113288 486.8   16835321 899.2 10914880 583.0
-Vcells 16904203 129.0   31815656 242.8 26367385 201.2</code></pre>
+Ncells  9113762 486.8   14403500 769.3 11241733 600.4
+Vcells 16905389 129.0   26897840 205.3 22345167 170.5</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s2" class="section level2">
@@ -1023,6 +1114,43 @@ figS2_panelA &lt;- ggplot(pca_data) +
   textsize_small
 figS2_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS2_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS2_panelA-1">
+Past versions of figS2_panelA-1.png
+</button>
+</p>
+<div id="fig-figS2_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-1" class="section level3">
@@ -1030,6 +1158,43 @@ figS2_panelA</code></pre>
 <pre class="r"><code># Combine all panels of the figure
 figS2_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS2_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS2_combi-1">
+Past versions of figS2_combi-1.png
+</button>
+</p>
+<div id="fig-figS2_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS2_panelA,
@@ -1063,8 +1228,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9259088 494.5   16835321 899.2 16835321 899.2
-Vcells 16140395 123.2   31815656 242.8 26367385 201.2</code></pre>
+Ncells  9259553 494.6   14403500 769.3 14403500 769.3
+Vcells 16141732 123.2   26897840 205.3 23295134 177.8</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s3" class="section level2">
@@ -1165,6 +1330,43 @@ figS3_panelA &lt;- ggplot(subset(pca_data, inhib_text_new %in% figS3_conditions)
   textsize_small
 figS3_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS3_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS3_panelA-1">
+Past versions of figS3_panelA-1.png
+</button>
+</p>
+<div id="fig-figS3_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b" class="section level4">
 <h4>Panel B</h4>
@@ -1183,6 +1385,43 @@ figS3_panelB &lt;- ggplot(subset(pca_data, inhib_text_new %in% figS3_conditions)
   textsize_small
 figS3_panelB</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS3_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS3_panelB-1">
+Past versions of figS3_panelB-1.png
+</button>
+</p>
+<div id="fig-figS3_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-2" class="section level3">
@@ -1191,6 +1430,43 @@ figS3_panelB</code></pre>
 figS3 &lt;- plot_grid(figS3_panelA, figS3_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 1.5), label_size = 10)
 figS3</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS3_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS3_combi-1">
+Past versions of figS3_combi-1.png
+</button>
+</p>
+<div id="fig-figS3_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS3,
@@ -1224,8 +1500,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9286789 496.0   16835321 899.2 16835321 899.2
-Vcells 16187627 123.6   31815656 242.8 26367385 201.2</code></pre>
+Ncells  9287281 496.0   14403500 769.3 14403500 769.3
+Vcells 16189259 123.6   26897840 205.3 23295134 177.8</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s4" class="section level2">
@@ -1500,6 +1776,43 @@ figS4_panelA &lt;- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
   textsize_small
 figS4_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS4_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS4_panelA-1">
+Past versions of figS4_panelA-1.png
+</button>
+</p>
+<div id="fig-figS4_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-3" class="section level3">
@@ -1507,6 +1820,43 @@ figS4_panelA</code></pre>
 <pre class="r"><code># Combine all panels of the figure
 figS4_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS4_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS4_combi-1">
+Past versions of figS4_combi-1.png
+</button>
+</p>
+<div id="fig-figS4_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS4_panelA,
@@ -1540,8 +1890,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9562852 510.8   16835321 899.2 16835321 899.2
-Vcells 16874941 128.8   31815656 242.8 26367385 201.2</code></pre>
+Ncells  9563353 510.8   14403500 769.3 14403500 769.3
+Vcells 16876754 128.8   26897840 205.3 23295134 177.8</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s5" class="section level2">
@@ -1688,6 +2038,43 @@ figS5_panelA &lt;- ggplot(pca_data) +
   theme(panel.grid.minor = element_blank(), legend.key.size = unit(0.65, &quot;cm&quot;), legend.spacing.y = unit(0.5, &quot;cm&quot;), legend.box.spacing = unit(0.05, &quot;cm&quot;), legend.position = &quot;right&quot;, legend.justification = &quot;left&quot;, legend.text = element_text(size = 7), legend.title = element_text(size = 8))
 figS5_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS5_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS5_panelA-1">
+Past versions of figS5_panelA-1.png
+</button>
+</p>
+<div id="fig-figS5_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-4" class="section level3">
@@ -1695,6 +2082,43 @@ figS5_panelA</code></pre>
 <pre class="r"><code># Combine all panels of the figure
 figS5_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS5_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS5_combi-1">
+Past versions of figS5_combi-1.png
+</button>
+</p>
+<div id="fig-figS5_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS5_panelA,
@@ -1728,8 +2152,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9552633 510.2   16835321 899.2 16835321 899.2
-Vcells 16847247 128.6   31815656 242.8 26367385 201.2</code></pre>
+Ncells  9552996 510.2   14403500 769.3 14403500 769.3
+Vcells 16848997 128.6   26897840 205.3 23295134 177.8</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s6" class="section level2">
@@ -1881,6 +2305,43 @@ figS6_panelA &lt;- ggplot(figS6AB_data) +
   textsize_small
 figS6_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS6_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS6_panelA-1">
+Past versions of figS6_panelA-1.png
+</button>
+</p>
+<div id="fig-figS6_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b-1" class="section level4">
 <h4>Panel B</h4>
@@ -1905,6 +2366,43 @@ figS6_panelB &lt;- ggplot(figS6AB_data) +
   textsize_small
 figS6_panelB</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS6_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS6_panelB-1">
+Past versions of figS6_panelB-1.png
+</button>
+</p>
+<div id="fig-figS6_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-5" class="section level3">
@@ -1913,6 +2411,43 @@ figS6_panelB</code></pre>
 figS6 &lt;- plot_grid(figS6_panelA, figS6_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 1.5), label_size = 10)
 figS6</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS6_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS6_combi-1">
+Past versions of figS6_combi-1.png
+</button>
+</p>
+<div id="fig-figS6_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS6,
@@ -1947,8 +2482,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9561231 510.7   16835321 899.2 16835321 899.2
-Vcells 16864523 128.7   31815656 242.8 26367385 201.2</code></pre>
+Ncells  9561741 510.7   14403500 769.3 14403500 769.3
+Vcells 16866768 128.7   26897840 205.3 23295134 177.8</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s7" class="section level2">
@@ -2082,6 +2617,43 @@ figS7_panelA &lt;- ggplot() +
   textsize_small
 figS7_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS7_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS7_panelA-1">
+Past versions of figS7_panelA-1.png
+</button>
+</p>
+<div id="fig-figS7_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-6" class="section level3">
@@ -2089,6 +2661,43 @@ figS7_panelA</code></pre>
 <pre class="r"><code># Combine all panels of the figure
 figS7_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS7_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS7_combi-1">
+Past versions of figS7_combi-1.png
+</button>
+</p>
+<div id="fig-figS7_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS7_panelA,
@@ -2122,8 +2731,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9566637 511.0   16835321 899.2 16835321 899.2
-Vcells 16873680 128.8   31815656 242.8 26367385 201.2</code></pre>
+Ncells  9566991 511.0   14403500 769.3 14403500 769.3
+Vcells 16875831 128.8   26897840 205.3 23295134 177.8</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s8" class="section level2">
@@ -2161,6 +2770,43 @@ figS8_panelA &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_
   theme(plot.title = element_text(size = 8))
 figS8_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS8_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS8_panelA-1">
+Past versions of figS8_panelA-1.png
+</button>
+</p>
+<div id="fig-figS8_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># legend
 figS8_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/legend_network_projections.png&quot;) %&gt;%
   # magick::image_border(color = &quot;black&quot;, geometry = &quot;1x1&quot;) %&gt;%
@@ -2181,6 +2827,43 @@ figS8_panelB &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_
   theme(plot.title = element_text(size = 8))
 figS8_panelB</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS8_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS8_panelB-1">
+Past versions of figS8_panelB-1.png
+</button>
+</p>
+<div id="fig-figS8_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-c" class="section level4">
 <h4>Panel C</h4>
@@ -2194,6 +2877,43 @@ figS8_panelC &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_
   theme(plot.title = element_text(size = 8))
 figS8_panelC</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS8_panelC-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS8_panelC-1">
+Past versions of figS8_panelC-1.png
+</button>
+</p>
+<div id="fig-figS8_panelC-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-d" class="section level4">
 <h4>Panel D</h4>
@@ -2216,6 +2936,43 @@ figS8_panelD &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_
   theme(plot.title = element_text(size = 8))
 figS8_panelD</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS8_panelD-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS8_panelD-1">
+Past versions of figS8_panelD-1.png
+</button>
+</p>
+<div id="fig-figS8_panelD-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-7" class="section level3">
@@ -2226,6 +2983,43 @@ figS8_networks &lt;- plot_grid(figS8_panelA, figS8_panelB, figS8_panelC, figS8_p
 figS8 &lt;- plot_grid(figS8_networks, figS8_legend, ncol = 1, rel_heights = c(10, 1))
 figS8</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS8_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS8_combi-1">
+Past versions of figS8_combi-1.png
+</button>
+</p>
+<div id="fig-figS8_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS8,
@@ -2259,8 +3053,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9588797 512.1   16835321 899.2 16835321 899.2
-Vcells 20807157 158.8   45990544 350.9 37626918 287.1</code></pre>
+Ncells  9589325 512.2   14403500 769.3 14403500 769.3
+Vcells 20810015 158.8   38908889 296.9 38883774 296.7</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s9" class="section level2">
@@ -2434,6 +3228,43 @@ figS9_panelA &lt;- ggplot(data = figS9A_data,
   textsize_small
 figS9_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS9_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS9_panelA-1">
+Past versions of figS9_panelA-1.png
+</button>
+</p>
+<div id="fig-figS9_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-8" class="section level3">
@@ -2441,6 +3272,43 @@ figS9_panelA</code></pre>
 <pre class="r"><code># Combine all panels of the figure
 figS9_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS9_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS9_combi-1">
+Past versions of figS9_combi-1.png
+</button>
+</p>
+<div id="fig-figS9_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS9_panelA,
@@ -2474,8 +3342,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9597010 512.6   16835321 899.2 16835321 899.2
-Vcells 16884837 128.9   45990544 350.9 37626918 287.1</code></pre>
+Ncells  9597451 512.6   14403500 769.3 14403500 769.3
+Vcells 16887706 128.9   38908889 296.9 38883774 296.7</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s10" class="section level2">
@@ -2653,6 +3521,43 @@ figS10_panelA &lt;- ggplot() +
   textsize_small
 figS10_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS10_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS10_panelA-1">
+Past versions of figS10_panelA-1.png
+</button>
+</p>
+<div id="fig-figS10_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Figure alt (with stats)
 figS10_panelA_alt &lt;- ggplot() +
   geom_jitter(data = figS10A_data, 
@@ -2684,6 +3589,43 @@ figS10_panelA_alt &lt;- ggplot() +
   textsize_small
 figS10_panelA_alt</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS10_panelA-2.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS10_panelA-2">
+Past versions of figS10_panelA-2.png
+</button>
+</p>
+<div id="fig-figS10_panelA-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b-3" class="section level4">
 <h4>Panel B</h4>
@@ -2792,6 +3734,43 @@ figS10_panelB &lt;- ggplot() +
   textsize_small
 figS10_panelB</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS10_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS10_panelB-1">
+Past versions of figS10_panelB-1.png
+</button>
+</p>
+<div id="fig-figS10_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Figure alt (with stats)
 figS10_panelB_alt &lt;- ggplot() +
   geom_jitter(data = figS10B_data, 
@@ -2823,6 +3802,43 @@ figS10_panelB_alt &lt;- ggplot() +
   textsize_small
 figS10_panelB_alt</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS10_panelB-2.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS10_panelB-2">
+Past versions of figS10_panelB-2.png
+</button>
+</p>
+<div id="fig-figS10_panelB-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-9" class="section level3">
@@ -2831,9 +3847,83 @@ figS10_panelB_alt</code></pre>
 figS10 &lt;- plot_grid(figS10_panelA, figS10_panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10)
 figS10</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS10_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS10_combi-1">
+Past versions of figS10_combi-1.png
+</button>
+</p>
+<div id="fig-figS10_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>figS10_alt &lt;- plot_grid(figS10_panelA_alt, figS10_panelB_alt, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10)
 figS10_alt</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS10_combi-2.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS10_combi-2">
+Past versions of figS10_combi-2.png
+</button>
+</p>
+<div id="fig-figS10_combi-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS10,
@@ -2875,8 +3965,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9693277 517.7   16835321 899.2 16835321 899.2
-Vcells 17097618 130.5   45990544 350.9 37626918 287.1</code></pre>
+Ncells  9693829 517.8   14403500 769.3 14403500 769.3
+Vcells 17101175 130.5   38908889 296.9 38883774 296.7</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s11" class="section level2">
@@ -3055,6 +4145,43 @@ figS11_panelA &lt;- ggplot() +
   textsize_small
 figS11_panelA</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS11_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS11_panelA-1">
+Past versions of figS11_panelA-1.png
+</button>
+</p>
+<div id="fig-figS11_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Figure alt (with stats)
 figS11_panelA_alt &lt;- ggplot() +
   geom_jitter(data = figS11A_data, 
@@ -3086,6 +4213,43 @@ figS11_panelA_alt &lt;- ggplot() +
   textsize_small
 figS11_panelA_alt</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS11_panelA-2.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS11_panelA-2">
+Past versions of figS11_panelA-2.png
+</button>
+</p>
+<div id="fig-figS11_panelA-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b-4" class="section level4">
 <h4>Panel B</h4>
@@ -3194,6 +4358,43 @@ figS11_panelB &lt;- ggplot() +
   textsize_small
 figS11_panelB</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS11_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS11_panelB-1">
+Past versions of figS11_panelB-1.png
+</button>
+</p>
+<div id="fig-figS11_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Figure alt (with stats)
 figS11_panelB_alt &lt;- ggplot() +
   geom_jitter(data = figS11B_data, 
@@ -3225,6 +4426,43 @@ figS11_panelB_alt &lt;- ggplot() +
   textsize_small
 figS11_panelB_alt</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS11_panelB-2.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS11_panelB-2">
+Past versions of figS11_panelB-2.png
+</button>
+</p>
+<div id="fig-figS11_panelB-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-10" class="section level3">
@@ -3233,9 +4471,83 @@ figS11_panelB_alt</code></pre>
 figS11 &lt;- plot_grid(figS11_panelA, figS11_panelB, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10)
 figS11</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS11_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS11_combi-1">
+Past versions of figS11_combi-1.png
+</button>
+</p>
+<div id="fig-figS11_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>figS11_alt &lt;- plot_grid(figS11_panelA_alt, figS11_panelB_alt, labels = PANEL_labels[c(1, 2)], ncol = 1, rel_heights = c(1, 1), label_size = 10)
 figS11_alt</code></pre>
 <p><img src="figure/w_states_suppl.Rmd/figS11_combi-2.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-figS11_combi-2">
+Past versions of figS11_combi-2.png
+</button>
+</p>
+<div id="fig-figS11_combi-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   figS11,
@@ -3278,8 +4590,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  9693530 517.7   16835321 899.2 16835321 899.2
-Vcells 17100665 130.5   45990544 350.9 37626918 287.1</code></pre>
+Ncells  9694103 517.8   14403500 769.3 14403500 769.3
+Vcells 17104760 130.5   38908889 296.9 38883774 296.7</code></pre>
 </div>
 </div>
 <div id="suppl.-figure-s0" class="section level2">

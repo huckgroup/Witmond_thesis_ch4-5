@@ -481,7 +481,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-12
+<strong>Last updated:</strong> 2025-02-14
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -612,13 +612,13 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong1ffbd94">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong94c226d">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 1ffbd94
+aria-hidden="true"></span> <strong>Repository version:</strong> 94c226d
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong1ffbd94"
+<div id="strongRepositoryversionstrong94c226d"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -627,7 +627,7 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 1ffbd94.
+The results in this page were generated with repository version 94c226d.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -711,6 +711,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -853,6 +870,43 @@ fig1_panelA &lt;- magick::image_read(&quot;output/figures/non_R_figs/ch4_BCR_net
   magick::image_ggplot(interpolate = TRUE)
 fig1_panelA</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig1_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig1_panelA-1">
+Past versions of fig1_panelA-1.png
+</button>
+</p>
+<div id="fig-fig1_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b" class="section level4">
 <h4>Panel B</h4>
@@ -875,6 +929,43 @@ fig1_panelB &lt;- magick::image_read(&quot;output/figures/non_R_figs/ch4_DLBCL_i
   magick::image_ggplot(interpolate = TRUE)
 fig1_panelB</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig1_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig1_panelB-1">
+Past versions of fig1_panelB-1.png
+</button>
+</p>
+<div id="fig-fig1_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig" class="section level3">
@@ -883,6 +974,43 @@ fig1_panelB</code></pre>
 fig1 &lt;- plot_grid(fig1_panelA, fig1_panelB, labels = PANEL_labels[c(1, 2)], nrow = 1, rel_widths = c(1, 2.1), label_size = 10)
 fig1</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig1_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig1_combi-1">
+Past versions of fig1_combi-1.png
+</button>
+</p>
+<div id="fig-fig1_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   fig1,
@@ -916,8 +1044,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb)  max used  (Mb)
-Ncells  9156497 489.1   16813551 898.0  11067406 591.1
-Vcells 37749103 288.1  130872910 998.5 107716762 821.9</code></pre>
+Ncells  9156973 489.1   16807764 897.7  11029544 589.1
+Vcells 37750365 288.1  130872887 998.5 107717937 821.9</code></pre>
 </div>
 </div>
 <div id="figure-2" class="section level2">
@@ -1093,6 +1221,43 @@ fig2_panelA &lt;- ggplot(data = fig2A_dataset,
   textsize_small
 fig2_panelA</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig2_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig2_panelA-1">
+Past versions of fig2_panelA-1.png
+</button>
+</p>
+<div id="fig-fig2_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b-1" class="section level4">
 <h4>Panel B</h4>
@@ -1181,6 +1346,43 @@ fig2_panelB &lt;- ggplot() +
   scale_x_discrete(labels = fig2_cells_short)
 fig2_panelB</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig2_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig2_panelB-1">
+Past versions of fig2_panelB-1.png
+</button>
+</p>
+<div id="fig-fig2_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-c" class="section level4">
 <h4>Panel C</h4>
@@ -1376,6 +1578,43 @@ fig2_panelC &lt;- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
   textsize_small
 fig2_panelC</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig2_panelC-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig2_panelC-1">
+Past versions of fig2_panelC-1.png
+</button>
+</p>
+<div id="fig-fig2_panelC-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-d" class="section level4">
 <h4>Panel D</h4>
@@ -1463,6 +1702,43 @@ fig2_panelD &lt;- ggplot() +
         legend.position = &quot;bottom&quot;, legend.justification = &quot;right&quot;, legend.key.size = unit(0.5, &quot;cm&quot;), legend.spacing.y = unit(0.2, &quot;cm&quot;), legend.box.spacing = unit(0.01, &quot;cm&quot;), legend.margin = margin(c(0, 0, 0, 0)))
 fig2_panelD</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig2_panelD-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig2_panelD-1">
+Past versions of fig2_panelD-1.png
+</button>
+</p>
+<div id="fig-fig2_panelD-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-1" class="section level3">
@@ -1473,6 +1749,43 @@ fig2_CD &lt;- plot_grid(fig2_panelC, fig2_panelD, labels = PANEL_labels[c(3, 4)]
 fig2 &lt;- plot_grid(fig2_AB, fig2_CD, ncol = 1, rel_heights = c(1, 2), label_size = 10)
 fig2</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig2_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig2_combi-1">
+Past versions of fig2_combi-1.png
+</button>
+</p>
+<div id="fig-fig2_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   fig2,
@@ -1506,8 +1819,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb)  max used  (Mb)
-Ncells  9691169 517.6   16813551 898.0  16813551 898.0
-Vcells 17112485 130.6  104698328 798.8 107716762 821.9</code></pre>
+Ncells  9691631 517.6   16807764 897.7  16807764 897.7
+Vcells 17114126 130.6  104698310 798.8 107717937 821.9</code></pre>
 </div>
 </div>
 <div id="figure-3" class="section level2">
@@ -1669,6 +1982,43 @@ fig3_panelA &lt;- ggplot() +
         axis.text.x = element_text(size = 6), plot.title = element_text(size = 8.5), plot.title.position = &quot;panel&quot;)
 fig3_panelA</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig3_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig3_panelA-1">
+Past versions of fig3_panelA-1.png
+</button>
+</p>
+<div id="fig-fig3_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b-2" class="section level4">
 <h4>Panel B</h4>
@@ -1760,6 +2110,43 @@ fig3_panelB &lt;- ggplot() +
         axis.text.x = element_text(size = 6), plot.title = element_text(size = 8.5), plot.title.position = &quot;panel&quot;)
 fig3_panelB</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig3_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig3_panelB-1">
+Past versions of fig3_panelB-1.png
+</button>
+</p>
+<div id="fig-fig3_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-c-1" class="section level4">
 <h4>Panel C</h4>
@@ -1852,6 +2239,43 @@ fig3_panelC &lt;- ggplot() +
         axis.text.x = element_text(size = 6), plot.title = element_text(size = 8.5), plot.title.position = &quot;panel&quot;)
 fig3_panelC</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig3_panelC-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig3_panelC-1">
+Past versions of fig3_panelC-1.png
+</button>
+</p>
+<div id="fig-fig3_panelC-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-d-1" class="section level4">
 <h4>Panel D</h4>
@@ -1889,6 +2313,43 @@ fig3_panelD_HBL1 &lt;- ggvenn(data = fig3D_HBL1_data,
   theme(plot.title = element_text(size = 8.5))
 fig3_panelD_HBL1</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig3_panelD-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig3_panelD-1">
+Past versions of fig3_panelD-1.png
+</button>
+</p>
+<div id="fig-fig3_panelD-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># OCI-Ly8
 fig3D_OCI_data &lt;- list(fig3D_OCI_iBTK, fig3D_OCI_iSYK, fig3D_OCI_iNFkB)
 fig3D_OCI_names &lt;- c(paste0(&quot;iBTK (&quot;, length(fig3D_OCI_iBTK), &quot; prot.)&quot;), 
@@ -1908,9 +2369,83 @@ fig3_panelD_OCI &lt;- ggvenn(data = fig3D_OCI_data,
   theme(plot.title = element_text(size = 8.5))
 fig3_panelD_OCI</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig3_panelD-2.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig3_panelD-2">
+Past versions of fig3_panelD-2.png
+</button>
+</p>
+<div id="fig-fig3_panelD-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>fig3_panelD &lt;- plot_grid(fig3_panelD_HBL1, fig3_panelD_OCI, ncol = 1, rel_heights = c(1, 1))
 fig3_panelD</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig3_panelD-3.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig3_panelD-3">
+Past versions of fig3_panelD-3.png
+</button>
+</p>
+<div id="fig-fig3_panelD-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>fig3_panelD_alt &lt;- plot_grid(fig3_panelD_HBL1, fig3_panelD_OCI, nrow = 1, rel_widths = c(1, 1))
 # fig3_panelD_alt</code></pre>
 </div>
@@ -1923,6 +2458,43 @@ fig3_ABC &lt;- plot_grid(fig3_panelA, fig3_panelB, fig3_panelC, labels = PANEL_l
 fig3 &lt;- plot_grid(fig3_ABC, fig3_panelD, labels = c(NA, PANEL_labels[c(4)]), nrow = 1, rel_widths = c(2.9, 1), label_size = 10)
 fig3</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig3_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig3_combi-1">
+Past versions of fig3_combi-1.png
+</button>
+</p>
+<div id="fig-fig3_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   fig3,
@@ -1956,8 +2528,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb)  max used  (Mb)
-Ncells  9751558 520.8   16813551 898.0  16813551 898.0
-Vcells 17226225 131.5   83758663 639.1 107716762 821.9</code></pre>
+Ncells  9752038 520.9   16807764 897.7  16807764 897.7
+Vcells 17228477 131.5   83758648 639.1 107717937 821.9</code></pre>
 </div>
 </div>
 <div id="figure-4" class="section level2">
@@ -2440,6 +3012,43 @@ fig4_panelA &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_p
   textsize_small
 fig4_panelA</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig4_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig4_panelA-1">
+Past versions of fig4_panelA-1.png
+</button>
+</p>
+<div id="fig-fig4_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># legend
 fig4_network_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/legend_network_projections.png&quot;) %&gt;%
 # fig4_network_legend &lt;- magick::image_read(&quot;output/figures/non_R_figs/legend_network_projections_vert.png&quot;) %&gt;%
@@ -2473,6 +3082,43 @@ fig4_panelB &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_p
   textsize_small
 fig4_panelB</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig4_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig4_panelB-1">
+Past versions of fig4_panelB-1.png
+</button>
+</p>
+<div id="fig-fig4_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-c-2" class="section level4">
 <h4>Panel C</h4>
@@ -2498,6 +3144,43 @@ fig4_panelC &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_p
   textsize_small
 fig4_panelC</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig4_panelC-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig4_panelC-1">
+Past versions of fig4_panelC-1.png
+</button>
+</p>
+<div id="fig-fig4_panelC-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-d-2" class="section level4">
 <h4>Panel D</h4>
@@ -2523,6 +3206,43 @@ fig4_panelD &lt;- magick::image_read(&quot;output/figures/non_R_figs/Cytoscape_p
   textsize_small
 fig4_panelD</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig4_panelD-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig4_panelD-1">
+Past versions of fig4_panelD-1.png
+</button>
+</p>
+<div id="fig-fig4_panelD-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-3" class="section level3">
@@ -2532,6 +3252,43 @@ fig4_networks &lt;- plot_grid(fig4_panelA, fig4_panelB, fig4_panelC, fig4_panelD
 fig4 &lt;- plot_grid(fig4_networks, fig4_network_legend, ncol = 1, rel_heights = c(10, 1))
 fig4</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig4_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig4_combi-1">
+Past versions of fig4_combi-1.png
+</button>
+</p>
+<div id="fig-fig4_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   fig4,
@@ -2565,8 +3322,8 @@ rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb)  max used  (Mb)
-Ncells  9744620 520.5   16813551 898.0  16813551 898.0
-Vcells 21076260 160.8   67006931 511.3 107716762 821.9</code></pre>
+Ncells  9745036 520.5   16807764 897.7  16807764 897.7
+Vcells 21078526 160.9   67006919 511.3 107717937 821.9</code></pre>
 </div>
 </div>
 <div id="figure-5" class="section level2">
@@ -2837,6 +3594,43 @@ fig5_panelA &lt;- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
   theme(plot.title = element_text(size = 8.5))
 fig5_panelA</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig5_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig5_panelA-1">
+Past versions of fig5_panelA-1.png
+</button>
+</p>
+<div id="fig-fig5_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b-4" class="section level4">
 <h4>Panel B</h4>
@@ -3023,6 +3817,43 @@ fig5_panelB &lt;- ggplot(data = fig5B_dataset_subset,
   guides(shape = guide_legend(nrow = 3, bycol = TRUE), color = guide_legend(nrow = 3, bycol = TRUE))
 fig5_panelB</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig5_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig5_panelB-1">
+Past versions of fig5_panelB-1.png
+</button>
+</p>
+<div id="fig-fig5_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Figure
 fig5_panelB_test &lt;- ggplot(data = fig5B_dataset,
                       aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
@@ -3051,6 +3882,43 @@ fig5_panelB_test &lt;- ggplot(data = fig5B_dataset,
   guides(shape = guide_legend(nrow = 3, bycol = TRUE), color = guide_legend(nrow = 3, bycol = TRUE))
 fig5_panelB_test</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig5_panelB_test-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig5_panelB_test-1">
+Past versions of fig5_panelB_test-1.png
+</button>
+</p>
+<div id="fig-fig5_panelB_test-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-c-3" class="section level4">
 <h4>Panel C</h4>
@@ -3093,6 +3961,43 @@ fig5_panelC &lt;- ggplot() +
   guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
 fig5_panelC</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig5_panelC-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig5_panelC-1">
+Past versions of fig5_panelC-1.png
+</button>
+</p>
+<div id="fig-fig5_panelC-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-d-3" class="section level4">
 <h4>Panel D</h4>
@@ -3135,6 +4040,43 @@ fig5_panelD &lt;- ggplot() +
   guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
 fig5_panelD</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig5_panelD-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig5_panelD-1">
+Past versions of fig5_panelD-1.png
+</button>
+</p>
+<div id="fig-fig5_panelD-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-e" class="section level4">
 <h4>Panel E</h4>
@@ -3177,6 +4119,43 @@ fig5_panelE &lt;- ggplot() +
   guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
 fig5_panelE</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig5_panelE-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig5_panelE-1">
+Past versions of fig5_panelE-1.png
+</button>
+</p>
+<div id="fig-fig5_panelE-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-4" class="section level3">
@@ -3187,6 +4166,43 @@ fig5_CDE &lt;- plot_grid(fig5_panelC, fig5_panelD, fig5_panelE, labels = PANEL_l
 fig5 &lt;- plot_grid(fig5_AB, fig5_CDE, ncol = 1, rel_heights = c(1.65, 1), label_size = 10)
 fig5</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig5_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig5_combi-1">
+Past versions of fig5_combi-1.png
+</button>
+</p>
+<div id="fig-fig5_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   fig5,
@@ -3219,9 +4235,9 @@ rm(list = ls(pattern = &quot;heat_&quot;))
 rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
-<pre><code>           used  (Mb) gc trigger (Mb)  max used  (Mb)
-Ncells  9775032 522.1   16813551  898  16813551 898.0
-Vcells 17355136 132.5   53605545  409 107716762 821.9</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb)  max used  (Mb)
+Ncells  9775483 522.1   16807764 897.7  16807764 897.7
+Vcells 17358027 132.5   53605536 409.0 107717937 821.9</code></pre>
 </div>
 </div>
 <div id="figure-6" class="section level2">
@@ -3492,6 +4508,43 @@ fig6_panelA &lt;- ggplotify::as.ggplot(ComplexHeatmap::pheatmap(
   theme(plot.title = element_text(size = 8.5))
 fig6_panelA</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig6_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig6_panelA-1">
+Past versions of fig6_panelA-1.png
+</button>
+</p>
+<div id="fig-fig6_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-b-5" class="section level4">
 <h4>Panel B</h4>
@@ -3678,6 +4731,43 @@ fig6_panelB &lt;- ggplot(data = fig6B_dataset_subset,
   guides(shape = guide_legend(nrow = 3, bycol = TRUE), color = guide_legend(nrow = 3, bycol = TRUE))
 fig6_panelB</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig6_panelB-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig6_panelB-1">
+Past versions of fig6_panelB-1.png
+</button>
+</p>
+<div id="fig-fig6_panelB-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Figure
 fig6_panelB_test &lt;- ggplot(data = fig6B_dataset,
                       aes(x = log2FoldChange, y = -log10(padj), color = diff_express, label = delabel)) +
@@ -3706,6 +4796,43 @@ fig6_panelB_test &lt;- ggplot(data = fig6B_dataset,
   guides(shape = guide_legend(nrow = 3, bycol = TRUE), color = guide_legend(nrow = 3, bycol = TRUE))
 fig6_panelB_test</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig6_panelB_test-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig6_panelB_test-1">
+Past versions of fig6_panelB_test-1.png
+</button>
+</p>
+<div id="fig-fig6_panelB_test-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-c-4" class="section level4">
 <h4>Panel C</h4>
@@ -3748,6 +4875,43 @@ fig6_panelC &lt;- ggplot() +
   guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
 fig6_panelC</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig6_panelC-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig6_panelC-1">
+Past versions of fig6_panelC-1.png
+</button>
+</p>
+<div id="fig-fig6_panelC-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-d-4" class="section level4">
 <h4>Panel D</h4>
@@ -3790,6 +4954,43 @@ fig6_panelD &lt;- ggplot() +
   # guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
 fig6_panelD</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig6_panelD-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig6_panelD-1">
+Past versions of fig6_panelD-1.png
+</button>
+</p>
+<div id="fig-fig6_panelD-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="panel-e-1" class="section level4">
 <h4>Panel E</h4>
@@ -3832,6 +5033,43 @@ fig6_panelE &lt;- ggplot() +
   # guides(shape = guide_legend(nrow = 2, byrow = TRUE), color = guide_legend(nrow = 2, byrow = TRUE))
 fig6_panelE</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig6_panelE-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig6_panelE-1">
+Past versions of fig6_panelE-1.png
+</button>
+</p>
+<div id="fig-fig6_panelE-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-5" class="section level3">
@@ -3842,6 +5080,43 @@ fig6_CDE &lt;- plot_grid(fig6_panelC, fig6_panelD, fig6_panelE, labels = PANEL_l
 fig6 &lt;- plot_grid(fig6_AB, fig6_CDE, ncol = 1, rel_heights = c(1.65, 1), label_size = 10)
 fig6</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig6_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig6_combi-1">
+Past versions of fig6_combi-1.png
+</button>
+</p>
+<div id="fig-fig6_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   fig6,
@@ -3874,9 +5149,9 @@ rm(list = ls(pattern = &quot;heat_&quot;))
 rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
-<pre><code>           used  (Mb) gc trigger (Mb)  max used  (Mb)
-Ncells  9773808 522.0   16813551  898  16813551 898.0
-Vcells 17353705 132.4   53605545  409 107716762 821.9</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb)  max used  (Mb)
+Ncells  9774280 522.1   16807764 897.7  16807764 897.7
+Vcells 17357214 132.5   53605536 409.0 107717937 821.9</code></pre>
 </div>
 </div>
 <div id="figure-7" class="section level2">
@@ -3909,6 +5184,43 @@ fig7_panelA &lt;- magick::image_read(&quot;output/figures/non_R_figs/ch4_DLBCL_i
   magick::image_ggplot(interpolate = TRUE)
 fig7_panelA</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig7_panelA-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig7_panelA-1">
+Past versions of fig7_panelA-1.png
+</button>
+</p>
+<div id="fig-fig7_panelA-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="combined-fig-6" class="section level3">
@@ -3916,6 +5228,43 @@ fig7_panelA</code></pre>
 <pre class="r"><code># Combine all panels of the figure
 fig7_panelA</code></pre>
 <p><img src="figure/t_proteins_main.Rmd/fig7_combi-1.png" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-fig7_combi-1">
+Past versions of fig7_combi-1.png
+</button>
+</p>
+<div id="fig-fig7_combi-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Save figure as pdf, jpg
 ggsave(
   fig7_panelA_place,
@@ -3948,9 +5297,9 @@ rm(list = ls(pattern = &quot;heat_&quot;))
 rm(list = ls(pattern = &quot;rld&quot;))
 rm(list = ls(pattern = &quot;pca&quot;))
 gc()</code></pre>
-<pre><code>           used  (Mb) gc trigger (Mb)  max used  (Mb)
-Ncells  9733919 519.9   16813551  898  16813551 898.0
-Vcells 17250884 131.7   53605545  409 107716762 821.9</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb)  max used  (Mb)
+Ncells  9734397 519.9   16807764 897.7  16807764 897.7
+Vcells 17254570 131.7   53605536 409.0 107717937 821.9</code></pre>
 </div>
 </div>
 <div id="figure-0" class="section level2">

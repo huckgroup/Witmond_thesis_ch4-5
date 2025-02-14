@@ -481,7 +481,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-12
+<strong>Last updated:</strong> 2025-02-14
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -612,13 +612,13 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong1ffbd94">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong94c226d">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 1ffbd94
+aria-hidden="true"></span> <strong>Repository version:</strong> 94c226d
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong1ffbd94"
+<div id="strongRepositoryversionstrong94c226d"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -627,7 +627,7 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 1ffbd94.
+The results in this page were generated with repository version 94c226d.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -711,6 +711,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1889,8 +1906,8 @@ rm(list = ls(pattern = &quot;_DS102&quot;))
 rm(list = ls(pattern = &quot;plot&quot;))
 gc()</code></pre>
 <pre><code>          used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 3724334 199.0    6428514  343.4   6428514  343.4
-Vcells 6350748  48.5  164378349 1254.2 205457476 1567.6</code></pre>
+Ncells 3724336 199.0    6428008  343.3   6428008  343.3
+Vcells 6350776  48.5  164378376 1254.2 205457504 1567.6</code></pre>
 </div>
 </div>
 <div id="ds103-viabilitytest" class="section level2">
@@ -1926,8 +1943,8 @@ df_DS103_live &lt;- left_join(df_DS103_live, counts_DS103_live)
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3804258 203.2    6428514  343.4   6428514  343.4
-Vcells 28227634 215.4  131502680 1003.3 205457476 1567.6</code></pre>
+Ncells  3804260 203.2    6428008  343.3   6428008  343.3
+Vcells 28227662 215.4  131502701 1003.3 205457504 1567.6</code></pre>
 <pre class="r"><code># Get cell counts
 counts_HBL1 &lt;- gs_pop_get_count_fast(gs_HBL1)
 counts_Ly8 &lt;- gs_pop_get_count_fast(gs_Ly8)
@@ -2183,8 +2200,8 @@ df_DS103_pro &lt;- left_join(df_DS103_pro, counts_DS103_pro)
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3853937 205.9    6428514  343.4   6428514  343.4
-Vcells 47757314 364.4  131502680 1003.3 205457476 1567.6</code></pre>
+Ncells  3853939 205.9    6428008  343.3   6428008  343.3
+Vcells 47757342 364.4  131502701 1003.3 205457504 1567.6</code></pre>
 <pre class="r"><code># Proliferating cells
 counts_final_B_DS103 &lt;- subset(counts_DS103, Population == &quot;/Debris/Singlets/Live/Ki-67&quot;)
 raw_map(data = counts_final_B_DS103$Count, well = counts_final_B_DS103$wellID, plate = 96, size = 10) +
@@ -2399,8 +2416,8 @@ rm(list = ls(pattern = &quot;_Ly8&quot;))
 rm(list = ls(pattern = &quot;plot&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb)  max used   (Mb)
-Ncells  3853103 205.8    6428514 343.4   6428514  343.4
-Vcells 15955537 121.8  105202144 802.7 205457476 1567.6</code></pre>
+Ncells  3853105 205.8    6428008 343.3   6428008  343.3
+Vcells 15955565 121.8  105202161 802.7 205457504 1567.6</code></pre>
 </div>
 </div>
 <div id="ds104-stiminhibtest" class="section level2">
@@ -3354,8 +3371,8 @@ rm(list = ls(pattern = &quot;_DS104&quot;))
 rm(list = ls(pattern = &quot;plot&quot;))
 gc()</code></pre>
 <pre><code>          used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 3852998 205.8    6428514  343.4   6428514  343.4
-Vcells 6622471  50.6  149946112 1144.0 205457476 1567.6</code></pre>
+Ncells 3853000 205.8    6428008  343.3   6428008  343.3
+Vcells 6622499  50.6  149946151 1144.0 205457504 1567.6</code></pre>
 </div>
 </div>
 <div id="ds108-stiminhibidseq" class="section level2">
@@ -4297,8 +4314,8 @@ rm(list = ls(pattern = &quot;_DS108&quot;))
 rm(list = ls(pattern = &quot;plot&quot;))
 gc()</code></pre>
 <pre><code>          used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells 3854133 205.9    6428514  343.4   6428514  343.4
-Vcells 6627588  50.6  144714102 1104.1 205457476 1567.6</code></pre>
+Ncells 3854135 205.9    6428008  343.3   6428008  343.3
+Vcells 6627616  50.6  144714124 1104.1 205457504 1567.6</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

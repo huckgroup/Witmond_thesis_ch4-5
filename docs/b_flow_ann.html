@@ -483,7 +483,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-02-12
+<strong>Last updated:</strong> 2025-02-14
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -614,13 +614,13 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong1ffbd94">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong94c226d">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 1ffbd94
+aria-hidden="true"></span> <strong>Repository version:</strong> 94c226d
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong1ffbd94"
+<div id="strongRepositoryversionstrong94c226d"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -629,7 +629,7 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 1ffbd94.
+The results in this page were generated with repository version 94c226d.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -718,6 +718,23 @@ Message
 html
 </td>
 <td>
+ffc633f
+</td>
+<td>
+mwitmond
+</td>
+<td>
+2025-02-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
 4492de7
 </td>
 <td>
@@ -791,8 +808,8 @@ df_DS102 &lt;- df_DS102[ , c(&quot;name&quot;, &quot;plateID&quot;, &quot;rowID&
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  3532497 188.7    7072688 377.8  4096667 218.8
-Vcells 27456321 209.5   51978272 396.6 51738757 394.8</code></pre>
+Ncells  3532499 188.7    7072695 377.8  4096691 218.8
+Vcells 27456348 209.5   51978353 396.6 51738784 394.8</code></pre>
 <pre class="r"><code># Add metadata per well from custom .csv file
 metadata_DS102 &lt;- read_csv(&quot;data/DS102_StimTest/flow/metadata_plate_DS102.csv&quot;)
 
@@ -808,8 +825,8 @@ df_DS102 &lt;- df_DS102[df_DS102$sample_cell_count &gt; 5000, ]
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  3607413 192.7    7072688 377.8  4675683 249.8
-Vcells 36104328 275.5   75024711 572.4 62364438 475.9</code></pre>
+Ncells  3607415 192.7    7072695 377.8  4675685 249.8
+Vcells 36104355 275.5   75024827 572.4 62364465 475.9</code></pre>
 <pre class="r"><code># kable(df_DS102 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 </div>
 <div id="transform-data" class="section level3">
@@ -855,8 +872,8 @@ df_tidy_DS102 &lt;- list(df_PE_DS102, df_AF647_DS102, df_AF488_DS102, df_BV421_D
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3619720 193.4    7072688  377.8   4675683  249.8
-Vcells 81979224 625.5  200729165 1531.5 172494330 1316.1</code></pre>
+Ncells  3619722 193.4    7072695  377.8   4675685  249.8
+Vcells 81979251 625.5  200729222 1531.5 172494357 1316.1</code></pre>
 <pre class="r"><code># kable(df_tidy_DS102 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 <pre class="r"><code>data_info_DS102 &lt;- df_tidy_DS102 %&gt;%
   filter(conc == &quot;0&quot;) %&gt;%
@@ -882,8 +899,8 @@ df_tidy_DS102 &lt;- left_join(df_tidy_DS102, data_counts_DS102)
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3625422 193.7    7072688  377.8   4675683  249.8
-Vcells 90864649 693.3  202090967 1541.9 202090967 1541.9</code></pre>
+Ncells  3625424 193.7    7072695  377.8   4675685  249.8
+Vcells 90864676 693.3  202090994 1541.9 202090994 1541.9</code></pre>
 <pre class="r"><code>kable(df_tidy_DS102 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1326,8 +1343,8 @@ medians_tidy_DS102 &lt;- left_join(medians_tidy_DS102, median_zero_DS102) %&gt;%
 
 gc()</code></pre>
 <pre><code>            used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells   3814694 203.8    7072688  377.8   7072688  377.8
-Vcells 103123714 786.8  202090967 1541.9 202090967 1541.9</code></pre>
+Ncells   3814696 203.8    7072695  377.8   7072695  377.8
+Vcells 103123741 786.8  202090994 1541.9 202090994 1541.9</code></pre>
 <pre class="r"><code># kable(medians_tidy_DS102 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 </div>
 <div id="save-data" class="section level3">
@@ -1342,8 +1359,8 @@ rm(list = ls(pattern = &quot;_HBL1&quot;))
 rm(list = ls(pattern = &quot;_Ly8&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3815051 203.8    7072688  377.8   7072688  377.8
-Vcells 18470033 141.0  161672774 1233.5 202090967 1541.9</code></pre>
+Ncells  3815053 203.8    7072695  377.8   7072695  377.8
+Vcells 18470060 141.0  161672796 1233.5 202090994 1541.9</code></pre>
 </div>
 </div>
 <div id="ds104-stiminhibtest" class="section level2">
@@ -1374,8 +1391,8 @@ df_DS104 &lt;- df_DS104[ , c(&quot;name&quot;, &quot;plateID&quot;, &quot;rowID&
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb)  max used   (Mb)
-Ncells  3816239 203.9    7072688 377.8   7072688  377.8
-Vcells 35178506 268.4  129338220 986.8 202090967 1541.9</code></pre>
+Ncells  3816241 203.9    7072695 377.8   7072695  377.8
+Vcells 35178533 268.4  129338237 986.8 202090994 1541.9</code></pre>
 <pre class="r"><code># Add metadata per well from custom .csv file
 metadata_DS104 &lt;- read_csv(&quot;data/DS104_StimInhibTest/flow/metadata_plate_DS104.csv&quot;)
 
@@ -1391,8 +1408,8 @@ df_DS104 &lt;- df_DS104[df_DS104$sample_cell_count &gt; 5000, ]
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger  (Mb)  max used   (Mb)
-Ncells  3815618 203.8    7072688 377.8   7072688  377.8
-Vcells 43707440 333.5  129338220 986.8 202090967 1541.9</code></pre>
+Ncells  3815620 203.8    7072695 377.8   7072695  377.8
+Vcells 43707467 333.5  129338237 986.8 202090994 1541.9</code></pre>
 <pre class="r"><code># kable(df_DS104 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 </div>
 <div id="transform-data-1" class="section level3">
@@ -1438,8 +1455,8 @@ df_tidy_DS104 &lt;- list(df_PE_DS104, df_AF647_DS104, df_AF488_DS104, df_BV421_D
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3815792 203.8    7072688  377.8   7072688  377.8
-Vcells 86834354 662.5  223787643 1707.4 202090967 1541.9</code></pre>
+Ncells  3815794 203.8    7072695  377.8   7072695  377.8
+Vcells 86834381 662.5  223787672 1707.4 202090994 1541.9</code></pre>
 <pre class="r"><code># kable(df_tidy_DS104 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 <pre class="r"><code>data_info_DS104 &lt;- df_tidy_DS104 %&gt;%
   filter(stimulus == &quot;PBS&quot; &amp; inhibitor == &quot;DMSO&quot;) %&gt;%
@@ -1465,8 +1482,8 @@ df_tidy_DS104 &lt;- left_join(df_tidy_DS104, data_counts_DS104)
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3816221 203.9    7072688  377.8   7072688  377.8
-Vcells 93644363 714.5  223787643 1707.4 221701298 1691.5</code></pre>
+Ncells  3816223 203.9    7072695  377.8   7072695  377.8
+Vcells 93644390 714.5  223787672 1707.4 221701325 1691.5</code></pre>
 <pre class="r"><code>kable(df_tidy_DS104 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1960,8 +1977,8 @@ medians_tidy_DS104 &lt;- left_join(medians_tidy_DS104, median_zero_DS104) %&gt;%
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3816513 203.9    7072688  377.8   7072688  377.8
-Vcells 93682061 714.8  223787643 1707.4 223768963 1707.3</code></pre>
+Ncells  3816515 203.9    7072695  377.8   7072695  377.8
+Vcells 93682088 714.8  223787672 1707.4 223768990 1707.3</code></pre>
 <pre class="r"><code># kable(medians_tidy_DS104 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 <pre class="r"><code># Calculate median values for each sample
 sums_DS104 &lt;- df_tidy_DS104 %&gt;% 
@@ -1983,8 +2000,8 @@ medians_tidy_DS104 &lt;- left_join(medians_tidy_DS104, sums_zero_DS104) %&gt;%
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3816648 203.9    7072688  377.8   7072688  377.8
-Vcells 93679190 714.8  223787643 1707.4 223768963 1707.3</code></pre>
+Ncells  3816650 203.9    7072695  377.8   7072695  377.8
+Vcells 93679217 714.8  223787672 1707.4 223768990 1707.3</code></pre>
 <pre class="r"><code># kable(medians_tidy_DS104 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 </div>
 <div id="save-data-1" class="section level3">
@@ -1999,8 +2016,8 @@ rm(list = ls(pattern = &quot;_HBL1&quot;))
 rm(list = ls(pattern = &quot;_Ly8&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3815344 203.8    7072688  377.8   7072688  377.8
-Vcells 18501964 141.2  179030115 1365.9 223768963 1707.3</code></pre>
+Ncells  3815346 203.8    7072695  377.8   7072695  377.8
+Vcells 18501991 141.2  179030138 1365.9 223768990 1707.3</code></pre>
 </div>
 </div>
 <div id="ds108-stiminhibidseq" class="section level2">
@@ -2020,8 +2037,8 @@ df_DS108 &lt;- df_DS108[ , c(&quot;name&quot;, &quot;plateID&quot;, &quot;rowID&
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3816486 203.9    7072688  377.8   7072688  377.8
-Vcells 30075602 229.5  143224092 1092.8 223768963 1707.3</code></pre>
+Ncells  3816488 203.9    7072695  377.8   7072695  377.8
+Vcells 30075629 229.5  143224111 1092.8 223768990 1707.3</code></pre>
 <pre class="r"><code># Add metadata per well from custom .csv file
 metadata_DS108 &lt;- read_csv(&quot;data/DS108_StimInhibIDseq/flow/metadata_plate_DS108.csv&quot;)
 
@@ -2036,8 +2053,8 @@ df_DS108 &lt;- df_DS108[df_DS108$sample_cell_count &gt; 5000, ]
 
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3815725 203.8    7072688  377.8   7072688  377.8
-Vcells 43512414 332.0  143224092 1092.8 223768963 1707.3</code></pre>
+Ncells  3815727 203.8    7072695  377.8   7072695  377.8
+Vcells 43512441 332.0  143224111 1092.8 223768990 1707.3</code></pre>
 <pre class="r"><code># kable(df_DS108 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 </div>
 <div id="transform-data-2" class="section level3">
@@ -2083,8 +2100,8 @@ df_tidy_DS108 &lt;- list(df_PE_DS108, df_AF647_DS108, df_AF488_DS108, df_BV421_D
 
 gc()</code></pre>
 <pre><code>            used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells   3815896 203.8    7072688  377.8   7072688  377.8
-Vcells 112975639 862.0  251649550 1920.0 248828968 1898.5</code></pre>
+Ncells   3815898 203.8    7072695  377.8   7072695  377.8
+Vcells 112975666 862.0  251649582 1920.0 248828995 1898.5</code></pre>
 <pre class="r"><code># kable(df_tidy_DS108 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 <pre class="r"><code>data_info_DS108 &lt;- df_tidy_DS108 %&gt;%
   filter(stimulus == &quot;PBS&quot; &amp; inhib_conc == &quot;0 uM&quot;) %&gt;%
@@ -2110,8 +2127,8 @@ df_tidy_DS108 &lt;- left_join(df_tidy_DS108, data_counts_DS108)
 
 gc()</code></pre>
 <pre><code>            used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells   3816448 203.9    7072688  377.8   7072688  377.8
-Vcells 125235306 955.5  302059460 2304.6 251119384 1915.9</code></pre>
+Ncells   3816450 203.9    7072695  377.8   7072695  377.8
+Vcells 125235333 955.5  302059498 2304.6 251119411 1915.9</code></pre>
 <pre class="r"><code>kable(df_tidy_DS108 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -2566,8 +2583,8 @@ medians_tidy_DS108 &lt;- left_join(medians_tidy_DS108, median_zero_DS108) %&gt;%
 
 gc()</code></pre>
 <pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells   3838024  205.0    7072688  377.8   7072688  377.8
-Vcells 132758328 1012.9  302059460 2304.6 301932920 2303.6</code></pre>
+Ncells   3838026  205.0    7072695  377.8   7072695  377.8
+Vcells 132758355 1012.9  302059498 2304.6 301932947 2303.6</code></pre>
 <pre class="r"><code># kable(medians_tidy_DS108 %&gt;% head(5)) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
 </div>
 <div id="save-data-2" class="section level3">
@@ -2580,8 +2597,8 @@ write.csv(medians_tidy_DS108, file = &quot;output/DS108_StimInhibIDseq/flow_ann/
 rm(list = ls(pattern = &quot;_DS108&quot;))
 gc()</code></pre>
 <pre><code>           used  (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  3836685 205.0    7072688  377.8   7072688  377.8
-Vcells 26012958 198.5  241647568 1843.7 301932920 2303.6</code></pre>
+Ncells  3836687 205.0    7072695  377.8   7072695  377.8
+Vcells 26012985 198.5  241647599 1843.7 301932947 2303.6</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

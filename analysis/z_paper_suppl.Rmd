@@ -129,7 +129,7 @@ png_suppl_figS1_legend <- magick::image_read("output/figures/non_R_figs/legend_n
 ```
 
 
-### Combined fig
+l### Combined fig
 
 ```{r suppl_figS1_combi, fig.width=7.3, fig.height=8, fig.retina=1}
 # Combine all panels of the figure
@@ -168,7 +168,7 @@ gc()
 
 ## Suppl. figure S2
 
-*Increased activation upon treatment with both anti-Ig and H2O2 combined compared to treatment with anti-Ig or H2O2 alone.*
+*Increased activation upon treatment with both anti-Ig and H2O2 combined compared to treatment with anti-Ig or H2O2 alone without loss of viability.*
 
 Input:
 
@@ -180,6 +180,7 @@ Input:
 ```{r suppl_figS2_data}
 data_suppl_figS2 <- read_csv("output/DS102_StimTest/flow_ann/flow_data_DS102.csv")
 medians_suppl_figS2 <- read_csv("output/DS102_StimTest/flow_ann/flow_medians_DS102.csv")
+counts_suppl_figS2 <- read_csv("output/DS102_StimTest/flow_ann/gated_counts_DS102.csv")
 ```
 
 ```{r suppl_figS2_labels}
@@ -195,9 +196,22 @@ conc_labels_suppl_figS2 <- c("PBS",
                              "10 mM\nH2O2", "20 mM\nH2O2",
                              "15 anti-Ig +\n15 H2O2")
 colors_conc_suppl_figS2 <- c("PBS" = "#737373", 
-                             "10 ug/mL aIg" = "#a1d99b", "20 ug/mL aIg" = "#74c476",
-                             "10 mM H2O2" = "#98CAE1", "20 mM H2O2" = "#6EA6CD", 
-                             "15 H2O2 + 15 aIg" = "#FDB366")
+                             "10 ug/mL aIg" = "#74c476", "20 ug/mL aIg" = "#41ab5d",
+                             "10 mM H2O2" = "#6EA6CD", "20 mM H2O2" = "#4A7BB7", 
+                             "15 H2O2 + 15 aIg" = "#DD3D2D")
+
+conc_suppl_figS2C <- c("PBS", 
+                       "5 ug/mL aIg", "10 ug/mL aIg", "20 ug/mL aIg",
+                       "3.3 mM H2O2", "10 mM H2O2", "20 mM H2O2",
+                       "3.3 H2O2 + 10 aIg", "10 H2O2 + 10 aIg", "10 H2O2 + 20 aIg", "15 H2O2 + 15 aIg")
+conc_labels_suppl_figS2C <- c("PBS", 
+                              "5 ug/mL\nanti-Ig", "10 ug/mL\nanti-Ig", "20 ug/mL\nanti-Ig",
+                              "3.3 mM\nH2O2", "10 mM\nH2O2", "20 mM\nH2O2",
+                              "3.3 H2O2 +\n10 anti-Ig", "10 H2O2 +\n10 anti-Ig", "10 H2O2 +\n20 anti-Ig", "15 H2O2 +\n15 anti-Ig")
+colors_conc_suppl_figS2C <- c("PBS" = "#737373", 
+                             "5 ug/mL aIg" = "#a1d99b", "10 ug/mL aIg" = "#74c476", "20 ug/mL aIg" = "#41ab5d",
+                             "3.3 mM H2O2" = "#98CAE1", "10 mM H2O2" = "#6EA6CD", "20 mM H2O2" = "#4A7BB7", 
+                             "3.3 H2O2 + 10 aIg" = "#FEDA8B", "10 H2O2 + 10 aIg" = "#FDB366", "10 H2O2 + 20 aIg" = "#F67A4B", "15 H2O2 + 15 aIg" = "#DD3D2D")
 ```
 
 
@@ -384,33 +398,63 @@ suppl_figS2_panelB_alt <- ggplot() +
 suppl_figS2_panelB_alt
 ```
 
+#### Panel C
+```{r suppl_figS2_panelC, fig.width=6, fig.height=3, fig.retina=1}
+# Data
+metadata_suppl_figS2 <- medians_suppl_figS2 %>%
+  dplyr::select(c(plateID, wellID, sample, cell_line, stimulus, conc, conc_text, description, staining)) %>%
+  distinct()
+counts_suppl_figS2C <- counts_suppl_figS2 %>%
+  subset(Population == "/Debris/Singlets/Live") %>%
+  dplyr::select(c(plateID, wellID, PercentRoot, PercentParent)) %>%
+  left_join(metadata_suppl_figS2) %>%
+  subset(staining == "yes" & cell_line == "HBL1")
+
+# Figure
+suppl_figS2_panelC <- ggplot(counts_suppl_figS2C, 
+                             aes(x = factor(conc_text, levels = conc_suppl_figS2C, labels = conc_labels_suppl_figS2C), 
+                                 y = PercentRoot)) +
+  geom_point(aes(group = factor(conc_text, levels = conc_suppl_figS2C),
+                color = factor(conc_text, levels = conc_suppl_figS2C)), 
+             size = 2) +
+  facet_wrap(vars(factor(cell_line, labels = "Viability")), ncol = 1) +
+  ylim(0, 100) +
+  scale_color_manual(values = colors_conc_suppl_figS2C, labels = conc_labels_suppl_figS2C, name = "Stimulus") +
+  labs(y = "% live cells\nof total events", x = "") +
+  theme_bw() +
+  textsize_small +
+  theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major.x = element_blank(), axis.text.x = element_text(size = 6))
+suppl_figS2_panelC
+```
+
 
 ### Combined fig
 
 ```{r suppl_figS2_combi, fig.width=6.125, fig.height=3, fig.retina=1}
 # Combine all panels of the figure
-suppl_figS2 <- plot_grid(suppl_figS2_panelA_alt, suppl_figS2_panelB_alt, labels = PANEL_labels[c(1, 2)], ncol = 2, rel_widths = c(1, 1), label_size = 10)
+suppl_figS2_AB <- plot_grid(suppl_figS2_panelA_alt, suppl_figS2_panelB_alt, labels = PANEL_labels[c(1, 2)], ncol = 2, rel_widths = c(1, 1), label_size = 10)
+suppl_figS2 <- plot_grid(suppl_figS2_AB, suppl_figS2_panelC, labels = c("", PANEL_labels[c(3)]), ncol = 1, rel_heights = c(1.5, 1), label_size = 10)
 suppl_figS2
 
 # Save figure as pdf, jpg, and png
 ggsave(
   suppl_figS2,
-  filename = "output/figures/paper/suppl_figS2.pdf",
+  filename = "output/figures/paper/suppl_figS2_new.pdf",
   width = 6.125,
-  height = 3,
+  height = 4.5, #3
   units = "in",
   dpi = 300
   )
 ggsave(
   suppl_figS2,
-  filename = "output/figures/paper/suppl_figS2.jpg",
+  filename = "output/figures/paper/suppl_figS2_new.jpg",
   width = 6.125,
-  height = 3,
+  height = 4.5,
   units = "in",
   dpi = 300
   )
 ```
-*Figure S2: Increased activation upon treatment with both anti-Ig and H2O2 combined compared to treatment with anti-Ig or H2O2 alone.*
+*Figure S2: Increased activation upon treatment with both anti-Ig and H2O2 combined compared to treatment with anti-Ig or H2O2 alone without loss of viability.*
 
 ```{r suppl_figS2_clean}
 # Remove unnecessary files to clear up memory
